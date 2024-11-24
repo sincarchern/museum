@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博物館趣味問答</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+        .options li {
+            margin-bottom: 10px;
+        }
+        .options button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            background: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .options button:hover {
+            background: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            background: #f9fff9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>博物館趣味問答</h1>
+        <div id="quiz">
+            <div class="question">
+                <p id="question-text"><strong>問題將顯示於此</strong></p>
+            </div>
+            <ul class="options" id="options">
+                <!-- 選項按鈕將動態生成 -->
+            </ul>
+        </div>
+        <div id="result" class="result" style="display: none;"></div>
+    </div>
+
+    <script>
+        // 問題與選項資料
+        const questions = [
+            {
+                question: "哪一項是博物館促進社會共識的重要方式？",
+                options: ["提供咖啡廳和紀念品商店", "策劃與社會議題相關的展覽", "限制某些族群的參觀權利", "僅保存珍稀文物，不與公眾分享"],
+                correct: 1
+            },
+            {
+                question: "博物館教育的核心價值是什麼？",
+                options: ["提供娛樂", "促進文化傳承與公眾參與", "增進商業利益", "吸引旅遊人潮"],
+                correct: 1
+            },
+            {
+                question: "哪個活動最能促進博物館與社區的連結？",
+                options: ["設置高額門票", "舉辦在地文化展覽與互動工作坊", "僅提供靜態文物展示", "限制非專業人士的參觀"],
+                correct: 1
+            },
+            {
+                question: "博物館教育對兒童的主要貢獻是什麼？",
+                options: ["提升消費能力", "培養探索精神與批判性思維", "教導如何收藏文物", "鼓勵以競爭為主的學習模式"],
+                correct: 1
+            },
+            {
+                question: "如何讓更多人參與博物館教育？",
+                options: ["增加進入門檻", "運用數位平台與社群媒體", "降低教育活動頻率", "僅提供固定展覽"],
+                correct: 1
+            },
+            {
+                question: "博物館保存文物的目的之一是什麼？",
+                options: ["保持私人收藏", "促進歷史與文化的學習", "防止公眾接觸", "增加市場價值"],
+                correct: 1
+            },
+            {
+                question: "哪個策略能增強公眾對博物館展覽的共鳴？",
+                options: ["設計互動性體驗", "使用艱深的專業術語", "限制展覽主題", "提供過度商業化的內容"],
+                correct: 0
+            },
+            {
+                question: "博物館教育對哪個群體特別重要？",
+                options: ["只有學者", "所有年齡層的公眾", "只針對學生", "僅限研究人員"],
+                correct: 1
+            },
+            {
+                question: "博物館如何利用數位技術促進教育？",
+                options: ["發展線上展覽與虛擬導覽", "僅展示靜態文物照片", "限制資訊公開", "避免與公眾互動"],
+                correct: 0
+            },
+            {
+                question: "哪種方法能讓博物館更好地促進社會共識？",
+                options: ["合作策劃社會議題展覽", "僅展示藝術作品", "設置高價入場費", "忽視公眾需求"],
+                correct: 0
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const questionElement = document.getElementById("question-text");
+            const optionsElement = document.getElementById("options");
+
+            // 清空舊的選項
+            optionsElement.innerHTML = "";
+
+            // 加載問題與選項
+            const current = questions[currentQuestion];
+            questionElement.textContent = current.question;
+
+            current.options.forEach((option, index) => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.onclick = () => checkAnswer(index === current.correct);
+                optionsElement.appendChild(button);
+            });
+        }
+
+        function checkAnswer(isCorrect) {
+            if (isCorrect) {
+                score++;
+            }
+            currentQuestion++;
+
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            const quiz = document.getElementById("quiz");
+            const result = document.getElementById("result");
+
+            quiz.style.display = "none";
+            result.style.display = "block";
+            result.textContent = `你完成了問答！總分：${score} / ${questions.length}`;
+        }
+
+        // 初始加載第一題
+        loadQuestion();
+    </script>
+</body>
+</html>
