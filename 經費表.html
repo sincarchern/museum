@@ -1,0 +1,71 @@
+import React from 'react';
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+
+const ExpensePieChart = () => {
+// Expense data from the financial report
+const expenseData = [
+{ name: '人事費', value: 500000 },
+{ name: '交通費', value: 93925 },
+{ name: '餐費', value: 114587 },
+{ name: '點心費', value: 27190 },
+{ name: '住宿費', value: 59256 },
+{ name: '場地租借費', value: 11000 },
+{ name: '印刷費', value: 80144 },
+{ name: '授權費', value: 100000 },
+{ name: '雜支', value: 327547 },
+{ name: '工作費', value: 93000 }
+];
+
+// Color palette
+const COLORS = [
+'#0088FE', '#00C49F', '#FFBB28', '#FF8042',
+'#8884D8', '#82CA9D', '#FF6384', '#36A2EB',
+'#FFCE56', '#4BC0C0'
+];
+
+// Format currency
+const formatCurrency = (value) => {
+return `NT$${value.toLocaleString()}`;
+};
+
+return (
+<Card className="w-full max-w-4xl">
+<CardHeader>
+<CardTitle>博物館培訓計畫經費支出分析</CardTitle>
+</CardHeader>
+<CardContent>
+<ResponsiveContainer width="100%" height={400}>
+<PieChart>
+<Pie
+data={expenseData}
+cx="50%"
+cy="50%"
+labelLine={false}
+outerRadius={140}
+fill="#8884d8"
+dataKey="value"
+label={({ name, percent }) => `${name} ${(percent * 100).toFixed(1)}%`}
+>
+{expenseData.map((entry, index) => (
+<Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+))}
+</Pie>
+<Tooltip
+formatter={(value) => [formatCurrency(value), '金額']}
+contentStyle={{ borderRadius: '8px', padding: '10px' }}
+/>
+<Legend
+layout="vertical"
+verticalAlign="middle"
+align="right"
+formatter={(value, entry) => `${value} (${formatCurrency(entry.payload.value)})`}
+/>
+</PieChart>
+</ResponsiveContainer>
+</CardContent>
+</Card>
+);
+};
+
+export default ExpensePieChart;
