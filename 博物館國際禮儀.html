@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>博物館國際禮儀趣味問答</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .question { margin-bottom: 20px; }
+        .result { display: none; }
+    </style>
+</head>
+<body>
+    <h1>博物館國際禮儀趣味問答</h1>
+
+    <div class="question">
+        <p>1. 在博物館內，應該避免以下哪些行為？（可選多項）</p>
+        <input type="checkbox" id="q1a1"> 觸摸展品<br>
+        <input type="checkbox" id="q1a2"> 大聲喧嘩<br>
+        <input type="checkbox" id="q1a3"> 靜靜地欣賞展品<br>
+        <input type="checkbox" id="q1a4"> 使用長距離自拍器<br>
+    </div>
+
+    <div class="question">
+        <p>2. 哪些行為可能會損壞展品？（可選多項）</p>
+        <input type="checkbox" id="q2a1"> 靠得太近<br>
+        <input type="checkbox" id="q2a2"> 閃光燈攝影<br>
+        <input type="checkbox" id="q2a3"> 慢走觀展<br>
+        <input type="checkbox" id="q2a4"> 觸摸展品<br>
+    </div>
+
+    <div class="question">
+        <p>3. 在博物館內，應該如何處理大型背包？（可選一項）</p>
+        <input type="checkbox" id="q3a1"> 隨身攜帶<br>
+        <input type="checkbox" id="q3a2"> 寄存大型物品<br>
+        <input type="checkbox" id="q3a3"> 放在地上<br>
+        <input type="checkbox" id="q3a4"> 背在前面<br>
+    </div>
+
+    <div class="question">
+        <p>4. 在博物館內飲食是否允許？（可選一項）</p>
+        <input type="checkbox" id="q4a1"> 是<br>
+        <input type="checkbox" id="q4a2"> 否<br>
+    </div>
+
+    <div class="question">
+        <p>5. 為什麼博物館內應該保持安靜？（可選多項）</p>
+        <input type="checkbox" id="q5a1"> 避免干擾其他參觀者<br>
+        <input type="checkbox" id="q5a2"> 保護自己的耳朵<br>
+        <input type="checkbox" id="q5a3"> 更好地欣賞展品<br>
+        <input type="checkbox" id="q5a4"> 防止被趕出去<br>
+    </div>
+
+    <button onclick="checkAnswers()">提交答案</button>
+    <p id="result" class="result"></p>
+
+    <script>
+        function checkAnswers() {
+            let resultText = "你的答案：<br>";
+            let correctAnswers = [
+                ["q1a1", "q1a2", "q1a4"],
+                ["q2a1", "q2a2", "q2a4"],
+                ["q3a2"],
+                ["q4a2"],
+                ["q5a1", "q5a3"]
+            ];
+            let allCorrect = true;
+            for (let i = 0; i < correctAnswers.length; i++) {
+                let questionCorrect = true;
+                for (let j = 0; j < correctAnswers[i].length; j++) {
+                    let checkbox = document.getElementById(correctAnswers[i][j]);
+                    if (!checkbox.checked) {
+                        questionCorrect = false;
+                        allCorrect = false;
+                    }
+                }
+                resultText += "問題 " + (i + 1) + "：" + (questionCorrect ? "正確" : "錯誤") + "<br>";
+            }
+            resultText += allCorrect ? "恭喜！你答對了所有問題！" : "請檢查並重新作答。";
+            document.getElementById("result").innerHTML = resultText;
+            document.getElementById("result").style.display = "block";
+        }
+    </script>
+</body>
+</html>
