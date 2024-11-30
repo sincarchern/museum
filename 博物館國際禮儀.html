@@ -50,6 +50,14 @@
         <input type="checkbox" id="q5a4"> 防止被趕出去<br>
     </div>
 
+    <div class="question">
+        <p>6. 以下哪些行為是不恰當的？（可選多項）</p>
+        <input type="checkbox" id="q6a1"> 作品太美忍不住親一下<br>
+        <input type="checkbox" id="q6a2"> 補上幾筆讓作品更有創意<br>
+        <input type="checkbox" id="q6a3"> 尊重作品的原貌<br>
+        <input type="checkbox" id="q6a4"> 以適當的距離欣賞<br>
+    </div>
+
     <button onclick="checkAnswers()">提交答案</button>
     <p id="result" class="result"></p>
 
@@ -61,24 +69,10 @@
                 ["q2a1", "q2a2", "q2a4"],
                 ["q3a2"],
                 ["q4a2"],
-                ["q5a1", "q5a3"]
+                ["q5a1", "q5a3"],
+                ["q6a1", "q6a2"]
             ];
             let allCorrect = true;
             for (let i = 0; i < correctAnswers.length; i++) {
                 let questionCorrect = true;
-                for (let j = 0; j < correctAnswers[i].length; j++) {
-                    let checkbox = document.getElementById(correctAnswers[i][j]);
-                    if (!checkbox.checked) {
-                        questionCorrect = false;
-                        allCorrect = false;
-                    }
-                }
-                resultText += "問題 " + (i + 1) + "：" + (questionCorrect ? "正確" : "錯誤") + "<br>";
-            }
-            resultText += allCorrect ? "恭喜！你答對了所有問題！" : "請檢查並重新作答。";
-            document.getElementById("result").innerHTML = resultText;
-            document.getElementById("result").style.display = "block";
-        }
-    </script>
-</body>
-</html>
+               
