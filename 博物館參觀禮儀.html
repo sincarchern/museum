@@ -61,8 +61,7 @@
 
     <button onclick="checkAnswers()">提交答案</button>
     <p id="result" class="result"></p>
-    <img id="trophy" class="trophy" src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Trophy_icon.png" alt="Trophy">
-    <audio id="trophySound" src="https://www.soundjay.com/button/beep-07.wav"></audio>
+    <img id="trophy" class="trophy" src="https://example.com/trophy.png" alt="Trophy">
 
     <script>
         function checkAnswers() {
@@ -93,7 +92,6 @@
             
             if (allCorrect) {
                 document.getElementById("trophy").style.display = "block";
-                document.getElementById("trophySound").play();
             } else {
                 document.getElementById("trophy").style.display = "none";
             }
