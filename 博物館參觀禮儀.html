@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+一<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
@@ -87,9 +87,18 @@
                 }
                 resultText += "問題 " + (i + 1) + "：" + (questionCorrect ? "正確" : "錯誤") + "<br>";
             }
-            resultText += allCorrect ? "恭喜！你答對了所有問題！" : "請檢查並重新作答。";
+            resultText += allCorrect ? 
+"恭喜！你答對了所有問題！" : "請檢查並重新作答。";
             document.getElementById("result").innerHTML = resultText;
             document.getElementById("result").style.display = "block";
             
             if (allCorrect) {
-                document.getElement
+                document.getElementById("trophy").style.display = "block";
+                document.getElementById("trophySound").play();
+            } else {
+                document.getElementById("trophy").style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
