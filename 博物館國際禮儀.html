@@ -2,15 +2,16 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>博物館參觀禮儀趣味問答</title>
+    <title>博物館國際禮儀趣味問答</title>
     <style>
         body { font-family: Arial, sans-serif; }
         .question { margin-bottom: 20px; }
         .result { display: none; }
+        .trophy { display: none; width: 50px; height: 50px; }
     </style>
 </head>
 <body>
-    <h1>博物館參觀禮儀趣味問答</h1>
+    <h1>博物館國際禮儀趣味問答</h1>
 
     <div class="question">
         <p>1. 在博物館內，應該避免以下哪些行為？（可選多項）</p>
@@ -60,6 +61,7 @@
 
     <button onclick="checkAnswers()">提交答案</button>
     <p id="result" class="result"></p>
+    <img id="trophy" class="trophy" src="https://example.com/trophy.png" alt="Trophy">
 
     <script>
         function checkAnswers() {
@@ -75,4 +77,25 @@
             let allCorrect = true;
             for (let i = 0; i < correctAnswers.length; i++) {
                 let questionCorrect = true;
-               
+                for (let j = 0; j < correctAnswers[i].length; j++) {
+                    let checkbox = document.getElementById(correctAnswers[i][j]);
+                    if (!checkbox.checked) {
+                        questionCorrect = false;
+                        allCorrect = false;
+                    }
+                }
+                resultText += "問題 " + (i + 1) + "：" + (questionCorrect ? "正確" : "錯誤") + "<br>";
+            }
+            resultText += allCorrect ? "恭喜！你答對了所有問題！" : "請檢查並重新作答。";
+            document.getElementById("result").innerHTML = resultText;
+            document.getElementById("result").style.display = "block";
+            
+            if (allCorrect) {
+                document.getElementById("trophy").style.display = "block";
+            } else {
+                document.getElementById("trophy").style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
