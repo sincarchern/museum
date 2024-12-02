@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博物館探險家挑戰</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            text-align: center;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            margin: 20px 0;
+        }
+
+        .choices {
+            text-align: left;
+            display: inline-block;
+        }
+
+        .choices label {
+            display: block;
+            margin: 10px 0;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
+        .trophy {
+            width: 80px;
+            height: 80px;
+            display: none;
+            margin-top: 20px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>博物館探險家挑戰</h1>
+        <section id="game-area"></section>
+    </div>
+
+    <script>
+        // 所有關卡資料
+        const levels = [
+            {
+                title: "第一關：館內行為",
+                question: "在博物館內，應該避免以下哪些行為？（可選多項）",
+                choices: [
+                    { text: "觸摸展品", value: "q1a1" },
+                    { text: "大聲喧嘩", value: "q1a2" },
+                    { text: "靜靜地欣賞展品", value: "q1a3" },
+                    { text: "使用長距離自拍器", value: "q1a4" }
+                ],
+                correctAnswers: ["q1a1", "q1a2", "q1a4"]
+            },
+            {
+                title: "第二關：損壞展品",
+                question: "哪些行為可能會損壞展品？（可選多項）",
+                choices: [
+                    { text: "靠得太近", value: "q2a1" },
+                    { text: "閃光燈攝影", value: "q2a2" },
+                    { text: "慢走觀展", value: "q2a3" },
+                    { text: "觸摸展品", value: "q2a4" }
+                ],
+                correctAnswers: ["q2a1", "q2a2", "q2a4"]
+            },
+            {
+                title: "第三關：背包處理",
+                question: "在博物館內，應該如何處理大型背包？（可選一項）",
+                choices: [
+                    { text: "隨身攜帶", value: "q3a1" },
+                    { text: "寄存大型物品", value: "q3a2" },
+                    { text: "放在地上", value: "q3a3" },
+                    { text: "背在前面", value: "q3a4" }
+                ],
+                correctAnswers: ["q3a2"]
+            },
+            {
+                title: "第四關：飲食規範",
+                question: "以下哪些行為可能影響博物館環境？（可選多項）",
+                choices: [
+                    { text: "燈光美氣氛佳有助食慾", value: "q4a1" },
+                    { text: "食物氣味干擾其他人", value: "q4a2" },
+                    { text: "在指定區域用餐", value: "q4a3" },
+                    { text: "購買麥當勞邊看邊吃有助企業合作", value: "q4a4" }
+                ],
+                correctAnswers: ["q4a1", "q4a2", "q4a4"]
+            },
+            {
+                title: "第五關：保持安靜",
+                question: "為什麼博物館內應該保持安靜？（可選多項）",
+                choices: [
+                    { text: "避免干擾他人", value: "q5a1" },
+                    { text: "保護耳朵", value: "q5a2" },
+                    { text: "更好地欣賞展品", value: "q5a3" },
+                    { text: "防止被趕出去", value: "q5a4" }
+                ],
+                correctAnswers: ["q5a1", "q5a3"]
+            },
+            {
+                title: "第六關：尊重藝術",
+                question: "以下哪些行為是不恰當的？（可選多項）",
+                choices: [
+                    { text: "作品太美忍不住親一下", value: "q6a1" },
+                    { text: "補上幾筆讓作品更有創意", value: "q6a2" },
+                    { text: "尊重作品的原貌", value: "q6a3" },
+                    { text: "以適當距離欣賞", value: "q6a4" }
+                ],
+                correctAnswers: ["q6a1", "q6a2"]
+            }
+        ];
+
+        const gameArea = document.getElementById("game-area");
+
+        // 動態生成關卡
+        levels.forEach((level, index) => {
+            const levelDiv = document.createElement("article");
+            levelDiv.className = `level ${index > 0 ? "hidden" : ""}`;
+            levelDiv.id = `level-${index + 1}`;
+
+            levelDiv.innerHTML = `
+                <h2>${level.title}</h2>
+                <div class="question">${level.question}</div>
+                <div class="choices">
+                    ${level.choices.map(choice => `
+                        <label>
+                            <input type="checkbox" name="q${index + 1}" value="${choice.value}">
+                            ${choice.text}
+                        </label>
+                    `).join("")}
+                </div>
+                <button class="submit-btn" data-level="${index + 1}">提交答案</button>
+                <div id="feedback-${index + 1}" class="result"></div>
+            `;
+
+            gameArea.appendChild(levelDiv);
+        });
+
+        // 事件委派處理提交
+        gameArea.addEventListener("click", event => {
+            if (event.target.classList.contains("submit-btn")) {
+                const level = parseInt(event.target.dataset.level, 10);
+                const correctAnswers = levels[level - 1].correctAnswers;
+
+                const selectedAnswers = Array.from(document.querySelectorAll(`#level-${level} input:checked`))
+                    .map(input => input.value);
+
+                const feedback = document.getElementById(`feedback-${level}`);
+                if (selectedAnswers.sort().join(",") === correctAnswers.sort().join(",")) {
+                    feedback.textContent = "答對了！進入下一關！";
+                    feedback.style.color = "green";
+
+                    // 顯示下一關
+                    const currentLevel = document.getElementById(`level-${level}`);
+                    const nextLevel = document.getElementById(`level-${level + 1}`);
+                    if (nextLevel) {
+                        currentLevel.classList.add("hidden");
+                        nextLevel.classList.remove("hidden");
+                    } else {
+                        // 完成所有關卡
+                        feedback.textContent = "恭賀完全過關！您是受歡迎的VIP！";
+                        feedback.style.color = "gold";
+                        feedback.style.fontWeight = "bold";
+                    }
+                } else {
+                    feedback.textContent = "答錯了，請再試一次！";
+                    feedback.style.color = "red";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
