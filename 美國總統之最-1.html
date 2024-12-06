@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>美國總統之最(截至2024) 闖關問答</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question h3 {
+      margin: 0 0 10px;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    .correct {
+      color: green;
+    }
+    .incorrect {
+      color: red;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>美國總統之最(截至2024) 闖關問答</h1>
+  <p>冷知測試！</p>
+  
+  <div id="quiz">
+    <!-- 問題 1 -->
+    <div class="question">
+      <h3>1. 誰是最年輕當選的美國總統？</h3>
+      <label><input type="radio" name="q1" value="A"> 約翰·甘迺迪</label><br>
+      <label><input type="radio" name="q1" value="B"> 西奧多·羅斯福</label><br>
+      <label><input type="radio" name="q1" value="C"> 喬·拜登</label>
+    </div>
+
+    <!-- 問題 2 -->
+    <div class="question">
+      <h3>2. 唯一辭職的美國總統是誰？</h3>
+      <label><input type="radio" name="q2" value="A"> 安德魯·約翰遜</label><br>
+      <label><input type="radio" name="q2" value="B"> 理查·尼克森</label><br>
+      <label><input type="radio" name="q2" value="C"> 富蘭克林·羅斯福</label>
+    </div>
+
+    <!-- 問題 3 -->
+    <div class="question">
+      <h3>3. 哪位總統被認為是最矮的？</h3>
+      <label><input type="radio" name="q3" value="A"> 詹姆斯·麥迪遜</label><br>
+      <label><input type="radio" name="q3" value="B"> 巴拉克·歐巴馬</label><br>
+      <label><input type="radio" name="q3" value="C"> 西奧多·羅斯福</label>
+    </div>
+
+    <!-- 問題 4 -->
+    <div class="question">
+      <h3>4. 目前唯一擔任過最高法院首席大法官的總統是誰？</h3>
+      <label><input type="radio" name="q4" value="A"> 威廉·霍華德·塔夫脫</label><br>
+      <label><input type="radio" name="q4" value="B"> 托馬斯·傑佛遜</label><br>
+      <label><input type="radio" name="q4" value="C"> 喬治·華盛頓</label>
+    </div>
+
+    <!-- 問題 5 -->
+    <div class="question">
+      <h3>5. 誰是第一位住在白宮的總統？</h3>
+      <label><input type="radio" name="q5" value="A"> 喬治·華盛頓</label><br>
+      <label><input type="radio" name="q5" value="B"> 約翰·亞當斯</label><br>
+      <label><input type="radio" name="q5" value="C"> 托馬斯·傑佛遜</label>
+    </div>
+
+    <!-- 問題 6 -->
+    <div class="question">
+      <h3>6. 第一位非連續兩屆任期的總統是誰？</h3>
+      <label><input type="radio" name="q6" value="A"> 西奧多·羅斯福</label><br>
+      <label><input type="radio" name="q6" value="B"> 格羅弗·克利夫蘭</label><br>
+      <label><input type="radio" name="q6" value="C"> 林登·詹森</label>
+    </div>
+
+    <!-- 問題 7 -->
+    <div class="question">
+      <h3>7. 第一位非白人總統是誰？</h3>
+      <label><input type="radio" name="q7" value="A"> 喬·拜登</label><br>
+      <label><input type="radio" name="q7" value="B"> 唐納·川普</label><br>
+      <label><input type="radio" name="q7" value="C"> 巴拉克·歐巴馬</label>
+    </div>
+
+    <!-- 問題 8 -->
+    <div class="question">
+      <h3>8. 哪位總統的任期最長？</h3>
+      <label><input type="radio" name="q8" value="A"> 富蘭克林·羅斯福</label><br>
+      <label><input type="radio" name="q8" value="B"> 西奧多·羅斯福</label><br>
+      <label><input type="radio" name="q8" value="C"> 哈利·杜魯門</label>
+    </div>
+
+    <!-- 問題 9 -->
+    <div class="question">
+      <h3>9. 第一位公開支持同性婚姻的總統是誰？</h3>
+      <label><input type="radio" name="q9" value="A"> 喬·拜登</label><br>
+      <label><input type="radio" name="q9" value="B"> 巴拉克·歐巴馬</label><br>
+      <label><input type="radio" name="q9" value="C"> 喬治·布希</label>
+    </div>
+
+    <!-- 問題 10 -->
+    <div class="question">
+      <h3>10. 哪位總統在白宮舉行婚禮？</h3>
+      <label><input type="radio" name="q10" value="A"> 詹姆斯·麥迪遜</label><br>
+      <label><input type="radio" name="q10" value="B"> 格羅弗·克利夫蘭</label><br>
+      <label><input type="radio" name="q10" value="C"> 喬治·華盛頓</label>
+    </div>
+  </div>
+  
+  <button onclick="checkAnswers()">提交答案</button>
+  
+  <div id="result" class="result"></div>
+
+  <script>
+    function checkAnswers() {
+      const correctAnswers = {
+        q1: "A",
+        q2: "B",
+        q3: "A",
+        q4: "A",
+        q5: "B",
+        q6: "B",
+        q7: "C",
+        q8: "A",
+        q9: "B",
+        q10: "B"
+      };
+      
+      let score = 0;
+      for (const [question, answer] of Object.entries(correctAnswers)) {
+        const selected = document.querySelector(`input[name="${question}"]:checked`);
+        if (selected && selected.value === answer) {
+          score++;
+        }
+      }
+      
+      const result = document.getElementById("result");
+      if (score === Object.keys(correctAnswers).length) {
+        result.innerHTML = `<span class="correct">恭喜！你全部答對了！</span>`;
+      } else {
+        result.innerHTML = `<span class="incorrect">你答對了 ${score} 題，請再接再厲！</span>`;
+      }
+    }
+  </script>
+</body>
+</html>
