@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OKR 電子書</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    header {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 1.8em;
+    }
+    nav {
+      background-color: #f4f4f4;
+      padding: 10px 15px;
+      border-bottom: 1px solid #ddd;
+    }
+    nav a {
+      display: block;
+      color: #4CAF50;
+      text-decoration: none;
+      margin: 5px 0; /* 縮小目錄項目之間的間距 */
+      padding: 8px; /* 調整內部間距 */
+      border-radius: 5px;
+      background-color: white;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      font-size: 0.9em; /* 縮小字體 */
+    }
+    nav a:hover {
+      background-color: #4CAF50;
+      color: white;
+    }
+    main {
+      padding: 20px;
+    }
+    section {
+      display: none;
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease-in-out;
+    }
+    section.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    section h2 {
+      color: #4CAF50;
+      border-bottom: 2px solid #4CAF50;
+      padding-bottom: 5px;
+    }
+    footer {
+      text-align: center;
+      padding: 5px 10px;
+      background-color: #f4f4f4;
+      border-top: 1px solid #ddd;
+      font-size: 10px; /* 縮小字體 */
+      color: #666; /* 調整顏色以減少干擾 */
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  OKR 電子書
+</header>
+
+<nav>
+  <a href="#" onclick="showSection('intro')">什麼是 OKR</a>
+  <a href="#" onclick="showSection('components')">OKR 的基本構成</a>
+  <a href="#" onclick="showSection('principles')">OKR 的核心理念</a>
+  <a href="#" onclick="showSection('okr-vs-kpi')">OKR 與 KPI 的區別</a>
+  <a href="#" onclick="showSection('implementation')">OKR 如何實施</a>
+  <a href="#" onclick="showSection('benefits')">OKR 的優點</a>
+  <a href="#" onclick="showSection('challenges')">OKR 的常見挑戰</a>
+  <a href="#" onclick="showSection('examples')">OKR 實際範例</a>
+  <a href="#" onclick="showSection('tips')">制定 OKR 的技巧</a>
+</nav>
+
+<main>
+  <section id="intro">
+    <h2>什麼是 OKR</h2>
+    <p>OKR 是「目標與關鍵結果」的縮寫，是一種目標管理框架。</p>
+  </section>
+
+  <section id="components">
+    <h2>OKR 的基本構成</h2>
+    <p>OKR 包括目標（Objective）和關鍵結果（Key Results）。</p>
+  </section>
+
+  <section id="principles">
+    <h2>OKR 的核心理念</h2>
+    <p>OKR 的核心理念包括透明性、挑戰性和聚焦。</p>
+  </section>
+
+  <section id="okr-vs-kpi">
+    <h2>OKR 與 KPI 的區別</h2>
+    <p>OKR 注重挑戰性目標，而 KPI 更注重日常績效指標。</p>
+  </section>
+
+  <section id="implementation">
+    <h2>OKR 如何實施</h2>
+    <p>OKR 的實施需要明確目標、制定計畫並定期檢視進度。</p>
+  </section>
+
+  <section id="benefits">
+    <h2>OKR 的優點</h2>
+    <p>OKR 幫助組織聚焦重要目標，提升團隊協作和執行力。</p>
+  </section>
+
+  <section id="challenges">
+    <h2>OKR 的常見挑戰</h2>
+    <p>常見挑戰包括目標過多、缺乏檢視和透明性不足。</p>
+  </section>
+
+  <section id="examples">
+    <h2>OKR 實際範例</h2>
+    <p>例如：目標是提升用戶滿意度，關鍵結果是將滿意度提升至 90%。</p>
+  </section>
+
+  <section id="tips">
+    <h2>制定 OKR 的技巧</h2>
+    <p>制定 OKR 時應確保目標清晰、數量適中且具有挑戰性。</p>
+  </section>
+</main>
+
+<footer>
+  <p>@2024 Joseph</p>
+</footer>
+
+<script>
+  function showSection(sectionId) {
+    // 隱藏所有 section
+    const sections = document.querySelectorAll('main section');
+    sections.forEach(section => {
+      section.classList.remove('active');
+    });
+
+    // 顯示選中的 section 並添加動畫
+    const selectedSection = document.getElementById(sectionId);
+    if (selectedSection) {
+      selectedSection.classList.add('active');
+    }
+  }
+</script>
+
+</body>
+</html>
