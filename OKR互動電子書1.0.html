@@ -3,136 +3,225 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OKR 懶人包互動電子書</title>
+  <title>OKR 互動電子書</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      line-height: 1.6;
       margin: 0;
       padding: 0;
+      line-height: 1.6;
+      background-color: #f9f9f9;
     }
     header {
       background-color: #4CAF50;
       color: white;
-      padding: 10px 20px;
       text-align: center;
+      padding: 15px 20px;
+      font-size: 1.5em;
     }
     nav {
       background-color: #f4f4f4;
-      padding: 10px;
+      padding: 10px 20px;
+      border-bottom: 1px solid #ddd;
+    }
+    nav h3 {
+      margin: 0 0 10px;
+      color: #333;
     }
     nav a {
       display: block;
-      color: #333;
+      color: #4CAF50;
       text-decoration: none;
-      margin-bottom: 5px;
-      cursor: pointer;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
     }
     nav a:hover {
-      color: #4CAF50;
+      background-color: #4CAF50;
+      color: white;
     }
     main {
       padding: 20px;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
     }
     section {
       margin-bottom: 20px;
-      overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.5s ease, padding 0.5s ease;
-      padding: 0;
     }
-    section.open {
-      max-height: 500px; /* 設定足夠大的值以容納內容 */
-      padding: 20px 0;
-    }
-    h2 {
+    section h2 {
       color: #4CAF50;
+      margin-bottom: 10px;
     }
     footer {
       text-align: center;
       padding: 10px;
       background-color: #f4f4f4;
+      border-top: 1px solid #ddd;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>OKR 懶人包互動電子書</h1>
+  <h1>OKR 互動電子書</h1>
 </header>
 
 <nav>
   <h3>目錄</h3>
-  <a data-target="intro">什麼是 OKR？</a>
-  <a data-target="okr-vs-kpi">OKR 跟 KPI 差在哪？</a>
-  <a data-target="why-okr">為什麼 OKR 這麼紅？</a>
-  <a data-target="how-to-implement">怎麼執行、推動 OKR？</a>
-  <a data-target="conclusion">結論與下一步</a>
+  <a onclick="showContent('intro')">什麼是 OKR</a>
+  <a onclick="showContent('components')">OKR 的基本構成</a>
+  <a onclick="showContent('principles')">OKR 的核心理念</a>
+  <a onclick="showContent('okr-vs-kpi')">OKR 與 KPI 的區別</a>
+  <a onclick="showContent('implementation')">OKR 如何實施</a>
+  <a onclick="showContent('benefits')">OKR 的優點</a>
+  <a onclick="showContent('challenges')">OKR 的常見挑戰</a>
 </nav>
 
 <main>
-  <section id="intro">
-    <h2>什麼是 OKR？</h2>
-    <p>OKR（Objectives and Key Results）是一套目標管理工具，旨在幫助組織設定挑戰性且具鼓舞性的目標（Objectives），並搭配 3～5 個關鍵結果（Key Results）來衡量目標的進展。</p>
-    <p>例如，英特爾執行長安迪·葛洛夫曾比喻，OKR 是為了確保所有員工的努力方向一致，避免資源分散。</p>
+  <!-- 什麼是 OKR -->
+  <section id="intro" style="display: none;">
+    <h2>什麼是 OKR</h2>
+    <p><strong>OKR</strong> 是 <strong>Objectives and Key Results</strong> 的縮寫，中文通常翻譯為「目標與關鍵結果」。它是一種目標管理框架，幫助組織、團隊或個人設定明確的目標（Objectives）以及衡量這些目標是否達成的關鍵結果（Key Results）。OKR 最早由 Intel 公司發展，後來被 Google 等公司廣泛應用，成為許多企業提升績效和執行力的工具。</p>
   </section>
 
-  <section id="okr-vs-kpi">
-    <h2>OKR 跟 KPI 差在哪？</h2>
-    <p>OKR 更注重挑戰性和目標的實現過程，而 KPI（關鍵績效指標）則偏向衡量日常運營的績效。OKR 的設置通常短周期（如每季），具備更多彈性與創造性。</p>
+  <!-- OKR 的基本構成 -->
+  <section id="components" style="display: none;">
+    <h2>OKR 的基本構成</h2>
+    <h3>1. 目標（Objective）</h3>
+    <p><strong>定義：</strong>目標是你想要達成的具體方向或成果，通常是具有挑戰性且鼓舞人心的。</p>
+    <ul>
+      <li>簡潔且清晰</li>
+      <li>鼓舞人心</li>
+      <li>定性（不需要數字化）</li>
+    </ul>
+    <p><strong>範例：</strong></p>
+    <ul>
+      <li>提升產品的市場影響力</li>
+      <li>增強團隊的協作效率</li>
+    </ul>
+    <h3>2. 關鍵結果（Key Results）</h3>
+    <p><strong>定義：</strong>關鍵結果是用來衡量目標達成程度的具體指標，通常是量化的。</p>
+    <ul>
+      <li>可衡量（Measurable）</li>
+      <li>有時間限制</li>
+      <li>具體且可行</li>
+    </ul>
+    <p><strong>範例：</strong></p>
+    <ul>
+      <li>在一季度內新增 10,000 名活躍用戶</li>
+      <li>將客戶滿意度提升到 90% 以上</li>
+      <li>完成 5 場行業領袖合作活動</li>
+    </ul>
   </section>
 
-  <section id="why-okr">
-    <h2>為什麼 OKR 這麼紅？</h2>
-    <p>Google、Intel、Adobe 等企業都採用了 OKR，因為它能幫助團隊對齊目標、專注於最重要的事，並提升執行力與透明度。</p>
+  <!-- OKR 的核心理念 -->
+  <section id="principles" style="display: none;">
+    <h2>OKR 的核心理念</h2>
+    <ul>
+      <li><strong>聚焦於最重要的事情：</strong>OKR 鼓勵組織或個人專注於少數幾個最重要的目標，而不是分散精力在太多任務上。</li>
+      <li><strong>透明性：</strong>OKR 通常是公開的，無論是公司的高層目標還是個人目標，都可以讓所有人清楚了解彼此的方向，增強協作。</li>
+      <li><strong>挑戰性：</strong>OKR 鼓勵設定具有挑戰性的目標，幫助團隊和個人突破現狀。</li>
+      <li><strong>持續跟進：</strong>OKR 需要定期檢視（例如每週或每月），以確保目標進展順利，並根據需要進行調整。</li>
+    </ul>
   </section>
 
-  <section id="how-to-implement">
-    <h2>怎麼執行、推動 OKR？</h2>
+  <!-- OKR 與 KPI 的區別 -->
+  <section id="okr-vs-kpi" style="display: none;">
+    <h2>OKR 與 KPI 的區別</h2>
+    <table border="1" style="width: 100%; border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th>OKR</th>
+          <th>KPI</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>核心目的</td>
+          <td>設定挑戰性目標，推動成長與創新</td>
+          <td>衡量績效，確保業務的穩定運行</td>
+        </tr>
+        <tr>
+          <td>特性</td>
+          <td>強調挑戰性和透明性，可能不完全達成</td>
+          <td>強調穩定性與完成率</td>
+        </tr>
+        <tr>
+          <td>衡量方式</td>
+          <td>通過關鍵結果來衡量目標的達成程度</td>
+          <td>通過具體指標衡量日常工作的績效</td>
+        </tr>
+        <tr>
+          <td>使用範圍</td>
+          <td>戰略性、創新性目標</td>
+          <td>日常運營、績效管理</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- OKR 如何實施 -->
+  <section id="implementation" style="display: none;">
+    <h2>OKR 如何實施？</h2>
     <ol>
-      <li><strong>共同討論企業願景：</strong>確保全員參與，形成共識。</li>
-      <li><strong>說服員工接受變革：</strong>解釋 OKR 的好處與實施方式。</li>
-      <li><strong>擬定公司層級 OKR：</strong>每季設定 2～3 個目標。</li>
-      <li><strong>設定部門與個人 OKR：</strong>將目標細化至部門與個人層級。</li>
-      <li><strong>建置 OKR 紀錄表：</strong>追蹤進度，確保執行到位。</li>
-      <li><strong>檢視、追蹤實施成果：</strong>每季檢討並調整下一步行動。</li>
+      <li><strong>設計 OKR：</strong>從公司到個人層級逐步設定目標。</li>
+      <li><strong>確保透明性：</strong>將 OKR 公開，促進協作。</li>
+      <li><strong>定期檢視進展：</strong>每週或每月檢視 OKR 的進展情況，確保方向正確。</li>
+      <li><strong>評估與反思：</strong>在季度或年度結束時評估 OKR 的完成情況，並反思改進方向。</li>
     </ol>
   </section>
 
-  <section id="conclusion">
-    <h2>結論與下一步</h2>
-    <p>OKR 是一套強大的目標管理工具，但成功的關鍵在於全員的參與與持續的檢討改進。開始導入 OKR 時，可以先從公司層級的目標入手，逐步推廣到部門與個人。</p>
+  <!-- OKR 的優點 -->
+  <section id="benefits" style="display: none;">
+    <h2>OKR 的優點</h2>
+    <ul>
+      <li>提升目標聚焦</li>
+      <li>推動創新與挑戰</li>
+      <li>增強透明性</li>
+      <li>提高執行力</li>
+    </ul>
+  </section>
+
+  <!-- OKR 的常見挑戰 -->
+  <section id="challenges" style="display: none;">
+    <h2>OKR 的常見挑戰</h2>
+    <ul>
+      <li>目標設定過多，導致分散精力。</li>
+      <li>目標過於模糊，難以衡量。</li>
+      <li>忽略定期檢視，可能失去方向。</li>
+    </ul>
   </section>
 </main>
 
 <footer>
-  <p>更多資料請參考最新一期《經理人月刊》</p>
+  <p>@2024 Joseph Chen</p>
 </footer>
 
 <script>
-  // 取得所有目錄項目
-  const menuItems = document.querySelectorAll('nav a');
-  
-  // 為每個目錄項目添加點擊事件
-  menuItems.forEach(item => {
-    item.addEventListener('click', () => {
-      // 取得目標 section 的 ID
-      const targetId = item.getAttribute('data-target');
-      const targetSection = document.getElementById(targetId);
-
-      // 檢查是否已經展開，若已展開則收起
-      if (targetSection.classList.contains('open')) {
-        targetSection.classList.remove('open');
-      } else {
-        // 關閉其他已展開的 section
-        document.querySelectorAll('section').forEach(section => {
-          section.classList.remove('open');
-        });
-        // 展開目標 section
-        targetSection.classList.add('open');
-      }
+  function showContent(sectionId) {
+    const sections = document.querySelectorAll('main section');
+    sections.forEach(section => {
+      section.style.display = 'none';
+      section.style.opacity = '0';
     });
-  });
+    const selectedSection = document.getElementById(sectionId);
+    if (selectedSection) {
+      selectedSection.style.display = 'block';
+      setTimeout(() => {
+        selectedSection.style.opacity = '1';
+      }, 50);
+    }
+    const mainContent = document.querySelector('main');
+    mainContent.style.display = 'block';
+  }
 </script>
 
 </body>
