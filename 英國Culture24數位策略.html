@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>英國 Culture24 數位化策略互動電子書</title>
+  <style>
+    body {
+      font-family: "Microsoft JhengHei", Arial, sans-serif;
+      line-height: 1.8;
+      margin: 0;
+      padding: 0;
+      background-color: #f3f7fa;
+      color: #333;
+    }
+    header {
+      background-color: #007BFF;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .index {
+      margin-bottom: 20px;
+    }
+    .index a {
+      display: block;
+      text-decoration: none;
+      color: #007BFF;
+      margin: 5px 0;
+      cursor: pointer;
+    }
+    .index a:hover {
+      text-decoration: underline;
+    }
+    .chapter {
+      display: none;
+    }
+    .chapter.show {
+      display: block;
+      animation: slideDown 0.5s ease;
+    }
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .navigation {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .navigation button {
+      padding: 10px 20px;
+      margin: 5px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .navigation button:hover {
+      background-color: #0056b3;
+    }
+    .quiz {
+      margin-top: 30px;
+      padding: 15px;
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    .quiz-question {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .quiz-options button {
+      display: block;
+      margin: 5px 0;
+      padding: 8px 12px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .quiz-options button:hover {
+      background-color: #0056b3;
+    }
+    .quiz-result {
+      margin-top: 15px;
+      padding: 10px;
+      font-weight: bold;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>英國 Culture24 數位化策略互動電子書</h1>
+</header>
+
+<div class="container">
+  <!-- 索引 -->
+  <div class="index">
+    <h2>目錄</h2>
+    <a onclick="showChapter(1)">1. 數位參與與文化普及</a>
+    <a onclick="showChapter(2)">2. 支持文化機構的數位轉型</a>
+    <a onclick="showChapter(3)">3. 數據驅動的決策</a>
+    <a onclick="showChapter(4)">4. 創新與實驗</a>
+    <a onclick="showChapter(5)">5. 推動數位文化的可持續發展</a>
+    <a onclick="showChapter(6)">6. 案例：Museum Crush</a>
+  </div>
+
+  <!-- 章節 5 -->
+  <div id="chapter5" class="chapter">
+    <h2>5. 推動數位文化的可持續發展</h2>
+    <p>
+      英國 Culture24 的數位化策略還關注可持續性問題，確保數位文化的長期發展。具體措施包括：
+    </p>
+    <ul>
+      <li><strong>資金支持與商業模式：</strong>幫助文化機構探索可持續的數位商業模式，例如會員訂閱、線上捐贈和數位產品銷售。</li>
+      <li><strong>技術基礎設施：</strong>支持文化機構建立穩定且可擴展的技術基礎設施，以應對未來需求。</li>
+      <li><strong>環境可持續性：</strong>關注數位活動的環境影響，提倡使用節能技術和可持續的數位實踐。</li>
+    </ul>
+    <div class="quiz">
+      <div class="quiz-question">問題：英國 Culture24 如何推動數位文化的可持續發展？</div>
+      <div class="quiz-options">
+        <button onclick="showResult(this, '正確！英國 Culture24 支持穩定技術基礎設施並探索商業模式。')">A. 穩定技術基礎設施</button>
+        <button onclick="showResult(this, '錯誤！僅依賴短期資金並非可持續策略。')">B. 短期資金支持</button>
+      </div>
+      <div class="quiz-result"></div>
+    </div>
+    <div class="navigation">
+      <button onclick="showChapter(4)">上一章</button>
+      <button onclick="showChapter(6)">下一章</button>
+    </div>
+  </div>
+
+  <!-- 章節 6 -->
+  <div id="chapter6" class="chapter">
+    <h2>6. 案例：Museum Crush</h2>
+    <p>
+      英國 Culture24 的一個成功數位化項目是 <strong>Museum Crush</strong>，這是一個專門為博物館和文化愛好者打造的線上平台，展示來自英國各地博物館的故事和藏品。其特點包括：
+    </p>
+    <ul>
+      <li>吸引年輕觀眾的視覺化設計。</li>
+      <li>高品質的內容策劃，結合圖片、視頻和文字。</li>
+      <li>社交媒體整合，增加互動性和分享度。</li>
+    </ul>
+    <div class="quiz">
+      <div class="quiz-question">問題：Museum Crush 的特點是什麼？</div>
+      <div class="quiz-options">
+        <button onclick="showResult(this, '正確！Museum Crush 結合高品質內容和社交媒體整合。')">A. 高品質內容策劃</button>
+        <button onclick="showResult(this, '錯誤！僅依賴傳統媒體並非其特點。')">B. 傳統媒體展示</button>
+      </div>
+      <div class="quiz-result"></div>
+    </div>
+    <div class="navigation">
+      <button onclick="showChapter(5)">上一章</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showChapter(chapterNumber) {
+    const chapters = document.querySelectorAll('.chapter');
+    chapters.forEach(chapter => chapter.classList.remove('show'));
+    document.getElementById(`chapter${chapterNumber}`).classList.add('show');
+  }
+
+  function showResult(button, message) {
+    const resultDiv = button.parentElement.nextElementSibling;
+    resultDiv.textContent = message;
+    resultDiv.style.color = message.includes('正確') ? 'green' : 'red';
+  }
+</script>
+
+</body>
+</html>
