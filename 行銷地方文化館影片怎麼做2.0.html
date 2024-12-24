@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地方文化館影片製作指南</title>
+    <style>
+        /* 全局樣式 */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em; /* 標題字體加大 */
+        }
+        main {
+            padding: 20px;
+        }
+        section {
+            margin-bottom: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: none; /* 預設隱藏所有內容 */
+        }
+        section.active {
+            display: block; /* 顯示被選中的內容 */
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        footer {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        .highlight {
+            color: #007BFF;
+            font-weight: bold;
+            background-color: yellow; /* 反白效果 */
+        }
+
+        /* 目錄樣式 */
+        .toc {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #e9ecef;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            position: relative;
+        }
+        .toc h2 {
+            margin-top: 0;
+            font-size: 1.8em; /* 目錄標題字體加大 */
+        }
+        .toc a {
+            text-decoration: none;
+            color: #007BFF;
+            display: block;
+            margin: 15px 0; /* 增加間距 */
+            font-size: 1.5em; /* 目錄字體加大 */
+            transition: color 0.3s ease;
+        }
+        .toc a:hover {
+            color: #0056b3;
+        }
+
+        /* 手機適配 */
+        @media (max-width: 768px) {
+            .toc {
+                height: 100vh; /* 充滿手機直立版面 */
+                overflow-y: auto;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+        }
+
+        /* 拍攝前準備工作展開/收起樣式 */
+        .expandable {
+            cursor: pointer;
+            font-weight: bold;
+            color: #007BFF;
+            margin-bottom: 10px;
+        }
+        .expandable:hover {
+            text-decoration: underline;
+        }
+        .expandable-content {
+            display: none; /* 預設隱藏詳細內容 */
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+        .expandable-content.active {
+            display: block; /* 展開詳細內容 */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>地方文化館影片製作指南</h1>
+    </header>
+    <main>
+        <!-- 目錄 -->
+        <div class="toc">
+            <h2>目錄</h2>
+            <a href="#core" onclick="showSection('core')">核心理念</a>
+            <a href="#preparation" onclick="showSection('preparation')">拍攝前準備工作</a>
+            <a href="#shooting" onclick="showSection('shooting')">拍攝重點</a>
+            <a href="#copywriting" onclick="showSection('copywriting')">文案建議方向</a>
+            <a href="#example" onclick="showSection('example')">成功案例文案範例</a>
+            <a href="#video" onclick="showSection('video')">影片欣賞</a>
+        </div>
+
+        <!-- 核心理念 -->
+        <section id="core" class="fade-in">
+            <h2>核心理念</h2>
+            <ul>
+                <li>以「地方營造」為核心價值</li>
+                <li>從「參觀地方文化館 (Visit Small)」切入</li>
+                <li>連結在地產業經驗與傳承</li>
+                <li>優先與在地居民分享生活故事</li>
+            </ul>
+        </section>
+
+        <!-- 拍攝前準備工作 -->
+        <section id="preparation" class="fade-in">
+            <h2>拍攝前準備工作</h2>
+            <div>
+                <p class="expandable" onclick="toggleContent('survey')">1. 調查館舍現況與需求</p>
+                <div id="survey" class="expandable-content">
+                    <ul>
+                        <li>透過不記名問卷了解館方的需求重點。</li>
+                        <li>確認館舍的定位與核心價值。</li>
+                        <li>建立完整影像資料庫，確保資料的可追溯性與完整性。</li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <p class="expandable" onclick="toggleContent('team')">2. 團隊組成建議</p>
+                <div id="team" class="expandable-content">
+                    <ul>
+                        <li>企劃統籌：負責整體企劃與專案管理。</li>
+                        <li>文案撰寫：提供影片腳本與字幕撰寫。</li>
+                        <li>攝影/剪輯：負責影片拍攝與後期製作。</li>
+                        <li>配樂製作：為影片配樂，強化觀賞體驗。</li>
+                        <li>現場訪問：與在地居民互動，挖掘真實故事。</li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <p class="expandable" onclick="toggleContent('location')">3. 拍攝場地規劃</p>
+                <div id="location" class="expandable-content">
+                    <ul>
+                        <li>確認拍攝地點的可用性與拍攝時間安排。</li>
+                        <li>確保場地光線、音效等條件適合拍攝需求。</li>
+                        <li>提前與館方協調，避免干擾正常運作。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 拍攝重點 -->
+        <section id="shooting" class="fade-in">
+            <h2>拍攝重點</h2>
+            <h3>必做事項</h3>
+            <ul>
+                <li><span class="highlight">行銷地方文化館影片怎麼做：</span>展現真實的地方特色，記錄社區居民生活面貌。</li>
+                <li>增加在地人入鏡機會：訪問在地居民，記錄地方職人故事。</li>
+                <li>聚焦單一主題：避免主題發散，深入呈現地方特色。</li>
+                <li>給予創作團隊發揮空間：尊重專業判斷，鼓勵創意表現。</li>
+            </ul>
+        </section>
+
+        <!-- 文案建議方向 -->
+        <section id="copywriting" class="fade-in">
+            <h2>文案建議方向</h2>
+            <ul>
+                <li>著重在地特色。</li>
+                <li>連結歷史記憶。</li>
+                <li>融入情感連結。</li>
+                <li>強調文化傳承。</li>
+                <li>突出在地獨特性。</li>
+            </ul>
+        </section>
+
+        <!-- 成功案例文案範例 -->
+        <section id="example" class="fade-in">
+            <h2>成功案例文案範例</h2>
+            <blockquote>
+                這裡有光陰的故事<br>
+                這裡有職人的傳承<br>
+                熱情奔放的歌舞<br>
+                產物直送的米食<br>
+                阿公阿嬤那些年追的青春<br>
+                爸爸媽媽兒時奔跑的土地<br>
+                還有重回桃園家鄉的自己<br>
+                <strong>Visit Small</strong><br>
+                走進地方文化館<br>
+                <strong>Come and enjoy</strong><br>
+                你要的都在這裡
+            </blockquote>
+        </section>
+
+        <!-- 影片欣賞 -->
+        <section id="video" class="fade-in">
+            <h2>影片欣賞</h2>
+            <p>點擊以下連結欣賞影片：</p>
+            <a href="https://drive.google.com/file/d/1kGHcMu0ygMGSC3rRd-v88pcA1piRXZt3/view?usp=drivesdk" target="_blank">
+                觀看影片
+            </a>
+        </section>
+    </main>
+    <footer>
+        @桂雅文、詹子琦、林聖硯、武敬凱
+    </footer>
+
+    <script>
+        // 顯示對應的 section 並隱藏其他內容
+        function showSection(id) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                if (section.id === id) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+        }
+
+        // 展開/收起詳細內容
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            content.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
