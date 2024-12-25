@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行銷漏斗電子書</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .section {
+            background: #fff;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .section h2 {
+            cursor: pointer;
+            margin: 0;
+            font-size: 1.2em;
+            background: #e7e7e7;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .section-content {
+            display: none;
+            margin-top: 10px;
+        }
+        .section-content p {
+            margin: 0;
+        }
+        .section-content ul {
+            margin: 10px 0 0;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>行銷漏斗互動式電子書</h1>
+
+    <div class="section" data-id="awareness">
+        <h2>1. 認知階段（Awareness）</h2>
+        <div class="section-content">
+            <p><strong>目標：</strong>吸引潛在顧客的注意，讓他們知道你的品牌或產品。</p>
+            <p><strong>策略：</strong></p>
+            <ul>
+                <li>使用廣告提高曝光。</li>
+                <li>透過社交媒體貼文吸引目光。</li>
+                <li>使用內容行銷，例如部落格或影片。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section" data-id="interest">
+        <h2>2. 興趣階段（Interest）</h2>
+        <div class="section-content">
+            <p><strong>目標：</strong>激發潛在顧客的興趣，讓他們了解你的品牌價值。</p>
+            <p><strong>策略：</strong></p>
+            <ul>
+                <li>提供電子書或網路研討會。</li>
+                <li>透過電子郵件行銷建立關係。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section" data-id="consideration">
+        <h2>3. 考慮階段（Consideration）</h2>
+        <div class="section-content">
+            <p><strong>目標：</strong>幫助潛在顧客評估你的產品或服務，並促進他們的購買意願。</p>
+            <p><strong>策略：</strong></p>
+            <ul>
+                <li>提供試用版。</li>
+                <li>展示用戶見證與案例研究。</li>
+                <li>提供產品比較表。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section" data-id="conversion">
+        <h2>4. 轉換階段（Conversion）</h2>
+        <div class="section-content">
+            <p><strong>目標：</strong>將潛在顧客轉化為實際顧客。</p>
+            <p><strong>策略：</strong></p>
+            <ul>
+                <li>運用限時優惠與折扣。</li>
+                <li>簡化購買流程。</li>
+                <li>使用再行銷廣告推動決策。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section" data-id="loyalty">
+        <h2>5. 忠誠階段（Loyalty）</h2>
+        <div class="section-content">
+            <p><strong>目標：</strong>留住現有顧客並建立長期關係。</p>
+            <p><strong>策略：</strong></p>
+            <ul>
+                <li>提供優質售後服務。</li>
+                <li>設計會員計劃。</li>
+                <li>定期發送特別優惠。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section" data-id="advocacy">
+        <h2>6. 倡導階段（Advocacy）</h2>
+        <div class="section-content">
+            <p><strong>目標：</strong>將顧客變成品牌推廣者。</p>
+            <p><strong>策略：</strong></p>
+            <ul>
+                <li>鼓勵顧客分享體驗。</li>
+                <li>舉辦推薦計劃。</li>
+                <li>透過社交媒體創造口碑行銷。</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            section.querySelector('h2').addEventListener('click', () => {
+                sections.forEach(s => {
+                    if (s !== section) s.querySelector('.section-content').style.display = 'none';
+                });
+                const content = section.querySelector('.section-content');
+                content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+    </script>
+</body>
+</html>
