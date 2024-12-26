@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行銷漏斗完整指南</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+        }
+        a {
+            text-decoration: none;
+            color: blue;
+            cursor: pointer;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .menu {
+            margin-bottom: 20px;
+        }
+    </style>
+    <script>
+        function showContent(id) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 行銷漏斗完整指南</h1>
+
+        <!-- 目錄 -->
+        <div class="menu">
+            <ul>
+                <li><a onclick="showContent('content1')">第一階段：認知階段</a></li>
+                <li><a onclick="showContent('content2')">第二階段：興趣階段</a></li>
+                <li><a onclick="showContent('content3')">第三階段：考慮階段</a></li>
+                <li><a onclick="showContent('content4')">第四階段：轉換階段</a></li>
+                <li><a onclick="showContent('content5')">第五階段：忠誠階段</a></li>
+                <li><a onclick="showContent('content6')">第六階段：倡導階段</a></li>
+            </ul>
+        </div>
+
+        <!-- 第一階段：認知階段 -->
+        <div class="content-section active" id="content1">
+            <h2>認知階段 (Awareness)</h2>
+            <p>在認知階段，主要目標是讓目標客戶知道品牌的存在，並建立初步的信任感。</p>
+            <ul>
+                <li>核心目標：提升品牌知名度、吸引流量。</li>
+                <li>實施策略：社群媒體推廣、SEO 優化、廣告投放。</li>
+            </ul>
+        </div>
+
+        <!-- 第二階段：興趣階段 -->
+        <div class="content-section" id="content2">
+            <h2>興趣階段 (Interest)</h2>
+            <p>興趣階段旨在深化目標客戶對品牌的理解，並促進他們的參與。</p>
+            <ul>
+                <li>核心目標：建立品牌權威、提供價值資訊。</li>
+                <li>實施策略：教學內容、直播活動、電子報。</li>
+            </ul>
+        </div>
+
+        <!-- 第三階段：考慮階段 -->
+        <div class="content-section" id="content3">
+            <h2>考慮階段 (Consideration)</h2>
+            <p>考慮階段的重點是展示產品的價值，並解答潛在客戶的疑慮。</p>
+            <ul>
+                <li>核心目標：促進潛在客戶做出購買決定。</li>
+                <li>實施策略：產品示範、客戶見證、功能比較。</li>
+            </ul>
+        </div>
+
+        <!-- 第四階段：轉換階段 -->
+        <div class="content-section" id="content4">
+            <h2>轉換階段 (Conversion)</h2>
+            <p>轉換階段的重點是促成交易並優化購買流程。</p>
+            <ul>
+                <li>核心目標：提高交易完成率、降低購物車放棄率。</li>
+                <li>實施策略：限時優惠、簡化結帳、即時客服。</li>
+            </ul>
+        </div>
+
+        <!-- 第五階段：忠誠階段 -->
+        <div class="content-section" id="content5">
+            <h2>忠誠階段 (Loyalty)</h2>
+            <p>忠誠階段專注於提升顧客滿意度，並建立持續的品牌忠誠。</p>
+            <ul>
+                <li>核心目標：增加重複購買率、提升終身價值。</li>
+                <li>實施策略：會員計劃、售後服務、滿意度調查。</li>
+            </ul>
+        </div>
+
+        <!-- 第六階段：倡導階段 -->
+        <div class="content-section" id="content6">
+            <h2>倡導階段 (Advocacy)</h2>
+            <p>倡導階段旨在培養品牌擁護者，並促進口碑行銷。</p>
+            <ul>
+                <li>核心目標：提高推薦率、擴大口碑效應。</li>
+                <li>實施策略：用戶生成內容、品牌大使計劃。</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
