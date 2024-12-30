@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>專案經理成功完整指南</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --highlight-bg: #dbeafe;
+            --tips-bg: #e0f2fe;
+            --warning-bg: #fee2e2;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+        
+        .chapter {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+        }
+        
+        .chapter-title {
+            color: var(--primary-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0;
+            padding: 10px 0;
+        }
+        
+        .chapter-content {
+            display: none;
+            padding: 15px 0;
+        }
+        
+        .active .chapter-content {
+            display: block;
+        }
+        
+        .toggle-icon {
+            transition: transform 0.3s;
+        }
+        
+        .active .toggle-icon {
+            transform: rotate(180deg);
+        }
+        
+        .sub-section {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        
+        .highlight {
+            background: var(--highlight-bg);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        
+        .tips {
+            background: var(--tips-bg);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        
+        .warning {
+            background: var(--warning-bg);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        
+        .tool-box {
+            border: 2px solid var(--primary-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        
+        .case-study {
+            background: #f0f9ff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .checklist li {
+            margin: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>專案經理（PM）完整成功指南</h1>
+        
+        <div class="chapter" onclick="toggleChapter(this)">
+            <h2 class="chapter-title">
+                1. 核心技能全方位解析
+                <span class="toggle-icon">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <div class="sub-section">
+                    <h3>1.1 專案管理方法論精通</h3>
+                    <div class="highlight">
+                        <h4>傳統專案管理方法</h4>
+                        <ul>
+                            <li>PMBOK (Project Management Body of Knowledge)
+                                <ul>
+                                    <li>五大過程組：啟動、規劃、執行、監控、結案</li>
+                                    <li>十大知識領域：整合、範疇、進度、成本、品質、資源、溝通、風險、採購、利害關係人</li>
+                                </ul>
+                            </li>
+                            <li>PRINCE2 (Projects IN Controlled Environments)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tips">
+                        <h4>敏捷管理方法</h4>
+                        <ul>
+                            <li>Scrum框架
+                                <ul>
+                                    <li>Sprint Planning</li>
+                                    <li>Daily Scrum</li>
+                                    <li>Sprint Review</li>
+                                    <li>Sprint Retrospective</li>
+                                </ul>
+                            </li>
+                            <li>看板方法 (Kanban)</li>
+                            <li>混合方法 (Hybrid Approach)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="sub-section">
+                    <h3>1.2 專案管理工具精選</h3>
+                    <div class="tool-box">
+                        <h4>必備工具清單</h4>
+                        <ul>
+                            <li>專案管理平台
+                                <ul>
+                                    <li>JIRA：適合軟體開發專案</li>
+                                    <li>Asana：適合一般專案管理</li>
+                                    <li>Trello：視覺化專案追蹤</li>
+                                    <li>Monday.com：團隊協作管理</li>
+                                </ul>
+                            </li>
+                            <li>文件協作工具
+                                <ul>
+                                    <li>Notion：知識庫建立</li>
+                                    <li>Confluence：團隊文件管理</li>
+                                    <li>Google Workspace：即時協作</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="sub-section">
+                    <h3>1.3 時間管理技巧</h3>
+                    <div class="case-study">
+                        <h4>案例分析：專案時程延遲處理</h4>
+                        <p>情境：軟體開發專案遇到技術難題，導致進度延遲</p>
+                        <p>解決方案：</p>
+                        <ol>
+                            <li>快速評估影響範圍</li>
+                            <li>調整資源配置</li>
+                            <li>重新規劃時程</li>
+                            <li>與利害關係人溝通</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter" onclick="toggleChapter(this)">
+            <h2 class="chapter-title">
+                2. 進階專案管理技巧
+                <span class="toggle-icon">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <div class="sub-section">
+                    <h3>2.1 風險管理策略</h3>
+                    <div class="highlight">
+                        <h4>風險評估矩陣</h4>
+                        <ul>
+                            <li>風險識別
+                                <ul>
+                                    <li>技術風險</li>
+                                    <li>時程風險</li>
+                                    <li>成本風險</li>
+                                    <li>品質風險</li>
+                                </ul>
+                            </li>
+                            <li>風險應對策略
+                                <ul>
+                                    <li>規避</li>
+                                    <li>轉移</li>
+                                    <li>減輕</li>
+                                    <li>接受</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="warning">
+                        <h4>常見風險警示</h4>
+                        <ul>
+                            <li>需求變更頻繁</li>
+                            <li>資源配置不當</li>
+                            <li>溝通不良</li>
+                            <li>技術障礙</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="sub-section">
+                    <h3>2.2 品質管理流程</h3>
+                    <div class="tool-box">
+                        <h4>品質管理工具</h4>
+                        <ul>
+                            <li>品質規劃
+                                <ul>
+                                    <li>品質標準訂定</li>
+                                    <li>驗收規範制定</li>
+                                </ul>
+                            </li>
+                            <li>品質保證
+                                <ul>
+                                    <li>流程稽核</li>
+                                    <li>同儕審查</li>
+                                </ul>
+                            </li>
+                            <li>品質控制
+                                <ul>
+                                    <li>檢查表</li>
+                                    <li>統計抽樣</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter" onclick="toggleChapter(this)">
+            <h2 class="chapter-title">
+                3. 溝通與領導力
+                <span class="toggle-icon">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <div class="sub-section">
+                    <h3>3.1 有效溝通策略</h3>
+                    <div class="highlight">
+                        <h4>溝通計畫要素</h4>
+                        <ul>
+                            <li>溝通對象分析</li>
+                            <li>溝通頻率設定</li>
+                            <li>溝通管道選擇</li>
+                            <li>溝通內容規劃</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tips">
+                        <h4>會議管理技巧</h4>
+                        <ul>
+                            <li>會議前準備
+                                <ul>
+                                    <li>議程規劃</li>
+                                    <li>資料準備</li>
+                                </ul>
+                            </li>
+                            <li>會議中掌控
+                                <ul>
+                                    <li>時間管理</li>
+                                    <li>討論引導</li>
+                                </ul>
+                            </li>
+                            <li>會議後追蹤
+                                <ul>
+                                    <li>會議紀錄</li>
+                                    <li>行動項目追蹤</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="sub-section">
+                    <h3>3.2 團隊領導技巧</h3>
+                    <div class="case-study">
+                        <h4>團隊建立案例</h4>
+                        <p>情境：跨部門專案團隊的組建與管理</p>
+                        <p>關鍵策略：</p>
+                        <ul>
+                            <li>角色與責任明確化</li>
+                            <li>團隊文化建立</li>
+                            <li>衝突管理機制</li>
+                            <li>激勵制度設計</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter" onclick="toggleChapter(this)">
+            <h2 class="chapter-title">
+                4. 專業發展路徑
+                <span class="toggle-icon">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <div class="sub-section">
+                    <h3>4.1 專業認證規劃</h3>
+                    <div class="highlight">
+                        <h4>重要認證</h4>
+                        <ul>
+                            <li>PMP (Project Management Professional)</li>
+                            <li>PRINCE2 Practitioner</li>
+                            <li>Agile認證</li>
+                            <li>領域特定認證</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="sub-section">
+                    <h3>4.2 持續學習資源</h3>
+                    <div class="tool-box">
+                        <h4>學習平台推薦</h4>
+                        <ul>
+                            <li>線上課程平台
+                                <ul>
+                                    <li>Coursera</li>
+                                    <li>Udemy</li>
+                                    <li>LinkedIn Learning</li>
+                                </ul>
+                            </li>
+                            <li>專業社群
+                                <ul>
+                                    <li>PMI章節組織</li>
+                                    <li>Agile社群</li>
+                                    <li>產業專業組織</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter" onclick="toggleChapter(this)">
+            <h2 class="chapter-title">
+                5. 實戰技巧與案例
+                <span class="toggle-icon">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <div class="sub-section">
+                    <h3>5.1 專案啟動階段</h3>
+                    <div class="checklist">
+                        <h4>啟動檢查清單</h4></antArtifact>
