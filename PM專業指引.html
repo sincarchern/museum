@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>專案經理完整實戰指南</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --highlight-bg: #dbeafe;
+            --tips-bg: #e0f2fe;
+            --warning-bg: #fee2e2;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+        
+        .chapter {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+        }
+        
+        .chapter-title {
+            color: var(--primary-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0;
+            padding: 10px 0;
+        }
+        
+        .chapter-content {
+            display: none;
+            padding: 15px 0;
+        }
+        
+        .active .chapter-content {
+            display: block;
+        }
+        
+        .toggle-icon {
+            transition: transform 0.3s;
+        }
+        
+        .active .toggle-icon {
+            transform: rotate(180deg);
+        }
+        
+        .sub-section {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        
+        .highlight {
+            background: var(--highlight-bg);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        
+        .tips {
+            background: var(--tips-bg);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        
+        .warning {
+            background: var(--warning-bg);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        
+        ul, ol {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        
+        .quick-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .quick-link:hover {
+            text-decoration: underline;
+        }
+        
+        .nav-section {
+            background: #f8fafc;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .resource-box {
+            border: 2px solid var(--primary-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>專案經理（PM）完整實戰指南</h1>
+        
+        <div class="nav-section">
+            <h2>快速導覽</h2>
+            <ul>
+                <li><a href="#core" class="quick-link">核心知識體系</a></li>
+                <li><a href="#methods" class="quick-link">專案管理方法論</a></li>
+                <li><a href="#skills" class="quick-link">關鍵技能培養</a></li>
+                <li><a href="#tools" class="quick-link">工具應用實務</a></li>
+                <li><a href="#cases" class="quick-link">實戰案例分析</a></li>
+            </ul>
+        </div>
+        
+        <div class="chapter" id="core">
+            <h2 class="chapter-title">
+                1. 核心知識體系
+                <span class="toggle-icon">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <div class="sub-section">
+                    <h3>1.1 專案管理基礎</h3>
+                    <div class="highlight">
+                        <h4>專案要素</h4>
+                        <ul>
+                            <li>範疇管理
+                                <ul>
+                                    <li>專案目標定義</li>
+                                    <li>可交付成果確認</li>
+                                    <li>工作分解結構(WBS)</li>
+                                </ul>
+                            </li>
+                            <li>時間管理
+                                <ul>
+                                    <li>進度規劃技術</li>
+                                    <li>關鍵路徑分析</li>
+                                    <li>里程碑設定</li>
+                                </ul>
+                            </li>
+                            <li>成本管理
+                                <ul>
+                                    <li>預算編列方法</li>
+                                    <li>成本控制技巧</li>
+                                    <li>資源分配最佳化</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="sub-section">
+                    <h3>1.2 品質與風險管理</h3>
+                    <div class="tips">
+                        <h4>品質管理框架</h4>
+                        <ul>
+                            <li>品質規劃
+                                <ul>
+                                    <li>標準制定</li>
+                                    <li>驗收準則</li>
+                                    <li>檢驗方法</li>
+                                </ul>
+                            </li>
+                            <li>品質保證
+                                <ul>
+                                    <li>流程審查</li>
+                                    <li>標準符合性確認</li>
+                                    <li>預防措施</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="warning">
+                        <h4>風險管理策略</h4>
+                        <ul>
+                            <li>風險辨識
+                                <ul>
+                                    <li>風險因子分析</li>
+                                    <li>影響評估</li>
+                                    <li>優先順序判定</li>
+                                </ul>
+                            </li>
+                            <li>風險應對
+                                <ul>
+                                    <li>迴避策略</li>
+                                    <li>轉移方案</li>
+                                    <li>降低措施</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter" id="methods">
+            <h2 class="chapter-title">
+                2. 專案管理方法論
+                <span class="toggle-icon">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <div class="sub-section">
+                    <h3>2.1 傳統瀑布式管理</h3>
+                    <div class="resource-box">
+                        <h4>PMBOK框架</h4>
+                        <ul>
+                            <li>五大過程組
+                                <ul>
+                                    <li>啟動過程組：制定專案章程</li>
+                                    <li>規劃過程組：建立專案管理計畫</li>
+                                    <li>執行過程組：專案工作執行</li>
+                                    <li>監控過程組：績效監督與控制</li>
+                                    <li>結案過程組：專案收尾與經驗學習</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="sub-section">
+                    <h3>2.2 敏捷管理方法</h3>
+                    <div class="highlight">
+                        <h4>Scrum框架</h4>
+                        <ul>
+                            <li>核心角色
+                                <ul>
+                                    <li>產品負責人</li>
+                                    <li>Scrum主持人</li>
+                                    <li>開發團隊</li>
+                                </ul>
+                            </li>
+                            <li>主要活動
+                                <ul>
+                                    <li>每日站立會議</li>
+                                    <li>衝刺規劃會議</li>
+                                    <li>衝刺檢視會議</li>
+                                    <li>回顧檢討會議</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter" id="skills">
+            <h2 class="chapter-title">
+                3. 關鍵技能培養
+                <span class="toggle-icon">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <div class="sub-section">
+                    <h3>3.1 溝通管理</h3>
+                    <div class="tips">
+                        <h4>有效溝通技巧</h4>
+                        <ul>
+                            <li>溝通規劃
+                                <ul>
+                                    <li>利害關係人分析</li>
+                                    <li>溝通需求評估</li>
+                                    <li>溝通頻率設定</li>
+                                </ul>
+                            </li>
+                            <li>溝通執行
+                                <ul>
+                                    <li>會議主持技巧</li>
+                                    <li>衝突處理方法</li>
+                                    <li>跨部門協調</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="sub-section">
+                    <h3>3.2 領導力發展</h3>
+                    <div class="resource-box">
+                        <h4>團隊管理能力</h4>
+                        <ul>
+                            <li>團隊建立
+                                <ul>
+                                    <li>角色分配</li>
+                                    <li>目標設定</li>
+                                    <li>工作分派</li>
+                                </ul>
+                            </li>
+                            <li>團隊激勵
+                                <ul>
+                                    <li>績效認可</li>
+                                    <li>發展機會</li>
+                                    <li>團隊氣氛營造</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter" id="tools">
+            <h2 class="chapter-title">
+                4. 工具應用實務
+                <span class="toggle-icon">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <div class="sub-section">
+                    <h3>4.1 專案管理工具</h3>
+                    <div class="highlight">
+                        <h4>常用工具介紹</h4>
+                        <ul>
+                            <li>專案規劃工具
+                                <ul>
+                                    <li>Microsoft Project</li>
+                                    <li>ProjectLibre</li>
+                                    <li>甘特圖工具</li>
+                                </ul>
+                            </li>
+                            <li>協作平台
+                                <ul>
+                                    <li>JIRA</li>
+                                    <li>Trello</li>
+                                    <li>Asana</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="sub-section">
+                    <h3>4.2 文件管理</h3>
+                    <div class="tips">
+                        <h4>文件系統建置</h4>
+                        <ul>
+                            <li>文件架構
+                                <ul>
+                                    <li>專案計畫書</li>
+                                    <li>工作說明書</li>
+                                    <li>會議紀錄</li>
+                                    <li>進度報告</li>
+                                </ul>
+                            </li>
+                            <li>版本控制
+                                <ul>
+                                    <li>命名規則</li>
+                                    <li>更新流程</li>
+                                    <li>權限管理</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter" id="cases">
+            <h2 class="chapter-title">
+                5. 實戰案例分析
+                <span class="toggle-icon">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <div class="sub-section">
+                    <h3>5.1 軟體開發專案</h3>
+                    <div class="resource-box">
+                        <h4>案例研究</h4>
+                        <ul>
+                            <li>專案背景
+                                <ul>
+                                    <li>系統更新專案</li>
+                                    <li>跨部門協作</li>
+                                    <li>時程緊迫</li>
+                                </ul>
+                            </li>
+                            <li>解決方案
+                                <ul>
+                                    <li>敏捷方法導入</li>
+                                    <li>溝通機制建立</li>
+                                    <li>風險控管措施</li>
+                                </ul>
+                            </li</antArtifact>
