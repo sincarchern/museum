@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>專案經理成功指南</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+        
+        .chapter {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+        }
+        
+        .chapter-title {
+            color: var(--primary-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0;
+            padding: 10px 0;
+        }
+        
+        .chapter-content {
+            display: none;
+            padding: 15px 0;
+        }
+        
+        .active .chapter-content {
+            display: block;
+        }
+        
+        .toggle-icon {
+            transition: transform 0.3s;
+        }
+        
+        .active .toggle-icon {
+            transform: rotate(180deg);
+        }
+        
+        .sub-section {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .highlight {
+            background: #dbeafe;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        
+        .tips {
+            background: #e0f2fe;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>專案經理（PM）成功指南</h1>
+        
+        <div class="chapter" onclick="toggleChapter(this)">
+            <h2 class="chapter-title">
+                1. 核心技能
+                <span class="toggle-icon">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <div class="sub-section">
+                    <h3>專案管理知識與工具</h3>
+                    <div class="highlight">
+                        核心工具：PMBOK、Scrum、JIRA、Asana、Trello、Notion
+                    </div>
+                    <p>掌握專案管理知識體系，熟練使用各種專案管理工具是基本要求。</p>
+                </div>
+                
+                <div class="sub-section">
+                    <h3>時間管理</h3>
+                    <div class="tips">
+                        重點技能：甘特圖應用、關鍵路徑分析、時程壓縮技巧
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter" onclick="toggleChapter(this)">
+            <h2 class="chapter-title">
+                2. 軟實力與人際能力
+                <span class="toggle-icon">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <div class="sub-section">
+                    <h3>溝通能力</h3>
+                    <div class="highlight">
+                        關鍵工具：專案說明會、LINE群組、Google Meet
+                    </div>
+                    <p>有效溝通是專案成功的關鍵，需要掌握各種溝通渠道和技巧。</p>
+                </div>
+                
+                <div class="sub-section">
+                    <h3>領導能力</h3>
+                    <div class="tips">
+                        重點：團隊激勵、衝突管理、決策能力
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter" onclick="toggleChapter(this)">
+            <h2 class="chapter-title">
+                3. 行業知識與背景
+                <span class="toggle-icon">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <div class="sub-section">
+                    <h3>技術知識</h3>
+                    <div class="highlight">
+                        必備：行業術語、基本技術流程理解
+                    </div>
+                </div>
+                
+                <div class="sub-section">
+                    <h3>市場洞察</h3>
+                    <div class="tips">
+                        重點：用戶需求分析、市場趨勢掌握
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter" onclick="toggleChapter(this)">
+            <h2 class="chapter-title">
+                4. 企劃能力與流程控制
+                <span class="toggle-icon">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <div class="sub-section">
+                    <h3>需求評估</h3>
+                    <div class="highlight">
+                        工具：用戶訪談、問卷調查、SWOT分析
+                    </div>
+                </div>
+                
+                <div class="sub-section">
+                    <h3>解決方案設計</h3>
+                    <div class="tips">
+                        方法：腦力激盪、思維導圖（XMind、Miro）
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter" onclick="toggleChapter(this)">
+            <h2 class="chapter-title">
+                5. 學習與適應能力
+                <span class="toggle-icon">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <div class="sub-section">
+                    <h3>持續學習</h3>
+                    <div class="highlight">
+                        資源：TPMA專案管理協會、PMI認證
+                    </div>
+                </div>
+                
+                <div class="sub-section">
+                    <h3>應變能力</h3>
+                    <div class="tips">
+                        重點：快速決策、彈性調整
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter" onclick="toggleChapter(this)">
+            <h2 class="chapter-title">
+                6. 價值觀與態度
+                <span class="toggle-icon">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <div class="sub-section">
+                    <h3>結果導向</h3>
+                    <div class="highlight">
+                        目標：時間、預算與品質的平衡
+                    </div>
+                </div>
+                
+                <div class="sub-section">
+                    <h3>團隊合作</h3>
+                    <div class="tips">
+                        重點：跨部門協作、資源整合
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleChapter(element) {
+            const wasActive = element.classList.contains('active');
+            
+            // Close all chapters
+            document.querySelectorAll('.chapter').forEach(chapter => {
+                chapter.classList.remove('active');
+            });
+            
+            // If the clicked chapter wasn't active, open it
+            if (!wasActive) {
+                element.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
