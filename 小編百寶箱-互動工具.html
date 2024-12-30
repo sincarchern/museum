@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小編百寶箱 - 互動式工具書</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #333;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+    }
+    main {
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    section {
+      margin-bottom: 30px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .tool-details {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+    }
+    .tool-details p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>小編百寶箱</h1>
+  <p>一站式管理你的社群媒體運營工具</p>
+</header>
+
+<main>
+  <section>
+    <h2>1. 內容排程與發佈工具</h2>
+    <ul>
+      <li>
+        <button onclick="toggleDetails('creator-studio')">Facebook Creator Studio</button>
+        <div id="creator-studio" class="tool-details">
+          <p>用於排程和發佈貼文，並可追蹤貼文表現，管理多個帳號。</p>
+        </div>
+      </li>
+      <li>
+        <button onclick="toggleDetails('hootsuite')">Hootsuite</button>
+        <div id="hootsuite" class="tool-details">
+          <p>多平台社群媒體管理工具，支持排程與數據分析。</p>
+        </div>
+      </li>
+      <li>
+        <button onclick="toggleDetails('buffer')">Buffer</button>
+        <div id="buffer" class="tool-details">
+          <p>一個簡單易用的多平台社群管理工具，可以排程內容並進行分析。</p>
+        </div>
+      </li>
+      <li>
+        <button onclick="toggleDetails('later')">Later</button>
+        <div id="later" class="tool-details">
+          <p>視覺化的排程工具，適用於圖片與視頻內容的發佈。</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>2. 圖片與影片編輯工具</h2>
+    <ul>
+      <li>
+        <button onclick="toggleDetails('canva')">Canva</button>
+        <div id="canva" class="tool-details">
+          <p>簡單易用的設計工具，適合快速創建社群內容的圖片與影片。</p>
+        </div>
+      </li>
+      <li>
+        <button onclick="toggleDetails('adobe-spark')">Adobe Spark</button>
+        <div id="adobe-spark" class="tool-details">
+          <p>用於創建精美圖片、影片與網頁，快速製作社群內容。</p>
+        </div>
+      </li>
+      <li>
+        <button onclick="toggleDetails('inshot')">InShot</button>
+        <div id="inshot" class="tool-details">
+          <p>強大的手機視頻編輯工具，適用於短片編輯。</p>
+        </div>
+      </li>
+      <li>
+        <button onclick="toggleDetails('fotor')">Fotor</button>
+        <div id="fotor" class="tool-details">
+          <p>用於製作社群貼文的圖片，擁有多種濾鏡和編輯功能。</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>3. 社群互動與管理工具</h2>
+    <ul>
+      <li>
+        <button onclick="toggleDetails('socialbee')">SocialBee</button>
+        <div id="socialbee" class="tool-details">
+          <p>支持排程發佈內容、管理互動和數據分析的社群管理工具。</p>
+        </div>
+      </li>
+      <li>
+        <button onclick="toggleDetails('sprout-social')">Sprout Social</button>
+        <div id="sprout-social" class="tool-details">
+          <p>提供社群監控、分析報告和品牌聲譽管理功能。</p>
+        </div>
+      </li>
+      <li>
+        <button onclick="toggleDetails('manychat')">ManyChat</button>
+        <div id="manychat" class="tool-details">
+          <p>基於Facebook Messenger的自動化聊天機器人工具，可提高服務效率。</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>4. 數據分析與監控工具</h2>
+    <ul>
+      <li>
+        <button onclick="toggleDetails('facebook-insights')">Facebook Insights</button>
+        <div id="facebook-insights" class="tool-details">
+          <p>Facebook自帶的分析工具，用於追蹤粉專的表現和粉絲互動。</p>
+        </div>
+      </li>
+      <li>
+        <button onclick="toggleDetails('google-analytics')">Google Analytics</button>
+        <div id="google-analytics" class="tool-details">
+          <p>用來追蹤來自FB的網站流量，並分析粉絲行為。</p>
+        </div>
+      </li>
+      <li>
+        <button onclick="toggleDetails('quintly')">Quintly</button>
+        <div id="quintly" class="tool-details">
+          <p>社群媒體監控平台，提供深入的社群分析和競爭對手追蹤。</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>5. 社群活動與競賽工具</h2>
+    <ul>
+      <li>
+        <button onclick="toggleDetails('rafflecopter')">Rafflecopter</button>
+        <div id="rafflecopter" class="tool-details">
+          <p>舉辦抽獎活動的工具，支持多種參與條件設置。</p>
+        </div>
+      </li>
+      <li>
+        <button onclick="toggleDetails('woobox')">Woobox</button>
+        <div id="woobox" class="tool-details">
+          <p>支援舉辦競賽和抽獎活動，提升粉絲參與度。</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>6. 文字排版與校對工具</h2>
+    <ul>
+      <li>
+        <button onclick="toggleDetails('grammarly')">Grammarly</button>
+        <div id="grammarly" class="tool-details">
+          <p>檢查語法和拼寫錯誤，確保內容的專業性和流暢度。</p>
+        </div>
+      </li>
+      <li>
+        <button onclick="toggleDetails('hemingway')">Hemingway Editor</button>
+        <div id="hemingway" class="tool-details">
+          <p>簡化文本，提升內容易讀性，適合社群貼文寫作。</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>7. 設計與協作工具</h2>
+    <ul>
+      <li>
+        <button onclick="toggleDetails('trello')">Trello</button>
+        <div id="trello" class="tool-details">
+          <p>協作與內容排程工具，有助於小編的工作管理與進度追蹤。</p>
+        </div>
+      </li>
+      <li>
+        <button onclick="toggleDetails('asana')">Asana</button>
+        <div id="asana" class="tool-details">
+          <p>項目管理工具，適合團隊協作並有效管理多項工作。</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+</main>
+
+<script>
+  function toggleDetails(toolId) {
+    const toolDetails = document.getElementById(toolId);
+    toolDetails.style.display = toolDetails.style.display === 'block' ? 'none' : 'block';
+  }
+</script>
+
+</body>
+</html>
