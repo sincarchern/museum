@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成果分析專業模板</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .content {
+            display: none;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .toggle-btn {
+            cursor: pointer;
+            color: #007bff;
+            text-decoration: underline;
+        }
+        iframe {
+            width: 100%;
+            height: 350px;
+            border: none;
+            margin-top: 10px;
+        }
+        ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+    </style>
+    <script>
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            content.style.display = content.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</head>
+<body>
+
+    <h1>成果分析報告模板</h1>
+
+    <div class="section">
+        <h2>一、專案概述</h2>
+        <span class="toggle-btn" onclick="toggleContent('intro')">點擊顯示/隱藏內容</span>
+        <div id="intro" class="content">
+            <p>活動名稱：<span>[請填寫]</span></p>
+            <p>執行期間：<span>[請填寫]</span></p>
+            <p>目標：<span>[簡要說明專案目標，如提升品牌知名度或促進教育推廣]</span></p>
+            <p>核心價值：<span>[說明專案特點或創新點]</span></p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>二、數據分析與指標</h2>
+        <span class="toggle-btn" onclick="toggleContent('data-analysis')">點擊顯示/隱藏內容</span>
+        <div id="data-analysis" class="content">
+            <h3>2.1 關鍵數據摘要</h3>
+            <ul>
+                <li>參與人數：<span>[數據]</span></li>
+                <li>完成率：<span>[百分比]</span></li>
+                <li>成本效益：<span>[ROI 計算結果]</span></li>
+            </ul>
+            <h3>2.2 社群效益</h3>
+            <ul>
+                <li>觸及人數：<span>[數據]</span></li>
+                <li>互動率：<span>[百分比]</span></li>
+                <li>影音觀看次數：<span>[數據]</span></li>
+            </ul>
+            <h3>2.3 成果指標</h3>
+            <p>與專案目標的達成率比較：<span>[簡要說明是否超出或低於預期]</span></p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>三、數據視覺化呈現</h2>
+        <span class="toggle-btn" onclick="toggleContent('visualization')">點擊顯示/隱藏內容</span>
+        <div id="visualization" class="content">
+            <p>建議使用折線圖、長條圖或餅圖展示以下內容：</p>
+            <ul>
+                <li>參與者年齡分布</li>
+                <li>不同管道的觸及與互動效益</li>
+                <li>成本與收益分析</li>
+            </ul>
+            <iframe src="https://www.youtube.com/embed/example-video" title="成果展示影片"></iframe>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>四、參與者回饋</h2>
+        <span class="toggle-btn" onclick="toggleContent('feedback')">點擊顯示/隱藏內容</span>
+        <div id="feedback" class="content">
+            <h3>4.1 質化回饋</h3>
+            <p>範例：「講師非常專業，讓我對該主題有更深入的了解。」</p>
+            <h3>4.2 量化回饋</h3>
+            <p>滿意度平均分數：<span>[數據，滿分5]</span></p>
+            <p>評分分項數據：講師表現：<span>[數據]</span>，內容設計：<span>[數據]</span>，活動安排：<span>[數據]</span></p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>五、問題與改善建議</h2>
+        <span class="toggle-btn" onclick="toggleContent('suggestions')">點擊顯示/隱藏內容</span>
+        <div id="suggestions" class="content">
+            <h3>5.1 發現問題</h3>
+            <p>範例：活動時間過長，部分參與者表示疲憊。</p>
+            <h3>5.2 改善建議</h3>
+            <ul>
+                <li>縮短活動時長或增加休息間隔</li>
+                <li>強化提醒機制，例如活動前3天寄送簡訊通知</li>
+                <li>進一步優化影音內容，加入字幕與互動功能</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>六、未來計畫與擴展可能</h2>
+        <span class="toggle-btn" onclick="toggleContent('future-plans')">點擊顯示/隱藏內容</span>
+        <div id="future-plans" class="content">
+            <p>根據本次成果，未來可考慮：</p>
+            <ul>
+                <li>擴展至其他市場或地區</li>
+                <li>與更多合作夥伴聯名推出活動</li>
+                <li>引入更先進的科技工具（如AR/VR）提升互動體驗</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
