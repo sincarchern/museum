@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook 洞察分析完整指南</title>
+    <style>
+        :root {
+            --primary-color: #1877f2;
+            --text-color: #333;
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --hover-color: #e7f3ff;
+            --border-color: #ddd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: white;
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            padding: 1rem 0;
+        }
+
+        .content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .menu-item {
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .menu-item:hover {
+            background: var(--hover-color);
+            border-left-color: var(--primary-color);
+        }
+
+        .menu-item.active {
+            background: var(--hover-color);
+            border-left-color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .submenu {
+            padding-left: 1.5rem;
+            display: none;
+        }
+
+        .menu-item.active .submenu {
+            display: block;
+        }
+
+        .submenu-item {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .submenu-item:hover {
+            color: var(--primary-color);
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .subsection {
+            margin: 1.5rem 0;
+            padding-left: 1rem;
+            border-left: 3px solid var(--hover-color);
+        }
+
+        .subsection h3 {
+            margin-bottom: 1rem;
+        }
+
+        .bullet-list {
+            list-style-type: circle;
+            padding-left: 1.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .bullet-list li {
+            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Facebook 洞察分析完整指南</h1>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <div class="menu-item" data-target="reach">
+                一、觸及率(Reach)相關指標
+            </div>
+            <div class="menu-item" data-target="engagement">
+                二、互動指標(Engagement)
+            </div>
+            <div class="menu-item" data-target="fans">
+                三、粉絲分析
+            </div>
+            <div class="menu-item" data-target="content">
+                四、內容效益分析
+            </div>
+            <div class="menu-item" data-target="analysis">
+                五、量化分析方法
+            </div>
+            <div class="menu-item" data-target="tracking">
+                六、建議追蹤頻率
+            </div>
+        </nav>
+
+        <main class="content">
+            <!-- 觸及率 -->
+            <section id="reach" class="content-section">
+                <h2 class="section-title">一、觸及率(Reach)相關指標</h2>
+                <div class="subsection">
+                    <h3>1. 觸及人數</h3>
+                    <p>定義：貼文出現在用戶動態消息的次數</p>
+                    <p>分析方法：</p>
+                    <ul class="bullet-list">
+                        <li>追蹤每週觸及人數變化趨勢</li>
+                        <li>計算公式：觸及率 = 觸及人數 / 粉絲總數 × 100%</li>
+                        <li>建議基準：有機觸及率維持在 5-10% 為健康水平</li>
+                    </ul>
+                </div>
+                <div class="subsection">
+                    <h3>2. 付費觸及 vs 自然觸及</h3>
+                    <ul class="bullet-list">
+                        <li>監測兩者比例變化</li>
+                        <li>評估廣告投資效益</li>
+                        <li>建立基準值：記錄高表現貼文的觸及比例</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 互動指標 -->
+            <section id="engagement" class="content-section">
+                <h2 class="section-title">二、互動指標(Engagement)</h2>
+                <div class="subsection">
+                    <h3>1. 互動率計算</h3>
+                    <p>基本公式：(按讚+留言+分享) / 觸及人數 × 100%</p>
+                    <p>進階分析：</p>
+                    <ul class="bullet-list">
+                        <li>細分各類互動的佔比</li>
+                        <li>追蹤高峰時段的互動表現</li>
+                        <li>建立內容類型與互動率的關聯分析</li>
+                    </ul>
+                </div>
+                <div class="subsection">
+                    <h3>2. 關鍵互動指標</h3>
+                    <ul class="bullet-list">
+                        <li>按讚率：按讚數 / 觸及人數</li>
+                        <li>留言率：留言數 / 觸及人數</li>
+                        <li>分享率：分享數 / 觸及人數</li>
+                        <li>點擊率(CTR)：連結點擊數 / 觸及人數</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 粉絲分析 -->
+            <section id="fans" class="content-section">
+                <h2 class="section-title">三、粉絲分析</h2>
+                <div class="subsection">
+                    <h3>1. 人口統計資料</h3>
+                    <ul class="bullet-list">
+                        <li>年齡分布</li>
+                        <li>性別比例</li>
+                        <li>地理位置</li>
+                        <li>上線時間分析</li>
+                    </ul>
+                </div>
+                <div class="subsection">
+                    <h3>2. 粉絲成長分析</h3>
+                    <ul class="bullet-list">
+                        <li>自然成長率計算</li>
+                        <li>流失率監測</li>
+                        <li>高峰期分析</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 內容效益 -->
+            <section id="content" class="content-section">
+                <h2 class="section-title">四、內容效益分析</h2>
+                <div class="subsection">
+                    <h3>1. 內容分類追蹤</h3>
+                    <ul class="bullet-list">
+                        <li>建立內容類型矩陣</li>
+                        <li>記錄各類型平均表現</li>
+                        <li>找出最佳表現類型</li>
+                    </ul>
+                </div>
+                <div class="subsection">
+                    <h3>2. 發文時間效益</h3>
+                    <ul class="bullet-list">
+                        <li>建立時段效益矩陣</li>
+                        <li>追蹤互動高峰期</li>
+                        <li>最佳發文時間分析</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 量化分析 -->
+            <section id="analysis" class="content-section">
+                <h2 class="section-title">五、量化分析方法</h2>
+                <div class="subsection">
+                    <h3>1. 趨勢分析</h3>
+                    <ul class="bullet-list">
+                        <li>建立週期性報告</li>
+                        <li>設定關鍵績效指標(KPI)</li>
+                        <li>追蹤成長率變化</li>
+                    </ul>
+                </div>
+                <div class="subsection">
+                    <h3>2. AB測試方法</h3>
+                    <ul class="bullet-list">
+                        <li>內容測試：相似主題，不同表現形式</li>
+                        <li>時間測試：相同內容，不同發布時間</li>
+                        <li>標題測試：相同內容，不同標題形式</li>
+                    </ul>
+                </div>
+                <div class="subsection">
+                    <h3>3. ROI分析</h3>
+                    <ul class="bullet-list">
+                        <li>有機觸及成本計算</li>
+                        <li>付費觸及成本計算</li>
+                        <li>轉換率追蹤</li>
+                        <li>客戶獲取成本分析</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 追蹤頻率 -->
+            <section id="tracking" class="content-section">
+                <h2 class="section-title">六、建議追蹤頻率</h2>
+                <div class="subsection">
+                    <h3>1. 每日追蹤</h3>
+                    <ul class="bullet-list">
+                        <li>觸及人數</li>
+                        <li>互動數據</li>
+                        <li>新增粉絲</li>
+                    </ul>
+                </div>
+                <div class="subsection">
+                    <h3>2. 週報分析</h3>
+                    <ul class="bullet-list">
+                        <li>內容表現比較</li>
+                        <li>互動率分析</li>
+                        <li>粉絲成長趨勢</li>
+                    </ul>
+                </div>
+                <div class="subsection">
+                    <h3>3. 月報分析</h3>
+                    <ul class="bullet-list">
+                        <li>整體表現評估</li>
+                        <li>KPI達成率</li>
+                        <li>競品比較</li>
+                        <li>策略調整建議</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuItems = document.querySelectorAll('.menu-item');
+            const contentSections = document.querySelectorAll('.content-section');
+
+            // 默认显示第一个部分
+            menuItems[0].classList.add('active');
+            contentSections[0].classList.add('active');
+
+            menuItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // 移除所有活动状态
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    contentSections.forEach(s => s.classList.remove('active'));
+
+                    // 添加新的活动状态
+                    item.classList.add('active');
+                    const targetSection = document.getElementById(item.dataset.target);
+                    targetSection.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
