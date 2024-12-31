@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook洞察分析指南</title>
+    <style>
+        :root {
+            --primary-color: #1877f2;
+            --bg-color: #f0f2f5;
+            --text-color: #1c1e21;
+            --sidebar-width: 280px;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .content {
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            flex: 1;
+            max-width: 800px;
+        }
+
+        .nav-item {
+            margin: 8px 0;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .nav-item:hover {
+            background: var(--bg-color);
+        }
+
+        .section {
+            background: white;
+            padding: 24px;
+            margin-bottom: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .metric-card {
+            background: var(--bg-color);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 12px 0;
+        }
+
+        .formula {
+            background: #e4e6eb;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            margin: 12px 0;
+        }
+
+        .tip {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 16px;
+            margin: 16px 0;
+        }
+        
+        .active-nav {
+            background: var(--bg-color);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>目錄</h2>
+            <div id="nav-container"></div>
+        </div>
+        <div class="content" id="main-content">
+            <div class="section active" id="section-1">
+                <h2>一、觸及率(Reach)相關指標</h2>
+                <div class="metric-card">
+                    <h3>觸及人數</h3>
+                    <p>定義：貼文出現在用戶動態消息的次數</p>
+                    <div class="formula">
+                        觸及率 = 觸及人數 / 粉絲總數 × 100%
+                    </div>
+                    <div class="tip">
+                        建議基準：有機觸及率維持在 5-10% 為健康水平
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <h3>付費觸及 vs 自然觸及</h3>
+                    <ul>
+                        <li>監測兩者比例變化</li>
+                        <li>評估廣告投資效益</li>
+                        <li>建立基準值分析</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section" id="section-2">
+                <h2>二、互動指標(Engagement)</h2>
+                <div class="metric-card">
+                    <h3>互動率計算</h3>
+                    <div class="formula">
+                        互動率 = (按讚+留言+分享) / 觸及人數 × 100%
+                    </div>
+                    <p>進階分析要點：</p>
+                    <ul>
+                        <li>細分各類互動的佔比</li>
+                        <li>追蹤高峰時段的互動表現</li>
+                        <li>建立內容類型與互動率的關聯分析</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section" id="section-3">
+                <h2>三、粉絲分析</h2>
+                <div class="metric-card">
+                    <h3>人口統計資料</h3>
+                    <ul>
+                        <li>年齡分布追蹤</li>
+                        <li>性別比例分析</li>
+                        <li>地理位置數據</li>
+                        <li>用戶上線時間分析</li>
+                    </ul>
+                </div>
+                <div class="metric-card">
+                    <h3>粉絲成長分析</h3>
+                    <ul>
+                        <li>自然成長率計算</li>
+                        <li>流失率監測</li>
+                        <li>高峰期分析</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section" id="section-4">
+                <h2>四、內容效益分析</h2>
+                <div class="metric-card">
+                    <h3>內容分類追蹤</h3>
+                    <p>建立內容效益矩陣：</p>
+                    <ul>
+                        <li>各類型內容平均表現</li>
+                        <li>最佳表現內容類型分析</li>
+                        <li>內容策略優化建議</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section" id="section-5">
+                <h2>五、量化分析方法</h2>
+                <div class="metric-card">
+                    <h3>趨勢分析</h3>
+                    <ul>
+                        <li>建立週期性報告</li>
+                        <li>設定關鍵績效指標(KPI)</li>
+                        <li>追蹤成長率變化</li>
+                    </ul>
+                </div>
+                <div class="metric-card">
+                    <h3>AB測試方法</h3>
+                    <ul>
+                        <li>內容測試：相似主題，不同表現形式</li>
+                        <li>時間測試：相同內容，不同發布時間</li>
+                        <li>標題測試：相同內容，不同標題形式</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section" id="section-6">
+                <h2>六、建議追蹤頻率</h2>
+                <div class="metric-card">
+                    <h3>每日追蹤項目</h3>
+                    <ul>
+                        <li>觸及人數監測</li>
+                        <li>互動數據分析</li>
+                        <li>新增粉絲統計</li>
+                    </ul>
+                </div>
+                <div class="metric-card">
+                    <h3>週報分析重點</h3>
+                    <ul>
+                        <li>內容表現比較</li>
+                        <li>互動率分析</li>
+                        <li>粉絲成長趨勢</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const sections = [
+            "一、觸及率相關指標",
+            "二、互動指標",
+            "三、粉絲分析",
+            "四、內容效益分析",
+            "五、量化分析方法",
+            "六、建議追蹤頻率"
+        ];
+
+        const navContainer = document.getElementById('nav-container');
+
+        sections.forEach((section, index) => {
+            const navItem = document.createElement('div');
+            navItem.className = 'nav-item';
+            navItem.textContent = section;
+            navItem.onclick = () => showSection(index + 1);
+            navContainer.appendChild(navItem);
+        });
+
+        function showSection(sectionNumber) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(`section-${sectionNumber}`).classList.add('active');
+            
+            // Update navigation highlighting
+            document.querySelectorAll('.nav-item').forEach((item, index) => {
+                if (index === sectionNumber - 1) {
+                    item.classList.add('active-nav');
+                } else {
+                    item.classList.remove('active-nav');
+                }
+            });
+        }
+
+        // Show first section by default
+        showSection(1);
+    </script>
+</body>
+</html>
