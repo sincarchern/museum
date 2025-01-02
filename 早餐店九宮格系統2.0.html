@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>早餐店九宮格分析系統</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        
+        body {
+            background: #f5f6f8;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            flex: 1;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin: 30px 0;
+            font-size: 36px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .breadcrumb {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .grid-item {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #e1e8ed;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            background: #f8f9fa;
+        }
+
+        .grid-item h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .grid-item p {
+            color: #5a6c7d;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .back-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-right: 15px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #2980b9;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #currentPath {
+            font-size: 16px;
+            color: #2c3e50;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: #5a6c7d;
+            font-size: 14px;
+            border-top: 1px solid #e1e8ed;
+        }
+
+        /* Color themes for different sections */
+        [data-category="product"] {
+            border-left: 4px solid #e74c3c;
+        }
+
+        [data-category="price"] {
+            border-left: 4px solid #2ecc71;
+        }
+
+        [data-category="location"] {
+            border-left: 4px solid #f1c40f;
+        }
+
+        #productGrid .grid-item {
+            border-left: 4px solid #e74c3c;
+        }
+
+        #priceGrid .grid-item {
+            border-left: 4px solid #2ecc71;
+        }
+
+        #locationGrid .grid-item {
+            border-left: 4px solid #f1c40f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>早餐店九宮格分析系統</h1>
+        <div class="breadcrumb">
+            <button id="backBtn" class="back-button hidden">返回上一層</button>
+            <span id="currentPath">主層級</span>
+        </div>
+        
+        <!-- 主層級九宮格 -->
+        <div id="mainGrid" class="grid-container">
+            <div class="grid-item" data-category="product">
+                <h3>產品創新</h3>
+                <p>開發新產品、改良現有產品</p>
+            </div>
+            <div class="grid-item" data-category="price">
+                <h3>價格策略</h3>
+                <p>制定合理價格、促銷方案</p>
+            </div>
+            <div class="grid-item" data-category="location">
+                <h3>地點優化</h3>
+                <p>選址規劃、空間利用</p>
+            </div>
+            <div class="grid-item">
+                <h3>行銷推廣</h3>
+                <p>品牌宣傳、顧客溝通</p>
+            </div>
+            <div class="grid-item">
+                <h3>核心競爭力</h3>
+                <p>企業核心價值</p>
+            </div>
+            <div class="grid-item">
+                <h3>競爭分析</h3>
+                <p>市場研究、競爭策略</p>
+            </div>
+            <div class="grid-item">
+                <h3>顧客服務</h3>
+                <p>服務品質、顧客體驗</p>
+            </div>
+            <div class="grid-item">
+                <h3>供應鏈管理</h3>
+                <p>採購物流、庫存管理</p>
+            </div>
+            <div class="grid-item">
+                <h3>營運效率</h3>
+                <p>流程優化、成本控制</p>
+            </div>
+        </div>
+
+        <!-- 產品創新九宮格 -->
+        <div id="productGrid" class="grid-container hidden">
+            <div class="grid-item">
+                <h3>健康餐點</h3>
+                <p>開發低卡、營養均衡餐點</p>
+            </div>
+            <div class="grid-item">
+                <h3>特色餐點</h3>
+                <p>創新口味、獨特組合</p>
+            </div>
+            <div class="grid-item">
+                <h3>季節限定</h3>
+                <p>應季食材、節慶特餐</p>
+            </div>
+            <div class="grid-item">
+                <h3>食材升級</h3>
+                <p>優質食材、在地食材</p>
+            </div>
+            <div class="grid-item">
+                <h3>多樣選擇</h3>
+                <p>豐富菜單、客製化選項</p>
+            </div>
+            <div class="grid-item">
+                <h3>顧客定制</h3>
+                <p>個人化餐點、特殊需求</p>
+            </div>
+            <div class="grid-item">
+                <h3>產品包裝</h3>
+                <p>環保包材、精美設計</p>
+            </div>
+            <div class="grid-item">
+                <h3>產品故事</h3>
+                <p>品牌理念、食材來源</p>
+            </div>
+            <div class="grid-item">
+                <h3>顧客回饋</h3>
+                <p>意見收集、產品改良</p>
+            </div>
+        </div>
+
+        <!-- 價格策略九宮格 -->
+        <div id="priceGrid" class="grid-container hidden">
+            <div class="grid-item">
+                <h3>優惠活動</h3>
+                <p>折扣方案、限時特價</p>
+            </div>
+            <div class="grid-item">
+                <h3>會員制度</h3>
+                <p>會員優惠、積分回饋</p>
+            </div>
+            <div class="grid-item">
+                <h3>套餐設計</h3>
+                <p>組合優惠、加值服務</p>
+            </div>
+            <div class="grid-item">
+                <h3>漲價策略</h3>
+                <p>成本轉嫁、價值提升</p>
+            </div>
+            <div class="grid-item">
+                <h3>降價策略</h3>
+                <p>促銷清倉、特價組合</p>
+            </div>
+            <div class="grid-item">
+                <h3>動態定價</h3>
+                <p>尖峰定價、季節調整</p>
+            </div>
+            <div class="grid-item">
+                <h3>促銷搭配</h3>
+                <p>組合優惠、加購優惠</p>
+            </div>
+            <div class="grid-item">
+                <h3>價格透明</h3>
+                <p>明確標價、無隱藏費用</p>
+            </div>
+            <div class="grid-item">
+                <h3>價格競爭</h3>
+                <p>市場定位、競爭策略</p>
+            </div>
+        </div>
+
+        <!-- 地點優化九宮格 -->
+        <div id="locationGrid" class="grid-container hidden">
+            <div class="grid-item">
+                <h3>交通便利</h3>
+                <p>大眾運輸、人流動線</p>
+            </div>
+            <div class="grid-item">
+                <h3>周邊人口</h3>
+                <p>客群分析、商圈評估</p>
+            </div>
+            <div class="grid-item">
+                <h3>環境設計</h3>
+                <p>裝潢風格、空間規劃</p>
+            </div>
+            <div class="grid-item">
+                <h3>內用座位</h3>
+                <p>座位配置、用餐環境</p>
+            </div>
+            <div class="grid-item">
+                <h3>戶外用餐</h3>
+                <p>戶外座位、景觀規劃</p>
+            </div>
+            <div class="grid-item">
+                <h3>外帶便利</h3>
+                <p>取餐動線、包裝設計</p>
+            </div>
+            <div class="grid-item">
+                <h3>停車空間</h3>
+                <p>停車便利性、接送區域</p>
+            </div>
+            <div class="grid-item">
+                <h3>區域佈局</h3>
+                <p>空間規劃、動線設計</p>
+            </div>
+            <div class="grid-item">
+                <h3>鄰近店家</h3>
+                <p>商圈互補、競爭分析</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 大清早餐店 版權所有</p>
+    </footer>
+
+    <script>
+        const mainGrid = document.getElementById('mainGrid');
+        const productGrid = document.getElementById('productGrid');
+        const priceGrid = document.getElementById('priceGrid');
+        const locationGrid = document.getElementById('locationGrid');
+        const backBtn = document.getElementById('backBtn');
+        const currentPath = document.getElementById('currentPath');
+        
+        let currentGrid = mainGrid;
+
+        function showGrid(grid, title) {
+            currentGrid.classList.add('hidden');
+            grid.classList.remove('hidden');
+            currentGrid = grid;
+            backBtn.classList.remove('hidden');
+            currentPath.textContent = `主層級 > ${title}`;
+        }
+
+        function showMainGrid() {
+            currentGrid.classList.add('hidden');
+            mainGrid.classList.remove('hidden');
+            currentGrid = mainGrid;
+            backBtn.classList.add('hidden');
+            currentPath.textContent = '主層級';
+        }
+
+        document.querySelectorAll('.grid-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const category = item.dataset.category;
+                if (category === 'product') {
+                    showGrid(productGrid, '產品創新');
+                } else if (category === 'price') {
+                    showGrid(priceGrid, '價格策略');
+                } else if (category === 'location') {
+                    showGrid(locationGrid, '地點優化');
+                }
+            });
+        });
+
+        backBtn.addEventListener('click', showMainGrid);
+    </script>
+</body>
+</html>
