@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>早餐店九宮格分析系統</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #FF6B6B;
+            --secondary-color: #4ECDC4;
+            --accent-color: #FFD93D;
+            --text-primary: #2C3E50;
+            --text-secondary: #34495E;
+            --background-light: #f8f9fa;
+            --card-hover: #FFF3E0;
+        }
+        
+        body {
+            background: var(--background-light);
+            padding: 20px;
+            color: var(--text-primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: white;
+            margin: 0;
+            font-size: 32px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .sub-title {
+            color: white;
+            margin-top: 10px;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .breadcrumb {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 20px;
+            padding: 10px;
+        }
+
+        .grid-item {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 2px solid transparent;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+            background: var(--card-hover);
+            border-color: var(--primary-color);
+        }
+
+        .grid-item h3 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .grid-item p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .back-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-right: 15px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: var(--text-secondary);
+            border-top: 1px solid #ddd;
+        }
+
+        .category-icon {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .grid-container:not(.hidden) {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>早餐店九宮格分析系統</h1>
+            <div class="sub-title">全方位提升早餐店營運效能分析工具</div>
+        </div>
+        
+        <div class="breadcrumb">
+            <button id="backBtn" class="back-button hidden">返回上一層</button>
+            <span id="currentPath">主層級</span>
+        </div>
+        
+        <!-- 主層級九宮格 -->
+        <div id="mainGrid" class="grid-container">
+            <div class="grid-item" data-category="product">
+                <div class="category-icon">🍳</div>
+                <h3>產品創新</h3>
+                <p>開發新產品、改良現有產品，提升競爭力</p>
+            </div>
+            <div class="grid-item" data-category="price">
+                <div class="category-icon">💰</div>
+                <h3>價格策略</h3>
+                <p>制定合理價格、促銷方案，優化收益</p>
+            </div>
+            <div class="grid-item" data-category="location">
+                <div class="category-icon">🏪</div>
+                <h3>地點優化</h3>
+                <p>選址規劃、空間利用，提升效益</p>
+            </div>
+            <div class="grid-item">
+                <div class="category-icon">📢</div>
+                <h3>行銷推廣</h3>
+                <p>品牌宣傳、顧客溝通，擴大市場</p>
+            </div>
+            <div class="grid-item">
+                <div class="category-icon">🎯</div>
+                <h3>核心競爭力</h3>
+                <p>企業核心價值，打造品牌特色</p>
+            </div>
+            <div class="grid-item">
+                <div class="category-icon">📊</div>
+                <h3>競爭分析</h3>
+                <p>市場研究、競爭策略，掌握優勢</p>
+            </div>
+            <div class="grid-item">
+                <div class="category-icon">👥</div>
+                <h3>顧客服務</h3>
+                <p>服務品質、顧客體驗，提升滿意度</p>
+            </div>
+            <div class="grid-item">
+                <div class="category-icon">📦</div>
+                <h3>供應鏈管理</h3>
+                <p>採購物流、庫存管理，降低成本</p>
+            </div>
+            <div class="grid-item">
+                <div class="category-icon">⚡</div>
+                <h3>營運效率</h3>
+                <p>流程優化、成本控制，提升效能</p>
+            </div>
+        </div>
+
+        <!-- 產品創新九宮格 -->
+        <div id="productGrid" class="grid-container hidden">
+            <!-- [原有產品創新內容保持不變] -->
+            <div class="grid-item">
+                <div class="category-icon">🥗</div>
+                <h3>健康餐點</h3>
+                <p>開發低卡、營養均衡餐點，滿足健康需求</p>
+            </div>
+            <!-- [其他產品創新格子] -->
+        </div>
+
+        <!-- 價格策略九宮格 -->
+        <div id="priceGrid" class="grid-container hidden">
+            <!-- [原有價格策略內容保持不變] -->
+            <div class="grid-item">
+                <div class="category-icon">🏷️</div>
+                <h3>優惠活動</h3>
+                <p>折扣方案、限時特價，刺激銷售</p>
+            </div>
+            <!-- [其他價格策略格子] -->
+        </div>
+
+        <!-- 地點優化九宮格 -->
+        <div id="locationGrid" class="grid-container hidden">
+            <!-- [原有地點優化內容保持不變] -->
+            <div class="grid-item">
+                <div class="category-icon">🚇</div>
+                <h3>交通便利</h3>
+                <p>大眾運輸、人流動線，提升可及性</p>
+            </div>
+            <!-- [其他地點優化格子] -->
+        </div>
+
+        <div class="footer">
+            <p>© 2024 大清早餐店 Joseph | All Rights Reserved</p>
+            <p style="margin-top: 10px; font-size: 14px;">專業早餐店經營管理分析系統</p>
+        </div>
+    </div>
+
+    <script>
+        // [原有JavaScript邏輯保持不變]
+        const mainGrid = document.getElementById('mainGrid');
+        const productGrid = document.getElementById('productGrid');
+        const priceGrid = document.getElementById('priceGrid');
+        const locationGrid = document.getElementById('locationGrid');
+        const backBtn = document.getElementById('backBtn');
+        const currentPath = document.getElementById('currentPath');
+        
+        let currentGrid = mainGrid;
+
+        function showGrid(grid, title) {
+            currentGrid.classList.add('hidden');
+            grid.classList.remove('hidden');
+            currentGrid = grid;
+            backBtn.classList.remove('hidden');
+            currentPath.textContent = `主層級 > ${title}`;
+        }
+
+        function showMainGrid() {
+            currentGrid.classList.add('hidden');
+            mainGrid.classList.remove('hidden');
+            currentGrid = mainGrid;
+            backBtn.classList.add('hidden');
+            currentPath.textContent = '主層級';
+        }
+
+        document.querySelectorAll('.grid-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const category = item.dataset.category;
+                if (category === 'product') {
+                    showGrid(productGrid, '產品創新');
+                } else if (category === 'price') {
+                    showGrid(priceGrid, '價格策略');
+                } else if (category === 'location') {
+                    showGrid(locationGrid, '地點優化');
+                }
+            });
+        });
+
+        backBtn.addEventListener('click', showMainGrid);
+    </script>
+</body>
+</html>
