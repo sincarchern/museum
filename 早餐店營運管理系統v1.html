@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大清早餐店管理系統</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .copyright {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .grid-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .grid-item h2 {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .icon-wrapper {
+            margin-bottom: 1rem;
+        }
+
+        .subgrid-item {
+            padding: 1rem;
+            cursor: default;
+        }
+
+        .subgrid-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subgrid-item p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .back-button {
+            background: #4a5568;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-button:hover {
+            background: #2d3748;
+        }
+
+        /* Color themes for main grid items */
+        .theme-1 { background: #e3f2fd; }
+        .theme-2 { background: #e8f5e9; }
+        .theme-3 { background: #fff3e0; }
+        .theme-4 { background: #fce4ec; }
+        .theme-5 { background: #f3e5f5; }
+        .theme-6 { background: #fff8e1; }
+        .theme-7 { background: #e0f7fa; }
+        .theme-8 { background: #e8eaf6; }
+        .theme-9 { background: #e0f2f1; }
+    </style>
+</head>
+<body>
+    <div class="container" x-data="{ 
+        selectedTopic: null,
+        topics: {
+            '產品創新': {
+                theme: 'theme-1',
+                icon: 'cookie',
+                items: [
+                    { title: '健康餐點', desc: '開發低卡、營養均衡餐點' },
+                    { title: '特色餐點', desc: '創新口味、獨特組合' },
+                    { title: '季節限定', desc: '應季食材、節慶特餐' },
+                    { title: '食材升級', desc: '優質食材、在地食材' },
+                    { title: '多樣選擇', desc: '豐富菜單、客製化選項' },
+                    { title: '顧客定制', desc: '個人化餐點、特殊需求' },
+                    { title: '產品包裝', desc: '環保包材、精美設計' },
+                    { title: '產品故事', desc: '品牌理念、食材來源' },
+                    { title: '顧客回饋', desc: '意見收集、產品改良' }
+                ]
+            },
+            '價格策略': {
+                theme: 'theme-2',
+                icon: 'wallet',
+                items: [
+                    { title: '優惠活動', desc: '折扣方案、限時特價' },
+                    { title: '會員制度', desc: '會員優惠、積分回饋' },
+                    { title: '套餐設計', desc: '組合優惠、加值服務' },
+                    { title: '漲價策略', desc: '成本轉嫁、價值提升' },
+                    { title: '降價策略', desc: '促銷清倉、特價組合' },
+                    { title: '動態定價', desc: '尖峰定價、季節調整' },
+                    { title: '促銷搭配', desc: '組合優惠、加購優惠' },
+                    { title: '價格透明', desc: '明確標價、無隱藏費用' },
+                    { title: '價格競爭', desc: '市場定位、競爭策略' }
+                ]
+            },
+            '地點優化': {
+                theme: 'theme-3',
+                icon: 'map-pin',
+                items: [
+                    { title: '交通便利', desc: '大眾運輸、人流動線' },
+                    { title: '周邊人口', desc: '客群分析、商圈評估' },
+                    { title: '環境設計', desc: '裝潢風格、空間規劃' },
+                    { title: '內用座位', desc: '座位配置、用餐環境' },
+                    { title: '戶外用餐', desc: '戶外座位、景觀規劃' },
+                    { title: '外帶便利', desc: '取餐動線、包裝設計' },
+                    { title: '停車空間', desc: '停車便利性、接送區域' },
+                    { title: '區域佈局', desc: '空間規劃、動線設計' },
+                    { title: '鄰近店家', desc: '商圈互補、競爭分析' }
+                ]
+            },
+            '行銷推廣': {
+                theme: 'theme-4',
+                icon: 'megaphone',
+                items: [
+                    { title: '品牌宣傳', desc: '透過多種媒介提升品牌知名度' },
+                    { title: '社群經營', desc: '在社交平台上與顧客互動' },
+                    { title: '廣告投放', desc: '精準定位，投放有效廣告' },
+                    { title: '活動策劃', desc: '舉辦創意活動吸引顧客參與' },
+                    { title: '口碑行銷', desc: '利用顧客好評提升信任度' },
+                    { title: '合作推廣', desc: '與其他品牌或店家合作行銷' },
+                    { title: '內容創作', desc: '製作有價值的內容吸引目標受眾' },
+                    { title: '公關策略', desc: '處理品牌形象與媒體關係' },
+                    { title: '目標市場', desc: '清楚界定並深入研究客群需求' }
+                ]
+            },
+            '核心競爭力': {
+                theme: 'theme-5',
+                icon: 'target',
+                items: [
+                    { title: '產品品質', desc: '穩定提供優質的產品' },
+                    { title: '創新能力', desc: '不斷開發新技術與概念' },
+                    { title: '服務文化', desc: '建立貼心的服務體系' },
+                    { title: '品牌價值', desc: '打造深具吸引力的品牌形象' },
+                    { title: '員工專業', desc: '培訓員工以提升專業度' },
+                    { title: '快速反應', desc: '對市場需求快速做出反應' },
+                    { title: '成本優勢', desc: '以低成本維持高品質' },
+                    { title: '顧客忠誠', desc: '維繫與顧客的長期關係' },
+                    { title: '資源整合', desc: '高效利用內外部資源' }
+                ]
+            },
+            '競爭分析': {
+                theme: 'theme-6',
+                icon: 'bar-chart-2',
+                items: [
+                    { title: '市場研究', desc: '了解市場規模與趨勢' },
+                    { title: '競爭對手', desc: '分析主要競爭者的策略' },
+                    { title: '定位策略', desc: '確認自己在市場中的位置' },
+                    { title: '客戶偏好', desc: '研究消費者行為與需求' },
+                    { title: '優勢劣勢', desc: '評估自身優劣勢' },
+                    { title: '潛在威脅', desc: '預測可能出現的挑戰' },
+                    { title: '商圈影響', desc: '評估區域內競爭環境' },
+                    { title: '技術發展', desc: '關注相關領域的技術進步' },
+                    { title: '數據分析', desc: '利用數據指導決策' }
+                ]
+            },
+            '顧客服務': {
+                theme: 'theme-7',
+                icon: 'heart-handshake',
+                items: [
+                    { title: '服務品質', desc: '確保提供穩定、高品質的服務' },
+                    { title: '顧客體驗', desc: '關注每一環節的顧客感受' },
+                    { title: '滿意度調查', desc: '定期收集顧客回饋' },
+                    { title: '問題處理', desc: '快速解決顧客投訴或問題' },
+                    { title: '忠誠計畫', desc: '提供積分或會員回饋制度' },
+                    { title: '社交互動', desc: '與顧客建立良好的溝通管道' },
+                    { title: '售後服務', desc: '持續關注產品與服務的使用狀況' },
+                    { title: '教育顧客', desc: '提供使用指南或專業建議' },
+                    { title: '親切態度', desc: '以熱情友善的態度面對每位顧客' }
+                ]
+            },
+            '供應鏈管理': {
+                theme: 'theme-8',
+                icon: 'truck',
+                items: [
+                    { title: '供應商選擇', desc: '與優質供應商合作' },
+                    { title: '採購效率', desc: '簡化採購流程以節省成本' },
+                    { title: '庫存管理', desc: '保持合理庫存，避免積壓' },
+                    { title: '物流優化', desc: '提高配送效率並降低成本' },
+                    { title: '供應穩定', desc: '確保貨源穩定不斷貨' },
+                    { title: '成本控制', desc: '在各環節降低不必要開支' },
+                    { title: '本地採購', desc: '鼓勵使用當地資源' },
+                    { title: '多元供應', desc: '避免對單一供應商的依賴' },
+                    { title: '質量檢測', desc: '對所有進貨進行品質管控' }
+                ]
+            },
+            '營運效率': {
+                theme: 'theme-9',
+                icon: 'settings',
+                items: [
+                    { title: '流程優化', desc: '簡化內部流程提高效率' },
+                    { title: '設備升級', desc: '使用先進設備提升生產力' },
+                    { title: '數位化管理', desc: '引入系統化工具監控營運' },
+                    { title: '節能減排', desc: '採用環保措施降低能耗' },
+                    { title: '員工協作', desc: '促進團隊間的合作與分工' },
+                    { title: '成本控制', desc: '減少不必要的營運成本' },
+                    { title: '目標設定', desc: '制定清晰且可實現的目標' },
+                    { title: '績效評估', desc: '建立有效的績效考核制度' },
+                    { title: '培訓機制', desc: '持續提升員工能力與效率' }
+                ]
+            }
+        }
+    }" x-init="lucide.createIcons()">
+        <div class="header">
+            <h1>大清早餐店管理系統</h1>
+            <p class="copyright">© 2025 大清早餐店 Joseph Chen</p>
+        </div>
+
+        <template x-if="!selectedTopic">
+            <div class="grid">
+                <template x-for="(data, topic) in topics" :key="topic">
+                    <div 
+                        class="grid-item"
+                        :class="data.theme"
+                        @click="selectedTopic = topic"
+                    >
+                        <div class="icon-wrapper">
+                            <i :data-lucide="data.icon" class="w-8 h-8"></i>
+                        </div>
+                        <h2 x-text="topic"></h2>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <template x-if="selectedTopic">
+            <div>
+                <button class="back-button" @click="selecte</antArtifact>
