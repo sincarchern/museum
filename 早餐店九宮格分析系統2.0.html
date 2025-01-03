@@ -32,7 +32,7 @@
             margin: 30px 0;
             font-size: 36px;
             font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         .grid-container {
@@ -50,18 +50,13 @@
             transition: all 0.3s ease;
             position: relative;
             min-height: 250px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             border: 1px solid #e1e8ed;
         }
 
         .grid-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
             background: #f8f9fa;
         }
 
@@ -70,25 +65,30 @@
             margin-bottom: 15px;
             font-size: 20px;
             font-weight: bold;
+            text-align: center;
         }
 
-        .grid-item ul {
-            list-style: none;
+        .grid-item img {
+            display: block;
+            margin: 0 auto 10px;
+            width: 50px;
+            height: 50px;
+        }
+
+        .sub-links {
             margin-top: 10px;
-            padding-left: 0;
+            text-align: center;
         }
 
-        .grid-item ul li {
-            margin: 8px 0;
-        }
-
-        .grid-item ul li a {
+        .sub-links a {
+            display: block;
             color: #3498db;
             text-decoration: none;
             font-size: 14px;
+            margin: 5px 0;
         }
 
-        .grid-item ul li a:hover {
+        .sub-links a:hover {
             text-decoration: underline;
             color: #2980b9;
         }
@@ -108,76 +108,85 @@
         <h1>早餐店九宮格分析系統</h1>
         <div class="grid-container">
             <div class="grid-item">
+                <img src="https://via.placeholder.com/50" alt="產品創新圖示">
                 <h3>產品創新</h3>
-                <ul>
-                    <li><a href="#">新菜單開發</a></li>
-                    <li><a href="#">提升品質策略</a></li>
-                    <li><a href="#">健康化選項</a></li>
-                </ul>
+                <div class="sub-links">
+                    <a href="#">新菜單開發</a>
+                    <a href="#">提升品質策略</a>
+                    <a href="#">健康化選項</a>
+                </div>
             </div>
             <div class="grid-item">
+                <img src="https://via.placeholder.com/50" alt="價格策略圖示">
                 <h3>價格策略</h3>
-                <ul>
-                    <li><a href="#">套餐優惠</a></li>
-                    <li><a href="#">動態定價機制</a></li>
-                    <li><a href="#">價格心理學</a></li>
-                </ul>
+                <div class="sub-links">
+                    <a href="#">套餐優惠</a>
+                    <a href="#">動態定價機制</a>
+                    <a href="#">價格心理學</a>
+                </div>
             </div>
             <div class="grid-item">
+                <img src="https://via.placeholder.com/50" alt="地點優化圖示">
                 <h3>地點優化</h3>
-                <ul>
-                    <li><a href="#">交通便利分析</a></li>
-                    <li><a href="#">商圈影響</a></li>
-                    <li><a href="#">環境設計優化</a></li>
-                </ul>
+                <div class="sub-links">
+                    <a href="#">交通便利分析</a>
+                    <a href="#">商圈影響</a>
+                    <a href="#">環境設計優化</a>
+                </div>
             </div>
             <div class="grid-item">
+                <img src="https://via.placeholder.com/50" alt="行銷推廣圖示">
                 <h3>行銷推廣</h3>
-                <ul>
-                    <li><a href="#">社群媒體經營</a></li>
-                    <li><a href="#">活動策劃</a></li>
-                    <li><a href="#">品牌形象提升</a></li>
-                </ul>
+                <div class="sub-links">
+                    <a href="#">社群媒體經營</a>
+                    <a href="#">活動策劃</a>
+                    <a href="#">品牌形象提升</a>
+                </div>
             </div>
             <div class="grid-item">
+                <img src="https://via.placeholder.com/50" alt="顧客服務圖示">
                 <h3>顧客服務</h3>
-                <ul>
-                    <li><a href="#">客訴管理</a></li>
-                    <li><a href="#">顧客忠誠計畫</a></li>
-                    <li><a href="#">滿意度調查</a></li>
-                </ul>
+                <div class="sub-links">
+                    <a href="#">客訴管理</a>
+                    <a href="#">顧客忠誠計畫</a>
+                    <a href="#">滿意度調查</a>
+                </div>
             </div>
             <div class="grid-item">
+                <img src="https://via.placeholder.com/50" alt="營運效率圖示">
                 <h3>營運效率</h3>
-                <ul>
-                    <li><a href="#">人力資源分配</a></li>
-                    <li><a href="#">成本控制</a></li>
-                    <li><a href="#">流程自動化</a></li>
-                </ul>
+                <div class="sub-links">
+                    <a href="#">人力資源分配</a>
+                    <a href="#">成本控制</a>
+                    <a href="#">流程自動化</a>
+                </div>
             </div>
             <div class="grid-item">
+                <img src="https://via.placeholder.com/50" alt="核心競爭力圖示">
                 <h3>核心競爭力</h3>
-                <ul>
-                    <li><a href="#">品牌差異化</a></li>
-                    <li><a href="#">技術創新</a></li>
-                    <li><a href="#">專利與獨特性</a></li>
-                </ul>
+                <div class="sub-links">
+                    <a href="#">品牌差異化</a>
+                    <a href="#">技術創新</a>
+                    <a href="#">專利與獨特性</a>
+                </div>
             </div>
             <div class="grid-item">
+                <img src="https://via.placeholder.com/50" alt="競爭分析圖示">
                 <h3>競爭分析</h3>
-                <ul>
-                    <li><a href="#">市場定位</a></li>
-                    <li><a href="#">競爭優勢策略</a></li>
-                    <li><a href="#">同業比較</a></li>
-                </ul>
+                <div class="sub-links">
+                    <a href="#">市場定位</a>
+                    <a href="#">競爭優勢策略</a>
+                    <a href="#">同業比較</a>
+                </div>
             </div>
             <div class="grid-item">
+                <img src="https://via.placeholder.com/50" alt="供應鏈管理圖示">
                 <h3>供應鏈管理</h3>
-                <ul>
-                    <li><a href="#">物流效率</a></li>
-                    <li><a href="#">原料來源管理</a></li>
-                    <li><a href="#">庫存控制</a></li>
-                </ul>
+                <div class="sub-links">
+                    <a href="#">物流效率</a>
+                    <a href="#">原料來源管理</a>
+                    <a href="#">庫存控制</a>
+                </div>
             </div>
         </div>
     </div>
