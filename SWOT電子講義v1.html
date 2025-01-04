@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大清早餐店 SWOT 分析</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            margin-top: 20px;
+            color: #333;
+        }
+        .matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0;
+            width: 90%;
+            max-width: 800px;
+        }
+        .box {
+            background-color: #ffffff;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        .strengths { background-color: #e7f3ff; }
+        .weaknesses { background-color: #fff7e6; }
+        .opportunities { background-color: #e9ffea; }
+        .threats { background-color: #ffe6e6; }
+        .description {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        .menu-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 30px;
+            width: 90%;
+            max-width: 800px;
+        }
+        .menu-btn {
+            padding: 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .menu-btn:hover {
+            background-color: #2980b9;
+        }
+        footer {
+            margin: 20px 0;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <h1>大清早餐店 SWOT 分析工具</h1>
+    <p>點擊以下按鈕了解如何進行 SWOT 分析：</p>
+    <div class="matrix">
+        <div class="box strengths" onclick="showDescription('strengths')">優勢（Strengths）</div>
+        <div class="box opportunities" onclick="showDescription('opportunities')">機會（Opportunities）</div>
+        <div class="box weaknesses" onclick="showDescription('weaknesses')">劣勢（Weaknesses）</div>
+        <div class="box threats" onclick="showDescription('threats')">威脅（Threats）</div>
+    </div>
+    <div id="description" class="description"></div>
+    
+    <!-- 長條目錄按鈕 -->
+    <div class="menu-btns">
+        <button class="menu-btn" onclick="showFullContent('strengthsContent')">優勢分析</button>
+        <button class="menu-btn" onclick="showFullContent('weaknessesContent')">劣勢分析</button>
+        <button class="menu-btn" onclick="showFullContent('opportunitiesContent')">機會分析</button>
+        <button class="menu-btn" onclick="showFullContent('threatsContent')">威脅分析</button>
+        <button class="menu-btn" onclick="showFullContent('strategiesContent')">策略建議</button>
+        <button class="menu-btn" onclick="showFullContent('stepsContent')">SWOT 應用步驟</button>
+    </div>
+
+    <!-- 顯示詳細內容 -->
+    <div id="strengthsContent" class="description" style="display:none;">
+        <h2>優勢（Strengths）</h2>
+        <p><b>定義：</b>內部擁有的、有助於成功的特點或資源。</p>
+        <p><b>問題：</b>我們做得好的有哪些？我們的資源或能力在哪些方面有競爭力？</p>
+        <p><b>範例：</b>品牌聲譽、專業技術、忠誠顧客、地理位置優越。</p>
+        <p><b>案例：</b>例如，大清早餐店利用其地理位置優勢，店面靠近學校，吸引大量學生群體。</p>
+    </div>
+    <div id="weaknessesContent" class="description" style="display:none;">
+        <h2>劣勢（Weaknesses）</h2>
+        <p><b>定義：</b>內部存在的、不利於成功的短板或限制。</p>
+        <p><b>問題：</b>我們在哪些方面做得不足？需要改進的地方是什麼？</p>
+        <p><b>範例：</b>資金不足、員工技能不足、設備老化、行銷能力弱。</p>
+        <p><b>案例：</b>例如，大清早餐店的店面空間有限，影響了翻桌率，無法容納更多顧客。</p>
+    </div>
+    <div id="opportunitiesContent" class="description" style="display:none;">
+        <h2>機會（Opportunities）</h2>
+        <p><b>定義：</b>外部環境中有利於成功的趨勢或條件。</p>
+        <p><b>問題：</b>市場上有哪些未開發的領域？外部有哪些趨勢可以利用？</p>
+        <p><b>範例：</b>新市場需求增加、政府政策支持、競爭對手退場、新技術的出現。</p>
+        <p><b>案例：</b>例如，健康早餐需求增加，促使大清早餐店可以推出更多健康選項，吸引健康意識強的顧客。</p>
+    </div>
+    <div id="threatsContent" class="description" style="display:none;">
+        <h2>威脅（Threats）</h2>
+        <p><b>定義：</b>外部環境中可能阻礙成功的風險或挑戰。</p>
+        <p><b>問題：</b>哪些外部因素可能對我們不利？面臨哪些競爭壓力？</p>
+        <p><b>範例：</b>新競爭者進入市場、原材料價格上漲、消費者偏好改變。</p>
+        <p><b>案例：</b>例如，周邊新開的早餐店帶來了更強的競爭壓力，影響了大清早餐店的客源。</p>
+    </div>
+    <div id="strategiesContent" class="description" style="display:none;">
+        <h2>策略建議</h2>
+        <p>基於 SWOT 分析，提出以下策略建議：</p>
+        <ul>
+            <li><b>SO策略</b>：利用口碑與地理位置優勢，推出健康套餐，吸引健康飲食族群。</li>
+            <li><b>WO策略</b>：改善行銷方式，通過社群媒體吸引新顧客，提升品牌知名度。</li>
+            <li><b>ST策略</b>：利用穩定的員工團隊和效率，保持高品質服務，增強競爭力。</li>
+            <li><b>WT策略</b>：制定成本控制計劃，以減少原材料價格波動的影響。</li>
+        </ul>
+    </div>
+    <div id="stepsContent" class="description" style="display:none;">
+        <h2>SWOT 應用步驟</h2>
+        <p>要有效運用 SWOT 分析，您可以遵循以下步驟：</p>
+        <ul>
+            <li><b>資料收集與評估：</b>首先，收集有關內部因素（如資源、能力、績效）和外部因素（如市場趨勢、競爭環境）的資料。</li>
+            <li><b>分類並填寫 SWOT 矩陣：</b>將每個因素歸類到對應的象限中，形成清晰的圖表。</li>
+            <li><b>制定策略：</b>根據分析結果，制定行動計劃，包括 SO、WO、ST 和 WT 策略。</li>
+        </ul>
+    </div>
+    
+    <footer>
+  <p>&copy; 2024 Joseph Chen. All rights reserved.</p>
+</footer>
+
+    <script>
+        function showDescription(type) {
+            const description = document.getElementById('description');
+            if (type === 'strengths') {
+                description.innerHTML = '<h2>優勢（Strengths）</h2><p><b>定義：</b>內部擁有的、有助於成功的特點或資源。</p><p><b>問題：</b>我們做得好的有哪些？我們的資源或能力在哪些方面有競爭力？</p><p><b>範例：</b>品牌聲譽、專業技術、忠誠顧客、地理位置優越。</p><p><b>案例：</b>例如，大清早餐店利用其地理位置優勢，店面靠近學校，吸引大量學生群體。</p>';
+            } else if (type === 'weaknesses') {
+                description.innerHTML = '<h2>劣勢（Weaknesses）</h2><p><b>定義：</b>內部存在的、不利於成功的短板或限制。</p><p><b>問題：</b>我們在哪些方面做得不足？需要改進的地方是什麼？</p><p><b>範例：</b>資金不足、員工技能不足、設備老化、行銷能力弱。</p><p><b>案例：</b>例如，大清早餐店的店面空間有限，影響了翻桌率，無法容納更多顧客。</p>';
+            } else if (type === 'opportunities') {
+                description.innerHTML = '<h2>機會（Opportunities）</h2><p><b>定義：</b>外部環境中有利於成功的趨勢或條件。</p><p><b>問題：</b>市場上有哪些未開發的領域？外部有哪些趨勢可以利用？</p><p><b>範例：</b>新市場需求增加、政府政策支持、競爭對手退場、新技術的出現。</p><p><b>案例：</b>例如，健康早餐需求增加，促使大清早餐店可以推出更多健康選項，吸引健康意識強的顧客。</p>';
+            } else if (type === 'threats') {
+                description.innerHTML = '<h2>威脅（Threats）</h2><p><b>定義：</b>外部環境中可能阻礙成功的風險或挑戰。</p><p><b>問題：</b>哪些外部因素可能對我們不利？面臨哪些競爭壓力？</p><p><b>範例：</b>新競爭者進入市場、原材料價格上漲、消費者偏好改變。</p><p><b>案例：</b>例如，周邊新開的早餐店帶來了更強的競爭壓力，影響了大清早餐店的客源。</p>';
+            }
+            description.style.display = 'block';
+        }
+
+        function showFullContent(contentId) {
+            const contents = document.querySelectorAll('.description');
+            contents.forEach(content => {
+                content.style.display = 'none';
+            });
+            const content = document.getElementById(contentId);
+            content.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
