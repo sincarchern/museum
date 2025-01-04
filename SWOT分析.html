@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWOT 互動講義</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            width: 80%;
+            max-width: 800px;
+            height: 80%;
+        }
+        .box {
+            background-color: #ffffff;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .box h2 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .box textarea {
+            flex-grow: 1;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 14px;
+            resize: none;
+        }
+        .box.important {
+            background-color: #e7f3ff;
+        }
+        .box.opportunity {
+            background-color: #e9ffea;
+        }
+        .box.weakness {
+            background-color: #fff7e6;
+        }
+        .box.threat {
+            background-color: #ffe6e6;
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix">
+        <div class="box important">
+            <h2>優勢（Strengths）</h2>
+            <textarea placeholder="輸入內容..."></textarea>
+        </div>
+        <div class="box opportunity">
+            <h2>機會（Opportunities）</h2>
+            <textarea placeholder="輸入內容..."></textarea>
+        </div>
+        <div class="box weakness">
+            <h2>劣勢（Weaknesses）</h2>
+            <textarea placeholder="輸入內容..."></textarea>
+        </div>
+        <div class="box threat">
+            <h2>威脅（Threats）</h2>
+            <textarea placeholder="輸入內容..."></textarea>
+        </div>
+    </div>
+</body>
+</html>

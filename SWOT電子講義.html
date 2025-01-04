@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大清早餐店 SWOT 分析</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            margin-top: 20px;
+            color: #333;
+        }
+        .matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0;
+            width: 90%;
+            max-width: 800px;
+        }
+        .box {
+            background-color: #ffffff;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        .strengths { background-color: #e7f3ff; }
+        .weaknesses { background-color: #fff7e6; }
+        .opportunities { background-color: #e9ffea; }
+        .threats { background-color: #ffe6e6; }
+        .description {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        .menu-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 30px;
+            width: 90%;
+            max-width: 800px;
+        }
+        .menu-btn {
+            padding: 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .menu-btn:hover {
+            background-color: #2980b9;
+        }
+        footer {
+            margin: 20px 0;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <h1>大清早餐店 SWOT 分析工具</h1>
+    <p>點擊以下按鈕了解如何進行 SWOT 分析：</p>
+    <div class="matrix">
+        <div class="box strengths" onclick="showDescription('strengths')">優勢（Strengths）</div>
+        <div class="box opportunities" onclick="showDescription('opportunities')">機會（Opportunities）</div>
+        <div class="box weaknesses" onclick="showDescription('weaknesses')">劣勢（Weaknesses）</div>
+        <div class="box threats" onclick="showDescription('threats')">威脅（Threats）</div>
+    </div>
+    <div id="description" class="description"></div>
+    
+    <!-- 長條目錄按鈕 -->
+    <div class="menu-btns">
+        <button class="menu-btn" onclick="showFullContent('strengthsContent')">優勢分析</button>
+        <button class="menu-btn" onclick="showFullContent('weaknessesContent')">劣勢分析</button>
+        <button class="menu-btn" onclick="showFullContent('opportunitiesContent')">機會分析</button>
+        <button class="menu-btn" onclick="showFullContent('threatsContent')">威脅分析</button>
+        <button class="menu-btn" onclick="showFullContent('strategiesContent')">策略建議</button>
+    </div>
+
+    <!-- 顯示詳細內容 -->
+    <div id="strengthsContent" class="description" style="display:none;">
+        <h2>優勢（Strengths）</h2>
+        <p>內部擁有的、有助於成功的特點或資源。</p>
+        <ul>
+            <li>食材新鮮，餐點口碑良好。</li>
+            <li>地點靠近學校，人流穩定。</li>
+            <li>員工團隊穩定，效率高。</li>
+        </ul>
+    </div>
+    <div id="weaknessesContent" class="description" style="display:none;">
+        <h2>劣勢（Weaknesses）</h2>
+        <p>內部存在的、不利於成功的短板或限制。</p>
+        <ul>
+            <li>店面空間有限，翻桌率受限。</li>
+            <li>行銷手段不足，知名度不高。</li>
+            <li>菜單創新能力較弱。</li>
+        </ul>
+    </div>
+    <div id="opportunitiesContent" class="description" style="display:none;">
+        <h2>機會（Opportunities）</h2>
+        <p>外部環境中有利於成功的趨勢或條件。</p>
+        <ul>
+            <li>健康早餐需求增加。</li>
+            <li>鄰近開發區將帶來新顧客群。</li>
+            <li>社群行銷成本低、回報高。</li>
+        </ul>
+    </div>
+    <div id="threatsContent" class="description" style="display:none;">
+        <h2>威脅（Threats）</h2>
+        <p>外部環境中可能阻礙成功的風險或挑戰。</p>
+        <ul>
+            <li>周邊新早餐店競爭激烈。</li>
+            <li>原材料價格波動大。</li>
+            <li>季節性顧客流失（如寒暑假）。</li>
+        </ul>
+    </div>
+    <div id="strategiesContent" class="description" style="display:none;">
+        <h2>策略建議</h2>
+        <p>基於 SWOT 分析，提出以下策略建議：</p>
+        <ul>
+            <li><b>SO策略</b>：利用口碑與地理位置優勢，推出健康套餐，吸引健康飲食族群。</li>
+            <li><b>WO策略</b>：改善行銷方式，通過社群媒體吸引新顧客，提升品牌知名度。</li>
+            <li><b>ST策略</b>：利用穩定的員工團隊和效率，保持高品質服務，增強競爭力。</li>
+            <li><b>WT策略</b>：制定成本控制計劃，以減少原材料價格波動的影響。</li>
+        </ul>
+    </div>
+
+    <footer>版權：大清早餐店 Joseph Chen</footer>
+
+    <script>
+        const descriptions = {
+            strengths: `
+                <h2>優勢（Strengths）</h2>
+                <p>優勢是內部擁有的、有助於成功的特點或資源。</p>
+                <ul>
+                    <li>早餐店的食材新鮮、餐點口碑好。</li>
+                    <li>地理位置靠近學校，人流穩定。</li>
+                    <li>員工團隊穩定且效率高。</li>
+                </ul>
+            `,
+            weaknesses: `
+                <h2>劣勢（Weaknesses）</h2>
+                <p>劣勢是內部存在的、不利於成功的短板或限制。</p>
+                <ul>
+                    <li>店面空間有限，翻桌率低。</li>
+                    <li>行銷手段不足，知名度不高。</li>
+                    <li>菜單創新能力較弱。</li>
+                </ul>
+            `,
+            opportunities: `
+                <h2>機會（Opportunities）</h2>
+                <p>機會是外部環境中有利於成功的趨勢或條件。</p>
+                <ul>
+                    <li>健康飲食趨勢增強。</li>
+                    <li>鄰近開發區帶來新顧客。</li>
+                    <li>社群行銷成本低、回報高。</li>
+                </ul>
+            `,
+            threats: `
+                <h2>威脅（Threats）</h2>
+                <p>威脅是外部環境中可能阻礙成功的風險或挑戰。</p>
+                <ul>
+                    <li>周邊新早餐店的競爭。</li>
+                    <li>原材料價格波動。</li>
+                    <li>季節性顧客流失（如寒暑假）。</li>
+                </ul>
+            `
+        };
+
+        function showDescription(type) {
+            const descriptionBox = document.getElementById("description");
+            descriptionBox.innerHTML = descriptions[type];
+            descriptionBox.style.display = "block";
+        }
+
+        function showFullContent(id) {
+            const contents = document.querySelectorAll('.description');
+            contents.forEach(content => {
+                content.style.display = 'none';
+            });
+            document.getElementById(id).style.display = 'block';
+        }
+    </script>
+</body>
+</html>
