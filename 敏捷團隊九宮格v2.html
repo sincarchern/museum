@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>敏捷九宮格</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #ffffff;
+            background-color: #006400;
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+            margin: 0;
+        }
+        .button-container {
+            margin: 20px 0;
+        }
+        .ebook-button {
+            background-color: #FF8C00;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-gap: 5px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .grid-item {
+            color: #ffffff;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .grid-item.step {
+            background-color: #FF8C00;
+        }
+        .grid-item:not(.step) {
+            background-color: #006400;
+        }
+        .grid-item:hover {
+            opacity: 0.9;
+        }
+        .description {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #000000;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+        }
+        footer {
+            color: #ffffff;
+            background-color: #006400;
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>敏捷九宮格</h1>
+
+    <div class="button-container">
+        <a href="https://sincarchern.github.io/museum/敏捷工作電子講義.html" class="ebook-button" target="_blank">
+            點擊觀看敏捷團隊電子書
+        </a>
+    </div>
+
+    <div class="grid">
+        <div class="grid-item step" onclick="showDescription('㈠ 計劃：\n這是敏捷流程的起點，專注於確定專案目標並分解任務。團隊會召開計劃會議，建立產品積壓工作表，並設定迭代目標。這一階段確保所有人對目標和流程的共識。')">㈠ 計劃</div>
+        <div class="grid-item" onclick="showDescription('角色A：產品負責人（PO）：\n負責管理產品積壓項目，確保需求符合商業價值，並與客戶保持緊密聯繫，為團隊提供清晰的需求指引。')">角色A</div>
+        <div class="grid-item step" onclick="showDescription('㈡ 執行：\n這是團隊將計劃轉化為實際工作的過程。成員根據迭代目標分工合作，並每日舉行站立會議以檢視進度、協調阻礙。')">㈡ 執行</div>
+        <div class="grid-item" onclick="showDescription('角色B：開發者：\n他們是專案的實施者，負責撰寫代碼、解決技術問題，並與其他角色協作以完成高質量的功能交付。')">角色B</div>
+        <div class="grid-item" onclick="showDescription('敏捷團隊：\n這是一個多角色、高效協作的團體，透過自我管理、快速反饋以及持續學習來實現卓越的產品交付與流程優化。')">敏捷團隊</div>
+        <div class="grid-item" onclick="showDescription('角色C：測試員：\n負責驗證產品功能是否符合需求，透過自動化和手動測試，確保產品在迭代中保持高品質和穩定性。')">角色C</div>
+        <div class="grid-item step" onclick="showDescription('㈢ 檢視：\n這是團隊回顧工作成果的過程，通過檢視會議識別優勢與不足，為下一次迭代提供改進建議。')">㈢ 檢視</div>
+        <div class="grid-item" onclick="showDescription('角色D：敏捷教練：\n促進團隊遵循敏捷原則，協助解決阻礙，提供反饋與建議，幫助團隊達到更高效的合作與溝通。')">角色D</div>
+        <div class="grid-item step" onclick="showDescription('㈣ 調整：\n基於檢視會議的結果，團隊進一步優化流程與計劃，確保下一次迭代更加符合專案目標與客戶需求。')">㈣ 調整</div>
+    </div>
+
+    <div class="description" id="description">請點擊九宮格內的選項以顯示詳細說明。</div>
+
+    <footer>
+        <p>&copy; 2025 Joseph Chen. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function showDescription(text) {
+            document.getElementById('description').innerText = text;
+        }
+    </script>
+</body>
+</html>
