@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>九宮格拆解法 - 敏捷工作團隊</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 20px auto;
+      max-width: 600px;
+    }
+    .grid-item {
+      text-align: center;
+      padding: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .grid-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .red { background-color: #e57373; }
+    .blue { background-color: #64b5f6; }
+    .green { background-color: #81c784; }
+    .orange { background-color: #ffb74d; }
+    .purple { background-color: #ba68c8; }
+    .yellow { background-color: #ffd54f; }
+    .brown { background-color: #8d6e63; } /* 數據分析改為褐色 */
+    .teal { background-color: #4db6ac; }
+    .pink { background-color: #f06292; }
+    .grey { background-color: #90a4ae; }
+    .highlight-center {
+      border: 3px solid #000;
+      color: #000;
+    }
+    .content-section, .details-section {
+      margin-top: 20px;
+    }
+    .details-section {
+      padding: 10px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>九宮格拆解法</h1>
+  <div id="first-layer" class="grid-container">
+    <div class="grid-item red" data-color="red" data-topic="顧客需求">顧客需求</div>
+    <div class="grid-item blue" data-color="blue" data-topic="產品設計">產品設計</div>
+    <div class="grid-item green" data-color="green" data-topic="生產流程">生產流程</div>
+    <div class="grid-item orange" data-color="orange" data-topic="員工協作">員工協作</div>
+    <div class="grid-item purple" data-color="purple" data-topic="提升營運效率">提升營運效率</div>
+    <div class="grid-item brown" data-color="brown" data-topic="數據分析">數據分析</div>
+    <div class="grid-item teal" data-color="teal" data-topic="庫存管理">庫存管理</div>
+    <div class="grid-item pink" data-color="pink" data-topic="營銷推廣">營銷推廣</div>
+    <div class="grid-item grey" data-color="grey" data-topic="顧客反饋">顧客反饋</div>
+  </div>
+
+  <div id="second-layer" class="content-section"></div>
+  <div id="details-section" class="details-section"></div>
+
+  <footer>
+    <p>&copy; 2024 Joseph Chen. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const firstLayerItems = document.querySelectorAll('#first-layer .grid-item');
+    const secondLayerContainer = document.getElementById('second-layer');
+    const detailsSection = document.getElementById('details-section');
+
+    // 第二層九宮格的子題與詳細說明
+    const subTopics = {
+      "顧客需求": [
+        "調查需求: 深入了解顧客需求，提供貼心服務。",
+        "偏好分析: 分析顧客消費偏好，優化選品策略。",
+        "價格敏感: 根據顧客對價格的反應，調整價格策略。",
+        "習慣分析: 研究顧客的消費習慣，設計更便利的購物流程。",
+        "顧客需求: 中心主題，滿足顧客期望。",
+        "特殊需求: 為特定客群提供個性化服務。",
+        "忠誠度: 增強顧客忠誠度，促進重複消費。",
+        "購物路徑: 優化顧客的購物體驗。",
+        "購物體驗: 提升整體消費滿意度。"
+      ],
+      "產品設計": [
+        "菜單更新: 定期更新菜單吸引顧客。",
+        "健康選項: 增加健康飲食的選擇。",
+        "季節限定: 推出限定產品吸引新老顧客。",
+        "視覺設計: 以吸引人的設計提升產品價值。",
+        "產品設計: 中心主題，優化產品。",
+        "優惠套餐: 推出實惠套餐增加吸引力。",
+        "食材來源: 保證食材的新鮮與高品質。",
+        "創意搭配: 提供新穎的產品組合。",
+        "包裝改進: 改善包裝以提升品牌形象。"
+      ],
+      "數據分析": [
+        "數據收集: 收集營運相關的各類數據。",
+        "銷售排行: 分析暢銷產品，制定推廣策略。",
+        "行為模式: 了解顧客行為特徵。",
+        "促銷效果: 評估促銷活動的效果。",
+        "數據分析: 中心主題，數據驅動決策。",
+        "會員數據: 深入挖掘會員的消費潛力。",
+        "內外銷售: 區分內外銷產品的表現。",
+        "季節變化: 根據季節調整供應與促銷。",
+        "趨勢預測: 利用數據預測市場趨勢。"
+      ]
+    };
+
+    firstLayerItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const topic = item.getAttribute('data-topic');
+        const color = item.getAttribute('data-color');
+
+        // 生成第二層九宮格
+        secondLayerContainer.innerHTML = `
+          <h2>${topic}的九宮格拆解</h2>
+          <div class="grid-container">
+            ${subTopics[topic].map((subTopic, index) => `
+              <div class="grid-item ${color} ${index === 4 ? 'highlight-center' : ''}" data-detail="${subTopic}">
+                ${index === 4 ? topic : subTopic.split(":")[0]}
+              </div>
+            `).join('')}
+          </div>
+        `;
+
+        // 綁定第二層格子點擊事件
+        const secondLayerItems = document.querySelectorAll('#second-layer .grid-item');
+        secondLayerItems.forEach(subItem => {
+          subItem.addEventListener('click', () => {
+            const detail = subItem.getAttribute('data-detail');
+            detailsSection.innerHTML = `<p>${detail}</p>`;
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
