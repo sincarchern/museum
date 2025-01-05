@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>九宮格拆解法 - 敏捷工作團隊</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 20px auto;
+      max-width: 600px;
+    }
+    .grid-item {
+      text-align: center;
+      padding: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .grid-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .red { background-color: #e57373; }
+    .blue { background-color: #64b5f6; }
+    .green { background-color: #81c784; }
+    .orange { background-color: #ffb74d; }
+    .purple { background-color: #ba68c8; }
+    .yellow { background-color: #ffd54f; }
+    .teal { background-color: #4db6ac; }
+    .pink { background-color: #f06292; }
+    .grey { background-color: #90a4ae; }
+    .highlight-center {
+      border: 3px solid #000;
+      color: #000;
+    }
+
+    .content-section {
+      margin-top: 20px;
+    }
+
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>九宮格拆解法</h1>
+  <div id="first-layer" class="grid-container">
+    <div class="grid-item red" data-color="red" data-topic="顧客需求">顧客需求</div>
+    <div class="grid-item blue" data-color="blue" data-topic="產品設計">產品設計</div>
+    <div class="grid-item green" data-color="green" data-topic="生產流程">生產流程</div>
+    <div class="grid-item orange" data-color="orange" data-topic="員工協作">員工協作</div>
+    <div class="grid-item purple" data-color="purple" data-topic="提升營運效率">提升營運效率</div>
+    <div class="grid-item yellow" data-color="yellow" data-topic="數據分析">數據分析</div>
+    <div class="grid-item teal" data-color="teal" data-topic="庫存管理">庫存管理</div>
+    <div class="grid-item pink" data-color="pink" data-topic="營銷推廣">營銷推廣</div>
+    <div class="grid-item grey" data-color="grey" data-topic="顧客反饋">顧客反饋</div>
+  </div>
+
+  <div id="second-layer" class="content-section"></div>
+
+  <footer>
+    <p>&copy; 2024 Joseph Chen. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const firstLayerItems = document.querySelectorAll('#first-layer .grid-item');
+    const secondLayerContainer = document.getElementById('second-layer');
+
+    // 第二層九宮格的子題
+    const subTopics = {
+      "顧客需求": ["調查需求", "偏好分析", "價格敏感", "習慣分析", "顧客需求", "特殊需求", "忠誠度", "購物路徑"],
+      "產品設計": ["菜單更新", "健康選項", "季節限定", "視覺設計", "產品設計", "優惠套餐", "食材來源", "創意搭配"],
+      "生產流程": ["流程標準", "製作效率", "空間利用", "流程規劃", "生產流程", "人員培訓", "急單應對", "減少浪費"],
+      "員工協作": ["團隊協作", "輪班優化", "技能提升", "士氣提升", "員工協作", "工作檢討", "績效獎勵", "應對高峰"],
+      "提升營運效率": ["顧客服務", "產品優化", "流程改善", "員工管理", "營運效率", "數據支持", "庫存控制", "營銷推廣"],
+      "數據分析": ["數據收集", "銷售排行", "行為模式", "促銷效果", "數據分析", "會員數據", "內外銷售", "季節變化"],
+      "庫存管理": ["精準採購", "庫存損耗", "過期處理", "供應鏈管理", "庫存管理", "損耗減少", "每日盤點", "低銷產品"],
+      "營銷推廣": ["社群媒體", "優惠活動", "外送推廣", "品牌形象", "營銷推廣", "社區活動", "忠誠計劃", "合作宣傳"],
+      "顧客反饋": ["即時意見", "負評改善", "調查問卷", "意見箱", "顧客反饋", "回訪調查", "顧客互動", "公開好評"]
+    };
+
+    firstLayerItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const topic = item.getAttribute('data-topic');
+        const color = item.getAttribute('data-color');
+
+        // 生成第二層九宮格
+        secondLayerContainer.innerHTML = `
+          <h2>${topic}的九宮格拆解</h2>
+          <div class="grid-container">
+            ${subTopics[topic].map((subTopic, index) => `
+              <div class="grid-item ${color} ${index === 4 ? 'highlight-center' : ''}">
+                ${index === 4 ? topic : subTopic}
+              </div>
+            `).join('')}
+          </div>
+        `;
+      });
+    });
+  </script>
+</body>
+</html>
