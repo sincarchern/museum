@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>九宮格拆解法 - 敏捷工作團隊</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 20px auto;
+      max-width: 600px;
+    }
+    .grid-item {
+      text-align: center;
+      padding: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .grid-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .red { background-color: #e57373; }
+    .blue { background-color: #64b5f6; }
+    .green { background-color: #81c784; }
+    .orange { background-color: #ffb74d; }
+    .purple { background-color: #ba68c8; }
+    .brown { background-color: #A52A2A; }
+    .teal { background-color: #4db6ac; }
+    .pink { background-color: #f06292; }
+    .grey { background-color: #90a4ae; }
+    .highlight-center {
+      border: 3px solid #000;
+      color: #000;
+    }
+
+    .content-section, .details-section {
+      margin-top: 20px;
+    }
+
+    .details-section {
+      padding: 10px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>九宮格拆解法</h1>
+  <div id="first-layer" class="grid-container">
+    <div class="grid-item red" data-color="red" data-topic="顧客需求">顧客需求</div>
+    <div class="grid-item blue" data-color="blue" data-topic="產品設計">產品設計</div>
+    <div class="grid-item green" data-color="green" data-topic="生產流程">生產流程</div>
+    <div class="grid-item orange" data-color="orange" data-topic="員工協作">員工協作</div>
+    <div class="grid-item purple" data-color="purple" data-topic="提升營運效率">提升營運效率</div>
+    <div class="grid-item brown" data-color="brown" data-topic="數據分析">數據分析</div>
+    <div class="grid-item teal" data-color="teal" data-topic="庫存管理">庫存管理</div>
+    <div class="grid-item pink" data-color="pink" data-topic="營銷推廣">營銷推廣</div>
+    <div class="grid-item grey" data-color="grey" data-topic="顧客反饋">顧客反饋</div>
+  </div>
+
+  <div id="second-layer" class="content-section"></div>
+  <div id="details-section" class="details-section"></div>
+
+  <footer>
+    <p>&copy; 2024 Joseph Chen. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const firstLayerItems = document.querySelectorAll('#first-layer .grid-item');
+    const secondLayerContainer = document.getElementById('second-layer');
+    const detailsSection = document.getElementById('details-section');
+
+    // 第二層九宮格的子題、詳細說明與方法
+    const subTopics = {
+      "顧客需求": [
+        { title: "調查需求", detail: "深入了解顧客需求，提供貼心服務。", method: "方法：發放問卷調查或訪談現場顧客。" },
+        { title: "偏好分析", detail: "分析顧客消費偏好，優化選品策略。", method: "方法：根據銷售數據進行消費趨勢分析。" },
+        { title: "價格敏感", detail: "根據顧客對價格的反應，調整價格策略。", method: "方法：設計階梯式價格，並進行市場測試。" },
+        { title: "習慣分析", detail: "研究顧客的消費習慣，設計更便利的購物流程。", method: "方法：安裝顧客行為追蹤設備，蒐集數據。" },
+        { title: "顧客需求", detail: "中心主題，滿足顧客期望。", method: "方法：綜合分析需求，制定全面策略。" },
+        { title: "特殊需求", detail: "為特定客群提供個性化服務。", method: "方法：設置專門服務通道，如健康選項或定制產品。" },
+        { title: "忠誠度", detail: "增強顧客忠誠度，促進重複消費。", method: "方法：推出會員積分制及專屬優惠。" },
+        { title: "購物路徑", detail: "優化顧客的購物體驗。", method: "方法：重新設計店內動線，減少顧客等待時間。" },
+        { title: "購物體驗", detail: "提升整體消費滿意度。", method: "方法：提供額外服務如快速結帳或舒適座椅。" }
+      ],
+      // 可繼續添加其他主題與對應子題
+    };
+
+    firstLayerItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const topic = item.getAttribute('data-topic');
+
+        secondLayerContainer.innerHTML = `
+          <h2>${topic}的九宮格拆解</h2>
+          <div class="grid-container">
+            ${subTopics[topic].map((subTopic, index) => `
+              <div class="grid-item">
+                <strong>${subTopic.title}</strong>
+                <p>${subTopic.detail}</p>
+                <p>${subTopic.method}</p>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      });
+    });
+  </script>
+</body>
+</html>
