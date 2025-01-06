@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDCA循環管理與應用教程</title>
+    <style>
+        body {
+            font-family: 'Microsoft JhengHei', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 20px;
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+        }
+        h4 {
+            color: #2c3e50;
+            margin-top: 15px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .interactive-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+        .interactive-btn:hover {
+            background-color: #2980b9;
+        }
+        .content {
+            display: none;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .active {
+            display: block;
+        }
+        .example-box {
+            border-left: 4px solid #3498db;
+            padding: 10px 20px;
+            background-color: #ecf0f1;
+            margin: 10px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .success-factor {
+            background-color: #e8f6f3;
+            border: 1px solid #2ecc71;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .company-case {
+            background-color: #f4f6f7;
+            border: 1px solid #95a5a6;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .highlight-text {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .circle-diagram {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .process-steps {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .step {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin: 5px 0;
+        }
+        .note {
+            font-style: italic;
+            color: #666;
+            margin: 10px 0;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .process-steps {
+                flex-direction: column;
+            }
+            .step {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PDCA循環管理與實際應用</h1>
+        
+        <!-- 第一部分：PDCA基礎 -->
+        <div class="section">
+            <h2>一、PDCA循環管理詳解</h2>
+            <button class="interactive-btn" onclick="toggleContent('pdca-basics')">展開/收合</button>
+            <div id="pdca-basics" class="content">
+                <h3>基本概念</h3>
+                <p>PDCA是由戴明博士提出的持續改善管理循環，是企業追求卓越的重要工具。</p>
+                
+                <div class="process-steps">
+                    <div class="step">
+                        <h4>Plan（計劃）</h4>
+                        <ul>
+                            <li>確立目標與標準</li>
+                            <li>找出問題關鍵點</li>
+                            <li>制定具體改善方案</li>
+                            <li>設定評估指標</li>
+                        </ul>
+                    </div>
+
+                    <div class="step">
+                        <h4>Do（執行）</h4>
+                        <ul>
+                            <li>按計劃實施方案</li>
+                            <li>蒐集相關數據</li>
+                            <li>記錄執行過程</li>
+                            <li>落實教育訓練</li>
+                        </ul>
+                    </div>
+
+                    <div class="step">
+                        <h4>Check（檢查）</h4>
+                        <ul>
+                            <li>確認執行結果</li>
+                            <li>與目標比較分析</li>
+                            <li>檢討未達成原因</li>
+                            <li>發掘可改善點</li>
+                        </ul>
+                    </div>
+
+                    <div class="step">
+                        <h4>Act（行動）</h4>
+                        <ul>
+                            <li>標準化成功方法</li>
+                            <li>檢討失敗原因</li>
+                            <li>提出新的改善計劃</li>
+                            <li>進入下一個循環</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h4>PDCA的特點</h4>
+                    <ul>
+                        <li>循環性：持續不斷改善</li>
+                        <li>系統性：步驟清晰明確</li>
+                        <li>科學性：基於數據分析</li>
+                        <li>實用性：適用範圍廣泛</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第二部分：日本企業應用 -->
+        <div class="section">
+            <h2>二、日本企業PDCA應用</h2>
+            <button class="interactive-btn" onclick="toggleContent('japan-cases')">展開/收合</button>
+            <div id="japan-cases" class="content">
+                <h3>代表性企業案例分析</h3>
+
+                <div class="company-case">
+                    <h4>1. 豐田汽車（Toyota）</h4>
+                    <p class="highlight-text">精實生產系統的典範</p>
+                    <ul>
+                        <li>計劃：
+                            <ul>
+                                <li>制定生產計劃</li>
+                                <li>設定品質目標</li>
+                                <li>規劃資源配置</li>
+                            </ul>
+                        </li>
+                        <li>執行：
+                            <ul>
+                                <li>實施精實生產</li>
+                                <li>推行及時化生產</li>
+                                <li>執行品質管理</li>
+                            </ul>
+                        </li>
+                        <li>檢查：
+                            <ul>
+                                <li>品質檢測分析</li>
+                                <li>生產效率評估</li>
+                                <li>成本控制審查</li>
+                            </ul>
+                        </li>
+                        <li>行動：
+                            <ul>
+                                <li>持續改善流程</li>
+                                <li>優化生產方式</li>
+                                <li>更新標準作業</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="company-case">
+                    <h4>2. 索尼（Sony）</h4>
+                    <p class="highlight-text">產品創新與品質管理的結合</p>
+                    <ul>
+                        <li>計劃：
+                            <ul>
+                                <li>新產品開發規劃</li>
+                                <li>市場需求分析</li>
+                                <li>技術可行性評估</li>
+                            </ul>
+                        </li>
+                        <li>執行：
+                            <ul>
+                                <li>產品設計開發</li>
+                                <li>原型製作測試</li>
+                                <li>生產準備作業</li>
+                            </ul>
+                        </li>
+                        <li>檢查：
+                            <ul>
+                                <li>品質測試評估</li>
+                                <li>市場反應調查</li>
+                                <li>使用者體驗分析</li>
+                            </ul>
+                        </li>
+                        <li>行動：
+                            <ul>
+                                <li>產品改良優化</li>
+                                <li>生產流程調整</li>
+                                <li>服務支援強化</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="company-case">
+                    <h4>3. 日立（Hitachi）</h4>
+                    <p class="highlight-text">專案管理與服務品質的整合</p>
+                    <ul>
+                        <li>計劃：
+                            <ul>
+                                <li>專案整體規劃</li>
+                                <li>資源需求評估</li>
+                                <li>進度時程安排</li>
+                            </ul>
+                        </li>
+                        <li>執行：
+                            <ul>
+                                <li>專案任務分配</li>
+                                <li>進度追蹤管理</li>
+                                <li>問題即時處理</li>
+                            </ul>
+                        </li>
+                        <li>檢查：
+                            <ul>
+                                <li>階段性成果評估</li>
+                                <li>品質指標監控</li>
+                                <li>客戶滿意度調查</li>
+                            </ul>
+                        </li>
+                        <li>行動：
+                            <ul>
+                                <li>流程優化調整</li>
+                                <li>標準作業更新</li>
+                                <li>持續服務改善</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <h3>日本企業PDCA實施成功因素</h3>
+
+                <div class="success-factor">
+                    <h4>1. 企業文化要素</h4>
+                    <ul>
+                        <li>追求完美的工匠精神</li>
+                        <li>全員參與的改善意識</li>
+                        <li>長期發展的經營理念</li>
+                        <li>重視細節的執行力</li>
+                    </ul>
+                </div>
+
+                <div class="success-factor">
+                    <h4>2. 管理系統要素</h4>
+                    <ul>
+                        <li>標準化的作業程序</li>
+                        <li>完善的培訓體系</li>
+                        <li>科學的評價機制</li>
+                        <li>有效的獎勵制度</li>
+                    </ul>
+                </div>
+
+                <div class="success-factor">
+                    <h4>3. 技術方法要素</h4>
+                    <ul>
+                        <li>數據化管理工具</li>
+                        <li>可視化管理手段</li>
+                        <li>問題解決技術</li>
+                        <li>品質管理方法</li>
+                    </ul>
+                </div>
+
+                <div class="success-factor">
+                    <h4>4. 組織支持要素</h4>
+                    <ul>
+                        <li>高層的堅定承諾</li>
+                        <li>充分的資源投入</li>
+                        <li>跨部門的協作機制</li>
+                        <li>持續的改善動力</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第三部分：早餐店應用 -->
+        <div class="section">
+            <h2>三、早餐店PDCA應用</h2>
+            <button class="interactive-btn" onclick="toggleContent('breakfast-store')">展開/收合</button>
+            <div id="breakfast-store" class="content">
+                <h3>實際運用案例</h3>
+
+                <div class="example-box">
+                    <h4>Plan（計劃階段）</h4>
+                    <ul>
+                        <li>菜單規劃：
+                            <ul>
+                                <li>商品組合設計</li>
+                                <li>價格策略制定</li>
+                                <li>季節性調整規劃</li>
+                            </ul>
+                        </li>
+                        <li>營運計劃：
+                            <ul>
+                                <li>人力配置安排</li>
+                                <li>設備配置規劃</antArtifact>
+                                <li>原物料採購計劃</li>
+                            </ul>
+                        </li>
+                        <li>品質管理：
+                            <ul>
+                                <li>衛生標準制定</li>
+                                <li>服務流程規劃</li>
+                                <li>品質監控機制</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>Do（執行階段）</h4>
+                    <ul>
+                        <li>日常運營：
+                            <ul>
+                                <li>原料備製管理</li>
+                                <li>餐點製作流程</li>
+                                <li>現場服務執行</li>
+                            </ul>
+                        </li>
+                        <li>衛生管理：
+                            <ul>
+                                <li>環境清潔維護</li>
+                                <li>食品安全控制</li>
+                                <li>個人衛生要求</li>
+                            </ul>
+                        </li>
+                        <li>人員管理：
+                            <ul>
+                                <li>工作分配執行</li>
+                                <li>標準作業遵循</li>
+                                <li>現場問題處理</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>Check（檢查階段）</h4>
+                    <ul>
+                        <li>品質檢核：
+                            <ul>
+                                <li>食材新鮮度檢查</li>
+                                <li>製作流程稽核</li>
+                                <li>成品品質抽檢</li>
+                            </ul>
+                        </li>
+                        <li>營運分析：
+                            <ul>
+                                <li>銷售數據統計</li>
+                                <li>成本效益分析</li>
+                                <li>顧客滿意度調查</li>
+                            </ul>
+                        </li>
+                        <li>效率評估：
+                            <ul>
+                                <li>人力配置效益</li>
+                                <li>設備使用狀況</li>
+                                <li>作業時間控制</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>Act（行動階段）</h4>
+                    <ul>
+                        <li>改善行動：
+                            <ul>
+                                <li>菜單品項調整</li>
+                                <li>製作流程優化</li>
+                                <li>服務方式改進</li>
+                            </ul>
+                        </li>
+                        <li>標準化：
+                            <ul>
+                                <li>成功經驗文件化</li>
+                                <li>作業標準更新</li>
+                                <li>培訓內容修訂</li>
+                            </ul>
+                        </li>
+                        <li>持續精進：
+                            <ul>
+                                <li>新目標設定</li>
+                                <li>改善計畫擬定</li>
+                                <li>執行方案規劃</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="success-factor">
+                    <h4>早餐店PDCA實施重點</h4>
+                    <ul>
+                        <li>即時性：
+                            <ul>
+                                <li>快速回應顧客需求</li>
+                                <li>及時處理現場問題</li>
+                                <li>動態調整運營策略</li>
+                            </ul>
+                        </li>
+                        <li>持續性：
+                            <ul>
+                                <li>定期檢討改善</li>
+                                <li>持續優化流程</li>
+                                <li>不斷提升品質</li>
+                            </ul>
+                        </li>
+                        <li>實用性：
+                            <ul>
+                                <li>符合實際運營需求</li>
+                                <li>易於執行和控制</li>
+                                <li>效果可立即驗證</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 總結部分 -->
+        <div class="section">
+            <h2>結語：PDCA的價值與展望</h2>
+            <button class="interactive-btn" onclick="toggleContent('conclusion')">展開/收合</button>
+            <div id="conclusion" class="content">
+                <div class="example-box">
+                    <h4>PDCA的核心價值</h4>
+                    <ul>
+                        <li>管理工具的實用性：
+                            <ul>
+                                <li>適用於各類組織</li>
+                                <li>操作方法簡單明確</li>
+                                <li>效果可測量可驗證</li>
+                            </ul>
+                        </li>
+                        <li>持續改善的推動力：
+                            <ul>
+                                <li>形成改善循環機制</li>
+                                <li>促進組織學習成長</li>
+                                <li>建立改善文化氛圍</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="note">
+                    <p>PDCA循環管理方法不僅適用於大型企業，對於小型企業如早餐店等，同樣具有重要的實踐價值。關鍵在於根據實際情況，靈活運用其核心理念，持續推動改善。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            content.classList.toggle('active');
+        }
+
+        // 頁面加載時默認展開第一個部分
+        window.onload = function() {
+            document.getElementById('pdca-basics').classList.add('active');
+        }
+    </script>
+    <footer>
+  <p>&copy; 2024 Joseph Chen. All rights reserved.</p>
+</footer>
+</body>
+</html>
