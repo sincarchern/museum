@@ -1,78 +1,249 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>顧客忠誠計畫全集</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #333;
-      color: #fff;
-      padding: 15px;
-      text-align: center;
-    }
-    section {
-      margin: 20px;
-      text-align: center;
-    }
-    h2 {
-      color: #333;
-    }
-    .button-container {
-      margin-top: 20px;
-    }
-    .btn {
-      background-color: #4CAF50;
-      color: white;
-      padding: 15px 32px;
-      text-align: center;
-      font-size: 18px;
-      cursor: pointer;
-      border: none;
-      border-radius: 5px;
-      margin: 10px;
-      text-decoration: none;
-    }
-    .btn:hover {
-      background-color: #45a049;
-    }
-    footer {
-      text-align: center;
-      padding: 15px;
-      background-color: #333;
-      color: #fff;
-      position: fixed;
-      width: 100%;
-      bottom: 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>顧客忠誠計畫全集</title>
+    <style>
+        :root {
+            --primary-color: #2196F3;
+            --secondary-color: #4CAF50;
+            --dark-color: #333;
+            --light-color: #f9f9f9;
+        }
+        
+        body {
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 16px;
+            color: white;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .stat-label {
+            color: var(--dark-color);
+            margin-top: 5px;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                display: block;
+                margin: 10px 20px;
+            }
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+            text-decoration: none;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <div class="header-content">
+            <h1>顧客忠誠計畫全集</h1>
+            <p class="subtitle">提升品牌價值，建立長期顧客關係的完整指南</p>
+        </div>
+    </header>
 
-  <header>
-    <h1>顧客忠誠計畫全集</h1>
-  </header>
+    <main>
+        <div class="features">
+            <div class="feature-card">
+                <h3>什麼是顧客忠誠計畫？</h3>
+                <p>顧客忠誠計畫是一套系統化的營銷策略，通過提供獎勵、優惠和專屬體驗，來增強顧客與品牌之間的連結。這些計畫不僅能提高顧客滿意度，還能帶來持續性的商業價值。</p>
+            </div>
+            <div class="feature-card">
+                <h3>為什麼需要忠誠計畫？</h3>
+                <p>研究表明，留住現有顧客的成本遠低於獲取新顧客。優秀的忠誠計畫能夠：
+                    • 提高顧客留存率
+                    • 增加複購率
+                    • 提升品牌口碑
+                    • 獲得寶貴的顧客數據</p>
+            </div>
+            <div class="feature-card">
+                <h3>計畫內容</h3>
+                <p>本全集涵蓋88種實用的忠誠計畫方案，分為11個核心單元，從基礎會員制到創新數位體驗，提供全方位的策略指導。每個方案都附帶實施建議和成功案例分析。</p>
+            </div>
+        </div>
 
-  <section>
-    <h2>1. 什麼是顧客忠誠計畫？</h2>
-    <p>顧客忠誠計畫是一種透過獎勳、回饋或專屬優惠來鼓勵顧客持續支持品牌或企業的策略。它旨在提升顧客的滿意度與忠誠度，並促使顧客長期與品牌保持關係。</p>
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">88</div>
+                <div class="stat-label">忠誠計畫方案</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">11</div>
+                <div class="stat-label">核心單元</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">3</div>
+                <div class="stat-label">精選合輯</div>
+            </div>
+        </div>
 
-    <div class="button-container">
-      <a href="https://sincarchern.github.io/museum/(顧客忠誠計畫(上集).html)" class="btn">顧客忠誠計畫上集</a>
-      <a href="https://sincarchern.github.io/museum/(顧客忠誠計畫(中集).html)" class="btn">顧客忠誠計畫中集</a>
-      <a href="https://sincarchern.github.io/museum/(顧客忠誠計畫(下集).html)" class="btn">顧客忠誠計畫下集</a>
-    </div>
-  </section>
+        <div class="button-container">
+            <a href="https://sincarchern.github.io/museum/(顧客忠誠計畫(上集).html)" class="btn">上集：基礎建設與互動體驗</a>
+            <a href="https://sincarchern.github.io/museum/(顧客忠誠計畫(中集).html)" class="btn">中集：品牌擴展與促銷策略</a>
+            <a href="https://sincarchern.github.io/museum/(顧客忠誠計畫(下集).html)" class="btn">下集：數據分析與創新方案</a>
+        </div>
+    </main>
 
-  <footer>
-    <p>&copy; 2024 Joseph Chen. All rights reserved.</p>
-  </footer>
+    <footer>
+        <p>&copy; 2024 Joseph Chen. All rights reserved.</p>
+    </footer>
 
+    <a href="#" class="scroll-top" id="scrollTop">↑</a>
+
+    <script>
+        // 滾動到頂部按鈕
+        const scrollTop = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        });
+
+        scrollTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 </body>
 </html>
