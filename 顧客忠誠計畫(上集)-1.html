@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>客戶忠誠計畫 - 上集</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+    }
+    section {
+      margin: 20px;
+    }
+    h2 {
+      color: #333;
+    }
+    .unit {
+      background-color: #fff;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .plan-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    .plan-list li {
+      margin: 5px 0;
+    }
+    .btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px 0;
+      width: 100%;
+    }
+    .btn:hover {
+      background-color: #45a049;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #333;
+      color: #fff;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+    .plan-description {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>客戶忠誠計畫 - 上集</h1>
+  </header>
+
+  <section>
+    <h2>單元 1: 顧客體驗與互動提升</h2>
+    <div class="unit">
+      <button class="btn" onclick="toggleDescription('desc1')">積分獎勳計畫</button>
+      <div id="desc1" class="plan-description">此計畫旨在透過積分系統激勵顧客回頭消費，顧客每次消費即可獲得積分，積分可用於未來的購物折扣、獎品兌換等。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc2')">生日專屬優惠</button>
+      <div id="desc2" class="plan-description">提供顧客在生日當月專屬折扣或免費小禮物，讓顧客感受到品牌的關懷和專屬待遇。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc3')">會員專屬優惠日</button>
+      <div id="desc3" class="plan-description">定期舉辦會員專屬優惠日，會員在此期間可享有更優惠的價格和專屬商品。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc4')">消費排行榜</button>
+      <div id="desc4" class="plan-description">根據顧客的消費金額排名，定期公佈消費排行榜，讓顧客可以展示他們的消費貢獻，並享有更多的福利。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc5')">隨機驚喜贈品</button>
+      <div id="desc5" class="plan-description">為了提高顧客的購物體驗，定期隨機贈送小禮物或折扣券，讓顧客感到驚喜並提高滿意度。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc6')">社交媒體互動獎勳</button>
+      <div id="desc6" class="plan-description">鼓勵顧客在社交媒體上與品牌互動，分享體驗或標註品牌，並根據互動程度提供積分或獎勳。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc7')">早餐食譜投票</button>
+      <div id="desc7" class="plan-description">每月舉行食譜投票活動，邀請顧客投票選出他們最喜愛的早餐菜單，並依照投票結果推出特別早餐。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc8')">快速服務計畫</button>
+      <div id="desc8" class="plan-description">為忙碌的顧客提供快速服務選項，如優先排隊、提前預定等，確保顧客能夠快速享受到服務。</div>
+    </div>
+
+    <h2>單元 2: 創新體驗與社群參與</h2>
+    <div class="unit">
+      <button class="btn" onclick="toggleDescription('desc9')">食物配對大挑戰</button>
+      <div id="desc9" class="plan-description">顧客可以參與食物搭配挑戰，根據品牌推薦的食材或菜單進行搭配，並分享他們的創意配對。</div>
+
+      <button class="btn" onclick="toggleDescription('desc10')">早餐會員社群</button>
+      <div id="desc10" class="plan-description">建立一個早餐愛好者的會員社群，顧客可以在社群中分享早餐心得，並獲得專屬的優惠和活動信息。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc11')">限量週限定優惠</button>
+      <div id="desc11" class="plan-description">每週推出限量優惠活動，顧客可以在限定時間內購買到折扣產品，吸引顧客持續光顧。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc12')">美食攝影挑戰</button>
+      <div id="desc12" class="plan-description">鼓勵顧客拍攝和分享他們的美食照片，並舉辦攝影比賽，獲勝者可以得到獎品或優惠。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc13')">啟動儲值計畫</button>
+      <div id="desc13" class="plan-description">推出儲值計畫，顧客預先儲值一定金額，即可享有額外折扣或贈品，激勵顧客提前消費。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc14')">早餐故事牆</button>
+      <div id="desc14" class="plan-description">創建一面早餐故事牆，顧客可以分享他們的早餐故事或回憶，並可獲得積分或獎勳。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc15')">環保集點計畫</button>
+      <div id="desc15" class="plan-description">為了推動環保，顧客可以透過回收包裝或參與環保活動來累積集點，並兌換獎品。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc16')">雙人同行優惠</button>
+      <div id="desc16" class="plan-description">提供雙人同行優惠，顧客可邀請朋友一同享受折扣，增加顧客的推薦和參與。</div>
+    </div>
+
+    <h2>單元 3: 顧客推薦與會員專屬活動</h2>
+    <div class="unit">
+      <button class="btn" onclick="toggleDescription('desc17')">晨運挑戰合作</button>
+      <div id="desc17" class="plan-description">與健身房或晨跑俱樂部合作，提供會員專屬的晨運挑戰，並根據顧客的參與度提供優惠。</div>
+
+      <button class="btn" onclick="toggleDescription('desc18')">季卡計畫</button>
+      <div id="desc18" class="plan-description">推出季卡計畫，顧客購買季卡後可享有一系列優惠，提升顧客的忠誠度和購買意願。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc19')">回頭客專屬優惠</button>
+      <div id="desc19" class="plan-description">針對回頭客提供額外的優惠或贈品，以獎勳顧客的忠誠，促進再次消費。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc20')">會員生日月抽獎</button>
+      <div id="desc20" class="plan-description">在會員的生日月份舉行抽獎活動，獲獎者可以得到特別的禮物或優惠。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc21')">節日限定套餐</button>
+      <div id="desc21" class="plan-description">推出節日限定套餐，根據各大節日推出具有節慶氛圍的特色早餐套餐，吸引顧客前來購買。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc22')">成為「早晨大使」</button>
+      <div id="desc22" class="plan-description">提供顧客成為品牌「早晨大使」的機會，成為品牌的代表，並能夠享有專屬的福利和活動。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc23')">限時快閃優惠</button>
+      <div id="desc23" class="plan-description">不定期推出限時快閃優惠，顧客可以在限定的時間內獲得極具吸引力的優惠。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc24')">顧客推薦獎勳</button>
+      <div id="desc24" class="plan-description">
+          <div id="desc24" class="plan-description">顧客推薦新會員加入後，推薦人可以獲得獎勳或積分，激勵顧客帶來更多新會員。</div>
+    </div>
+
+    <h2>單元 4: 優化顧客關係管理與數據應用</h2>
+    <div class="unit">
+      <button class="btn" onclick="toggleDescription('desc25')">數據驅動的顧客分析</button>
+      <div id="desc25" class="plan-description">利用顧客購買數據進行分析，了解顧客的需求和消費習慣，並根據這些資料提供個性化的優惠或產品推薦。</div>
+
+      <button class="btn" onclick="toggleDescription('desc26')">忠誠度積分自動化管理</button>
+      <div id="desc26" class="plan-description">利用自動化系統管理顧客的忠誠度積分，讓顧客可以方便地查詢並使用積分，提升顧客的體驗。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc27')">顧客關係管理 (CRM) 系統</button>
+      <div id="desc27" class="plan-description">透過CRM系統追蹤顧客的行為與偏好，精準地進行行銷活動，提升顧客滿意度與忠誠度。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc28')">定期顧客滿意度調查</button>
+      <div id="desc28" class="plan-description">定期發放顧客滿意度調查，收集顧客的意見與建議，並根據反饋優化服務與產品。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc29')">訂閱式服務計畫</button>
+      <div id="desc29" class="plan-description">推出訂閱式服務計畫，顧客可選擇訂閱特定餐飲服務或套餐，享有更高的性價比與專屬優惠。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc30')">顧客評價回饋</button>
+      <div id="desc30" class="plan-description">鼓勵顧客在社交媒體或平台上留下評價，並根據評價提供回饋，增強顧客的參與感。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc31')">定制化優惠方案</button>
+      <div id="desc31" class="plan-description">根據顧客的歷史消費行為與需求，提供專屬的定制化優惠方案，增加顧客的滿意度和再次購買的可能性。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc32')">顧客關懷計畫</button>
+      <div id="desc32" class="plan-description">針對特定顧客群體（如高價值顧客、長期未消費顧客）提供定期的關懷計畫，包括生日祝福、感謝信等。</div>
+    </div>
+
+    <h2>單元 5: 整合營銷與品牌價值提升</h2>
+    <div class="unit">
+      <button class="btn" onclick="toggleDescription('desc33')">跨品牌聯名活動</button>
+      <div id="desc33" class="plan-description">與其他品牌合作，推出聯名活動或產品，互相促銷，吸引更多顧客來參與。</div>
+
+      <button class="btn" onclick="toggleDescription('desc34')">品牌大使計畫</button>
+      <div id="desc34" class="plan-description">選擇忠誠顧客或影響力人物擔任品牌大使，透過他們的影響力宣傳品牌，擴大品牌的知名度與影響力。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc35')">VIP專屬活動</button>
+      <div id="desc35" class="plan-description">舉辦VIP專屬活動，讓高價值顧客能夠參與私密的品鑑會、專屬優惠活動，提升顧客的歸屬感。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc36')">品牌故事分享</button>
+      <div id="desc36" class="plan-description">在各大平台分享品牌的故事與理念，增強顧客對品牌的情感認同，提升品牌忠誠度。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc37')">綠色品牌形象推廣</button>
+      <div id="desc37" class="plan-description">以環保為核心，推廣綠色品牌形象，吸引有環保理念的顧客群體，並促進品牌的正面形象。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc38')">名人推薦計畫</button>
+      <div id="desc38" class="plan-description">與名人或有影響力的人士合作，通過他們的推薦提升品牌的曝光度與信任感。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc39')">社會責任項目</button>
+      <div id="desc39" class="plan-description">積極參與社會責任項目，提升品牌的社會形象，吸引顧客對品牌的認同和支持。</div>
+      
+      <button class="btn" onclick="toggleDescription('desc40')">顧客參與品牌創新</button>
+      <div id="desc40" class="plan-description">邀請顧客參與品牌創新過程，如新產品設計、活動構思等，增強顧客的參與感和品牌歸屬感。</div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 客戶忠誠計畫 - 上集</p>
+  </footer>
+
+  <script>
+    function toggleDescription(id) {
+      var desc = document.getElementById(id);
+      if (desc.style.display === "none" || desc.style.display === "") {
+        desc.style.display = "block";
+      } else {
+        desc.style.display = "none";
+      }
+    }
+  </script>
+  
+</body>
+</html>
