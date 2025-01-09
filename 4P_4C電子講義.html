@@ -128,5 +128,32 @@
             </ul>
         </div>
     </section>
+    <footer>
+  <p>&copy; 2024 Joseph Chen. All rights reserved.</p>
+</footer></p>
+  </footer>
+
+  <script>
+    function toggleDescription(id) {
+      var desc = document.getElementById(id);
+      if (desc.style.display === "none" || desc.style.display === "") {
+        desc.style.display = "block";
+      } else {
+        desc.style.display = "none";
+      }
+    }
+  </script><script>
+    function checkPassword() {
+      var password = prompt("請輸入密碼以訪問該頁面:");
+      if (password === "joseph") {
+        alert("密碼正確，歡迎進入！");
+      } else {
+        alert("密碼錯誤，請再試一次。");
+        window.location.href = "about:blank";  // 密碼錯誤則跳轉
+      }
+    }
+
+    checkPassword(); // 在頁面加載時立即檢查密碼
+  </script>
 </body>
 </html>
