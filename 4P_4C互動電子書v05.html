@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4P 與 4C 行銷法則完整指南</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a237e, #0d47a1);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .container {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .accordion {
+            background-color: #f8f9fa;
+            color: #333;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+            border-radius: 4px;
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion:after {
+            content: '\02795';
+            font-size: 13px;
+            color: #777;
+            margin-left: 5px;
+        }
+
+        .accordion.active:after {
+            content: "\2796";
+        }
+
+        .accordion:hover {
+            background-color: #e9ecef;
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+
+        .strategy-card {
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+            background: #fff;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            background: #e9ecef;
+            border: none;
+            cursor: pointer;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .tab:hover {
+            background: #dee2e6;
+        }
+
+        .tab.active {
+            background: #fff;
+            border-bottom: 2px solid #0d47a1;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background: #fff;
+            border-radius: 4px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+
+        footer {
+            background: #1a237e;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                width: 100%;
+                margin-right: 0;
+            }
+
+            .container {
+                padding: 10px;
+            }
+        }
+
+        .marketing-section {
+            margin-bottom: 30px;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .marketing-button {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .marketing-button:hover {
+            background-color: #34495e;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>4P 與 4C 行銷法則完整指南</h1>
+        <p>整合企業觀點與消費者視角的現代行銷策略</p>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>行銷組合概述</h2>
+            <div class="tabs">
+                <button class="tab active" onclick="openTab(event, '4p-intro')">4P 概述</button>
+                <button class="tab" onclick="openTab(event, '4c-intro')">4C 概述</button>
+                <button class="tab" onclick="openTab(event, 'integration')">整合策略</button>
+            </div>
+
+            <div id="4p-intro" class="tab-content active">
+                <h3>4P - 企業視角的行銷組合</h3>
+                <p>傳統行銷混合的四大要素：</p>
+                <ul>
+                    <li><strong>Product (產品)</strong> - 設計和開發滿足市場需求的產品與服務</li>
+                    <li><strong>Price (價格)</strong> - 制定合適的定價策略和價格水平</li>
+                    <li><strong>Place (通路)</strong> - 選擇和管理產品分銷通路</li>
+                    <li><strong>Promotion (推廣)</strong> - 規劃和執行推廣活動</li>
+                </ul>
+            </div>
+
+            <div id="4c-intro" class="tab-content">
+                <h3>4C - 消費者視角的行銷組合</h3>
+                <p>現代消費者導向的行銷理念：</p>
+                <ul>
+                    <li><strong>Customer Needs (顧客需求)</strong> - 深入了解並滿足目標客群的需求</li>
+                    <li><strong>Cost (顧客成本)</strong> - 考量顧客的總體購買成本</li>
+                    <li><strong>Convenience (便利性)</strong> - 提供便捷的購買體驗</li>
+                    <li><strong>Communication (溝通)</strong> - 建立有效的雙向溝通管道</li>
+                </ul>
+            </div>
+
+            <div id="integration" class="tab-content">
+                <h3>4P與4C的整合應用</h3>
+                <p>現代行銷策略需要平衡企業能力和顧客需求：</p>
+                <ul>
+                    <li>以顧客需求為導向開發產品</li>
+                    <li>根據顧客價值感知制定價格</li>
+                    <li>打造便利的購物體驗</li>
+                    <li>建立持續的顧客互動關係</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="marketing-section">
+            <div class="card">
+                <h2>4P 行銷組合詳細說明</h2>
+                <div class="button-grid">
+                    <button class="marketing-button" onclick="toggleContent('product-detail')">Product 產品策略</button>
+                    <button class="marketing-button" onclick="toggleContent('price-detail')">Price 價格策略</button>
+                    <button class="marketing-button" onclick="toggleContent('place-detail')">Place 通路策略</button>
+                    <button class="marketing-button" onclick="toggleContent('promotion-detail')">Promotion 推廣策略</button>
+                </div>
+                
+                <div id="product-detail" class="content-section">
+                    <div class="strategy-card">
+                        <h4>產品策略要點</h4>
+                        <ul>
+                            <li>產品創新與研發</li>
+                            <li>產品線規劃與管理</li>
+                            <li>品質控制與保證</li>
+                            <li>品牌定位與管理</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="price-detail" class="content-section">
+                    <div class="strategy-card">
+                        <h4>價格策略要點</h4>
+                        <ul>
+                            <li>成本分析與定價</li>
+                            <li>價格彈性研究</li>
+                            <li>競爭者價格分析</li>
+                            <li>促銷價格策略</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="place-detail" class="content-section">
+                    <div class="strategy-card">
+                        <h4>通路策略要點</h4>
+                        <ul>
+                            <li>通路選擇與評估</li>
+                            <li>庫存管理</li>
+                            <li>物流配送規劃</li>
+                            <li>零售點布局</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="promotion-detail" class="content-section">
+                    <div class="strategy-card">
+                        <h4>推廣策略要點</h4>
+                        <ul>
+                            <li>廣告策略規劃</li>
+                            <li>公關活動設計</li>
+                            <li>銷售促進方案</li>
+                            <li>社群媒體經營</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>實務應用案例</h2>
+            <div class="grid">
+                <div class="strategy-card">
+                    <h4>電商平台案例</h4>
+                    <ul>
+                        <li><strong>產品策略：</strong>個人化推薦系統</li>
+                        <li><strong>定價策略：</strong>動態定價機制</li>
+                        <li><strong>通路策略：</strong>全通路整合服務</li>
+                        <li><strong>推廣策略：</strong>社群行銷活動</li>
+                    </ul>
+                </div>
+                
+                <div class="strategy-card">
+                    <h4>實體零售案例</h4>
+                    <ul>
+                        <li><strong>產品策略：</strong>店內體驗區設計</li>
+                        <li><strong>定價策略：</strong>會員積分制度</li>
+                        <li><strong>通路策略：</strong>線上線下整合</li>
+                        <li><strong>推廣策略：</strong>互動式行銷活動</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Joseph Chen. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleContent(id) {
+            const element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tab");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        var acc = document.getElementsByClassName("accordion");
+        for (var i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
