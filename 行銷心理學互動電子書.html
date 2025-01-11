@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="行銷心理學互動電子書 - 深入探討消費者心理與行銷策略">
+    <title>行銷心理學互動電子書</title>
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --primary-hover: #45a049;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --bg-light: #f4f4f4;
+            --border-color: #dddddd;
+            --accent-color: #2196F3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        /* Header Styles */
+        .header {
+            background: var(--primary-color);
+            color: var(--text-light);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-list {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .theory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .theory-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .theory-item h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Button & Interactive Elements */
+        .btn {
+            background: var(--primary-color);
+            color: var(--text-light);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Carousel Styles */
+        .carousel {
+            position: relative;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(76, 175, 80, 0.8);
+            color: white;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-btn:hover {
+            background: var(--primary-color);
+        }
+
+        .prev-btn { left: 1rem; }
+        .next-btn { right: 1rem; }
+
+        /* Category Cards */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .category-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Quiz Styles */
+        .quiz-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .quiz-option {
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            background: var(--bg-light);
+        }
+
+        .quiz-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .correct {
+            background: #dff0d8;
+            color: #3c763d;
+            border-left: 4px solid #3c763d;
+        }
+
+        .incorrect {
+            background: #f2dede;
+            color: #a94442;
+            border-left: 4px solid #a94442;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-list {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section {
+                padding: 1rem;
+            }
+
+            .theory-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .carousel-btn {
+                padding: 0.5rem;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .expanded {
+            max-height: 1000px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>行銷心理學互動電子書</h1>
+        <nav>
+            <ul class="nav-list">
+                <li><a href="#introduction" class="nav-link">簡介</a></li>
+                <li><a href="#core-concepts" class="nav-link">核心概念</a></li>
+                <li><a href="#theories" class="nav-link">心理學理論</a></li>
+                <li><a href="#applications" class="nav-link">實務應用</a></li>
+                <li><a href="#case-studies" class="nav-link">案例分析</a></li>
+                <li><a href="#challenges" class="nav-link">挑戰與未來</a></li>
+                <li><a href="#quiz" class="nav-link">互動測驗</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- 簡介部分 -->
+        <section id="introduction" class="section">
+            <h2 class="section-title">行銷心理學簡介</h2>
+            <div class="content-card">
+                <p>行銷心理學（Marketing Psychology）是研究消費者心理與行為如何影響行銷策略的一門學科，結合心理學與行銷學的原理，幫助企業了解受眾需求並制定有效的行銷方案。它重視消費者在購買過程中的感知、情感、決策和行為模式。</p>
+                <button class="btn" data-toggle="intro-more">了解更多</button>
+                <div id="intro-more" class="hidden">
+                    <p>行銷心理學幫助企業：</p>
+                    <ul>
+                        <li>深入理解消費者的決策過程</li>
+                        <li>預測和影響購買行為</li>
+                        <li>建立有效的品牌溝通策略</li>
+                        <li>優化產品設計和定價策略</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 核心概念 -->
+        <section id="core-concepts" class="section">
+            <h2 class="section-title">核心概念</h2>
+            <div class="category-grid">
+                <div class="category-card">
+                    <h3>消費者行為</h3>
+                    <p>研究消費者如何決策、購買和使用產品或服務，包含購買動機、決策過程和使用體驗等方面。</p>
+                </div>
+                <div class="category-card">
+                    <h3>心理觸發</h3>
+                    <p>探討能引發購買行為的心理因素，包括情感需求、社交需求和自我實現等動機。</p>
+                </div>
+                <div class="category-card">
+                    <h3>價值感知</h3>
+                    <p>分析消費者如何評估產品價值，影響其願付價格的心理因素。</p>
+                </div>
+                <div class="category-card">
+                    <h3>決策偏誤</h3>
+                    <p>研究消費者在購買過程中的非理性行為和認知偏差。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 心理學理論 -->
+        <section id="theories" class="section">
+            <h2 class="section-title">行銷心理學理論</h2>
+            <div class="theory-grid">
+                <div class="theory-item">
+                    <h3>馬斯洛需求層次理論</h3>
+                    <p>根據不同層次需求（生理、安全、社交、尊重、自我實現）設計行銷策略，滿足目標受眾的特定需求。</p>
+                </div>
+                <div class="theory-item">
+                    <h3>情感行銷理論</h3>
+                    <p>利用情感連結觸發購買慾望，通過故事營銷、懷舊營銷等方式建立品牌認同。</p>
+                </div>
+                <div class="theory-item">
+                    <h3>社會認同理論</h3>
+                    <p>運用群體影響力，通過社會證明、意見領袖等方式提升產品認可度。</p>
+                </div>
+                <div class="theory-item">
+                    <h3>損失規避效應</h3>
+                    <p>利用人們對損失的厭惡感，通過限時優惠、稀缺性營銷等手段促進購買。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 實務應用 -->
+        <section id="applications" class="section">
+            <h2 class="section-title">行銷心理學應用</h2>
+            <div class="theory-grid">
+                <div class="theory-item">
+                    <h3>色彩心理學</h3>
+                    <p>不同顏色影響消費者情緒和行為：</p>
+                    <ul>
+                        <li>紅色：刺激、熱情</li>
+                        <li>藍色：信任、專業</li>
+                        <li>綠色：健康、自然</li>
+                    </ul>
+                </div>
+                <div class="theory-item">
+                    <h3>價格策略</h3>
+                    <p>運用心理定價技巧：</p>
+                    <ul>
+                        <li>尾數定價（如9.99）</li>
+                        <li>捆綁定價</li>
+                        <li>比較定價</li>
+                    </ul>
+                </div>
+                <div class="theory-item">
+                    <h3>社交證明</h3>
+                    <p>建立產品信任度：</p>
+                    <ul>
+                        <li>用戶評價展示</li>
+                        <li>銷售數據展示</li>
+                        <li>專家推薦</li>
+                    </ul>
+                </div>
+                <div class="theory-item">
+                    <h3>個性化行銷</h3>
+                    <p>根據用戶行為制定策略：</p>
+                    <ul>
+                        <li>個性化推薦</li>
+                        <li>動態定價</li</antArtifact>
