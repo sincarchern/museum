@@ -1,0 +1,183 @@
+import React, { useState } from 'react';
+import { ChevronDown, ChevronRight, BookOpen } from 'lucide-react';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+
+const EBook = () => {
+  const [expandedChapter, setExpandedChapter] = useState(null);
+  const [expandedSection, setExpandedSection] = useState(null);
+
+  const chapters = [
+    {
+      title: "第一章：消費者行為概述",
+      content: "消費者行為是指個人或群體在選擇、購買、使用及處理產品、服務、經驗或理念的過程中，所表現出的行為和決策過程。",
+      sections: [
+        {
+          title: "消費者行為的特徵",
+          content: [
+            "多樣性：不同消費者因個人特徵而表現不同行為",
+            "過程性：從需求產生到購後評估的完整過程",
+            "影響因素廣泛：受多方面因素影響",
+            "動態性：隨時間和環境變化而改變"
+          ]
+        },
+        {
+          title: "案例分析",
+          content: "案例：iPhone用戶行為分析\n\n蘋果公司深入理解消費者行為特徵：\n- 多樣性：針對不同年齡層推出不同價位產品\n- 過程性：從期待新品發布到實際購買使用\n- 影響因素：品牌形象、社會認同感等\n- 動態性：不斷推出新功能適應用戶需求變化"
+        }
+      ]
+    },
+    {
+      title: "第二章：消費者行為理論",
+      content: "消費者行為理論包含多個學科視角，從不同層面解釋消費行為的形成。",
+      sections: [
+        {
+          title: "主要理論框架",
+          content: [
+            "經濟學理論：理性選擇與效用最大化",
+            "心理學理論：需求層次與動機理論",
+            "社會學理論：群體影響與文化因素",
+            "行為學理論：學習與條件反射"
+          ]
+        },
+        {
+          title: "案例分析",
+          content: "案例：星巴克消費者行為分析\n\n理論應用：\n- 經濟學：高價位策略與品質聯繫\n- 心理學：提供第三空間滿足社交需求\n- 社會學：打造精品咖啡文化群體認同\n- 行為學：會員積分計劃強化購買行為"
+        }
+      ]
+    },
+    {
+      title: "第三章：影響因素分析",
+      content: "消費者行為受到多方面因素的綜合影響。",
+      sections: [
+        {
+          title: "關鍵影響因素",
+          content: [
+            "文化因素：價值觀與社會規範",
+            "社會因素：家庭與參考群體",
+            "個人因素：年齡、職業、生活方式",
+            "心理因素：動機、態度與學習"
+          ]
+        },
+        {
+          title: "案例分析",
+          content: "案例：優衣庫營銷策略分析\n\n影響因素應用：\n- 文化：適應不同地區消費習慣\n- 社會：強調家庭裝系列\n- 個人：針對不同年齡層設計\n- 心理：品質與價格平衡的定位"
+        }
+      ]
+    },
+    {
+      title: "第四章：消費者行為類型",
+      content: "消費者表現出不同類型的購買行為模式。",
+      sections: [
+        {
+          title: "行為類型分類",
+          content: [
+            "衝動型購買：即興決策",
+            "計劃型購買：理性比較",
+            "習慣型購買：重複性選擇",
+            "多樣化尋求：追求新鮮感"
+          ]
+        },
+        {
+          title: "案例分析",
+          content: "案例：電商平台雙11購物節分析\n\n行為類型表現：\n- 衝動購買：限時搶購活動\n- 計劃購買：預售清單準備\n- 習慣購買：年度固定補貨\n- 多樣化：新品牌嘗試"
+        }
+      ]
+    },
+    {
+      title: "第五章：應用與展望",
+      content: "消費者行為研究在各領域的實際應用。",
+      sections: [
+        {
+          title: "應用領域",
+          content: [
+            "商業營銷：提升銷售效果",
+            "公共政策：推動行為改變",
+            "行為經濟：預測市場趨勢",
+            "數字營銷：個性化推薦"
+          ]
+        },
+        {
+          title: "案例分析",
+          content: "案例：淘寶個性化推薦系統分析\n\n應用實踐：\n- 數據收集：瀏覽與購買記錄\n- 行為分析：興趣偏好識別\n- 算法優化：實時推薦調整\n- 效果評估：轉化率提升"
+        }
+      ]
+    }
+  ];
+
+  const toggleChapter = (index) => {
+    setExpandedChapter(expandedChapter === index ? null : index);
+    setExpandedSection(null);
+  };
+
+  const toggleSection = (sectionIndex) => {
+    setExpandedSection(expandedSection === sectionIndex ? null : sectionIndex);
+  };
+
+  return (
+    <Card className="w-full max-w-4xl">
+      <CardHeader className="bg-blue-50">
+        <CardTitle className="flex items-center gap-2">
+          <BookOpen className="h-6 w-6" />
+          消費者行為互動電子書
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="p-6">
+        <div className="space-y-4">
+          {chapters.map((chapter, chapterIndex) => (
+            <div key={chapterIndex} className="border rounded-lg">
+              <button
+                onClick={() => toggleChapter(chapterIndex)}
+                className="w-full p-4 text-left flex items-center justify-between hover:bg-gray-50"
+              >
+                <span className="font-medium">{chapter.title}</span>
+                {expandedChapter === chapterIndex ? (
+                  <ChevronDown className="h-5 w-5" />
+                ) : (
+                  <ChevronRight className="h-5 w-5" />
+                )}
+              </button>
+              
+              {expandedChapter === chapterIndex && (
+                <div className="p-4 bg-gray-50">
+                  <p className="mb-4">{chapter.content}</p>
+                  
+                  {chapter.sections.map((section, sectionIndex) => (
+                    <div key={sectionIndex} className="mb-4">
+                      <button
+                        onClick={() => toggleSection(sectionIndex)}
+                        className="w-full p-2 text-left flex items-center justify-between bg-white rounded-md hover:bg-gray-100"
+                      >
+                        <span className="font-medium">{section.title}</span>
+                        {expandedSection === sectionIndex ? (
+                          <ChevronDown className="h-4 w-4" />
+                        ) : (
+                          <ChevronRight className="h-4 w-4" />
+                        )}
+                      </button>
+                      
+                      {expandedSection === sectionIndex && (
+                        <div className="p-4 bg-white mt-2 rounded-md">
+                          {Array.isArray(section.content) ? (
+                            <ul className="list-disc pl-5 space-y-2">
+                              {section.content.map((item, i) => (
+                                <li key={i}>{item}</li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <p className="whitespace-pre-line">{section.content}</p>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default EBook;
