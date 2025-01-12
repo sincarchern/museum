@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>經濟學理論與消費者行為</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+    }
+    header {
+      background: #0078d4;
+      color: #fff;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+    section {
+      padding: 1.5rem;
+      margin: 1rem auto;
+      background: #fff;
+      border-radius: 8px;
+      max-width: 800px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    button {
+      display: block;
+      margin: 1rem auto;
+      padding: 0.5rem 1rem;
+      background: #0078d4;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:hover {
+      background: #005fa3;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>經濟學理論與消費者行為</h1>
+    <p>探索消費者決策的理性與非理性</p>
+  </header>
+
+  <section id="chapter1">
+    <h2>1. 經濟學理論中的消費者行為</h2>
+    <p>效用理論、預算約束、替代效應與互補效應是經濟學分析消費者行為的核心理論基礎。</p>
+    <button onclick="toggleContent('content1')">更多內容</button>
+    <div id="content1" class="hidden">
+      <ul>
+        <li><strong>效用理論：</strong>消費者追求效用最大化，邊際效用遞減。</li>
+        <li><strong>預算約束：</strong>消費行為受限於收入與價格。</li>
+        <li><strong>替代效應：</strong>價格上升時，消費者會選擇替代品。</li>
+        <li><strong>互補效應：</strong>互補品需求相互影響，例如汽車與汽油。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. 消費者行為研究</h2>
+    <p>心理、社會與情境因素深刻影響消費者的選擇。</p>
+    <button onclick="toggleContent('content2')">更多內容</button>
+    <div id="content2" class="hidden">
+      <ul>
+        <li><strong>心理因素：</strong>動機、態度與認知影響購買決策。</li>
+        <li><strong>社會影響：</strong>參考群體與文化對消費行為的作用。</li>
+        <li><strong>情境因素：</strong>購買環境與促銷活動的影響。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. 結合應用</h2>
+    <p>經濟學理論與消費者行為研究的結合，有助於制定商業與政策策略。</p>
+    <button onclick="toggleContent('content3')">更多內容</button>
+    <div id="content3" class="hidden">
+      <ul>
+        <li><strong>定價策略：</strong>運用需求彈性來優化價格設定。</li>
+        <li><strong>行銷策略：</strong>結合行為經濟學設計促銷方式。</li>
+        <li><strong>公共政策：</strong>以誘因設計推動健康與永續消費。</li>
+      </ul>
+    </div>
+  </section>
+
+  <script>
+    function toggleContent(id) {
+      const content = document.getElementById(id);
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+      } else {
+        content.classList.add('hidden');
+      }
+    }
+  </script>
+  <footer>
+        <p>&copy; 2024 消費者行為| Joseph Chen. All rights reserved.</p>
+        </p>
+    </footer>
+</body>
+</html>
