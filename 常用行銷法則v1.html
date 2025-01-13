@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行銷法則動態講義</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
+        .section { margin: 20px 0; border-bottom: 1px solid #ccc; padding-bottom: 10px; }
+        .toggle { cursor: pointer; color: blue; text-decoration: underline; }
+        .content { display: none; margin-top: 10px; }
+        h1 { text-align: center; color: #333; }
+    </style>
+    <script>
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            content.style.display = content.style.display === "none" ? "block" : "none";
+        }
+    </script>
+</head>
+<body>
+    <h1>行銷法則動態講義</h1>
+
+    <div class="section">
+        <h2>1. 4P法則</h2>
+        <span class="toggle" onclick="toggleContent('4p')">點擊展開/收起詳細說明</span>
+        <div id="4p" class="content">
+            <p><b>產品 (Product)：</b> 提供符合市場需求的高品質產品。</p>
+            <p><b>價格 (Price)：</b> 設定具有競爭力且能滿足利潤需求的價格。</p>
+            <p><b>通路 (Place)：</b> 確保產品能夠通過適當的渠道觸達目標客群。</p>
+            <p><b>促銷 (Promotion)：</b> 使用廣告、折扣、社交媒體等工具推廣產品。</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>2. STP法則</h2>
+        <span class="toggle" onclick="toggleContent('stp')">點擊展開/收起詳細說明</span>
+        <div id="stp" class="content">
+            <p><b>市場細分 (Segmentation)：</b> 將市場分為不同的細分群體。</p>
+            <p><b>目標市場 (Targeting)：</b> 選擇最有潛力的細分市場進行主攻。</p>
+            <p><b>定位 (Positioning)：</b> 在目標市場中塑造品牌獨特性。</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>3. AIDA法則</h2>
+        <span class="toggle" onclick="toggleContent('aida')">點擊展開/收起詳細說明</span>
+        <div id="aida" class="content">
+            <p><b>注意 (Attention)：</b> 吸引消費者的注意力。</p>
+            <p><b>興趣 (Interest)：</b> 引發消費者對產品的興趣。</p>
+            <p><b>慾望 (Desire)：</b> 激發消費者的購買慾望。</p>
+            <p><b>行動 (Action)：</b> 促成購買行動。</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>4. 80/20法則（帕雷托法則）</h2>
+        <span class="toggle" onclick="toggleContent('pareto')">點擊展開/收起詳細說明</span>
+        <div id="pareto" class="content">
+            <p>80%的收益來自20%的核心客戶，應重點服務這部分客戶。</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>5. 損失趨避法則</h2>
+        <span class="toggle" onclick="toggleContent('loss-aversion')">點擊展開/收起詳細說明</span>
+        <div id="loss-aversion" class="content">
+            <p>消費者更害怕失去而非獲得，因此行銷活動可利用限時優惠或數量稀缺。</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>6. 社會認同法則</h2>
+        <span class="toggle" onclick="toggleContent('social-proof')">點擊展開/收起詳細說明</span>
+        <div id="social-proof" class="content">
+            <p>人們更傾向於相信他人已經驗證過的選擇，例如客戶評價和見證。</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>7. 長尾理論</h2>
+        <span class="toggle" onclick="toggleContent('long-tail')">點擊展開/收起詳細說明</span>
+        <div id="long-tail" class="content">
+            <p>在大數據時代，冷門產品的總需求可能超過熱門產品，應重視利基市場。</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>8. 魚骨法則</h2>
+        <span class="toggle" onclick="toggleContent('fishbone')">點擊展開/收起詳細說明</span>
+        <div id="fishbone" class="content">
+            <p>找出行銷中的問題根源並進行優化，例如流量低迷或轉化率不足。</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>9. 6C法則</h2>
+        <span class="toggle" onclick="toggleContent('6c')">點擊展開/收起詳細說明</span>
+        <div id="6c" class="content">
+            <p><b>內容 (Content)：</b> 製作吸引人的內容。</p>
+            <p><b>社群 (Community)：</b> 建立忠實的客戶群體。</p>
+            <p><b>轉化 (Conversion)：</b> 將瀏覽者轉化為購買者。</p>
+            <p><b>連結 (Connection)：</b> 與消費者保持互動。</p>
+            <p><b>溝通 (Communication)：</b> 提供清晰的品牌訊息。</p>
+            <p><b>顧客 (Customer)：</b> 持續滿足顧客需求。</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>10. 口碑效應</h2>
+        <span class="toggle" onclick="toggleContent('word-of-mouth')">點擊展開/收起詳細說明</span>
+        <div id="word-of-mouth" class="content">
+            <p>透過正面評價和推薦提升品牌聲譽。</p>
+        </div>
+    </div>
+  <footer>
+        <p>&copy; 2024 行銷法則講義| Joseph Chen. All rights reserved.</p>
+        </p>
+    </footer>
+    <script>
+    function checkPassword() {
+      var password = prompt("請輸入密碼以訪問該頁面:");
+      if (password === "123") {
+        alert("密碼正確，歡迎進入！");
+      } else {
+        alert("密碼錯誤，請再試一次。");
+        window.location.href = "about:blank";  // 密碼錯誤則跳轉
+      }
+    }
+
+    checkPassword(); // 在頁面加載時立即檢查密碼
+  </script>
+</body>,,
+</html>
+
+</body>
+</html>
