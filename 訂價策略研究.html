@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訂價策略指南</title>
+    <style>
+        body {
+            font-family: 'Microsoft JhengHei', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .book-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .chapter {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            display: none;
+        }
+        .chapter.active {
+            display: block;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .toc {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .toc a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+            padding: 5px 0;
+        }
+        .toc a:hover {
+            color: #4CAF50;
+        }
+        .progress-tracker {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        #progress {
+            height: 100%;
+            background: #4CAF50;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="book-container">
+        <h1>訂價策略指南</h1>
+        <p>訂價策略是影響商品或服務銷售成敗的關鍵因素，以下是一些常見的訂價策略，適合不同情境使用：</p>
+        <div class="toc">
+            <h2>目錄</h2>
+            <a href="#" onclick="showChapter(1)">1. 成本導向訂價</a>
+            <a href="#" onclick="showChapter(2)">2. 價值導向訂價</a>
+            <a href="#" onclick="showChapter(3)">3. 競爭導向訂價</a>
+            <a href="#" onclick="showChapter(4)">4. 心理定價</a>
+            <a href="#" onclick="showChapter(5)">5. 促銷定價</a>
+            <a href="#" onclick="showChapter(6)">6. 區分訂價</a>
+            <a href="#" onclick="showChapter(7)">7. 訂閱制或分期付款</a>
+        </div>
+        <div id="chapter1" class="chapter active">
+            <h2>1. 成本導向訂價</h2>
+            <p>成本加成訂價：根據產品成本加上一個固定比例的利潤訂價。</p>
+            <p>適合對成本掌握度高的產品。</p>
+            <p>目標利潤訂價：設定預期的利潤目標，然後計算所需的價格。</p>
+            <p>適合長期專案或高額投資的產品。</p>
+        </div>
+        <div id="chapter2" class="chapter">
+            <h2>2. 價值導向訂價</h2>
+            <p>根據顧客對產品價值的認知進行訂價。</p>
+            <p>適合差異化明顯且能帶來高附加價值的產品，例如藝術品或專業服務。</p>
+        </div>
+        <div id="chapter3" class="chapter">
+            <h2>3. 競爭導向訂價</h2>
+            <p>根據競爭對手的價格來制定自己的價格。</p>
+            <ul>
+                <li>低於競爭者：吸引價格敏感型顧客。</li>
+                <li>與競爭者相同：強調產品品質或服務差異。</li>
+                <li>高於競爭者：塑造高端形象。</li>
+            </ul>
+        </div>
+        <div id="chapter4" class="chapter">
+            <h2>4. 心理定價</h2>
+            <p>尾數定價：如 $99 或 $199，利用小數點或尾數吸引顧客。</p>
+            <p>基於參考點：提供高價選項來提升中價選項的吸引力。</p>
+            <p>分段定價：如按不同功能或服務層級分層定價。</p>
+        </div>
+        <div id="chapter5" class="chapter">
+            <h2>5. 促銷定價</h2>
+            <p>折扣或限時優惠：增加短期銷售量。</p>
+            <p>綁定銷售：多產品或服務打包銷售。</p>
+        </div>
+        <div id="chapter6" class="chapter">
+            <h2>6. 區分訂價</h2>
+            <p>地區差異：根據地區經濟水平差異訂價。</p>
+            <p>時間差異：如淡旺季價格不同。</p>
+            <p>顧客類型：如學生、會員或企業優惠。</p>
+        </div>
+        <div id="chapter7" class="chapter">
+            <h2>7. 訂閱制或分期付款</h2>
+            <p>提供訂閱或分期方案，降低單次支付壓力，提升顧客留存率。</p>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="previousChapter()">上一章</button>
+            <button onclick="nextChapter()">下一章</button>
+        </div>
+        <div class="progress-tracker">
+            <h3>學習進度</h3>
+            <div class="progress-bar">
+                <div id="progress" style="width: 0%"></div>
+            </div>
+            <p id="progress-text">已完成: 0%</p>
+        </div>
+    </div>
+    <script>
+        let currentChapter = 1;
+        const totalChapters = 7;
+
+        function showChapter(number) {
+            document.querySelectorAll('.chapter').forEach(chapter => {
+                chapter.classList.remove('active');
+            });
+            document.getElementById(`chapter${number}`).classList.add('active');
+            currentChapter = number;
+            updateProgress();
+        }
+
+        function nextChapter() {
+            if (currentChapter < totalChapters) {
+                showChapter(currentChapter + 1);
+            }
+        }
+
+        function previousChapter() {
+            if (currentChapter > 1) {
+                showChapter(currentChapter - 1);
+            }
+        }
+
+        function updateProgress() {
+            const progress = (currentChapter / totalChapters) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = `已完成: ${Math.round(progress)}%`;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            updateProgress();
+        });
+    </script>
+    
+      <footer>
+        <p>&copy; 2024 訂價策略研究| Joseph Chen. All rights reserved.</p>
+        </p>
+    </footer>
+    <script>
+    function checkPassword() {
+      var password = prompt("請輸入密碼以訪問該頁面:");
+      if (password === "123") {
+        alert("密碼正確，歡迎進入！");
+      } else {
+        alert("密碼錯誤，請再試一次。");
+        window.location.href = "about:blank";  // 密碼錯誤則跳轉
+      }
+    }
+
+    checkPassword(); // 在頁面加載時立即檢查密碼
+  </script>
+<
+</body>
+</html>
