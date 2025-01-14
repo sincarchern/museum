@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>專案管理方法比較</title>
+    <style>
+        body {
+            font-family: 'Microsoft JhengHei', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            color: #666;
+        }
+        .tab.active {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+            margin-bottom: -2px;
+        }
+        .content {
+            display: none;
+            padding: 20px;
+            background: #fff;
+            border-radius: 4px;
+        }
+        .content.active {
+            display: block;
+        }
+        .method-card {
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .method-card h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .comparison-table th {
+            background-color: #3498db;
+            color: white;
+        }
+        .comparison-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>專案管理方法比較</h1>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showContent('overview')">概述</button>
+            <button class="tab" onclick="showContent('comparison')">詳細比較</button>
+            <button class="tab" onclick="showContent('recommendations')">選擇建議</button>
+        </div>
+
+        <div id="overview" class="content active">
+            <div class="method-card">
+                <h3>瀑布式 (Waterfall)</h3>
+                <p>傳統線性開發模式，按照固定順序進行，適合需求明確的專案。</p>
+                <p>特點：嚴格的階段劃分、完整的文檔、清晰的里程碑</p>
+            </div>
+            
+            <div class="method-card">
+                <h3>敏捷式 (Agile)</h3>
+                <p>迭代式開發模式，強調靈活性和持續改進，適合需求變動較大的專案。</p>
+                <p>特點：快速迭代、持續交付、客戶參與</p>
+            </div>
+            
+            <div class="method-card">
+                <h3>混合式 (Hybrid)</h3>
+                <p>結合瀑布式和敏捷式的優點，根據專案需求靈活調整管理方式。</p>
+                <p>特點：彈性調整、階段性規劃、綜合優勢</p>
+            </div>
+            
+            <div class="method-card">
+                <h3>川流式 (Scrum)</h3>
+                <p>敏捷開發的具體實踐方法，強調團隊自組織和持續改進。</p>
+                <p>特點：Sprint循環、每日站會、團隊協作</p>
+            </div>
+        </div>
+
+        <div id="comparison" class="content">
+            <table class="comparison-table">
+                <tr>
+                    <th>比較項目</th>
+                    <th>瀑布式</th>
+                    <th>敏捷式</th>
+                    <th>混合式</th>
+                    <th>川流式</th>
+                </tr>
+                <tr>
+                    <td>流程特點</td>
+                    <td>線性順序進行</td>
+                    <td>迭代循環開發</td>
+                    <td>依階段採用不同方法</td>
+                    <td>Sprint迭代開發</td>
+                </tr>
+                <tr>
+                    <td>需求變更</td>
+                    <td>較難調整</td>
+                    <td>容易適應</td>
+                    <td>階段性調整</td>
+                    <td>靈活調整</td>
+                </tr>
+                <tr>
+                    <td>團隊合作</td>
+                    <td>明確分工</td>
+                    <td>緊密協作</td>
+                    <td>彈性調整</td>
+                    <td>自組織團隊</td>
+                </tr>
+                <tr>
+                    <td>交付方式</td>
+                    <td>專案結束時</td>
+                    <td>持續交付</td>
+                    <td>階段性交付</td>
+                    <td>Sprint結束交付</td>
+                </tr>
+                <tr>
+                    <td>風險管理</td>
+                    <td>後期集中顯現</td>
+                    <td>持續監控</td>
+                    <td>分階段管理</td>
+                    <td>迭代中識別</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="recommendations" class="content">
+            <h2>選擇建議</h2>
+            <div class="method-card">
+                <h3>適合瀑布式的情況</h3>
+                <ul>
+                    <li>需求明確且穩定的專案</li>
+                    <li>有明確的交付期限和預算</li>
+                    <li>專案規模較大，需要嚴格控制</li>
+                </ul>
+            </div>
+            
+            <div class="method-card">
+                <h3>適合敏捷式的情況</h3>
+                <ul>
+                    <li>需求經常變動的專案</li>
+                    <li>需要快速交付和驗證的專案</li>
+                    <li>創新型專案</li>
+                </ul>
+            </div>
+            
+            <div class="method-card">
+                <h3>適合混合式的情況</h3>
+                <ul>
+                    <li>大型複雜專案</li>
+                    <li>不同階段有不同需求的專案</li>
+                    <li>需要平衡穩定性和靈活性的專案</li>
+                </ul>
+            </div>
+            
+            <div class="method-card">
+                <h3>適合川流式的情況</h3>
+                <ul>
+                    <li>軟體開發專案</li>
+                    <li>需要持續改進的專案</li>
+                    <li>團隊規模較小的專案</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showContent(contentId) {
+            // Hide all content
+            document.querySelectorAll('.content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected content
+            document.getElementById(contentId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
