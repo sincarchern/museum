@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .title {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .strategy-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .strategy-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 300px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .strategy-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .strategy-title {
+            color: #2c3e50;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .strategy-content {
+            color: #34495e;
+        }
+
+        .value-points {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .value-points li {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .value-points li:before {
+            content: "•";
+            color: #3498db;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .result-box {
+            background: #3498db;
+            color: white;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .cp-value {
+            background: #2ecc71;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">企業價值提升策略</h1>
+        
+        <div class="strategy-container">
+            <div class="strategy-box">
+                <h2 class="strategy-title">傳統行銷策略</h2>
+                <div class="strategy-content">
+                    <ul class="value-points">
+                        <li>折扣優惠</li>
+                        <li>促銷活動</li>
+                        <li>低價競爭</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="strategy-box">
+                <h2 class="strategy-title">核心價值提升</h2>
+                <div class="strategy-content">
+                    <ul class="value-points">
+                        <li>外觀設計優化</li>
+                        <li>包裝質感提升</li>
+                        <li>產品精緻度</li>
+                        <li>原料品質把關</li>
+                        <li>口味研發創新</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="strategy-box">
+                <h2 class="strategy-title">消費體驗優化</h2>
+                <div class="strategy-content">
+                    <ul class="value-points">
+                        <li>服務態度提升</li>
+                        <li>作業效率優化</li>
+                        <li>環境衛生維護</li>
+                        <li>整體體驗提升</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-box">
+            <h2>預期成果</h2>
+            <ul class="value-points">
+                <li>市場佔有率提升</li>
+                <li>企業利潤增加</li>
+                <li>品牌價值建立</li>
+                <li>良好口碑累積</li>
+            </ul>
+        </div>
+
+        <div class="cp-value">
+            最終目標：達到最佳性價比 (CP值)
+            = 合理價格 + 優質價值
+        </div>
+    </div>
+</body>
+</html>
