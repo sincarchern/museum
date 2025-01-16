@@ -8,209 +8,218 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: "Microsoft JhengHei", Arial, sans-serif;
         }
 
         body {
             background: #f0f2f5;
             padding: 15px;
-            max-width: 600px;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 1000px;
             margin: 0 auto;
+            padding: 10px;
         }
 
         .title {
             text-align: center;
-            color: #2c3e50;
-            margin: 20px 0;
-            font-size: 22px;
+            color: #1a73e8;
+            margin: 20px 0 30px;
+            font-size: clamp(24px, 5vw, 32px);
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #5f6368;
+            line-height: 1.6;
+        }
+
+        .strategy-container {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         }
 
         .strategy-box {
             background: white;
             border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .strategy-box:hover {
+            transform: translateY(-5px);
         }
 
         .strategy-title {
-            color: #2c3e50;
-            font-size: 18px;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #3498db;
-        }
-
-        .value-item {
-            padding: 12px;
-            margin: 8px 0;
-            background: #f8f9fa;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .value-item:active {
-            background: #e9ecef;
-        }
-
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-        }
-
-        .modal-content {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            padding: 20px;
-            border-radius: 20px 20px 0 0;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .modal-title {
-            font-size: 18px;
+            color: #1a73e8;
+            font-size: 20px;
             margin-bottom: 15px;
-            color: #2c3e50;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1a73e8;
         }
 
-        .modal-close {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: #666;
-            cursor: pointer;
+        .strategy-content {
+            color: #34495e;
         }
 
-        .result-box {
-            background: #3498db;
-            color: white;
-            padding: 15px;
-            border-radius: 12px;
-            margin: 15px 0;
-        }
-
-        .cp-value {
-            background: #2ecc71;
-            color: white;
-            padding: 15px;
-            border-radius: 12px;
-            text-align: center;
-            font-weight: bold;
-            margin-top: 15px;
-        }
-
-        .example-list {
+        .value-points {
+            list-style: none;
             margin-top: 10px;
         }
 
-        .example-list li {
-            margin: 8px 0;
-            padding-left: 15px;
+        .value-points li {
+            margin: 12px 0;
+            padding-left: 25px;
             position: relative;
+            line-height: 1.5;
         }
 
-        .example-list li:before {
-            content: "•";
+        .value-points li:before {
+            content: "→";
+            color: #1a73e8;
             position: absolute;
             left: 0;
-            color: #3498db;
+        }
+
+        .example {
+            background: #e8f0fe;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #1a73e8, #1557b0);
+            color: white;
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .result-box h2 {
+            margin-bottom: 15px;
+        }
+
+        .cp-value {
+            background: #34a853;
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 25px;
+            text-align: center;
+            font-weight: bold;
+            line-height: 1.6;
+        }
+
+        footer {
+            background-color: #1a73e8;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 40px;
+            border-radius: 0 0 12px 12px;
+        }
+
+        @media (max-width: 768px) {
+            .strategy-box {
+                margin-bottom: 15px;
+            }
+            
+            .title {
+                margin: 15px 0 20px;
+            }
+            
+            .strategy-container {
+                gap: 15px;
+            }
         }
     </style>
 </head>
 <body>
-    <h1 class="title">企業價值提升策略</h1>
-    
-    <div class="strategy-box">
-        <h2 class="strategy-title">傳統行銷策略</h2>
-        <div class="value-item" onclick="showModal('折扣優惠', '折扣策略可以快速刺激銷售：<br><ul class=\'example-list\'><li>限時特價促銷</li><li>套餐組合優惠</li><li>會員專屬折扣</li><li>節慶特別優惠</li></ul>')">
-            折扣優惠 →
+    <div class="container">
+        <h1 class="title">企業價值提升策略</h1>
+        
+        <p class="intro">
+            透過全方位的策略規劃，提升企業競爭力與品牌價值，<br>
+            建立長期永續經營的基礎。
+        </p>
+        
+        <div class="strategy-container">
+            <div class="strategy-box">
+                <h2 class="strategy-title">傳統行銷策略</h2>
+                <div class="strategy-content">
+                    <ul class="value-points">
+                        <li>折扣優惠：季節性促銷、會員專屬折扣</li>
+                        <li>促銷活動：限時特賣、買一送一</li>
+                        <li>低價競爭：價格優勢、量販優惠</li>
+                    </ul>
+                    <div class="example">
+                        案例：全家便利商店推出第二件商品半價活動，
+                        成功提升20%來客數
+                    </div>
+                </div>
+            </div>
+
+            <div class="strategy-box">
+                <h2 class="strategy-title">核心價值提升</h2>
+                <div class="strategy-content">
+                    <ul class="value-points">
+                        <li>外觀設計優化：時尚美觀、符合潮流</li>
+                        <li>包裝質感提升：環保材質、精緻包裝</li>
+                        <li>產品精緻度：工藝提升、細節要求</li>
+                        <li>原料品質把關：嚴選食材、品質認證</li>
+                        <li>口味研發創新：獨特配方、在地口味</li>
+                    </ul>
+                    <div class="example">
+                        案例：星巴克堅持使用阿拉比卡咖啡豆，
+                        打造優質咖啡品牌形象
+                    </div>
+                </div>
+            </div>
+
+            <div class="strategy-box">
+                <h2 class="strategy-title">消費體驗優化</h2>
+                <div class="strategy-content">
+                    <ul class="value-points">
+                        <li>服務態度提升：專業訓練、顧客關懷</li>
+                        <li>作業效率優化：標準流程、快速服務</li>
+                        <li>環境衛生維護：定期清潔、舒適空間</li>
+                        <li>整體體驗提升：氛圍營造、加值服務</li>
+                    </ul>
+                    <div class="example">
+                        案例：誠品書店打造舒適閱讀環境，
+                        提供文化休閒新體驗
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="value-item" onclick="showModal('促銷活動', '多樣化的促銷活動能提升品牌曝光：<br><ul class=\'example-list\'><li>買一送一活動</li><li>集點換購方案</li><li>節慶主題活動</li><li>線上線下整合行銷</li></ul>')">
-            促銷活動 →
+
+        <div class="result-box">
+            <h2>預期成果</h2>
+            <ul class="value-points">
+                <li>市場佔有率提升：擴大客戶群，提升品牌影響力</li>
+                <li>企業利潤增加：營收成長，獲利提升</li>
+                <li>品牌價值建立：塑造品牌特色，提升市場競爭力</li>
+                <li>良好口碑累積：客戶推薦，永續經營</li>
+            </ul>
         </div>
+
+        <div class="cp-value">
+            最終目標：達到最佳性價比 (CP值)<br>
+            = 合理價格 + 優質價值<br>
+            創造企業與消費者雙贏
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Joseph Chen. All rights reserved.</p>
+        </footer>
     </div>
-
-    <div class="strategy-box">
-        <h2 class="strategy-title">核心價值提升</h2>
-        <div class="value-item" onclick="showModal('產品設計', '優質的產品設計包含：<br><ul class=\'example-list\'><li>時尚美觀的外型設計</li><li>精緻的包裝材質</li><li>人體工學考量</li><li>環保永續理念</li></ul>')">
-            產品設計與包裝 →
-        </div>
-        <div class="value-item" onclick="showModal('品質把關', '嚴格的品質管理制度：<br><ul class=\'example-list\'><li>原料源頭管理</li><li>生產流程標準化</li><li>品質檢驗制度</li><li>顧客回饋追蹤</li></ul>')">
-            品質把關 →
-        </div>
-    </div>
-
-    <div class="strategy-box">
-        <h2 class="strategy-title">消費體驗</h2>
-        <div class="value-item" onclick="showModal('服務品質', '優質服務體驗要素：<br><ul class=\'example-list\'><li>專業服務態度</li><li>即時回應機制</li><li>個人化服務</li><li>售後服務保障</li></ul>')">
-            服務品質 →
-        </div>
-        <div class="value-item" onclick="showModal('環境與效率', '良好的消費環境：<br><ul class=\'example-list\'><li>整潔的場所維護</li><li>舒適的空間設計</li><li>快速的服務流程</li><li>便利的支付方式</li></ul>')">
-            環境與效率 →
-        </div>
-    </div>
-
-    <div class="result-box">
-        <div class="value-item" onclick="showModal('預期成果', '全方位提升帶來的效益：<br><ul class=\'example-list\'><li>客戶忠誠度提升</li><li>品牌形象強化</li><li>市場佔有率增加</li><li>營業額持續成長</li><li>口碑行銷效應</li></ul>')">
-            預期成果 →
-        </div>
-    </div>
-
-    <div class="cp-value" onclick="showModal('最佳性價比', '如何達到最佳性價比：<br><ul class=\'example-list\'><li>合理定價策略</li><li>價值感知提升</li><li>競爭優勢建立</li><li>市場定位精準</li><li>持續創新發展</li></ul>')">
-        最佳性價比 (CP值) →
-    </div>
-
-    <!-- Modal -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">×</button>
-            <h3 class="modal-title" id="modalTitle"></h3>
-            <div id="modalContent"></div>
-        </div>
-    </div>
-
-    <script>
-        function showModal(title, content) {
-            document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalContent').innerHTML = content;
-            document.getElementById('modal').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal when clicking outside
-        document.getElementById('modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-    </script>
-          footer {
-      background-color: black; /* 背景色設為黑色 */
-      color: white;           /* 文字設為白色 */
-      text-align: center;     /* 文字置中 */
-      padding: 10px 0;        /* 上下內邊距 */
-    }
-<footer>
-  <p>&copy; 2024 Joseph Chen. All rights reserved.</p>
-</footer>
 </body>
 </html>
