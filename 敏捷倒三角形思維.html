@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>敏捷倒三角思維與早餐店經營</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f8f8f8;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        .section {
+            background: #ffffff;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .accordion {
+            cursor: pointer;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            text-align: left;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            outline: none;
+            transition: background-color 0.3s ease;
+        }
+        .accordion:hover {
+            background-color: #0056b3;
+        }
+        .panel {
+            display: none;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-left: 3px solid #007BFF;
+            margin: 5px 0;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const acc = document.querySelectorAll(".accordion");
+            acc.forEach(btn => {
+                btn.addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    const panel = this.nextElementSibling;
+                    if (panel.style.display === "block") {
+                        panel.style.display = "none";
+                    } else {
+                        panel.style.display = "block";
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <h1>敏捷倒三角思維</h1>
+    <p>學習如何以敏捷倒三角思維應用於早餐店經營，從快速起步到逐步優化與創新。</p>
+
+    <div class="section">
+        <h2>什麼是敏捷倒三角思維？</h2>
+        <p>敏捷倒三角思維是一種以「價值」為核心的策略，特別適用於產品設計與開發。透過分層次的方式，能有效平衡資源投入與用戶需求。</p>
+        <button class="accordion">了解核心理念</button>
+        <div class="panel">
+            <ul>
+                <li>快速驗證與學習：快速投入市場並獲取用戶反饋。</li>
+                <li>迭代開發：根據反饋逐步優化，確保資源最大化利用。</li>
+                <li>減少浪費：專注於核心需求，避免資源浪費。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>案例應用：經營早餐店</h2>
+        <p>以下是敏捷倒三角思維如何幫助經營早餐店的三層策略：</p>
+
+        <button class="accordion">1. 最小可行產品（MVP）</button>
+        <div class="panel">
+            <p>快速開業並滿足顧客基本需求：</p>
+            <ul>
+                <li>菜單設計：提供三明治、蛋餅等熱門餐點。</li>
+                <li>服務模式：以外帶為主，節省場地與人力成本。</li>
+                <li>經營策略：選址在上班族經過的地點，開店時間對應顧客需求。</li>
+            </ul>
+        </div>
+
+        <button class="accordion">2. 核心功能優化</button>
+        <div class="panel">
+            <p>提升顧客滿意度：</p>
+            <ul>
+                <li>擴展菜單：增加漢堡、健康飲品等選項。</li>
+                <li>優化環境：提供內用桌椅，提升舒適度。</li>
+                <li>服務升級：加入電子支付與外送服務。</li>
+            </ul>
+        </div>
+
+        <button class="accordion">3. 附加功能與創新</button>
+        <div class="panel">
+            <p>增加創新與差異化：</p>
+            <ul>
+                <li>推出主題餐點，如季節性早餐或節日限定。</li>
+                <li>建立品牌：設計專屬包裝，推出會員卡或集點活動。</li>
+                <li>強化社群互動，吸引更廣泛的顧客群。</li>
+                <li>導入綠色經營，吸引注重環保的顧客。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>結論</h2>
+        <p>透過敏捷倒三角思維，早餐店能夠快速起步，逐步優化並建立長期競爭力，同時避免資源浪費。</p>
+    </div>
+<footer>
+  <p>&copy; 2024 Joseph Chen. All rights reserved.</p>
+</footer>
+</body>
+</html>
