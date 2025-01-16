@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+            padding: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .title {
+            text-align: center;
+            color: #2c3e50;
+            margin: 20px 0;
+            font-size: 22px;
+        }
+
+        .strategy-box {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .strategy-title {
+            color: #2c3e50;
+            font-size: 18px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .value-item {
+            padding: 12px;
+            margin: 8px 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .value-item:active {
+            background: #e9ecef;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 20px;
+            border-radius: 20px 20px 0 0;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .modal-close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .result-box {
+            background: #3498db;
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+        }
+
+        .cp-value {
+            background: #2ecc71;
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .example-list {
+            margin-top: 10px;
+        }
+
+        .example-list li {
+            margin: 8px 0;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .example-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">企業價值提升策略</h1>
+    
+    <div class="strategy-box">
+        <h2 class="strategy-title">傳統行銷策略</h2>
+        <div class="value-item" onclick="showModal('折扣優惠', '折扣策略可以快速刺激銷售：<br><ul class=\'example-list\'><li>限時特價促銷</li><li>套餐組合優惠</li><li>會員專屬折扣</li><li>節慶特別優惠</li></ul>')">
+            折扣優惠 →
+        </div>
+        <div class="value-item" onclick="showModal('促銷活動', '多樣化的促銷活動能提升品牌曝光：<br><ul class=\'example-list\'><li>買一送一活動</li><li>集點換購方案</li><li>節慶主題活動</li><li>線上線下整合行銷</li></ul>')">
+            促銷活動 →
+        </div>
+    </div>
+
+    <div class="strategy-box">
+        <h2 class="strategy-title">核心價值提升</h2>
+        <div class="value-item" onclick="showModal('產品設計', '優質的產品設計包含：<br><ul class=\'example-list\'><li>時尚美觀的外型設計</li><li>精緻的包裝材質</li><li>人體工學考量</li><li>環保永續理念</li></ul>')">
+            產品設計與包裝 →
+        </div>
+        <div class="value-item" onclick="showModal('品質把關', '嚴格的品質管理制度：<br><ul class=\'example-list\'><li>原料源頭管理</li><li>生產流程標準化</li><li>品質檢驗制度</li><li>顧客回饋追蹤</li></ul>')">
+            品質把關 →
+        </div>
+    </div>
+
+    <div class="strategy-box">
+        <h2 class="strategy-title">消費體驗</h2>
+        <div class="value-item" onclick="showModal('服務品質', '優質服務體驗要素：<br><ul class=\'example-list\'><li>專業服務態度</li><li>即時回應機制</li><li>個人化服務</li><li>售後服務保障</li></ul>')">
+            服務品質 →
+        </div>
+        <div class="value-item" onclick="showModal('環境與效率', '良好的消費環境：<br><ul class=\'example-list\'><li>整潔的場所維護</li><li>舒適的空間設計</li><li>快速的服務流程</li><li>便利的支付方式</li></ul>')">
+            環境與效率 →
+        </div>
+    </div>
+
+    <div class="result-box">
+        <div class="value-item" onclick="showModal('預期成果', '全方位提升帶來的效益：<br><ul class=\'example-list\'><li>客戶忠誠度提升</li><li>品牌形象強化</li><li>市場佔有率增加</li><li>營業額持續成長</li><li>口碑行銷效應</li></ul>')">
+            預期成果 →
+        </div>
+    </div>
+
+    <div class="cp-value" onclick="showModal('最佳性價比', '如何達到最佳性價比：<br><ul class=\'example-list\'><li>合理定價策略</li><li>價值感知提升</li><li>競爭優勢建立</li><li>市場定位精準</li><li>持續創新發展</li></ul>')">
+        最佳性價比 (CP值) →
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <h3 class="modal-title" id="modalTitle"></h3>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        function showModal(title, content) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
