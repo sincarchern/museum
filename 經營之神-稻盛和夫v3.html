@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本經營之神——稻盛和夫</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2E3A87;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h2 {
+            border-bottom: 2px solid #2E3A87;
+            padding-bottom: 5px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        h2:hover {
+            color: #1a237e;
+        }
+        h3 {
+            margin-left: 20px;
+        }
+        p {
+            text-indent: 2em;
+            margin: 10px 0;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        ul li {
+            margin: 10px 0;
+            position: relative;
+            line-height: 1.8;
+        }
+        ul li:before {
+            content: "•";
+            color: #2E3A87;
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+        a {
+            color: #2E3A87;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .formula {
+            background-color: #e3f2fd;
+            border-left: 6px solid #1565c0;
+            padding: 15px;
+            margin: 20px 0;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #0d47a1;
+            text-align: center;
+            border-radius: 4px;
+        }
+        .interactive {
+            background-color: #f1f8e9;
+            border: 1px solid #8bc34a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .interactive input {
+            width: 80px;
+            text-align: center;
+            padding: 5px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .interactive button {
+            margin: 10px;
+            padding: 8px 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .interactive button:hover {
+            background-color: #388e3c;
+        }
+        .section-content {
+            display: none;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 10px 0;
+        }
+        .section-content.active {
+            display: block;
+        }
+        .highlight-box {
+            background-color: #f5f5f5;
+            border-left: 4px solid #2E3A87;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            padding: 20px;
+            background-color: #e8eaf6;
+            border-radius: 4px;
+        }
+        @media (max-width: 768px) {
+            body {
+                margin: 10px;
+            }
+            .interactive input {
+                width: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>日本經營之神——稻盛和夫</h1>
+
+    <h2>目錄</h2>
+    <ul>
+        <li><a href="#section1">一、人物生平</a></li>
+        <li><a href="#section2">二、創業歷程</a></li>
+        <li><a href="#section3">三、經營哲學</a></li>
+        <li><a href="#section4">四、阿米巴經營模式</a></li>
+        <li><a href="#section5">五、人生與工作的成功方程式</a></li>
+        <li><a href="#section6">六、領導風格與管理特色</a></li>
+        <li><a href="#section7">七、具體管理實踐</a></li>
+        <li><a href="#section8">八、個人生活哲學</a></li>
+        <li><a href="#section9">九、對現代企業的啟示</a></li>
+        <li><a href="#section10">十、生平重要事蹟年表</a></li>
+    </ul>
+
+    <h2 onclick="toggleSection('section1')">一、人物生平</h2>
+    <div id="section1" class="section-content">
+        <p>稻盛和夫（Kazuo Inamori），1932年出生於日本鹿兒島市，是日本著名的企業家、哲學家和慈善家。</p>
+        <p>他創立了京都陶瓷（現為京瓷）及第二電電（現為KDDI），並於2010年成功重振日航，成為日本商界的傳奇人物。</p>
+    </div>
+
+    <h2 onclick="toggleSection('section2')">二、創業歷程</h2>
+    <div id="section2" class="section-content">
+        <p>1959年，稻盛和夫創立京都陶瓷，專注於高性能陶瓷的研發。</p>
+        <p>1984年，他成立第二電電，成功打破日本電信市場壟斷局面，為用戶提供更多選擇。</p>
+    </div>
+
+    <h2 onclick="toggleSection('section3')">三、經營哲學</h2>
+    <div id="section3" class="section-content">
+        <p>稻盛和夫的經營哲學以「敬天愛人」為核心，強調道德與利益並重。</p>
+        <p>他認為經營企業應以「追求全體員工的物質與精神幸福」為目標，同時為社會做出貢獻。</p>
+    </div>
+
+    <h2 onclick="toggleSection('section4')">四、阿米巴經營模式</h2>
+    <div id="section4" class="section-content">
+        <p>阿米巴經營將企業分為小單位，每個單位負責自主經營，以此提高效率和責任心。</p>
+        <p>這一模式能夠實現「全員參與經營」，並提升企業的盈利能力。</p>
+    </div>
+
+    <h2 onclick="toggleSection('section5')">五、人生與工作的成功方程式</h2>
+    <div id="section5" class="section-content">
+        <p>稻盛和夫提出著名的「人生與工作的成功方程式」：</p>
+        <div class="formula">
+            人生·工作的成果 = 思維方式 × 熱情 × 能力
+        </div>
+        <p>公式說明：</p>
+        <ul>
+            <li><strong>思維方式：</strong>您的價值觀、態度及對事情的看法，分數範圍為 -100 至 +100。</li>
+            <li><strong>熱情：</strong>指工作的熱忱與投入程度，分數範圍為 0 至 100。</li>
+            <li><strong>能力：</strong>您的天賦與技能，分數範圍為 0 至 100。</li>
+        </ul>
+
+        <div class="interactive">
+            <p>試著計算您的成果：</p>
+            <label for="thinking">思維方式（-100 至 +100）：</label>
+            <input type="number" id="thinking" name="thinking" min="-100" max="100" value="0"><br><br>
+            <label for="enthusiasm">熱情（0 至 100）：</label>
+            <input type="number" id="enthusiasm" name="enthusiasm" min="0" max="100" value="0"><br><br>
+            <label for="ability">能力（0 至 100）：</label>
+            <input type="number" id="ability" name="ability" min="0" max="100" value="0"><br><br>
+            <button onclick="calculateResult()">計算結果</button>
+            <p id="result"></p>
+        </div>
+    </div>
+
+    <h2 onclick="toggleSection('section6')">六、領導風格與管理特色</h2>
+    <div id="section6" class="section-content">
+        <div class="highlight-box">
+            <h3>六項精進原則</h3>
+            <ul>
+                <li>追求完美品質：在每件事上都要求最高標準</li>
+                <li>全力以赴：投入100%的努力在當前工作</li>
+                <li>正面思考：保持積極樂觀的心態</li>
+                <li>活在當下：專注於現在，珍惜每一刻</li>
+                <li>感恩心態：常懷感恩之心對待他人</li>
+                <li>謙虛為本：保持謙遜，持續學習</li>
+            </ul>
+        </div>
+        <div class="highlight-box">
+            <h3>決策原則</h3>
+            <ul>
+                <li>堅持以公心做決定，避免個人利益影響判斷</li>
+                <li>重視長期發展，不追求短期利益</li>
+                <li>重大決策前必須靜思，確保判斷準確</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2 onclick="toggleSection('section7')">七、具體管理實踐</h2>
+    <div id="section7" class="section-content">
+        <div class="highlight-box">
+            <h3>會計管理</h3>
+            <ul>
+                <li>京瓷會計學：創新的時間管理會計制度</li>
+                <li>即時掌握：每月及時了解各部門損益</li>
+                <li>透明制度：建立清晰的財務管理體系</li>
+            </ul>
+        </div>
+        <div class="highlight-box">
+            <h3>人才培養</h3>
+            <ul>
+                <li>稻盛經營道場：系統化培訓管理人才</li>
+                <li>定期研修：持續提升管理幹部能力</li>
+                <li>青年培育：重視年輕人才的發展</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2 onclick="toggleSection('section8')">八、個人生活哲學</h2>
+    <div id="section8" class="section-content">
+        <div class="highlight-box">
+            <h3>生活態度</h3>
+            <ul>
+                <li>每日反省：堅持自我反省與改進</li>
+                <li>持續學習：保持旺盛的求知慾</li>
+                <li>謙遜態度：永遠保持謙虛的心態</li>
+                <li>時間珍惜：善用時間，不虛度光陰</li>
+            </ul>
+        </div>
+        <div class="highlight-box">
+            <h3>成功心法</h3>
+            <ul>
+                <li>堅持不懈：面對困難永不放棄</li>
+                <li>勇於承擔：主動承擔責任與挑戰</li>
+                <li>同理心：理解並關心他人感受</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2 onclick="toggleSection('section9')">九、對現代企業的啟示</h2>
+    <div id="section9" class="section-content">
+        <div class="highlight-box">
+            <h3>企業社會責任</h3>
+            <ul>
+                <li>社會貢獻：企業必須為社會創造價值</li>
+                <li>環境保護：重視環境永續發展</li>
+                <li>道德經營：堅持誠信與道德標準</li>
+            </ul>
+        </div>
+        <div class="highlight-box">
+            <h3>永續經營之道</h3>
+            <ul>
+                <li>企業文化：建立正面積極的組織文化</li>
+                <li>人才發展：持續投資人才培育</li>
+                <li>技術創新：保持技術領先地位</li>
+                <li>財務健康：維持穩健的財務結構</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2 onclick="toggleSection('section10')">十、生平重要事蹟年表</h2>
+    <div id="section10" class="section-content">
+        <p>1932年：出生於鹿兒島。</p>
+        <p>1959年：創立京都陶瓷（京瓷）。</p>
+        <p>2010年：出任日本航空董事長，成功扭虧。</p>
+        <p>2022年：辭世，享年90歲。</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Joseph Chen. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleSection(sectionId) {
+            const allSections = document.querySelectorAll('.section-content');
+            allSections.forEach(section => {
+                if (section.id === sectionId) {
+                    section.classList.toggle('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+        }
+
+        function calculateResult() {
+            var thinking = parseFloat(document.getElementById('thinking').value);
+            var</antArtifact>
