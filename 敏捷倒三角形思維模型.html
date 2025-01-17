@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>敏捷倒三角思維模型與應用</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft JhengHei", Arial, sans-serif;
+        }
+
+        body {
+            background: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .title {
+            text-align: center;
+            color: #1a73e8;
+            margin: 20px 0;
+            font-size: clamp(24px, 5vw, 32px);
+        }
+
+        .intro {
+            text-align: center;
+            color: #5f6368;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .section {
+            background: #ffffff;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        .triangle-container {
+            position: relative;
+            width: 300px;
+            height: 260px;
+            margin: 40px auto;
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 260px solid #e8f0fe;
+            position: relative;
+        }
+
+        .level {
+            position: absolute;
+            width: 300px;
+            text-align: center;
+            color: #1a73e8;
+            font-weight: bold;
+            left: -150px;
+        }
+
+        .level-1 { bottom: 200px; }
+        .level-2 { bottom: 120px; }
+        .level-3 { bottom: 40px; }
+
+        .accordion {
+            cursor: pointer;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            text-align: left;
+            background-color: #1a73e8;
+            color: white;
+            border-radius: 8px;
+            outline: none;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .accordion:hover {
+            background-color: #1557b0;
+        }
+
+        .panel {
+            display: none;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-left: 3px solid #1a73e8;
+            margin: 5px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .content-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        .content-title {
+            color: #1a73e8;
+            font-size: 20px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1a73e8;
+        }
+
+        .content-list {
+            list-style: none;
+        }
+
+        .content-list li {
+            margin: 12px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .content-list li:before {
+            content: "→";
+            color: #1a73e8;
+            position: absolute;
+            left: 0;
+        }
+
+        .example-box {
+            background: #e8f0fe;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .bottom-note {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: linear-gradient(135deg, #1a73e8, #1557b0);
+            color: white;
+            border-radius: 12px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #5f6368;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .triangle-container {
+                transform: scale(0.8);
+            }
+            
+            .content-box {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">敏捷倒三角思維模型</h1>
+        
+        <p class="intro">
+            敏捷倒三角思維是一種創新的管理方法，從價值出發，通過快速迭代和持續改進，
+            實現更高效的項目管理和產品開發。
+        </p>
+
+        <div class="triangle-container">
+            <div class="triangle">
+                <div class="level level-1">價值層</div>
+                <div class="level level-2">方案層</div>
+                <div class="level level-3">任務層</div>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="content-box">
+                <h2 class="content-title">價值層 (Why)</h2>
+                <ul class="content-list">
+                    <li>確定目標價值和願景</li>
+                    <li>理解用戶需求和痛點</li>
+                    <li>定義成功指標</li>
+                    <li>評估商業可行性</li>
+                </ul>
+            </div>
+
+            <div class="content-box">
+                <h2 class="content-title">解決方案層 (How)</h2>
+                <ul class="content-list">
+                    <li>設計解決方案架構</li>
+                    <li>評估可行性方案</li>
+                    <li>制定實施策略</li>
+                    <li>規劃資源配置</li>
+                </ul>
+            </div>
+
+            <div class="content-box">
+                <h2 class="content-title">任務層 (What)</h2>
+                <ul class="content-list">
+                    <li>分解具體任務</li>
+                    <li>安排執行順序</li>
+                    <li>分配人員職責</li>
+                    <li>追蹤進度管理</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>案例應用：早餐店經營</h2>
+            <p>以下是敏捷倒三角思維如何幫助經營早餐店的三層策略：</p>
+
+            <button class="accordion">1. 最小可行產品（MVP）</button>
+            <div class="panel">
+                <p>快速開業並滿足顧客基本需求：</p>
+                <ul>
+                    <li>菜單設計：提供三明治、蛋餅等熱門餐點</li>
+                    <li>服務模式：以外帶為主，節省場地與人力成本</li>
+                    <li>經營策略：選址在上班族經過的地點，開店時間對應顧客需求</li>
+                </ul>
+            </div>
+
+            <button class="accordion">2. 核心功能優化</button>
+            <div class="panel">
+                <p>提升顧客滿意度：</p>
+                <ul>
+                    <li>擴展菜單：增加漢堡、健康飲品等選項</li>
+                    <li>優化環境：提供內用桌椅，提升舒適度</li>
+                    <li>服務升級：加入電子支付與外送服務</li>
+                </ul>
+            </div>
+
+            <button class="accordion">3. 附加功能與創新</button>
+            <div class="panel">
+                <p>增加創新與差異化：</p>
+                <ul>
+                    <li>推出主題餐點，如季節性早餐或節日限定</li>
+                    <li>建立品牌：設計專屬包裝，推出會員卡或集點活動</li>
+                    <li>強化社群互動，吸引更廣泛的顧客群</li>
+                    <li>導入綠色經營，吸引注重環保的顧客</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>核心價值與敏捷特點</h2>
+            <div class="content-box" style="margin-top: 20px;">
+                <h3 class="content-title">核心特點</h3>
+                <ul class="content-list">
+                    <li>快速開業：從 MVP 開始，確保低成本、低風險進入市場。</li>
+                    <li>快速調整：根據顧客回饋，調整菜單和服務，逐步優化。</li>
+                    <li>避免資源浪費：專注於顧客真正需要的功能，而非一開始就投資過多在次要或不必要的項目上。</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bottom-note">
+            <h3>核心理念</h3>
+            <p>從價值出發 → 找到解決方案 → 執行具體任務<br>
+            持續迭代改進，確保最終產出符合用戶價值</p>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Joseph Chen. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const acc = document.querySelectorAll(".accordion");
+            acc.forEach(btn => {
+                btn.addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    const panel = this.nextElementSibling;
+                    if (panel.style.display === "block") {
+                        panel.style.display = "none";
+                    } else {
+                        panel.style.display = "block";
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
