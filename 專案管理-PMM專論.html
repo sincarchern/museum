@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>專案管理成熟度模型 (PMM) 專論</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #0056b3;
+        }
+        .chapter {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            cursor: pointer;
+        }
+        .chapter:hover {
+            background-color: #e9f5ff;
+        }
+        .content {
+            display: none;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            background-color: #fff;
+        }
+        .show {
+            display: block;
+        }
+        ul {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding-left: 20px;
+        }
+    </style>
+    <script>
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            content.classList.toggle('show');
+        }
+    </script>
+</head>
+<body>
+    <h1>專案管理成熟度模型 (PMM) 專論</h1>
+    <h2>目錄</h2>
+    <div class="chapter" onclick="toggleContent('chapter1')">1. 專案管理成熟度模型概述</div>
+    <div id="chapter1" class="content">
+        <h3>專案管理成熟度模型概述</h3>
+        <p>專案管理成熟度模型 (PMM) 是一套用於評估組織專案管理能力的框架，幫助企業識別改進方向，從而實現更高效的專案運營。它以五個階段來描述組織管理成熟度的進展：從無序的初始階段到具備持續改進能力的最高階段。</p>
+    </div>
+    
+    <div class="chapter" onclick="toggleContent('chapter2')">2. PMM 的五個成熟度層級</div>
+    <div id="chapter2" class="content">
+        <h3>PMM 的五個成熟度層級</h3>
+        <p>專案管理成熟度的五個層級依序為：</p>
+        <ul>
+            <li><b>初始階段 (Ad-hoc)：</b> 缺乏標準流程，專案成功依賴個人能力。</li>
+            <li><b>標準化階段 (Repeatable)：</b> 開始建立標準化流程，但應用不全面。</li>
+            <li><b>制度化階段 (Defined)：</b> 將流程標準化並融入組織運營。</li>
+            <li><b>量化管理階段 (Managed)：</b> 使用數據監控專案績效，進行量化管理。</li>
+            <li><b>持續改進階段 (Optimizing)：</b> 利用反饋與創新，持續提升專案能力。</li>
+        </ul>
+        <p>以下是每個層級的詳細說明與實例：</p>
+        <div class="chapter" onclick="toggleContent('sub-chapter1')">2.1 初始階段</div>
+        <div id="sub-chapter1" class="content">
+            <p>在初始階段，組織內沒有明確的專案管理流程或工具，專案成功完全依賴團隊成員的個人能力與經驗。專案通常缺乏可重複性，且容易出現延誤或超支。</p>
+        </div>
+        <div class="chapter" onclick="toggleContent('sub-chapter2')">2.2 標準化階段</div>
+        <div id="sub-chapter2" class="content">
+            <p>標準化階段標誌著組織開始引入基本的專案管理流程與模板，這些流程可重複使用，但可能未完全融入到所有專案中。</p>
+        </div>
+        <!-- 類似結構繼續添加 2.3, 2.4, 2.5 -->
+    </div>
+
+    <div class="chapter" onclick="toggleContent('chapter3')">3. PMM 的應用價值</div>
+    <div id="chapter3" class="content">
+        <h3>PMM 的應用價值</h3>
+        <p>應用 PMM 可以幫助組織達到以下目標：</p>
+        <ul>
+            <li>提升專案成功率。</li>
+            <li>識別組織的管理瓶頸。</li>
+            <li>促進跨部門協作與流程標準化。</li>
+            <li>通過數據分析提升專案決策能力。</li>
+        </ul>
+    </div>
+
+    <div class="chapter" onclick="toggleContent('chapter4')">4. 實用工具與資源</div>
+    <div id="chapter4" class="content">
+        <h3>實用工具與資源</h3>
+        <ul>
+            <li><b>專案管理軟體：</b> Microsoft Project、Jira、Asana。</li>
+            <li><b>評估工具：</b> PMM 自我評估模板。</li>
+            <li><b>延伸學習：</b> 《PMBOK 指南》、Coursera 課程。</li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>© 2025 專案管理電子書 | 由專業團隊編寫</p>
+    </footer>
+</body>
+</html>
