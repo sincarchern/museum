@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>業績提升策略</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background-color: #2980b9;
+            color: #fff;
+            padding: 20px 10px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        h2 {
+            color: #2980b9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 20px;
+        }
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding: 10px;
+            border-left: 4px solid #2980b9;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        .toggle {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        .case {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px 0;
+            background: #2980b9;
+            color: #fff;
+        }
+    </style>
+    <script>
+        function toggleContent(id) {
+            var content = document.getElementById(id);
+            content.style.display = content.style.display === "none" ? "block" : "none";
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>業績提升策略</h1>
+        <p>全面覆蓋老顧客維繫、流失顧客挽回與內部能力提升策略</p>
+    </header>
+    <div class="container">
+        <ul>
+            <li>
+                <span class="toggle" onclick="toggleContent('section1')">1. 確定市場定位與核心優勢</span>
+                <div id="section1" class="content">
+                    清晰的市場定位是成功的基礎，了解顧客需求並突出核心競爭力。
+                    <p class="case">案例：早餐店專注平價/快速/好品質，成為當地上班族首選。</p>
+                </div>
+            </li>
+            <li>
+                <span class="toggle" onclick="toggleContent('section2')">2. 數位行銷與社群經營</span>
+                <div id="section2" class="content">
+                    善用社群媒體平台，分享品牌故事與促銷活動，吸引目標客群。
+                    <p class="case">案例：在 Instagram /FB發布貼文</p>
+                </div>
+            </li>
+            <li>
+                <span class="toggle" onclick="toggleContent('section3')">3. 提供客製化服務</span>
+                <div id="section3" class="content">
+                    了解顧客需求並提供客製化產品或服務。
+                    <p class="case">案例：針對老顧客推出優惠套餐，提升滿意度。</p>
+                </div>
+            </li>
+            <li>
+                <span class="toggle" onclick="toggleContent('section4')">4. 優化顧客服務流程</span>
+                <div id="section4" class="content">
+                    簡化流程並提升服務效率，減少顧客等待時間。
+                    <p class="case">案例：，推薦前一晚預約訂餐，縮短早餐店高峰期的點餐時間。</p>
+                </div>
+            </li>
+            <li>
+                <span class="toggle" onclick="toggleContent('section5')">5. 老顧客忠誠計劃</span>
+                <div id="section5" class="content">
+                    設計會員計劃與專屬優惠活動，穩定客源。
+                    <p class="case">案例：推出「消費累積點數」活動，吸引顧客反覆消費。</p>
+                </div>
+            </li>
+            <li>
+                <span class="toggle" onclick="toggleContent('section6')">6. 找回流失顧客</span>
+                <div id="section6" class="content">
+                    分析顧客流失原因，提供挽回優惠與更新服務資訊。
+                    <p class="case">案例：針對流失顧客加碼發送集點券，提升回流率。</p>
+                </div>
+            </li>
+            <li>
+                <span class="toggle" onclick="toggleContent('section7')">7. 提升工作夥伴專業與協作能力</span>
+                <div id="section7" class="content">
+                    透過敏捷團隊方法與定期培訓提升員工能力。
+                    <p class="case">案例：每日3~5分鐘立會，分享/協調快速解決問題的實用技巧。</p>
+                </div>
+            </li>
+            <li>
+                <span class="toggle" onclick="toggleContent('section8')">8. 定期市場調查與產品創新</span>
+                <div id="section8" class="content">
+                    不斷收集市場數據，推出符合潮流的產品。
+                    <p class="case">案例：根據顧客反饋增加選項，擴大目標客群。</p>
+                </div>
+            </li>
+            <li>
+                <span class="toggle" onclick="toggleContent('section9')">9. 品牌形象塑造與價值傳遞</span>
+                <div id="section9" class="content">
+                    強化品牌形象，將價值觀融入行銷與產品中。
+                    <p class="case">案例：推廣「食材履歷」概念，獲得社區居民支持。</p>
+                </div>
+            </li>
+            <li>
+                <span class="toggle" onclick="toggleContent('section10')">10. 夥伴建議/看法(以上案例皆是範例)</span>
+                <div id="section10" class="content">
+                    <p>夥伴們的寶貴建議，請通過以下連結提供您的想法：</p>
+                    <a href="https://forms.gle/zJZNmw6yx32Uv27L9" target="_blank">點此提交建議表單</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <footer>
+        <p>業績提升策略© 2025 Joseph Chen</p>
+    </footer>
+</body>
+</html>
