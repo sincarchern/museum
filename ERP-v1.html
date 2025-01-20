@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP企業資源規劃系統指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, "Microsoft JhengHei", sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+            padding-bottom: 80px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        .toc {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        .toc h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .toc-item {
+            cursor: pointer;
+            padding: 12px 15px;
+            margin: 5px 0;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 25px;
+            color: #2c3e50;
+        }
+
+        .toc-item:before {
+            content: "►";
+            position: absolute;
+            left: 8px;
+            transition: transform 0.3s;
+            font-size: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .toc-item:hover {
+            background-color: #f0f4f8;
+            transform: translateX(5px);
+        }
+
+        .content-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            animation: fadeIn 0.5s ease-in;
+            line-height: 1.6;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .active {
+            display: block;
+        }
+
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #34495e;
+            margin: 25px 0 15px 0;
+            padding-left: 10px;
+            border-left: 4px solid #2c3e50;
+        }
+
+        .content-section p {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: #2c3e50;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+
+            main {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+
+            .toc-item {
+                padding: 10px;
+            }
+
+            .back-to-top {
+                bottom: 70px;
+                right: 15px;
+                padding: 10px 15px;
+            }
+        }
+
+        /* 暗色主題 */
+        .dark-theme {
+            background: #1a1a1a;
+            color: #ffffff;
+        }
+
+        .dark-theme .content-section,
+        .dark-theme .toc {
+            background: #2d2d2d;
+            color: #ffffff;
+        }
+
+        .dark-theme .toc-item:hover {
+            background-color: #3d3d3d;
+        }
+
+        /* 列印優化 */
+        @media print {
+            .back-to-top,
+            footer {
+                display: none !important;
+            }
+
+            .content-section {
+                display: block !important;
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="header">
+            <h1>ERP企業資源規劃系統指南</h1>
+            <p>全方位了解ERP系統的功能與應用</p>
+        </div>
+
+        <div class="toc">
+            <h2>目錄</h2>
+            <div class="toc-item" onclick="showSection('intro')">1. ERP簡介</div>
+            <div class="toc-item" onclick="showSection('finance')">2. 財務管理模組</div>
+            <div class="toc-item" onclick="showSection('supply')">3. 供應鏈管理模組</div>
+            <div class="toc-item" onclick="showSection('production')">4. 生產管理模組</div>
+            <div class="toc-item" onclick="showSection('sales')">5. 銷售管理模組</div>
+            <div class="toc-item" onclick="showSection('hr')">6. 人力資源管理模組</div>
+            <div class="toc-item" onclick="showSection('implementation')">7. ERP導入與實施</div>
+            <div class="toc-item" onclick="showSection('vendors')">8. 主要ERP供應商比較</div>
+        </div>
+
+        <!-- [Previous content sections remain the same...] -->
+        
+    </main>
+
+    <div class="back-to-top" onclick="scrollToTop()">↑</div>
+
+    <footer>
+        <p>&copy; 2024 Joseph Chen. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // 隱藏所有內容
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // 顯示選中的內容
+            document.getElementById(sectionId).classList.add('active');
+            
+            // 優化滾動效果
+            const yOffset = -20;
+            const element = document.getElementById(sectionId);
+            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            
+            window.scrollTo({
+                top: y,
+                behavior: 'smooth'
+            });
+        }
+
+        // 優化的滾動監聽
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function() {
+            let backToTop = document.querySelector('.back-to-top');
+            let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (currentScroll > 200) {
+                backToTop.style.display = "block";
+                if (currentScroll > lastScrollTop) {
+                    // 向下滾動
+                    backToTop.style.opacity = "0.5";
+                } else {
+                    // 向上滾動
+                    backToTop.style.opacity = "1";
+                }
+            } else {
+                backToTop.style.display = "none";
+            }
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        }, false);
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 主題切換功能
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+        }
+
+        // 載入時檢查主題設定
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-theme');
+            }
+        });
+    </script>
+</body>
+</html>
