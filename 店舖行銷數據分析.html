@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>店舖經營數據收集與分析講義</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        nav {
+            margin-bottom: 20px;
+        }
+        .case-study, .quiz-section {
+            background-color: #f9f9f9;
+            border-left: 4px solid #3498db;
+            padding: 10px;
+            margin: 20px 0;
+        }
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        .quiz-question {
+            margin-bottom: 15px;
+        }
+        .quiz-option {
+            margin-left: 20px;
+        }
+        footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>店舖經營數據收集與分析講義</h1>
+    <nav>
+        <h2>目錄</h2>
+        <ul>
+            <li><a href="#data-collection">數據收集方法</a></li>
+            <li><a href="#data-analysis">數據分析方法</a></li>
+            <li><a href="#tools">工具與軟體推薦</a></li>
+            <li><a href="#charts">圖表展示</a></li>
+            <li><a href="#quiz">互動測試</a></li>
+            <li><a href="#case-study">案例分析</a></li>
+        </ul>
+    </nav>
+
+    <section id="data-collection">
+        <h2>一、數據收集方法</h2>
+        <p>以下列出常見的數據收集方法：</p>
+        <ul>
+            <li><strong>銷售數據收集</strong>
+                <ul>
+                    <li>使用 POS 系統記錄每日銷售額、產品銷售量、交易筆數。</li>
+                    <li>分析熱銷商品和滯銷商品。</li>
+                </ul>
+            </li>
+            <li><strong>顧客數據收集</strong>
+                <ul>
+                    <li>透過會員註冊收集基本資料（年齡、性別、地區）。</li>
+                    <li>問卷調查，瞭解顧客需求與滿意度。</li>
+                    <li>分析購物紀錄，研究購買習慣與偏好。</li>
+                </ul>
+            </li>
+            <li><strong>線上數據收集</strong>
+                <ul>
+                    <li>電子商務平台：追蹤瀏覽量、轉換率等指標。</li>
+                    <li>社群媒體：分析互動數據（按讚、分享、留言）。</li>
+                </ul>
+            </li>
+            <li><strong>環境數據收集</strong>
+                <ul>
+                    <li>店內客流量監控：分析每日訪客數與尖峰時段。</li>
+                    <li>熱區分析：利用熱感應設備瞭解顧客停留區域。</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <section id="data-analysis">
+        <h2>二、數據分析方法</h2>
+        <p>以下列出常用的數據分析方法：</p>
+        <ul>
+            <li><strong>基礎統計分析</strong>
+                <p>使用平均值、總和、佔比等指標，例如每日平均銷售額。</p>
+            </li>
+            <li><strong>趨勢分析</strong>
+                <p>觀察數據變化，找出高峰或低谷原因，例如節日銷售量變化。</p>
+            </li>
+            <li><strong>顧客分群分析</strong>
+                <p>利用 RFM 模型（Recency, Frequency, Monetary）進行分群，設計個性化行銷策略。</p>
+            </li>
+            <li><strong>商品分析</strong>
+                <p>例如使用 ABC 分析，將商品分類，集中資源於關鍵商品。</p>
+            </li>
+            <li><strong>地理數據分析</strong>
+                <p>根據顧客分布區域，優化店舖選址或行銷策略。</p>
+            </li>
+            <li><strong>社群與口碑分析</strong>
+                <p>分析網路評論，使用文本分析工具提取熱門話題。</p>
+            </li>
+        </ul>
+    </section>
+
+    <section id="tools">
+        <h2>三、工具與軟體推薦</h2>
+        <ul>
+            <li><strong>數據收集工具</strong>
+                <ul>
+                    <li>POS 系統：Square、Shopify POS。</li>
+                    <li>顧客管理：HubSpot CRM、Zoho CRM。</li>
+                    <li>網站分析：Google Analytics。</li>
+                </ul>
+            </li>
+            <li><strong>數據分析工具</strong>
+                <ul>
+                    <li>Excel/Google Sheets。</li>
+                    <li>Power BI、Tableau。</li>
+                    <li>Python/R。</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <section id="charts">
+        <h2>四、圖表展示</h2>
+        <canvas id="salesChart"></canvas>
+        <script>
+            const ctx = document.getElementById('salesChart').getContext('2d');
+            const salesChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['週一', '週二', '週三', '週四', '週五', '週六', '週日'],
+                    datasets: [{
+                        label: '每日銷售額 (千元)',
+                        data: [12, 19, 3, 5, 2, 3, 10],
+                        borderColor: '#3498db',
+                        borderWidth: 2,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { position: 'top' } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+        </script>
+    </section>
+
+    <section id="quiz" class="quiz-section">
+        <h2>五、互動測試</h2>
+        <div class="quiz-question">
+            <p><strong>1. 哪一種數據收集方法適合分析店內顧客的停留區域？</strong></p>
+            <label class="quiz-option"><input type="radio" name="q1" value="a"> POS 系統</label><br>
+            <label class="quiz-option"><input type="radio" name="q1" value="b"> 熱感應設備</label><br>
+            <label class="quiz-option"><input type="radio" name="q1" value="c"> 問卷調查</label><br>
+        </div>
+        <div class="quiz-question">
+            <p><strong>2. RFM 模型中，"F" 代表什麼？</strong></p>
+            <label class="quiz-option"><input type="radio" name="q2" value="a"> 最新購買時間</label><br>
+            <label class="quiz-option"><input type="radio" name="q2" value="b"> 購買頻率</label><br>
+            <label class="quiz-option"><input type="radio" name="q2" value="c"> 消費金額</label><br>
+        </div>
+<div class="quiz-question">
+            <p><strong>3. 下列哪一個軟體適合進行高效的數據視覺化分析？</strong></p>
+            <label class="quiz-option"><input type="radio" name="q3" value="a"> Tableau</label><br>
+            <label class="quiz-option"><input type="radio" name="q3" value="b"> Excel</label><br>
+            <label class="quiz-option"><input type="radio" name="q3" value="c"> Google Forms</label><br>
+        </div>
+        <div class="quiz-question">
+            <p><strong>4. 如果要了解顧客對產品的評價，應該使用哪種分析方法？</strong></p>
+            <label class="quiz-option"><input type="radio" name="q4" value="a"> ABC 分析</label><br>
+            <label class="quiz-option"><input type="radio" name="q4" value="b"> 社群與口碑分析</label><br>
+            <label class="quiz-option"><input type="radio" name="q4" value="c"> 滯銷分析</label><br>
+        </div>
+        <div class="quiz-question">
+            <p><strong>5. 什麼指標可以用來分析網路商店的顧客行為？（可多選）</strong></p>
+            <label class="quiz-option"><input type="checkbox" name="q5" value="a"> 瀏覽量</label><br>
+            <label class="quiz-option"><input type="checkbox" name="q5" value="b"> 轉換率</label><br>
+            <label class="quiz-option"><input type="checkbox" name="q5" value="c"> 顧客年齡</label><br>
+        </div>
+
+    </section>
+<footer>
+  <p>&copy; 2024 Joseph Chen. All rights reserved.</p>
+</footer>
+</body>
+</html>
