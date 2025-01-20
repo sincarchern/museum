@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>專案可行性分析與需求目標設定框架</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .tree-node {
+            margin: 5px 0;
+        }
+
+        .node-content {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .node-content:hover {
+            background-color: #f0f0f0;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            transition: transform 0.2s;
+        }
+
+        .expanded .icon {
+            transform: rotate(90deg);
+        }
+
+        .children {
+            margin-left: 28px;
+            display: none;
+        }
+
+        .expanded > .children {
+            display: block;
+        }
+
+        .title {
+            flex: 1;
+        }
+
+        /* 不同層級的標題樣式 */
+        .level-0 > .node-content > .title {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .level-1 > .node-content > .title {
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        .level-2 > .node-content > .title {
+            color: #7f8c8d;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>專案可行性分析與需求目標設定框架</h1>
+        <div id="tree-root"></div>
+    </div>
+
+    <script>
+        const data = {
+            title: "專案可行性分析與需求目標設定框架",
+            children: [
+                {
+                    title: "一、可行性分析維度",
+                    children: [
+                        {
+                            title: "1. 技術可行性",
+                            children: [
+                                {
+                                    title: "技術需求評估",
+                                    children: [
+                                        { title: "所需核心技術與能力" },
+                                        { title: "現有技術資源盤點" },
+                                        { title: "技術缺口分析" }
+                                    ]
+                                },
+                                {
+                                    title: "技術風險評估",
+                                    children: [
+                                        { title: "技術成熟度評估" },
+                                        { title: "技術整合難度" },
+                                        { title: "技術升級路徑" }
+                                    ]
+                                },
+                                {
+                                    title: "技術資源需求",
+                                    children: [
+                                        { title: "硬體設備需求" },
+                                        { title: "軟體系統需求" },
+                                        { title: "技術人才需求" }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            title: "2. 經濟可行性",
+                            children: [
+                                {
+                                    title: "投資效益分析",
+                                    children: [
+                                        { title: "投資報酬率 (ROI)" },
+                                        { title: "淨現值 (NPV)" },
+                                        { title: "內部報酬率 (IRR)" },
+                                        { title: "回收期" }
+                                    ]
+                                },
+                                {
+                                    title: "成本結構分析",
+                                    children: [
+                                        { title: "固定成本" },
+                                        { title: "變動成本" },
+                                        { title: "人力成本" },
+                                        { title: "維護成本" }
+                                    ]
+                                },
+                                {
+                                    title: "財務風險評估",
+                                    children: [
+                                        { title: "資金需求評估" },
+                                        { title: "現金流量分析" },
+                                        { title: "融資方案評估" }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            title: "3. 市場可行性",
+                            children: [
+                                {
+                                    title: "市場需求分析",
+                                    children: [
+                                        { title: "目標市場規模" },
+                                        { title: "市場成長性" },
+                                        { title: "市場區隔" }
+                                    ]
+                                },
+                                {
+                                    title: "競爭環境分析",
+                                    children: [
+                                        { title: "競爭者分析" },
+                                        { title: "市場佔有率" },
+                                        { title: "進入障礙" }
+                                    ]
+                                },
+                                {
+                                    title: "營運模式評估",
+                                    children: [
+                                        { title: "商業模式可行性" },
+                                        { title: "營收模式評估" },
+                                        { title: "通路策略" }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            title: "4. 組織可行性",
+                            children: [
+                                {
+                                    title: "人力資源評估",
+                                    children: [
+                                        { title: "所需人力配置" },
+                                        { title: "人才招募計畫" },
+                                        { title: "培訓需求" }
+                                    ]
+                                },
+                                {
+                                    title: "組織結構評估",
+                                    children: [
+                                        { title: "專案團隊架構" },
+                                        { title: "角色與職責" },
+                                        { title: "決策機制" }
+                                    ]
+                                },
+                                {
+                                    title: "變革管理評估",
+                                    children: [
+                                        { title: "組織文化影響" },
+                                        { title: "利害關係人管理" },
+                                        { title: "變革阻力評估" }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    title: "二、分析工具運用",
+                    children: [
+                        {
+                            title: "1. SWOT 分析",
+                            children: [
+                                { title: "優勢 (Strengths)" },
+                                { title: "劣勢 (Weaknesses)" },
+                                { title: "機會 (Opportunities)" },
+                                { title: "威脅 (Threats)" }
+                            ]
+                        },
+                        {
+                            title: "2. PEST 分析",
+                            children: [
+                                { title: "政治因素 (Political)" },
+                                { title: "經濟因素 (Economic)" },
+                                { title: "社會因素 (Social)" },
+                                { title: "技術因素 (Technological)" }
+                            ]
+                        },
+                        {
+                            title: "3. 專案時程規劃",
+                            children: [
+                                { title: "甘特圖 (Gantt Chart)" },
+                                { title: "里程碑規劃" },
+                                { title: "關鍵路徑分析" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    title: "三、專案需求與目標設定",
+                    children: [
+                        {
+                            title: "1. 需求分析",
+                            children: [
+                                {
+                                    title: "業務需求",
+                                    children: [
+                                        { title: "核心業務目標" },
+                                        { title: "業務流程需求" },
+                                        { title: "效能指標要求" }
+                                    ]
+                                },
+                                {
+                                    title: "功能需求",
+                                    children: [
+                                        { title: "系統功能需求" },
+                                        { title: "使用者需求" },
+                                        { title: "介面需求" }
+                                    ]
+                                },
+                                {
+                                    title: "非功能需求",
+                                    children: [
+                                        { title: "性能需求" },
+                                        { title: "安全需求" },
+                                        { title: "可靠性需求" }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            title: "2. 目標設定",
+                            children: [
+                                {
+                                    title: "策略目標",
+                                    children: [
+                                        { title: "長期目標" },
+                                        { title: "短期目標" },
+                                        { title: "階段性目標" }
+                                    ]
+                                },
+                                {
+                                    title: "SMART 原則",
+                                    children: [
+                                        { title: "具體性 (Specific)" },
+                                        { title: "可衡量 (Measurable)" },
+                                        { title: "可達成 (Achievable)" },
+                                        { title: "相關性 (Relevant)" },
+                                        { title: "時效性 (Time-bound)" }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            title: "3. 成功關鍵因素",
+                            children: [
+                                { title: "關鍵績效指標 (KPI)" },
+                                { title: "品質要求" },
+                                { title: "風險容忍度" },
+                                { title: "資源限制" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    title: "四、可行性分析報告",
+                    children: [
+                        {
+                            title: "1. 執行摘要",
+                            children: [
+                                { title: "專案概述" },
+                                { title: "主要發現" },
+                                { title: "建議方案" }
+                            ]
+                        },
+                        {
+                            title: "2. 詳細分析結果",
+                            children: [
+                                { title: "各面向可行性評估結果" },
+                                { title: "數據支持與佐證" },
+                                { title: "風險與機會評估" }
+                            ]
+                        },
+                        {
+                            title: "3. 建議與行動方案",
+                            children: [
+                                { title: "執行建議" },
+                                { title: "風險緩解策略" },
+                                { title: "資源配置建議" },
+                                { title: "時程規劃建議" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    title: "五、決策依據",
+                    children: [
+                        {
+                            title: "1. 評估標準",
+                            children: [
+                                { title: "財務標準" },
+                                { title: "策略符合度" },
+                                { title: "風險承受度" },
+                                { title: "資源可用性" }
+                            ]
+                        },
+                        {
+                            title: "2. 替代方案",
+                            children: [
+                                { title: "方案比較" },
+                                { title: "優劣分析" },
+                                { title: "建議選項" }
+                            ]
+                        },
+                        {
+                            title: "3. 最終建議",
+                            children: [
+                                { title: "綜合評估結果" },
+                                { title: "執行建議" },
+                                { title: "下一步行動" }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        function createTreeNode(node, level = 0) {
+            const div = document.createElement('div');
+            div.className = `tree-node level-${level}`;
+
+            const content = document.createElement('div');
+            content.className = 'node-content';
+
+            if (node.children && node.children.length > 0) {
+                const icon = document.createElement('i');
+                icon.className = 'icon fas fa-chevron-right';
+                content.appendChild(icon);
+            } else {
+                const spacer = document.createElement('span');
+                spacer.style.width = '20px';
+                spacer.style.display = 'inline-block';
+                content.appendChild(spacer);
+            }
+
+            const title = document.createElement('span');
+            title.className = 'title';
+            title.textContent = node.title;
+            content.appendChild(title);
+
+            div.appendChild(content);
+
+            if (node.children && node.children.length > 0) {
+                const childrenContainer = document.createElement('div');
+                childrenContainer.className = 'children';
+                node.children.forEach(child => {
+                    childrenContainer.appendChild(createTreeNode(child, level + 1));
+                });
+                div.appendChild(childrenContainer);
+
+                content.addEventListener('click', () => {
+                    div.classList.toggle('expanded');
+                });
+            }
+
+            return div;
+        }
+
+        // 初始化樹狀結構
+        window.onload = function() {
+            const treeRoot = document.getElementById('tree-root');
+            data.children.forEach(child => {
+                treeRoot.appendChild(createTreeNode(child));
+            });
+        };
+    </script>
+</body>
+</html>
