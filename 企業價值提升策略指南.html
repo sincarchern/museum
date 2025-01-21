@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        /* Previous styles remain the same until .cp-formula */
         * {
             margin: 0;
             padding: 0;
@@ -144,6 +145,78 @@
             font-size: 14px;
         }
 
+        /* New styles for case studies */
+        .case-studies {
+            margin-top: 30px;
+        }
+
+        .case-studies-title {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-size: 20px;
+            padding: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .case-box {
+            background: #2a2a2a;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #3498db;
+        }
+
+        .case-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 10px;
+        }
+
+        .case-icon {
+            background: #3498db;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .case-title {
+            color: #ffffff;
+            font-size: 18px;
+        }
+
+        .case-content {
+            color: #cccccc;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .case-metrics {
+            margin-top: 15px;
+            background: #333333;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .case-metrics-title {
+            color: #3498db;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            color: #ffffff;
+        }
+
         footer {
             text-align: center;
             padding: 20px;
@@ -167,9 +240,11 @@
 </head>
 <body>
     <div class="container">
+        <!-- Previous content remains the same until cp-value div -->
         <h1 class="title">企業價值提升策略指南</h1>
         
         <div class="strategy-container">
+            <!-- Previous strategy boxes remain the same -->
             <div class="strategy-box">
                 <h2 class="strategy-title">
                     <div class="strategy-icon">1</div>
@@ -243,9 +318,86 @@
             </div>
         </div>
 
-        <footer>
-            <p>&copy; 2024 Joseph Chen. All rights reserved.</p>
-        </footer>
-    </div>
-</body>
-</html>
+        <!-- New Case Studies Section -->
+        <div class="case-studies">
+            <h2 class="case-studies-title">成功案例分析</h2>
+            
+            <div class="case-box">
+                <div class="case-header">
+                    <div class="case-icon">A</div>
+                    <h3 class="case-title">品牌升級轉型案例</h3>
+                </div>
+                <div class="case-content">
+                    某連鎖餐飲品牌透過全面升級策略，成功從平價形象轉型為精緻休閒餐飲品牌。透過重新設計品牌識別、優化產品品質、提升服務水準等方式，在競爭激烈的市場中脫穎而出。
+                </div>
+                <div class="case-metrics">
+                    <div class="case-metrics-title">關鍵成效指標</div>
+                    <div class="metric-item">
+                        <span>客單價提升</span>
+                        <span>+35%</span>
+                    </div>
+                    <div class="metric-item">
+                        <span>顧客滿意度</span>
+                        <span>4.8/5.0</span>
+                    </div>
+                    <div class="metric-item">
+                        <span>品牌認同度</span>
+                        <span>+45%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="case-box">
+                <div class="case-header">
+                    <div class="case-icon">B</div>
+                    <h3 class="case-title">數位轉型優化案例</h3>
+                </div>
+                <div class="case-content">
+                    在疫情衝擊下，某傳統零售業者透過導入數位服務系統，優化顧客購物體驗。結合線上訂購、會員管理、個人化推薦等功能，成功擴大市場版圖。
+                </div>
+                <div class="case-metrics">
+                    <div class="case-metrics-title">關鍵成效指標</div>
+                    <div class="metric-item">
+                        <span>線上銷售成長</span>
+                        <span>+150%</span>
+                    </div>
+                    <div class="metric-item">
+                        <span>會員數增長</span>
+                        <span>+85%</span>
+                    </div>
+                    <div class="metric-item">
+                        <span>複購率提升</span>
+                        <span>+65%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="case-box">
+                <div class="case-header">
+                    <div class="case-icon">C</div>
+                    <h3 class="case-title">服務創新突破案例</h3>
+                </div>
+                <div class="case-content">
+                    某科技服務公司通過引入AI客服系統與優化人工服務流程，大幅提升客戶服務體驗。同時建立完整的客戶回饋機制，持續改善服務品質。
+                </div>
+                <div class="case-metrics">
+                    <div class="case-metrics-title">關鍵成效指標</div>
+                    <div class="metric-item">
+                        <span>服務效率提升</span>
+                        <span>+75%</span>
+                    </div>
+                    <div class="metric-item">
+                        <span>問題解決率</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="metric-item">
+                        <span>客戶留存率</span>
+                        <span>+40%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<footer>
+  <p>&copy; 2024 Joseph Chen. All rights reserved.</p>
+</footer>
