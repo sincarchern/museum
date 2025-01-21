@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft JhengHei", Arial, sans-serif;
+        }
+
+        body {
+            background: #1a1a1a;
+            padding: 15px;
+            line-height: 1.6;
+            color: white;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .title {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 25px;
+            font-size: 22px;
+            padding: 10px;
+        }
+
+        .strategy-container {
+            display: flex;
+            gap: 15px;
+            flex-direction: column;
+        }
+
+        .strategy-box {
+            background: #2a2a2a;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+            width: 100%;
+            margin-bottom: 5px;
+        }
+
+        .strategy-title {
+            color: #ffffff;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .strategy-icon {
+            width: 24px;
+            height: 24px;
+            background: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+
+        .strategy-content {
+            color: #ffffff;
+        }
+
+        .strategy-description {
+            color: #cccccc;
+            font-size: 14px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #333333;
+            border-radius: 8px;
+        }
+
+        .value-points {
+            list-style: none;
+        }
+
+        .value-points li {
+            margin: 12px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #ffffff;
+        }
+
+        .value-points li:before {
+            content: "✓";
+            color: #3498db;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .value-points li span {
+            color: #aaaaaa;
+            font-size: 13px;
+            display: block;
+            margin-top: 3px;
+            padding-left: 5px;
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #2a2a2a, #333333);
+            color: white;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #3498db;
+        }
+
+        .result-box h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .cp-value {
+            background: linear-gradient(135deg, #2a2a2a, #333333);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+            line-height: 1.8;
+            border: 1px solid #2ecc71;
+        }
+
+        .cp-formula {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            color: #ffffff;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (min-width: 768px) {
+            .strategy-container {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .strategy-box {
+                flex: 1;
+                min-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">企業價值提升策略指南</h1>
+        
+        <div class="strategy-container">
+            <div class="strategy-box">
+                <h2 class="strategy-title">
+                    <div class="strategy-icon">1</div>
+                    傳統行銷策略
+                </h2>
+                <div class="strategy-description">
+                    透過價格調整與促銷活動，快速提升市場競爭力與銷售量
+                </div>
+                <div class="strategy-content">
+                    <ul class="value-points">
+                        <li>折扣優惠<span>針對特定商品或季節性商品提供合理折扣</span></li>
+                        <li>促銷活動<span>設計創意行銷活動，提高顧客購買意願</span></li>
+                        <li>低價競爭<span>在保持合理利潤的前提下，提供具競爭力的價格</span></li>
+                        <li>會員回饋<span>建立會員制度，提供專屬優惠與服務</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="strategy-box">
+                <h2 class="strategy-title">
+                    <div class="strategy-icon">2</div>
+                    核心價值提升
+                </h2>
+                <div class="strategy-description">
+                    從產品本質提升價值，建立長期競爭優勢
+                </div>
+                <div class="strategy-content">
+                    <ul class="value-points">
+                        <li>外觀設計優化<span>產品視覺設計現代化，提升品牌形象</span></li>
+                        <li>包裝質感提升<span>選用優質包裝材料，強化產品質感</span></li>
+                        <li>產品精緻度<span>細節把關，確保每個環節都達到高品質標準</span></li>
+                        <li>原料品質把關<span>嚴選優質原物料，確保產品品質穩定</span></li>
+                        <li>口味研發創新<span>持續研發新口味，滿足市場需求</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="strategy-box">
+                <h2 class="strategy-title">
+                    <div class="strategy-icon">3</div>
+                    消費體驗優化
+                </h2>
+                <div class="strategy-description">
+                    優化整體消費流程，提升顧客滿意度與忠誠度
+                </div>
+                <div class="strategy-content">
+                    <ul class="value-points">
+                        <li>服務態度提升<span>加強員工訓練，提供親切專業的服務</span></li>
+                        <li>作業效率優化<span>streamline工作流程，縮短顧客等待時間</span></li>
+                        <li>環境衛生維護<span>保持環境整潔，創造舒適的消費空間</span></li>
+                        <li>整體體驗提升<span>從多面向優化消費體驗，建立品牌特色</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-box">
+            <h2>預期成果與效益</h2>
+            <ul class="value-points">
+                <li>市場佔有率提升<span>透過全方位策略執行，擴大市場影響力</span></li>
+                <li>企業利潤增加<span>優化成本結構，提升營運效率</span></li>
+                <li>品牌價值建立<span>打造獨特品牌定位，建立市場競爭優勢</span></li>
+                <li>良好口碑累積<span>提供優質產品與服務，贏得顧客信任</span></li>
+            </ul>
+        </div>
+
+        <div class="cp-value">
+            最終目標：達到最佳性價比 (CP值)
+            <div class="cp-formula">
+                優質CP值 = 合理市場價格 + 卓越產品價值 + 優質服務體驗
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Joseph Chen. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
