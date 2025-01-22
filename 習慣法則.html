@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>習慣養成與工作效率提升講義</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        #menu {
+            margin-bottom: 20px;
+        }
+        .content {
+            display: none;
+            margin-top: 10px;
+        }
+        .content.active {
+            display: block;
+        }
+        button {
+            cursor: pointer;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            background-color: black;
+            color: white;
+            padding: 10px;
+        }
+    </style>
+    <script>
+        function showContent(id) {
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => content.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <h1>習慣養成與工作效率提升講義</h1>
+    <div id="menu">
+        <button onclick="showContent('unit1')">第一單元：原子習慣</button>
+        <button onclick="showContent('unit2')">第二單元：工作習慣案例</button>
+    </div>
+
+    <!-- 第一單元：原子習慣 -->
+    <div id="unit1" class="content">
+        <h2>原子習慣</h2>
+        <p><strong>《原子習慣》（Atomic Habits）</strong>是由詹姆斯·克利爾（James Clear）撰寫的一本暢銷書，專注於如何透過微小但持續的習慣改變，達成長遠的目標。書中強調「微小的改變可以帶來巨大影響」，提供了一套實用的方法來建立好習慣並改掉壞習慣。</p>
+        
+        <h3>核心理念：</h3>
+        <ol>
+            <li><strong>習慣的複利效應：</strong>小習慣的持續累積會帶來巨大的改變，就像複利一樣，時間越長，效果越顯著。</li>
+            <li><strong>改變身份認同：</strong>專注於「我是什麼樣的人」，而不是「我想達成什麼目標」。例如，不是「我要減肥」，而是「我是個健康生活的人」。</li>
+            <li><strong>習慣的四個法則：</strong></li>
+            <ul>
+                <li>使之顯而易見：增加習慣的可見性（例如，把健身鞋放在顯眼的位置）。</li>
+                <li>使之有吸引力：結合你喜歡的事情，增加習慣的吸引力（例如，聽喜歡的音樂時運動）。</li>
+                <li>使之容易執行：減少執行的阻力，從簡單的起步開始（例如，先運動2分鐘）。</li>
+                <li>使之令人滿足：立即給予正向反饋（例如，完成習慣後打勾清單）。</li>
+            </ul>
+        </ol>
+
+        <h3>適合對象：</h3>
+        <ul>
+            <li>想改善生活、建立良好習慣的人。</li>
+            <li>希望戒掉壞習慣但屢次失敗的人。</li>
+            <li>對個人成長和效率提升感興趣的人。</li>
+        </ul>
+    </div>
+
+    <!-- 第二單元：工作習慣案例 -->
+    <div id="unit2" class="content">
+        <h2>工作習慣案例</h2>
+        <p>以下為提升工作效率的具體案例：</p>
+        <div id="menu">
+            <button onclick="showContent('case1')">1. 每日設置三個優先任務</button>
+            <button onclick="showContent('case2')">2. 番茄鐘工作法</button>
+            <button onclick="showContent('case3')">3. 工作區域清理習慣</button>
+            <button onclick="showContent('case4')">4. 會議後立即記錄關鍵行動項</button>
+            <button onclick="showContent('case5')">5. 每日回顧與計劃</button>
+            <button onclick="showContent('case6')">6. 專注時間與分心時間的區隔</button>
+            <button onclick="showContent('case7')">7. 定期自我反思和改進</button>
+            <button onclick="showContent('case8')">8. 善用快捷鍵與工具提升效率</button>
+        </div>
+
+        <!-- 工作習慣案例內容 -->
+        <div id="case1" class="content">
+            <h3>每日設置三個優先任務</h3>
+            <p>每天早晨花5分鐘列出最重要的三個任務，幫助聚焦目標。</p>
+        </div>
+        <div id="case2" class="content">
+            <h3>番茄鐘工作法</h3>
+            <p>使用25分鐘專注工作，5分鐘休息，提升專注力並避免疲勞。</p>
+        </div>
+        <div id="case3" class="content">
+            <h3>工作區域清理習慣</h3>
+            <p>每天結束時花5分鐘整理桌面，為第二天創造清爽的工作環境。</p>
+        </div>
+        <div id="case4" class="content">
+            <h3>會議後立即記錄關鍵行動項</h3>
+            <p>會議後立即記錄要執行的事項，避免遺忘細節。</p>
+        </div>
+        <div id="case5" class="content">
+            <h3>每日回顧與計劃</h3>
+            <p>每天花10分鐘回顧當天成果，並為明天列出待辦事項。</p>
+        </div>
+        <div id="case6" class="content">
+            <h3>專注時間與分心時間的區隔</h3>
+            <p>設定專注工作的時段，將手機調至靜音。</p>
+        </div>
+        <div id="case7" class="content">
+            <h3>定期自我反思和改進</h3>
+            <p>每周花30分鐘檢討一周進展，找出改進方向。</p>
+        </div>
+        <div id="case8" class="content">
+            <h3>善用快捷鍵與工具提升效率</h3>
+            <p>學習常用軟體的快捷鍵，減少操作時間。</p>
+        </div>
+    </div>
+
+    <!-- 版權聲明 -->
+    <footer>
+        <p>&copy; 2024 Joseph Chen. All rights reserved.</p>
+    </footer>
+</body>
+</html>
