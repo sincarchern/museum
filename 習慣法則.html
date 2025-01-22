@@ -13,11 +13,11 @@
         #menu {
             margin-bottom: 20px;
         }
-        .content {
+        .content, .case-content {
             display: none;
             margin-top: 10px;
         }
-        .content.active {
+        .content.active, .case-content.active {
             display: block;
         }
         button {
@@ -42,9 +42,17 @@
         }
     </style>
     <script>
+        // 顯示單元內容
         function showContent(id) {
             const contents = document.querySelectorAll('.content');
             contents.forEach(content => content.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        // 顯示案例內容
+        function showCaseContent(id) {
+            const cases = document.querySelectorAll('.case-content');
+            cases.forEach(caseContent => caseContent.classList.remove('active'));
             document.getElementById(id).classList.add('active');
         }
     </script>
@@ -86,47 +94,47 @@
     <div id="unit2" class="content">
         <h2>工作習慣案例</h2>
         <p>以下為提升工作效率的具體案例：</p>
-        <div id="menu">
-            <button onclick="showContent('case1')">1. 每日設置三個優先任務</button>
-            <button onclick="showContent('case2')">2. 番茄鐘工作法</button>
-            <button onclick="showContent('case3')">3. 工作區域清理習慣</button>
-            <button onclick="showContent('case4')">4. 會議後立即記錄關鍵行動項</button>
-            <button onclick="showContent('case5')">5. 每日回顧與計劃</button>
-            <button onclick="showContent('case6')">6. 專注時間與分心時間的區隔</button>
-            <button onclick="showContent('case7')">7. 定期自我反思和改進</button>
-            <button onclick="showContent('case8')">8. 善用快捷鍵與工具提升效率</button>
+        <div id="case-menu">
+            <button onclick="showCaseContent('case1')">1. 每日設置三個優先任務</button>
+            <button onclick="showCaseContent('case2')">2. 番茄鐘工作法</button>
+            <button onclick="showCaseContent('case3')">3. 工作區域清理習慣</button>
+            <button onclick="showCaseContent('case4')">4. 會議後立即記錄關鍵行動項</button>
+            <button onclick="showCaseContent('case5')">5. 每日回顧與計劃</button>
+            <button onclick="showCaseContent('case6')">6. 專注時間與分心時間的區隔</button>
+            <button onclick="showCaseContent('case7')">7. 定期自我反思和改進</button>
+            <button onclick="showCaseContent('case8')">8. 善用快捷鍵與工具提升效率</button>
         </div>
 
         <!-- 工作習慣案例內容 -->
-        <div id="case1" class="content">
+        <div id="case1" class="case-content">
             <h3>每日設置三個優先任務</h3>
             <p>每天早晨花5分鐘列出最重要的三個任務，幫助聚焦目標。</p>
         </div>
-        <div id="case2" class="content">
+        <div id="case2" class="case-content">
             <h3>番茄鐘工作法</h3>
             <p>使用25分鐘專注工作，5分鐘休息，提升專注力並避免疲勞。</p>
         </div>
-        <div id="case3" class="content">
+        <div id="case3" class="case-content">
             <h3>工作區域清理習慣</h3>
             <p>每天結束時花5分鐘整理桌面，為第二天創造清爽的工作環境。</p>
         </div>
-        <div id="case4" class="content">
+        <div id="case4" class="case-content">
             <h3>會議後立即記錄關鍵行動項</h3>
             <p>會議後立即記錄要執行的事項，避免遺忘細節。</p>
         </div>
-        <div id="case5" class="content">
+        <div id="case5" class="case-content">
             <h3>每日回顧與計劃</h3>
             <p>每天花10分鐘回顧當天成果，並為明天列出待辦事項。</p>
         </div>
-        <div id="case6" class="content">
+        <div id="case6" class="case-content">
             <h3>專注時間與分心時間的區隔</h3>
             <p>設定專注工作的時段，將手機調至靜音。</p>
         </div>
-        <div id="case7" class="content">
+        <div id="case7" class="case-content">
             <h3>定期自我反思和改進</h3>
             <p>每周花30分鐘檢討一周進展，找出改進方向。</p>
         </div>
-        <div id="case8" class="content">
+        <div id="case8" class="case-content">
             <h3>善用快捷鍵與工具提升效率</h3>
             <p>學習常用軟體的快捷鍵，減少操作時間。</p>
         </div>
