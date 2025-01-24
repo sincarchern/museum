@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>博物館質性與量化分析概要</title>
+    <title>博物館質性與量化分析專論</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -206,6 +206,16 @@
         }
 
         function toggleContent(id) {
+            // Hide all interactive content in the current section
+            const section = document.getElementById(id).closest('.section');
+            const interactiveElements = section.querySelectorAll('.interactive');
+            interactiveElements.forEach(el => {
+                if (el.id !== id) {
+                    el.classList.remove('show');
+                }
+            });
+
+            // Toggle the clicked content
             const content = document.getElementById(id);
             content.classList.toggle('show');
         }
