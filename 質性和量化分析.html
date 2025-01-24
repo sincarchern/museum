@@ -144,11 +144,27 @@
     </footer>
 
 <script>
-    function toggleContent(id) {
-        const content = document.getElementById(id);
-        content.classList.toggle('show');
-    }
-</script>
+        function checkPassword() {
+            const passwordInput = document.getElementById('password-input');
+            const loginPage = document.getElementById('login-page');
+            const mainContent = document.getElementById('main-content');
+            const errorMessage = document.getElementById('error-message');
+
+            if (passwordInput.value === '123') {
+                loginPage.style.display = 'none';
+                mainContent.style.display = 'block';
+                errorMessage.textContent = '';
+            } else {
+                errorMessage.textContent = '密碼錯誤，請重試';
+                passwordInput.value = '';
+            }
+        }
+
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            content.classList.toggle('show');
+        }
+    </script>
     
 </body>
 </html>
