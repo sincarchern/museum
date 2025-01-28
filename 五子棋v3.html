@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>19x19 五子棋遊戲</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #board {
+            display: grid;
+            grid-template-columns: repeat(19, 30px);
+            grid-template-rows: repeat(19, 30px);
+            background-color: #e4b873;
+            padding: 15px;
+            border: 2px solid #000;
+            position: relative;
+        }
+        .cell {
+            width: 30px;
+            height: 30px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .cell::before, .cell::after {
+            content: '';
+            position: absolute;
+            background-color: #000;
+        }
+        .cell::before {
+            width: 100%;
+            height: 1px;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+        .cell::after {
+            width: 1px;
+            height: 100%;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+        }
+        .cell.cross::before {
+            width: 4px;
+            height: 4px;
+            background-color: #000;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .stone {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 1;
+            animation: placeStone 0.3s ease-in-out;
+        }
+        @keyframes placeStone {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .stone.black { background-color: #000; }
+        .stone.white { background-color: #fff; border: 1px solid #000; }
+        #timer { margin-top: 20px; font-size: 24px; font-weight: bold; }
+        #status { margin-top: 10px; font-size: 18px; }
+        #undoButton, #startButton { margin-top: 10px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        #modeSelect { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div id="modeSelect">
+        <label for="mode">選擇模式：</label>
+        <select id="mode">
+            <option value="ai">與 AI 對戰</option>
+            <option value="human">兩人對戰</option>
+        </select>
+        <button id="startButton">開始遊戲</button>
+    </div>
+    <div id="game" style="display: none;">
+        <div id="board"></div>
+        <div id="timer">黑方時間: 0 秒</div>
+        <div id="status">當前玩家: 黑方</div>
+        <button id="undoButton">悔棋</button>
+    </div>
+
+    <script>
+        const boardSize = 19;
+        const board = [];
+        let currentPlayer = 'black';
+        let blackTime = 0;
+        let whiteTime = 0;
+        let timerInterval;
+        let mode = 'ai'; // 默認為與 AI 對戰
+        const moveHistory = [];
+        const boardElement = document.getElementById('board');
+        const timerElement = document.getElementById('timer');
+        const statusElement = document.getElementById('status');
+        const undoButton = document.getElementById('undoButton');
+        const startButton = document.getElementById('startButton');
+        const modeSelect = document.getElementById('modeSelect');
+        const gameSection = document.getElementById('game');
+
+        startButton.addEventListener('click', () => {
+            mode = document.getElementById('mode').value; // 取得選擇的模式
+            modeSelect.style.display = 'none'; // 隱藏模式選擇
+            gameSection.style.display = 'block'; // 顯示遊戲區域
+            resetBoard();
+        });
+
+        function initBoard() {
+            boardElement.innerHTML = ''; // 清空棋盤
+            for (let i = 0; i < boardSize; i++) {
+                board[i] = [];
+                for (let j = 0; j < boardSize; j++) {
+                    board[i][j] = null;
+                    const cell = document.createElement('div');
+                    cell.classList.add('cell');
+                    if ((i === 3 && j === 3) || (i === 3 && j === 9) || (i === 3 && j === 15) ||
+                        (i === 9 && j === 3) || (i === 9 && j === 9) || (i === 9 && j === 15) ||
+                        (i === 15 && j === 3) || (i === 15 && j === 9) || (i === 15 && j === 15)) {
+                        cell.classList.add('cross');
+                    }
+                    cell.dataset.row = i;
+                    cell.dataset.col = j;
+                    cell.addEventListener('click', onCellClick);
+                    boardElement.appendChild(cell);
+                }
+            }
+        }
+
+        function onCellClick(event) {
+            const row = parseInt(event.target.dataset.row);
+            const col = parseInt(event.target.dataset.col);
+            if (board[row][col] !== null) return; // 該位置已經有棋子
+
+            placeStone(row, col, currentPlayer);
+
+            if (checkWin(row, col)) {
+                alert(`${currentPlayer === 'black' ? '黑' : '白'}方獲勝！`);
+                resetBoard();
+                return;
+            }
+
+            switchPlayer();
+            if (mode === 'ai' && currentPlayer === 'white') {
+                setTimeout(AIMove, 500); // AI 在 0.5 秒後下棋
+            }
+        }
+
+        function placeStone(row, col, player) {
+            board[row][col] = player;
+            const stone = document.createElement('div');
+            stone.classList.add('stone', player);
+            const cell = document.querySelector(`.cell[data-row='${row}'][data-col='${col}']`);
+            cell.appendChild(stone);
+            moveHistory.push({ row, col, player });
+        }
+
+        function switchPlayer() {
+            currentPlayer = currentPlayer === 'black' ? 'white' : 'black';
+            statusElement.textContent = `當前玩家: ${currentPlayer === 'black' ? '黑方' : '白方'}`;
+            updateTimer();
+        }
+
+        function updateTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                if (currentPlayer === 'black') {
+                    blackTime++;
+                } else {
+                    whiteTime++;
+                }
+                timerElement.textContent = `黑方時間: ${blackTime} 秒 | 白方時間: ${whiteTime} 秒`;
+            }, 1000);
+        }
+
+        function AIMove() {
+            const bestMove = getBestMove();
+            placeStone(bestMove.row, bestMove.col, 'white');
+
+            if (checkWin(bestMove.row, bestMove.col)) {
+                alert('白方獲勝！');
+                resetBoard();
+                return;
+            }
+
+            switchPlayer();
+        }
+
+        function getBestMove() {
+            // 簡單 AI 的最佳移動邏輯
+            for (let i = 0; i < boardSize; i++) {
+                for (let j = 0; j < boardSize; j++) {
+                    if (board[i][j] === null) {
+                        return { row: i, col: j };
+                    }
+                }
+            }
+        }
+
+        function checkWin(row, col) {
+            const directions = [[1, 0], [0, 1], [1, 1], [1, -1]];
+            for (const [dx, dy] of directions) {
+                let count = 1;
+                for (let i = 1; i < 5; i++) {
+                    if (row + i * dx >= 0 && row + i * dx < boardSize &&
+                        col + i * dy >= 0 && col + i * dy < boardSize &&
+                        board[row + i * dx][col + i * dy] === currentPlayer) {
+                        count++;
+                    } else break;
+                }
+                for (let i = 1; i < 5; i++) {
+                    if (row - i * dx >= 0 && row - i * dx < boardSize &&
+                        col - i * dy >= 0 && col - i * dy < boardSize &&
+                        board[row - i * dx][col - i * dy] === currentPlayer) {
+                        count++;
+                    } else break;
+                }
+                if (count >= 5) return true;
+            }
+            return false;
+        }
+
+        function resetBoard() {
+            initBoard();
+            currentPlayer = 'black';
+            blackTime = 0;
+            whiteTime = 0;
+            clearInterval(timerInterval);
+            timerElement.textContent = `黑方時間: 0 秒 | 白方時間: 0 秒`;
+            statusElement.textContent = '當前玩家: 黑方';
+            updateTimer();
+            moveHistory.length = 0;
+        }
+
+        // 初始化遊戲
+        initBoard();
+    </script>
+</body>
+</html>
