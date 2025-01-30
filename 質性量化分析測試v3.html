@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研究方法指南 - 質性與量化分析</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --background: #f9f9f9;
+            --text-color: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans TC', sans-serif;
+            line-height: 1.8;
+            background: var(--background);
+            color: var(--text-color);
+            font-size: 16px;
+        }
+
+        /* 導航系統 */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+        }
+
+        .hamburger {
+            padding: 12px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .hamburger .bar {
+            width: 25px;
+            height: 2px;
+            background: var(--primary-color);
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        .nav-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .nav-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        /* 主要內容 */
+        .content {
+            padding: 20px;
+            margin-top: 60px;
+        }
+
+        .chapter {
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .chapter:hover {
+            transform: translateY(-2px);
+        }
+
+        .chapter-title {
+            color: var(--primary-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .toggle-btn {
+            font-size: 1.4em;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .info-icon {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--secondary-color);
+            border-radius: 50%;
+            text-align: center;
+            font-size: 12px;
+            margin-left: 8px;
+            cursor: help;
+        }
+
+        .step-guide {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid var(--secondary-color);
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            background: var(--secondary-color);
+            color: white;
+            text-align: center;
+            line-height: 28px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #e0e0e0;
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background: var(--secondary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .interactive-hint {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--secondary-color);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            opacity: 0.9;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        /* 深色模式 */
+        .dark-mode {
+            --primary-color: #ecf0f1;
+            --secondary-color: #e74c3c;
+            --background: #2c3e50;
+            --text-color: #f0f0f0;
+        }
+
+        .dark-mode .chapter {
+            background: rgba(44, 62, 80, 0.9);
+        }
+
+        /* 工具卡片樣式 */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .tool-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+            transition: transform 0.2s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 15px;
+            }
+
+            .content {
+                padding: 15px;
+                margin-top: 50px;
+            }
+
+            .chapter {
+                padding: 20px;
+                margin-bottom: 25px;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            .interactive-hint {
+                bottom: 10px;
+                right: 10px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="mobile-nav">
+        <div class="nav-header">
+            <div class="hamburger" onclick="toggleNav()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <button onclick="toggleDarkMode()">🌓 模式切換</button>
+        </div>
+        <div class="nav-menu">
+            <div class="nav-item" data-target="guide">📘 使用指南</div>
+            <div class="nav-item" data-target="qualitative">🔍 質性分析</div>
+            <div class="nav-item" data-target="quantitative">📊 量化分析</div>
+            <div class="nav-item" data-target="comparison">⚖️ 方法比較</div>
+            <div class="nav-item" data-target="cases">📌 實際案例</div>
+        </div>
+    </nav>
+
+    <main class="content">
+        <!-- 使用指南 -->
+        <section class="chapter" id="guide">
+            <h2 class="chapter-title" onclick="toggleChapter(this)">
+                📘 使用指南
+                <span class="toggle-btn">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <div class="step-guide">
+                    <div class="step-number">1</div>
+                    <h3>快速導航</h3>
+                    <p>點擊右上角漢堡菜單展開導航列表，可快速跳轉至不同章節</p>
+                </div>
+
+                <div class="step-guide">
+                    <div class="step-number">2</div>
+                    <h3>內容交互</h3>
+                    <ul>
+                        <li>點擊章節標題展開/收合內容</li>
+                        <li>長按表格可橫向滾動查看完整內容</li>
+                        <li>雙指縮放調整閱讀大小</li>
+                    </ul>
+                </div>
+
+                <div class="step-guide">
+                    <div class="step-number">3</div>
+                    <h3>閱讀模式</h3>
+                    <p>點擊右上角「模式切換」按鈕可在日間/夜間模式間切換</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 質性分析 -->
+        <section class="chapter" id="qualitative">
+            <h2 class="chapter-title" onclick="toggleChapter(this)">
+                🔍 質性分析
+                <span class="toggle-btn">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <h3>定義與特點 <span class="info-icon" title="適用於探索性研究和深度理解">i</span></h3>
+                <p>質性分析是通過非結構化資料（文字、影像、觀察記錄等）深入理解社會現象的研究方法，強調在自然情境中解讀參與者的主觀經驗。</p>
+                
+                <div class="step-guide">
+                    <div class="step-number">1</div>
+                    <h4>典型應用場景</h4>
+                    <ul>
+                        <li>探索新興研究領域</li>
+                        <li>理解複雜社會現象</li>
+                        <li>建構理論框架</li>
+                    </ul>
+                </div>
+
+                <h3>方法流程 <span class="info-icon" title="具高度靈活性與迭代特性">i</span></h3>
+                <ol>
+                    <li>確定研究問題</li>
+                    <li>選擇研究對象</li>
+                    <li>數據收集（訪談/觀察）</li>
+                    <li>開放編碼分析</li>
+                    <li>理論建構與驗證</li>
+                </ol>
+
+                <h3>常用工具</h3>
+                <div class="tool-grid">
+                    <div class="tool-card">
+                        <h4>📚 NVivo</h4>
+                        <p>質性分析專業軟體，支援多媒體資料編碼</p>
+                    </div>
+                    <div class="tool-card">
+                        <h4>📊 MAXQDA</h4>
+                        <p>混合方法研究平台，整合質性與量化數據</p>
+                    </div>
+                    <div class="tool-card">
+                        <h4>🔍 Atlas.ti</h4>
+                        <p>視覺化分析工具，強化理論建構功能</p>
+                    </div>
+                </div>
+
+                <h3>優缺點比較</h3>
+                <table>
+                    <tr><th>優勢</th><th>限制</th></tr>
+                    <tr><td>深度理解脈絡</td><td>研究者主觀影響</td></tr>
+                    <tr><td>方法靈活彈性</td><td>耗時成本較高</td></tr>
+                    <tr><td>理論建構能力</td><td>推論範圍有限</td></tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- 量化分析 -->
+        <section class="chapter" id="quantitative">
+            <h2 class="chapter-title" onclick="toggleChapter(this)">
+                📊 量化分析
+                <span class="toggle-btn">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <h3>核心特徵 <span class="info-icon" title="強調客觀測量與統計驗證">i</span></h3>
+                <p>通過結構化數據驗證假設，建立變量間的數量關係，具有高度標準化和可重複性特點。</p>
+                
+                <div class="step-guide">
+                    <div class="step-number">1</div>
+                    <h4>典型應用場景</h4>
+                    <ul>
+                        <li>驗證理論假設</li>
+                        <li>大規模趨勢預測</li>
+                        <li>效果評估與比較</li>
+                    </ul>
+                </div>
+
+                <h3>方法流程 <span class="info-icon" title="遵循預設研究設計">i</span></h3>
+                <ol>
+                    <li>明確研究假設</li>
+                    <li>操作化變量定義</li>
+                    <li>標準化數據採集</li>
+                    <li>統計模型構建</li>
+                    <li>結果效度驗證</li>
+                </ol>
+
+                <h3>技術工具</h3>
+                <div class="tool-grid">
+                    <div class="tool-card">
+                        <h4>📈 SPSS</h4>
+                        <p>基礎統計分析工具，適合描述統計與基礎推論分析</p>
+                    </div>
+                    <div class="tool-card">
+                        <h4>🐍 Python</h4>
+                        <p>SciPy/Pandas 庫支援複雜數據建模與機器學習</p>
+                    </div>
+                    <div class="tool-card">
+                        <h4>📉 R Studio</h4>
+                        <p>專業統計分析與視覺化平台</p>
+                    </div>
+                </div>
+
+                <h3>進階方法</h3>
+                <table>
+                    <tr><th>方法類型</th><th>應用場景</th><th>常用檢定</th></tr>
+                    <tr><td>描述統計</td><td>數據特徵摘要</td><td>頻數分析、交叉表</td></tr>
+                    <tr><td>推論統計</td><td>假設驗證</td><td>t檢定、ANOVA</td></tr>
+                    <tr><td>多變量分析</td><td>關係建模</td><td>迴歸分析、SEM</td></tr>
+                </table>
+
+                <div class="step-guide">
+                    <div class="step-number">!</div>
+                    <h4>方法選擇原則</h4>
+                    <ul>
+                        <li>數據類型決定分析方法</li>
+                        <li>研究問題決定模型複雜度</li>
+                        <li>樣本量影響統計效力</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 方法比較 -->
+        <section class="chapter" id="comparison">
+            <h2 class="chapter-title" onclick="toggleChapter(this)">
+                ⚖️ 方法比較
+                <span class="toggle-btn">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <table>
+                    <tr><th>維度</th><th>質性分析</th><th>量化分析</th></tr>
+                    <tr><td>研究目標</td><td>探索現象意義</td><td>驗證變量關係</td></tr>
+                    <tr><td>數據形式</td><td>文字/影像</td><td>數值/量表</td></tr>
+                    <tr><td>樣本特性</td><td>深度小樣本</td><td>廣度大樣本</td></tr>
+                    <tr><td>分析焦點</td><td>過程與脈絡</td><td>結果與效應</td></tr>
+                    <tr><td>理論角色</td><td>生成理論</td><td>檢驗理論</td></tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- 實際案例 -->
+        <section class="chapter" id="cases">
+            <h2 class="chapter-title" onclick="toggleChapter(this)">
+                📌 實際案例
+                <span class="toggle-btn">▼</span>
+            </h2>
+            <div class="chapter-content">
+                <div class="tool-grid">
+                    <div class="tool-card">
+                        <h4>🏥 醫療研究</h4>
+                        <p><strong>質性：</strong>醫病溝通模式觀察<br>
+                        <strong>量化：</strong>藥物療效隨機對照試驗</p>
+                    </div>
+                    <div class="tool-card">
+                        <h4>🌍 社會調查</h4>
+                        <p><strong>質性：</strong>都市更新訪談研究<br>
+                        <strong>量化：</strong>人口普查數據分析</p>
+                    </div>
+                    <div class="tool-card">
+                        <h4>📱 用戶研究</h4>
+                        <p><strong>混合：</strong>先進行焦點團體訪談，再設計量化問卷驗證</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="interactive-hint" onclick="scrollToTop()">
+            ↑ 返回頂部
+        </div>
+    </main>
+
+    <script>
+        // 互動功能
+        let isNavOpen = false;
+
+        function toggleNav() {
+            const navMenu = document.querySelector('.nav-menu');
+            const hamburger = document.querySelector('.hamburger');
+            isNavOpen = !isNavOpen;
+
+            navMenu.style.maxHeight = isNavOpen ? `${navMenu.scrollHeight}px` : '0';
+            hamburger.style.transform = isNavOpen ? 'rotate(90deg)' : 'rotate(0)';
+        }
+
+        function scrollToChapter(id) {
+            const target = document.getElementById(id);
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            toggleNav();
+        }
+
+        function toggleChapter(element) {
+            const content = element.nextElementSibling;
+            content.classList.toggle('active');
+            element.querySelector('.toggle-btn').textContent = content.classList.contains('active') ? '▲' : '▼';
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        }
+
+        // 初始化
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+
+        // 事件委託
+        document.querySelector('.nav-menu').addEventListener('click', (e) => {
+            if (e.target.classList.contains('nav-item')) {
+                const targetId = e.target.getAttribute('data-target');
+                scrollToChapter(targetId);
+            }
+        });
+
+        document.querySelectorAll('.chapter-title').forEach(title => {
+            title.addEventListener('click', () => toggleChapter(title));
+        });
+    </script>
+</body>
+</html>
