@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrum 框架與實踐指南</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        main {
+            padding: 20px;
+            background-color: white;
+            margin: 20px auto;
+            max-width: 900px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        h1, h2, h3 {
+            color: #333;
+        }
+
+        section {
+            margin-bottom: 30px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1em 0;
+            background-color: #333;
+            color: white;
+        }
+
+        .toc {
+            background-color: #f2f2f2;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .toc a {
+            color: #4CAF50;
+            text-decoration: none;
+            display: block;
+            margin: 5px 0;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .back-to-top {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .back-to-top:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Scrum 框架與實踐指南</h1>
+</header>
+
+<main>
+
+    <!-- 目錄 -->
+    <section class="toc">
+        <h2>目錄</h2>
+        <ul>
+            <li><a href="#section1">1. Scrum 的核心角色</a></li>
+            <li><a href="#section2">2. Scrum 的專案項目</a></li>
+            <li><a href="#section3">3. Scrum 的活動</a></li>
+            <li><a href="#section4">4. Scrum 的價值觀</a></li>
+            <li><a href="#section5">實踐建議與範例</a></li>
+            <li><a href="#section6">實踐細節</a></li>
+            <li><a href="#section7">工具建議</a></li>
+        </ul>
+    </section>
+
+    <!-- 內容 -->
+    <section id="section1">
+        <h2>1. Scrum 的核心角色</h2>
+        <p>Scrum 有三個角色，確保團隊協作高效：</p>
+        <ul>
+            <li><strong>產品負責人（Product Owner）</strong>：決定產品待辦清單（Product Backlog）的優先順序，確保團隊創造最大價值。</li>
+            <li><strong>Scrum 團隊（Scrum Team）</strong>：負責實際交付產品增量（Increment）的跨功能團隊，通常包括開發人員。</li>
+            <li><strong>Scrum 大師（Scrum Master）</strong>：協助團隊實踐 Scrum，移除障礙並促進流程改進。</li>
+        </ul>
+        <button class="back-to-top" onclick="scrollToTop()">回到目錄</button>
+    </section>
+
+    <section id="section2">
+        <h2>2. Scrum 的專案項目</h2>
+        <p>Scrum 框架中有三個主要的專案項目：</p>
+        <ul>
+            <li><strong>產品待辦清單（Product Backlog）</strong>：產品的所有需求清單，由產品負責人持續更新與優化。</li>
+            <li><strong>短期迭代待辦清單（Sprint Backlog）</strong>：每次短期迭代（Sprint）期間要完成的工作，由團隊選取自產品待辦清單。</li>
+            <li><strong>增量（Increment）</strong>：每個短期迭代產生的可交付價值，應滿足「完成的定義」（Definition of Done）。</li>
+        </ul>
+        <button class="back-to-top" onclick="scrollToTop()">回到目錄</button>
+    </section>
+
+    <section id="section3">
+        <h2>3. Scrum 的活動</h2>
+        <p>Scrum 中有四個主要活動：</p>
+        <ul>
+            <li><strong>短期迭代計劃會議（Sprint Planning）</strong>：確定短期迭代目標和將完成的工作。</li>
+            <li><strong>每日站會（Daily Scrum）</strong>：短暫的每日會議，幫助團隊同步進度並解決問題。</li>
+            <li><strong>短期迭代檢視（Sprint Review）</strong>：在短期迭代結束時展示增量並獲取反饋。</li>
+            <li><strong>短期迭代回顧（Sprint Retrospective）</strong>：反思團隊合作與流程，提出改進計劃。</li>
+        </ul>
+        <button class="back-to-top" onclick="scrollToTop()">回到目錄</button>
+    </section>
+
+    <section id="section4">
+        <h2>4. Scrum 的價值觀</h2>
+        <p>Scrum 的五大核心價值觀：</p>
+        <ul>
+            <li><strong>專注（Focus）</strong></li>
+            <li><strong>開放（Openness）</strong></li>
+            <li><strong>承諾（Commitment）</strong></li>
+            <li><strong>尊重（Respect）</strong></li>
+            <li><strong>勇氣（Courage）</strong></li>
+        </ul>
+        <button class="back-to-top" onclick="scrollToTop()">回到目錄</button>
+    </section>
+
+    <section id="section5">
+        <h2>實踐建議與範例</h2>
+        <h3>1. 實踐建議</h3>
+        <ul>
+            <li><strong>建立「完成的定義」</strong>：明確列出什麼樣的工作才算完成，確保團隊對交付標準達成共識。</li>
+            <li><strong>規劃合理的短期迭代長度</strong>：通常為 1～4 週，選擇適合團隊的週期。</li>
+            <li><strong>每日站會時間控制在 15 分鐘內</strong>：每個人回答三個問題，避免進行技術討論。</li>
+            <li><strong>透明化工作進度</strong>：使用工具（如 Jira、Trello、看板牆）可視化進度。</li>
+            <li><strong>短期迭代回顧要聚焦改進</strong>：鼓勵團隊成員分享並設定具體的改進行動。</li>
+            <li><strong>避免產品負責人過度干預短期迭代進行中</strong>：在短期迭代期間避免頻繁更改需求。</li>
+        </ul>
+
+        <h3>2. 實踐範例</h3>
+        <h4>範例 1：軟體開發團隊的 Sprint</h4>
+        <p>短期迭代目標：在 2 週內完成用戶註冊頁面功能並整合至現有系統。</p>
+        <ul>
+            <li>設計用戶界面原型</li>
+            <li>撰寫後端 API</li>
+            <li>實現前端功能並與 API 整合</li>
+            <li>撰寫自動化測試</li>
+            <li>確保所有功能通過測試</li>
+        </ul>
+
+        <h4>範例 2：博物館活動專案管理</h4>
+        <p>短期迭代目標：在 3 週內完成博物館「特展導覽活動」的策劃與報名系統搭建。</p>
+        <ul>
+            <li>撰寫活動企劃書</li>
+            <li>制作活動宣傳海報</li>
+            <li>與外部導覽講師確認檔期</li>
+            <li>搭建線上報名系統</li>
+            <li>測試並確認報名流程順暢</li>
+        </ul>
+        <button class="back-to-top" onclick="scrollToTop()">回到目錄</button>
+    </section>
+
+    <section id="section6">
+        <h2>實踐細節</h2>
+        <h3>1. 短期迭代規劃（Sprint Planning）</h3>
+        <p>時間長度：短期迭代開始時舉行，通常控制在 2 小時內。</p>
+        <h3>2. 每日站會（Daily Scrum）</h3>
+        <p>每位成員回答三個核心問題，並分享進度與障礙。</p>
+        <h3>3. 短期迭代檢視（Sprint Review）</h3>
+        <p>展示完成的產品增量，接受利益相關者的反饋。</p>
+        <h3>4. 短期迭代回顧（Sprint Retrospective）</h3>
+        <p>討論哪些實踐該開始、停止或繼續。</p>
+        <button class="back-to-top" onclick="scrollToTop()">回到目錄</button>
+    </section>
+
+    <section id="section7">
+        <h2>工具建議</h2>
+        <ul>
+            <li><strong>Jira</strong>：完整的 Scrum 工具，支援產品待辦清單管理、短期迭代規劃、每日站會和報表分析。</li>
+            <li><strong>Trello</strong>：簡單易用的看板管理工具。</li>
+            <li><strong>ClickUp</strong>：結合任務清單、甘特圖和看板。</li>
+            <li><strong>Slack</strong>：團隊即時溝通工具。</li>
+            <li><strong>Miro</strong>：白板工具，適合遠程協作。</li>
+        </ul>
+        <button class="back-to-top" onclick="scrollToTop()">回到目錄</button>
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2025 Scrum 框架與實踐指南</p>
+</footer>
+
+<script>
+    // 當頁面向下滾動時顯示 "回到目錄" 按鈕
+    window.onscroll = function() {
+        let button = document.querySelector(".back-to-top");
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            button.style.display = "block";
+        } else {
+            button.style.display = "none";
+        }
+    };
+
+    // 當點擊 "回到目錄" 按鈕時，將頁面滾動到目錄
+    function scrollToTop() {
+        document.querySelector(".toc").scrollIntoView({ behavior: "smooth" });
+    }
+</script>
+
+</body>
+</html>
