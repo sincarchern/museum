@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博物館猜燈謎</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #2ecc71;
+            --danger-color: #e74c3c;
+        }
+        body {
+            font-family: '微軟正黑體', Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .game-container {
+            max-width: 600px;
+            margin: 1rem auto;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+        .scene {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        button {
+            width: 100%;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        .btn-primary {
+            background: var(--secondary-color);
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #eee;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        .progress {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--secondary-color), var(--success-color));
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        .score-board {
+            display: flex;
+            justify-content: space-between;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        .victory, .game-over, .champion {
+            text-align: center;
+            font-size: 1.5rem;
+            margin: 2rem 0;
+        }
+        .victory {
+            color: var(--success-color);
+            animation: celebration 2s infinite;
+        }
+        .game-over {
+            color: var(--danger-color);
+        }
+        .wrong-answers {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #fff3f3;
+            border-radius: 10px;
+        }
+        .wrong-answers h3 {
+            color: var(--danger-color);
+        }
+        @keyframes celebration {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* 修改部分 */
+        .victory-text {
+            color: red;
+            font-size: 2rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="score-board">
+        <div>⏳ 剩餘時間：<span id="timer">10:00</span></div>
+        <div>🏆 正確：<span id="correctCount">0</span> / <span id="totalCount">10</span></div>
+    </div>
+
+    <div class="game-container">
+        <h1 style="text-align:center;color:var(--primary-color)">🏛️ 博物館猜燈謎 🏛️</h1>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+
+        <div id="gameScene"></div>
+
+        <!-- 勝利畫面 -->
+        <div id="victory" class="scene">
+            <h2 class="victory">🎉 恭喜完成燈謎挑戰！</h2>
+            <h3 class="victory-text">元宵節快樂！</h3> <!-- 修改部分 -->
+            <div class="wrong-answers" id="wrongAnswersVictory"></div>
+            <button onclick="restart()" class="btn-primary">重新開始</button>
+        </div>
+
+        <!-- 超時結束 -->
+        <div id="gameOver" class="scene">
+            <div class="game-over">⏰ 時間到！遊戲結束</div>
+            <div class="wrong-answers" id="wrongAnswersGameOver"></div>
+            <button onclick="restart()" class="btn-primary">重新開始</button>
+        </div>
+
+        <!-- 未全對結束 -->
+        <div id="encouragement" class="scene">
+            <h2 class="game-over">再接再厲！</h2>
+            <div class="wrong-answers" id="wrongAnswersEncouragement"></div>
+            <button onclick="restart()" class="btn-primary">重新開始</button>
+        </div>
+    </div>
+
+    <!-- 喜慶音效 -->
+    <audio id="correctSound" src="https://assets.mixkit.co/active_storage/sfx/2577/2577-preview.mp3"></audio>
+
+    <script>
+        const gameData = [
+            { question: '「四方珍寶無價值，萬人瞻仰不失時。」(猜一場所)', options: ['博物館', '圖書館', '廟宇'], answer: '博物館' },
+            { question: '「此物原產中國，卻遍布世界的每個博物館」(猜一物)', options: ['瓷器', '青銅器', '繪畫'], answer: '瓷器' },
+            { question: '「時光流轉留千年，世人尋來驚神顏。」(猜一收藏)', options: ['木乃伊', '兵馬俑', '化石'], answer: '木乃伊' },
+            { question: '「殿堂林立光輝耀，藏品萬千世人驚。」(猜一地點)', options: ['羅浮宮', '大英博物館', '國立歷史博物館'], answer: '羅浮宮' },
+            { question: '「千里江山一畫卷，無人不識丹青名。」(猜一作品)', options: ['清明上河圖', '千里江山圖', '蒙娜麗莎'], answer: '千里江山圖' },
+            { question: '「獸面人心古時兵，金戈鐵馬映忠魂。」(猜一收藏)', options: ['青銅器', '兵馬俑', '石雕'], answer: '兵馬俑' },
+            { question: '「展覽古今，照見文明光輝。」(猜一博物館)', options: ['羅浮宮', '國立歷史博物館', '美國史密森學會博物館'], answer: '國立歷史博物館' },
+            { question: '「船舶模型嵌入牆，航海歷史任人嘗。」(猜一主題)', options: ['海事博物館', '自然博物館', '藝術博物館'], answer: '海事博物館' },
+            { question: '「探究萬物奧秘，地球之美皆展。」(猜一博物館類型)', options: ['自然博物館', '科學博物館', '藝術博物館'], answer: '自然博物館' },
+            { question: '「過去未來一條線，流轉時光展其中。」(猜一主題)', options: ['時間博物館', '考古博物館', '科技博物館'], answer: '考古博物館' }
+        ];
+
+        let currentScene = 0;
+        let score = 0;
+        let wrongAnswers = [];
+        let timeLeft = 600;
+
+        document.getElementById('totalCount').textContent = gameData.length;
+
+        function initGame() {
+            loadQuestion();
+            startTimer();
+        }
+
+        function loadQuestion() {
+            document.getElementById('gameScene').innerHTML = `
+                <div id="scene${currentScene}" class="scene active">
+                    <p style="font-size:1.2rem;margin-bottom:1.5rem;">${gameData[currentScene].question}</p>
+                    ${gameData[currentScene].options.map(opt => `
+                        <button class="btn-primary" onclick="checkAnswer('${opt}')">${opt}</button>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function checkAnswer(answer) {
+            const sound = document.getElementById('correctSound');
+            sound.play().then(() => sound.pause()).catch(() => {});
+            sound.currentTime = 0;
+
+            if (answer === gameData[currentScene].answer) {
+                sound.play();
+                score++;
+                document.getElementById('correctCount').textContent = score;
+                updateProgress();
+            } else {
+                wrongAnswers.push({
+                    question: gameData[currentScene].question
+                });
+            }
+            nextScene();
+        }
+
+        function nextScene() {
+            currentScene++;
+            if (currentScene < gameData.length) {
+                loadQuestion();
+            } else {
+                if (score === gameData.length) {
+                    endChampion();
+                } else {
+                    endGame(false);
+                }
+            }
+        }
+
+        function updateProgress() {
+            document.querySelector('.progress').style.width = 
+                `${(score / gameData.length) * 100}%`;
+        }
+
+        function startTimer() {
+            const timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').textContent = 
+                    `${Math.floor(timeLeft/60).toString().padStart(2,'0')}:${(timeLeft%60).toString().padStart(2,'0')}`;
+                if(timeLeft <= 0) {
+                    clearInterval(timer);
+                    endGame(true);
+                }
+            }, 1000);
+        }
+
+        function endChampion() {
+            switchScene('victory', 'wrongAnswersVictory');
+        }
+
+        function endGame(isTimeout) {
+            if(isTimeout) {
+                switchScene('gameOver', 'wrongAnswersGameOver');
+            } else {
+                switchScene('encouragement', 'wrongAnswersEncouragement');
+            }
+        }
+
+        function switchScene(sceneId, wrongAnswersId) {
+            document.querySelectorAll('.scene').forEach(scene => {
+                scene.classList.remove('active');
+            });
+            const targetScene = document.getElementById(sceneId);
+            targetScene.classList.add('active');
+            displayWrongAnswers(wrongAnswersId);
+        }
+
+        function displayWrongAnswers(containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = `
+                <h3>答錯題目 (${wrongAnswers.length}題)：</h3>
+                ${wrongAnswers.map((item, index) => `
+                    <div style="margin:1rem 0;padding:1rem;background:#fff;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.1)">
+                        <p style="color:var(--danger-color);margin:0;">❌ 第${index+1}題：${item.question}</p>
+                    </div>
+                `).join('')}
+            `;
+        }
+
+        function restart() {
+            location.reload();
+        }
+
+        initGame();
+    </script>
+    <div class="footer">
+        <p>Joseph Chen 製作</p>
+    </div>
+
+    <style>
+        .footer {
+            background-color: red;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 0.8rem;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</body>
+</html>
