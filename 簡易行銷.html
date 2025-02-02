@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>簡易行銷策略</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; padding: 20px; }
+        h1, h2 { color: #333; }
+        .section { margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .question { font-weight: bold; color: #007bff; cursor: pointer; }
+        .answer { display: none; padding-top: 10px; color: #555; }
+        .highlight { color: #d9534f; font-weight: bold; }
+        .footer { margin-top: 30px; padding: 10px; background-color: #000; color: #fff; text-align: center; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h1>簡易行銷策略</h1>
+
+    <div class="section">
+        <h2>1️⃣ 什麼是行銷策略？</h2>
+        <p>行銷策略就是 <span class="highlight">讓更多人知道你的產品，並願意購買或使用的方法</span>。</p>
+        <p>想像你在賣珍珠奶茶，行銷策略就是如何讓大家選擇你的奶茶，而不是隔壁家的。</p>
+    </div>
+
+    <div class="section">
+        <h2>2️⃣ 如何讓更多人來買？</h2>
+        <p>假設你開了一家奶茶店，怎麼樣才能讓更多人來買？你可以這樣做：</p>
+        <ul>
+            <li><strong>📢 告訴大家有這家店（宣傳）：</strong> 可以在門口貼廣告、發傳單，或者在網路上分享好看的奶茶照片。</li>
+            <li><strong>💰 讓價格合理（定價）：</strong> 如果太貴，可能沒人想買；太便宜，可能賺不到錢。要找一個剛剛好的價格。</li>
+            <li><strong>📍 選一個好地點（通路）：</strong> 如果你的店開在學校旁邊，比開在山上更容易吸引學生來買。</li>
+            <li><strong>🍹 讓產品更有吸引力（產品）：</strong> 你的奶茶可以加大珍珠、換成燕麥奶，讓客人覺得很特別。</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>3️⃣ 4P 行銷策略</h2>
+        <p>行銷策略可以用 <span class="highlight">4P 原則</span> 來規劃：</p>
+        <ul>
+            <li><strong>✅ 產品（Product）</strong>：你賣的東西是什麼？有什麼特別的？</li>
+            <li><strong>✅ 價格（Price）</strong>：要怎麼訂價，才會讓人願意買？</li>
+            <li><strong>✅ 通路（Place）</strong>：在哪裡賣？怎麼讓人容易買到？</li>
+            <li><strong>✅ 推廣（Promotion）</strong>：怎麼讓更多人知道並想來試試看？</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>4️⃣ 常見問題</h2>
+        <p class="question" onclick="toggleAnswer('q1')">為什麼有些東西不用打廣告，還是很多人買？</p>
+        <p id="q1" class="answer">這是 <span class="highlight">口碑行銷</span> 的影響，顧客之間的推薦可以大幅影響產品銷量。</p>
+
+        <p class="question" onclick="toggleAnswer('q2')">為什麼定價很便宜，還是賣不出去？</p>
+        <p id="q2" class="answer">可能是 <span class="highlight">品牌形象不佳</span>，或是市場對這個產品的需求不高。</p>
+    </div>
+
+    <div class="section">
+        <h2>5️⃣ 總結</h2>
+        <p>行銷策略的核心概念就是 <span class="highlight">「幫你的產品找到合適的舞台」</span>。</p>
+        <p>如果你的產品很好，但沒人知道 → 需要做推廣（廣告、社群行銷）。</p>
+        <p>如果你的價格不合理 → 可能要調整策略（限時折扣、會員優惠）。</p>
+        <p>如果你的店開在沒人經過的地方 → 需要換個通路（網路銷售、外送合作）。</p>
+    </div>
+
+    <div class="footer">
+        Joseph Chen 製作
+    </div>
+
+    <script>
+        function toggleAnswer(id) {
+            var answer = document.getElementById(id);
+            if (answer.style.display === "block") {
+                answer.style.display = "none";
+            } else {
+                answer.style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+</html>
