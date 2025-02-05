@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博物館猜燈謎</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #2ecc71;
+            --danger-color: #e74c3c;
+        }
+        body {
+            font-family: '微軟正黑體', Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .game-container {
+            max-width: 600px;
+            margin: 1rem auto;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: var(--secondary-color); /* 設定藍色 */
+        }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #eee;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        .progress {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--secondary-color), var(--success-color));
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        button {
+            width: 100%;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            background: var(--secondary-color);
+            color: white;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .footer {
+            background-color: white;
+            color: #3498db; /* 設定藍色 */
+            text-align: center;
+            padding: 0.5rem;
+            font-size: 0.8rem; /* 缩小文字大小 */
+            font-weight: bold;
+            margin-top: 1rem;
+            border: 2px solid #3498db; /* 增加藍色邊框以反白顯示 */
+            border-radius: 5px;
+        }
+        #retryButton {
+            background-color: #e74c3c;
+            color: white;
+            font-size: 1.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 10px;
+            width: 100%;
+        }
+        #retryButton:hover {
+            background-color: #c0392b;
+        }
+        .congratulation {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            background-color: #e74c3c; /* 紅色背景 */
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>🏛️ 博物館猜燈謎 🏛️</h1>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+        <p id="question" style="font-size:1.2rem;margin-bottom:1.5rem;"></p>
+        <div id="options"></div>
+        <p>⏳ 剩餘時間：<span id="timer">10:00</span></p>
+        <p>🏆 正確答案：<span id="correctCount">0</span> / 10</p>
+        <div id="wrongAnswers"></div>
+        <button id="retryButton" style="display:none;" onclick="retryGame()">再猜一次</button>
+    </div>
+
+    <div class="footer">
+        MeDA Joseph Chen 製作
+    </div>
+
+    <script>
+        const gameData = [
+            { question: '「珍寶無價，四方流傳；萬人瞻仰，恆久傳世。」(猜一場所)', options: ['博物館', '圖書館', '廟宇'], answer: '博物館' },
+            { question: '「此物原產中國，卻遍布世界的每個博物館」(猜一物)', options: ['瓷器', '青銅器', '繪畫'], answer: '瓷器' },
+            { question: '「時光流轉留千年，世人尋來驚神顏。」(猜一收藏)', options: ['木乃伊', '兵馬俑', '化石'], answer: '木乃伊' },
+            { question: '「殿堂林立光輝耀，藏品萬千世人驚。」(猜一地點)', options: ['羅浮宮', '大英博物館', '國立歷史博物館'], answer: '羅浮宮' },
+            { question: '「千里江山一畫卷，無人不識丹青名。」(猜一作品)', options: ['清明上河圖', '千里江山圖', '蒙娜麗莎'], answer: '千里江山圖' },
+            { question: '「千古繁華繪一卷，故苑難藏汴水痕。」(猜一非台北故宮藏畫)', options: ['溪山行旅圖', '富春山居圖', '早春圖', '清明上河圖'], answer: '清明上河圖' },
+            { question: '「展覽古今，照見文明光輝。」(猜一博物館)', options: ['羅浮宮', '國立歷史博物館', '美國史密森學會博物館'], answer: '國立歷史博物館' },
+            { question: '「船舶模型嵌入牆，航海歷史任人嘗。」(猜一主題)', options: ['海事博物館', '自然博物館', '藝術博物館'], answer: '海事博物館' },
+            { question: '「探究萬物奧秘，地球之美皆展。」(猜一博物館類型)', options: ['自然博物館', '科學博物館', '藝術博物館'], answer: '自然博物館' },
+            { question: '「過去未來一條線，流轉時光展其中。」(猜一主題)', options: ['時間博物館', '考古博物館', '科技博物館'], answer: '考古博物館' }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let timeLeft = 600; // 10 分鐘
+        let timerInterval;
+
+        function startGame() {
+            loadQuestion();
+            startTimer();
+        }
+
+        function loadQuestion() {
+            if (currentQuestionIndex < gameData.length) {
+                const qData = gameData[currentQuestionIndex];
+                document.getElementById('question').textContent = qData.question;
+                document.getElementById('options').innerHTML = qData.options.map(opt =>
+                    `<button onclick="checkAnswer('${opt}')">${opt}</button>`
+                ).join('');
+                document.querySelector('.progress').style.width = `${(currentQuestionIndex / gameData.length) * 100}%`;
+            } else {
+                endGame();
+            }
+        }
+
+        function checkAnswer(answer) {
+            if (answer === gameData[currentQuestionIndex].answer) {
+                score++;
+                document.getElementById('correctCount').textContent = score;
+            } else {
+                document.getElementById('wrongAnswers').innerHTML += `<p style="color:red;">❌ ${gameData[currentQuestionIndex].question}</p>`;
+            }
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById('timer').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                if (timeLeft <= 0) endGame();
+            }, 1000);
+        }
+
+        function endGame() {
+            clearInterval(timerInterval);
+            document.getElementById('retryButton').style.display = 'block'; // 顯示「再猜一次」按鈕
+            if (score === 10) {
+                // 顯示「恭喜全對！」訊息
+                const congratsMessage = document.createElement('div');
+                congratsMessage.classList.add('congratulation');
+                congratsMessage.textContent = '恭喜全對！元宵節快樂';
+                document.body.appendChild(congratsMessage);
+            } else {
+                alert(`遊戲結束！正確答對 ${score} 題`);
+            }
+            document.querySelector('.footer').style.display = 'block'; // 顯示底部文字
+        }
+
+        function retryGame() {
+            currentQuestionIndex = 0;
+            score = 0;
+            timeLeft = 600;
+            document.getElementById('retryButton').style.display = 'none'; // 隱藏「再猜一次」按鈕
+            document.getElementById('wrongAnswers').innerHTML = ''; // 清除錯誤答案
+            document.getElementById('correctCount').textContent = score;
+            document.querySelector('.footer').style.display = 'block'; // 顯示底部文字
+            startGame();
+        }
+
+        startGame();
+    </script>
+</body>
+</html>
