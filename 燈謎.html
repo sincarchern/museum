@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>元宵燈謎 - 博物館教育篇</title>
+    <style>
+        body {
+            font-family: '微軟正黑體', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #e4393c;
+        }
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .lantern {
+            font-size: 2em;
+            margin: 10px 0;
+        }
+        .quiz-container {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+        .option {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .option:hover {
+            background: #f0f0f0;
+        }
+        .option.selected {
+            background: #e4393c;
+            color: white;
+        }
+        .option.correct {
+            background: #4CAF50;
+            color: white;
+        }
+        .option.wrong {
+            background: #f44336;
+            color: white;
+        }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #e4393c;
+            color: white;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button:hover {
+            background: #d43235;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .score-container {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        .progress {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        .firework {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: explode 1s ease-out forwards;
+            pointer-events: none;
+        }
+        @keyframes explode {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(20);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="lantern">🏮</div>
+            <h1>元宵燈謎大會</h1>
+            <h2>博物館教育主題特輯</h2>
+        </div>
+        <div class="progress">謎題進度：<span id="progress">1</span>/20</div>
+        <div class="quiz-container">
+            <div class="question"></div>
+            <div class="options"></div>
+        </div>
+        <div class="controls">
+            <button id="prevBtn" disabled>上一題</button>
+            <button id="checkBtn">檢查答案</button>
+            <button id="nextBtn" disabled>下一題</button>
+        </div>
+        <div class="score-container">
+            <div>目前得分：<span id="score">0</span></div>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "博物館教育的主要目標不包括下列何者？",
+                options: ["提升文化認知","培養批判思考","增加門票收入","促進終身學習"],
+                answer: "C"
+            },
+            {
+                question: "最吸引兒童的博物館教育方式為何？",
+                options: ["學術研討會","互動展覽","專家講座","文物紀錄片"],
+                answer: "B"
+            },
+            {
+                question: "博物館的社會責任包含哪些？",
+                options: ["典藏文物","教育大眾","娛樂觀眾","以上皆是"],
+                answer: "D"
+            },
+            {
+                question: "最適合推廣自然科學教育的博物館類型是？",
+                options: ["歷史博物館","美術館","科學博物館","民俗博物館"],
+                answer: "C"
+            },
+            {
+                question: "博物館教育活動的設計首要原則是？",
+                options: ["以展品為主","以觀眾需求為主","以館方便利為主","以成本考量為主"],
+                answer: "B"
+            },
+            {
+                question: "提升教育效果的最佳科技應用組合是？",
+                options: ["數位典藏","虛擬實境","互動裝置","以上皆是"],
+                answer: "D"
+            },
+            {
+                question: "評估教育成效的指標不包括？",
+                options: ["觀眾回饋","學習成效","參觀人數","館員滿意度"],
+                answer: "D"
+            },
+            {
+                question: "博物館教育面臨的最大挑戰是？",
+                options: ["經費不足","專業人才缺乏","觀眾興趣低落","以上皆是"],
+                answer: "D"
+            },
+            {
+                question: "未來發展的重要趨勢為何？",
+                options: ["數位轉型","國際合作","跨界整合","以上皆是"],
+                answer: "D"
+            },
+            {
+                question: "提升吸引力的有效方法包含？",
+                options: ["節慶限定活動","沉浸式體驗","文創商品開發","以上皆是"],
+                answer: "D"
+            },
+            {
+                question: "館校合作的最佳模式是？",
+                options: ["提供教材","辦理校外教學","共同開發課程","以上皆是"],
+                answer: "D"
+            },
+            {
+                question: "文化資產保存中的角色為何？",
+                options: ["文物修復者","歷史研究者","公共教育者","以上皆是"],
+                answer: "D"
+            },
+            {
+                question: "下列何者不屬於行銷策略？",
+                options: ["特展宣傳","新聞發布","提升教育品質","社群媒體經營"],
+                answer: "C"
+            },
+            {
+                question: "優化參觀體驗的關鍵要素？",
+                options: ["動線規劃","多語導覽","休憩設施","以上皆是"],
+                answer: "D"
+            },
+            {
+                question: "促進社區參與的具體做法？",
+                options: ["地方故事展","居民共創展區","開辦社區學堂","以上皆是"],
+                answer: "D"
+            },
+            {
+                question: "對社會的主要影響為何？",
+                options: ["提升公民素養","促進文化包容","推動永續發展","以上皆是"],
+                answer: "D"
+            },
+            {
+                question: "數位推廣的最佳組合是？",
+                options: ["線上展廳","AR導覽","教育遊戲","以上皆是"],
+                answer: "D"
+            },
+            {
+                question: "對兒童發展的幫助為何？",
+                options: ["激發好奇心","拓展世界觀","培養多元智能","以上皆是"],
+                answer: "D"
+            },
+            {
+                question: "幫助青少年探索自我的方式？",
+                options: ["實境解謎活動","生涯體驗營","文化認同工作坊","以上皆是"],
+                answer: "D"
+            },
+            {
+                question: "促進跨文化交流的作法？",
+                options: ["國際借展","雙語導覽","文化比較展","以上皆是"],
+                answer: "D"
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+        let selectedOption = null;
+
+        const questionElement = document.querySelector('.question');
+        const optionsElement = document.querySelector('.options');
+        const prevButton = document.getElementById('prevBtn');
+        const nextButton = document.getElementById('nextBtn');
+        const checkButton = document.getElementById('checkBtn');
+        const scoreElement = document.getElementById('score');
+        const progressElement = document.getElementById('progress');
+
+        function showQuestion() {
+            const question = quizData[currentQuestion];
+            questionElement.textContent = `${currentQuestion + 1}. ${question.question}`;
+            
+            optionsElement.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const button = document.createElement('div');
+                button.className = 'option';
+                button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+                button.addEventListener('click', () => selectOption(index));
+                optionsElement.appendChild(button);
+            });
+
+            updateProgress();
+            answered = false;
+            selectedOption = null;
+            checkButton.disabled = false;
+        }
+
+        function selectOption(index) {
+            if (answered) return;
+            
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[index].classList.add('selected');
+            selectedOption = index;
+            checkButton.disabled = false;
+        }
+
+        function checkAnswer() {
+            if (selectedOption === null || answered) return;
+
+            const options = document.querySelectorAll('.option');
+            const correctAnswer = quizData[currentQuestion].answer.charCodeAt(0) - 65;
+            
+            options[correctAnswer].classList.add('correct');
+            if (selectedOption !== correctAnswer) {
+                options[selectedOption].classList.add('wrong');
+            } else {
+                score++;
+                createFirework();
+            }
+            
+            scoreElement.textContent = score;
+            answered = true;
+            checkButton.disabled = true;
+            nextButton.disabled = false;
+        }
+
+        function updateProgress() {
+            progressElement.textContent = currentQuestion + 1;
+            prevButton.disabled = currentQuestion === 0;
+            nextButton.disabled = !answered;
+        }
+
+        function createFirework() {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff'];
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            firework.style.left = Math.random() * window.innerWidth + 'px';
+            firework.style.top = Math.random() * window.innerHeight + 'px';
+            firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.appendChild(firework);
+            
+            setTimeout(() => firework.remove(), 1000);
+        }
+
+        prevButton.addEventListener('click', () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                alert(`遊戲結束！\n你的得分是: ${score}/${quizData.length}`);
+            }
+        });
+
+        checkButton.addEventListener('click', checkAnswer);
+
+        showQuestion();
+    </script>
+</body>
+</html>
