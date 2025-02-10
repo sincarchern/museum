@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數學成語猜燈謎</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f9f9f9; }
+        .container { max-width: 600px; margin: 20px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        .question { font-size: 20px; margin-bottom: 10px; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        button { padding: 10px; font-size: 18px; cursor: pointer; border: 1px solid #ccc; border-radius: 5px; background: #fff; }
+        button:hover { background: #ddd; }
+        .source { background-color: black; color: white; display: inline-block; padding: 5px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>數學成語猜燈謎</h1>
+    <div id="quiz"></div>
+    <p class="source">出處：台大燈謎</p>
+</div>
+
+<script>
+    const riddles = [
+        { question: "0000", answer: "四大皆空" },
+        { question: "0＋0＝0", answer: "一無所獲" },
+        { question: "0+0=1", answer: "無中生有" },
+        { question: "1×1=1", answer: "一成不變" },
+        { question: "1的n次方", answer: "始終如一" },
+        { question: "1:1", answer: "不相上下" },
+        { question: "1/2", answer: "一分為二" },
+        { question: "1+2+3", answer: "接二連三" },
+        { question: "3.4", answer: "不三不四" },
+        { question: "33.22", answer: "三三两两" },
+        { question: "2/2", answer: "合二為一" },
+        { question: "20÷3", answer: "陸續不斷" },
+        { question: "1=365", answer: "度日如年" },
+        { question: "9寸加1寸", answer: "得寸進尺" },
+        { question: "1÷100", answer: "百裡挑一" },
+        { question: "333，555", answer: "三五成群" },
+        { question: "5，10", answer: "一五一十" },
+        { question: "1，2，3，4，5", answer: "屈指可數" },
+        { question: "1，2，3，4，5，6，0，9", answer: "七零八落" },
+        { question: "1，2，4，6，7，8，9，10", answer: "隔三差五" },
+        { question: "2，3，4，5，6，7，8，9", answer: "缺衣少食" },
+        { question: "7/8", answer: "七上八下" },
+        { question: "2，4，6，8", answer: "無獨有偶" },
+        { question: "4，3", answer: "顛三倒四" }
+    ];
+
+    function shuffle(array) {
+        return array.sort(() => Math.random() - 0.5);
+    }
+
+    function generateQuiz() {
+        const quizContainer = document.getElementById('quiz');
+        quizContainer.innerHTML = '';
+
+        const randomRiddle = riddles[Math.floor(Math.random() * riddles.length)];
+        const correctAnswer = randomRiddle.answer;
+        let options = shuffle([...riddles.map(r => r.answer)]).slice(0, 3);
+        if (!options.includes(correctAnswer)) {
+            options[Math.floor(Math.random() * options.length)] = correctAnswer;
+        }
+
+        const questionElem = document.createElement('div');
+        questionElem.classList.add('question');
+        questionElem.textContent = `謎題：${randomRiddle.question}`;
+        quizContainer.appendChild(questionElem);
+
+        const optionsContainer = document.createElement('div');
+        optionsContainer.classList.add('options');
+
+        options.forEach(option => {
+            const button = document.createElement('button');
+            button.textContent = option;
+            button.onclick = () => {
+                if (option === correctAnswer) {
+                    alert("答對了！");
+                } else {
+                    alert("再試一次！");
+                }
+                generateQuiz();
+            };
+            optionsContainer.appendChild(button);
+        });
+
+        quizContainer.appendChild(optionsContainer);
+    }
+
+    generateQuiz();
+</script>
+
+</body>
+</html>
