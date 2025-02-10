@@ -50,28 +50,36 @@
         { question: "4，3", answer: "顛三倒四" }
     ];
 
-    function shuffle(array) {
-        return array.sort(() => Math.random() - 0.5);
-    }
+    let currentIndex = 0;
 
     function generateQuiz() {
         const quizContainer = document.getElementById('quiz');
         quizContainer.innerHTML = '';
 
-        const randomRiddle = riddles[Math.floor(Math.random() * riddles.length)];
-        const correctAnswer = randomRiddle.answer;
-        let options = shuffle([...riddles.map(r => r.answer)]).slice(0, 3);
-        if (!options.includes(correctAnswer)) {
-            options[Math.floor(Math.random() * options.length)] = correctAnswer;
+        if (currentIndex >= riddles.length) {
+            quizContainer.innerHTML = "<h2>恭喜完成所有題目！</h2>";
+            return;
         }
+
+        const currentRiddle = riddles[currentIndex];
+        const correctAnswer = currentRiddle.answer;
 
         const questionElem = document.createElement('div');
         questionElem.classList.add('question');
-        questionElem.textContent = `謎題：${randomRiddle.question}`;
+        questionElem.textContent = `第 ${currentIndex + 1} 題：${currentRiddle.question}`;
         quizContainer.appendChild(questionElem);
 
         const optionsContainer = document.createElement('div');
         optionsContainer.classList.add('options');
+
+        let options = [correctAnswer];
+        while (options.length < 4) {
+            let randomAnswer = riddles[Math.floor(Math.random() * riddles.length)].answer;
+            if (!options.includes(randomAnswer)) {
+                options.push(randomAnswer);
+            }
+        }
+        options.sort(() => Math.random() - 0.5); // 隨機排列選項
 
         options.forEach(option => {
             const button = document.createElement('button');
@@ -82,6 +90,7 @@
                 } else {
                     alert("再試一次！");
                 }
+                currentIndex++;
                 generateQuiz();
             };
             optionsContainer.appendChild(button);
