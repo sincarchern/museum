@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>元宵燈謎 - 博物館教育篇</title>
+    <style>
+        body {
+            font-family: '微軟正黑體', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #e4393c;
+        }
+        .quiz-container {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+        .option {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .option:hover {
+            background: #f0f0f0;
+        }
+        .option.selected {
+            background: #e4393c;
+            color: white;
+        }
+        .option.correct {
+            background: #4CAF50;
+            color: white;
+        }
+        .option.wrong {
+            background: #f44336;
+            color: white;
+        }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #e4393c;
+            color: white;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .score-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .wrong-list {
+            margin-top: 20px;
+            padding: 10px;
+            background: #fff3f3;
+            border: 1px solid #f44336;
+            border-radius: 5px;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>元宵燈謎大會</h1>
+            <h2>博物館教育主題</h2>
+        </div>
+        <div class="quiz-container">
+            <div class="question"></div>
+            <div class="options"></div>
+        </div>
+        <div class="controls">
+            <button id="checkBtn">提交</button>
+            <button id="nextBtn" disabled>下一題</button>
+        </div>
+        <div class="score-container">
+            <div>目前得分：<span id="score">0</span></div>
+        </div>
+        <div class="wrong-list">
+            <h3>答錯題目：</h3>
+            <ul id="wrongAnswers"></ul>
+        </div>
+        <div class="score-container">
+            <button id="restartBtn" style="display: none;">再來一次</button>
+        </div>
+    </div>
+    <div class="footer">
+        初稿為 AI 編撰整理<br>
+        編輯/Joseph Chen
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "博物館教育的主要目標是？", options: ["娛樂", "學習與啟發", "商業發展", "展品保護"], answer: "B" },
+            { question: "世界上第一個博物館是哪個？", options: ["大英博物館", "羅浮宮", "烏菲茲美術館", "亞歷山卓圖書館"], answer: "D" },
+            { question: "科技博物館如何提升互動性？", options: ["虛擬實境", "靜態展示", "禁止觸碰", "純文字解說"], answer: "A" },
+            { question: "何種博物館最常使用觸摸式展示？", options: ["美術館", "兒童博物館", "自然歷史博物館", "考古博物館"], answer: "B" },
+            { question: "何者是國際博物館協會（ICOM）的主要宗旨？", options: ["推廣博物館教育", "研究古代文明", "增加票房收入", "販售文創商品"], answer: "A" },
+            { question: "何種展覽形式最適合科學主題？", options: ["靜態展示", "互動式體驗", "文字說明", "雕塑作品"], answer: "B" },
+            { question: "博物館內的導覽解說員主要職責是？", options: ["檢票", "販售紀念品", "提供知識與導覽", "維修展品"], answer: "C" },
+            { question: "哪個博物館以古埃及藏品著稱？", options: ["羅浮宮", "大英博物館", "東京國立博物館", "普拉多博物館"], answer: "B" },
+            { question: "兒童博物館的特點是？", options: ["禁止拍照", "以遊戲方式學習", "僅限成人", "主要展示古文物"], answer: "B" },
+            { question: "以下何者不屬於博物館的功能？", options: ["收藏", "研究", "拍照", "展示"], answer: "C" }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let wrongAnswers = [];
+
+        const questionEl = document.querySelector(".question");
+        const optionsEl = document.querySelector(".options");
+        const scoreEl = document.getElementById("score");
+        const checkBtn = document.getElementById("checkBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        const wrongAnswersEl = document.getElementById("wrongAnswers");
+        const restartBtn = document.getElementById("restartBtn");
+
+        function loadQuestion() {
+            const q = quizData[currentQuestion];
+            questionEl.textContent = q.question;
+            optionsEl.innerHTML = "";
+            q.options.forEach((opt, index) => {
+                const button = document.createElement("button");
+                button.textContent = opt;
+                button.classList.add("option");
+                button.dataset.index = String.fromCharCode(65 + index);
+                button.addEventListener("click", selectOption);
+                optionsEl.appendChild(button);
+            });
+        }
+
+        function selectOption(event) {
+            document.querySelectorAll(".option").forEach(opt => opt.classList.remove("selected"));
+            event.target.classList.add("selected");
+        }
+
+        function checkAnswer() {
+            const selected = document.querySelector(".option.selected");
+            if (!selected) return;
+            const q = quizData[currentQuestion];
+            const selectedAnswer = selected.dataset.index; // 取得選擇的選項
+            if (selectedAnswer === q.answer) {
+                selected.classList.add("correct");
+                score++;
+            } else {
+                selected.classList.add("wrong");
+                wrongAnswers.push(`${q.question} (正確答案: ${q.options[q.answer.charCodeAt(0) - 65]})`);
+                updateWrongList();
+            }
+            scoreEl.textContent = score;
+            nextBtn.disabled = false;  // 顯示下一題按鈕
+        }
+
+        function updateWrongList() {
+            wrongAnswersEl.innerHTML = "";
+            wrongAnswers.forEach(answer => {
+                const li = document.createElement("li");
+                li.textContent = answer;
+                wrongAnswersEl.appendChild(li);
+            });
+        }
+
+        function loadNextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < quizData.length) {
+                loadQuestion();
+                nextBtn.disabled = true;
+            } else {
+                showRestartButton();
+            }
+        }
+
+        function showRestartButton() {
+            checkBtn.style.display = "none";
+            nextBtn.style.display = "none";
+            restartBtn.style.display = "inline-block";
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            wrongAnswers = [];
+            scoreEl.textContent = score;
+            wrongAnswersEl.innerHTML = "";
+            checkBtn.style.display = "inline-block";
+            nextBtn.style.display = "inline-block";
+            restartBtn.style.display = "none";
+            loadQuestion();
+        }
+
+        checkBtn.addEventListener("click", checkAnswer);
+        nextBtn.addEventListener("click", loadNextQuestion);
+        restartBtn.addEventListener("click", restartQuiz);
+
+        loadQuestion();
+    </script>
+</body>
+</html>
