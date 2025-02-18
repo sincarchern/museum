@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博物館講座系列</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        main {
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        .lecture-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .lecture-item {
+            background-color: white;
+            margin: 10px 0;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .lecture-item h3 {
+            margin: 0;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        .lecture-item p {
+            margin: 10px 0;
+        }
+        .lecture-details {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>博物館講座系列</h1>
+</header>
+
+<main>
+    <section>
+        <h2>即將舉行的講座</h2>
+        <ul class="lecture-list">
+            <!-- 動態加載講座項目 -->
+        </ul>
+    </section>
+</main>
+
+<script>
+    // 使用 fetch 來載入 JSON 資料
+    fetch('lectures.json')
+        .then(response => response.json())
+        .then(data => {
+            const lectureList = document.querySelector('.lecture-list');
+            data.forEach(lecture => {
+                const lectureItem = document.createElement('li');
+                lectureItem.classList.add('lecture-item');
+                
+                lectureItem.innerHTML = `
+                    <h3 class="lecture-title">${lecture.title}</h3>
+                    <p><strong>講者：</strong>${lecture.speaker}</p>
+                    <p><strong>時間：</strong>${lecture.date}</p>
+                    <div class="lecture-details">${lecture.description}</div>
+                `;
+                
+                lectureList.appendChild(lectureItem);
+            });
+
+            // 為新加的項目添加點擊事件
+            const lectureTitles = document.querySelectorAll('.lecture-title');
+            lectureTitles.forEach(title => {
+                title.addEventListener('click', function() {
+                    const details = this.nextElementSibling.nextElementSibling;
+                    if (details.style.display === 'none' || details.style.display === '') {
+                        details.style.display = 'block';
+                    } else {
+                        details.style.display = 'none';
+                    }
+                });
+            });
+        })
+        .catch(error => console.log(error));
+</script>
+
+</body>
+</html>
