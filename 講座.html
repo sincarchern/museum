@@ -62,45 +62,48 @@
     <section>
         <h2>即將舉行的講座</h2>
         <ul class="lecture-list">
-            <!-- 動態加載講座項目 -->
+            <!-- 直接在 HTML 裡添加講座項目 -->
+            <li class="lecture-item">
+                <h3 class="lecture-title">藝術與歷史的交織</h3>
+                <p><strong>講者：</strong>李老師</p>
+                <p><strong>時間：</strong>2025年3月1日</p>
+                <div class="lecture-details">
+                    探索藝術史中的經典作品，並了解它們如何影響現代世界。
+                </div>
+            </li>
+            <li class="lecture-item">
+                <h3 class="lecture-title">當代藝術的變遷</h3>
+                <p><strong>講者：</strong>王教授</p>
+                <p><strong>時間：</strong>2025年3月10日</p>
+                <div class="lecture-details">
+                    了解當代藝術的多樣性以及它如何反映社會的變化。
+                </div>
+            </li>
+            <li class="lecture-item">
+                <h3 class="lecture-title">博物館的未來</h3>
+                <p><strong>講者：</strong>張博士</p>
+                <p><strong>時間：</strong>2025年3月15日</p>
+                <div class="lecture-details">
+                    探討博物館如何適應數位時代的挑戰。
+                </div>
+            </li>
         </ul>
     </section>
 </main>
 
 <script>
-    // 使用 fetch 來載入 JSON 資料
-    fetch('lectures.json')
-        .then(response => response.json())
-        .then(data => {
-            const lectureList = document.querySelector('.lecture-list');
-            data.forEach(lecture => {
-                const lectureItem = document.createElement('li');
-                lectureItem.classList.add('lecture-item');
-                
-                lectureItem.innerHTML = `
-                    <h3 class="lecture-title">${lecture.title}</h3>
-                    <p><strong>講者：</strong>${lecture.speaker}</p>
-                    <p><strong>時間：</strong>${lecture.date}</p>
-                    <div class="lecture-details">${lecture.description}</div>
-                `;
-                
-                lectureList.appendChild(lectureItem);
-            });
-
-            // 為新加的項目添加點擊事件
-            const lectureTitles = document.querySelectorAll('.lecture-title');
-            lectureTitles.forEach(title => {
-                title.addEventListener('click', function() {
-                    const details = this.nextElementSibling.nextElementSibling;
-                    if (details.style.display === 'none' || details.style.display === '') {
-                        details.style.display = 'block';
-                    } else {
-                        details.style.display = 'none';
-                    }
-                });
-            });
-        })
-        .catch(error => console.log(error));
+    // 為每個講座標題添加點擊事件
+    const lectureTitles = document.querySelectorAll('.lecture-title');
+    lectureTitles.forEach(title => {
+        title.addEventListener('click', function() {
+            const details = this.nextElementSibling.nextElementSibling;
+            if (details.style.display === 'none' || details.style.display === '') {
+                details.style.display = 'block';
+            } else {
+                details.style.display = 'none';
+            }
+        });
+    });
 </script>
 
 </body>
