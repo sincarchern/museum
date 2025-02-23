@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>早餐店經營管理 Know-How</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 16px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .menu-section {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .menu-button {
+            width: 100%;
+            padding: 16px;
+            background: #fff;
+            border: none;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            color: #2b6cb0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .menu-button:hover {
+            background-color: #f0f0f0;
+        }
+
+        .menu-button::after {
+            content: '+';
+            font-size: 20px;
+            font-weight: normal;
+        }
+
+        .menu-button.active::after {
+            content: '-';
+        }
+
+        .content {
+            display: none;
+            padding: 16px;
+            border-top: 1px solid #eee;
+        }
+
+        .content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .content p {
+            margin-bottom: 12px;
+        }
+
+        .content strong {
+            color: #2b6cb0;
+        }
+        
+        .content {
+            color: #4a5568;
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            margin-top: 20px;
+            font-size: 14px;
+            border-radius: 8px;
+        }
+
+        .presentation-link {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 24px;
+            background-color: #4299e1;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+
+        .presentation-link:hover {
+            background-color: #2b6cb0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>早餐店經營管理 Know-How</h1>
+
+        <div class="menu-section">
+            <button class="menu-button">市場分析與定位</button>
+            <div class="content">
+                <p><strong>市場需求分析</strong><br>
+                目標客群（學生、上班族、家庭）、商圈分析、顧客需求。</p>
+                <p><strong>品牌定位</strong><br>
+                產品特色、服務理念、差異化策略。</p>
+            </div>
+        </div>
+
+        <div class="menu-section">
+            <button class="menu-button">經營模式與菜單設計</button>
+            <div class="content">
+                <p><strong>營業模式</strong><br>
+                內用、外帶、外送比例，單店經營 vs. 連鎖加盟。</p>
+                <p><strong>菜單規劃</strong><br>
+                核心產品、季節限定、低成本高毛利產品設計。</p>
+            </div>
+        </div>
+
+        <div class="menu-section">
+            <button class="menu-button">成本與財務管理</button>
+            <div class="content">
+                <p><strong>固定成本控制</strong><br>
+                店面租金、裝潢設備、保險稅金。</p>
+                <p><strong>變動成本管理</strong><br>
+                食材採購策略、人事成本、能源與消耗品管理。</p>
+                <p><strong>價格策略</strong><br>
+                成本+利潤定價法、套餐優惠與促銷活動。</p>
+            </div>
+        </div>
+
+        <div class="menu-section">
+            <button class="menu-button">營運管理與服務流程</button>
+            <div class="content">
+                <p><strong>店面作業流程標準化</strong><br>
+                訂單處理、出餐速度優化、客戶服務應對。</p>
+                <p><strong>人員培訓與管理</strong><br>
+                員工訓練、內部管理（排班、獎懲機制）。</p>
+            </div>
+        </div>
+
+        <div class="menu-section">
+            <button class="menu-button">行銷與顧客經營</button>
+            <div class="content">
+                <p><strong>數位行銷策略</strong><br>
+                社群平台經營、線上訂購系統。</p>
+                <p><strong>顧客忠誠計畫</strong><br>
+                會員制度與回饋機制、顧客意見回饋與改善。</p>
+            </div>
+        </div>
+
+        <div class="menu-section">
+            <button class="menu-button">風險管理與未來發展</button>
+            <div class="content">
+                <p><strong>營運風險預防</strong><br>
+                食安問題、法規遵循。</p>
+                <p><strong>擴展計畫</strong><br>
+                連鎖加盟模式、產品多元化（午餐、下午茶市場）。</p>
+            </div>
+        </div>
+
+        <a href="https://drive.google.com/file/d/1fpMbAK85tVDtsuQTbcgoWfpdMaq5D_se/view?usp=drivesdk" 
+           class="presentation-link" 
+           target="_blank">
+            成本分析簡報
+        </a>
+
+        <div class="footer">
+            Joseph Chen 2025 製作/編輯
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.menu-button').forEach(button => {
+            button.addEventListener('click', () => {
+                // Toggle active state of clicked button
+                button.classList.toggle('active');
+                
+                // Toggle content visibility
+                const content = button.nextElementSibling;
+                content.classList.toggle('active');
+
+                // Close other sections
+                document.querySelectorAll('.menu-button').forEach(otherButton => {
+                    if (otherButton !== button) {
+                        otherButton.classList.remove('active');
+                        otherButton.nextElementSibling.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
