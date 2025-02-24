@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>餐飲業採購指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body { 
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f5f5f5;
+        }
+
+        h2, h3, h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .section { 
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        .title { 
+            background: #007BFF;
+            color: white;
+            padding: 12px 15px;
+            cursor: pointer;
+            border-radius: 8px 8px 0 0;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .content { 
+            display: none;
+            padding: 15px;
+            font-size: 1rem;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .editor-credit {
+            text-align: center;
+            padding: 12px 10px;
+            color: white;
+            background: #333;
+            margin: 20px auto;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            width: 60%;
+            max-width: 250px;
+        }
+
+        .cost-analysis {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .cost-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        .cost-table th, .cost-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .cost-table th {
+            background: #f0f0f0;
+        }
+
+        .process-steps {
+            background: #f0f4f8;
+            padding: 12px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .step {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            border-left: 3px solid #007BFF;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            .title {
+                font-size: 1rem;
+            }
+            .content {
+                font-size: 0.95rem;
+            }
+            .cost-table {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+    <script>
+        function toggleContent(id) {
+            var content = document.getElementById(id);
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                var allContents = document.getElementsByClassName('content');
+                for (var i = 0; i < allContents.length; i++) {
+                    allContents[i].style.display = "none";
+                }
+                content.style.display = "block";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>餐飲業採購指南</h2>
+    
+    <div class="section">
+        <div class="title" onclick="toggleContent('section1')">一、採購計劃與需求評估</div>
+        <div class="content" id="section1">
+            <div class="process-steps">
+                <h4>採購計劃與需求評估</h4>
+                <div class="step">
+                    <h4>1. 確定需求</h4>
+                    <ul>
+                        <li>根據餐廳類型、菜單及預計客流量制定採購計劃</li>
+                    </ul>
+                </div>
+                <div class="step">
+                    <h4>2. 預測銷量</h4>
+                    <ul>
+                        <li>參考過去數據，預測食材使用量，避免過度庫存或短缺</li>
+                    </ul>
+                </div>
+                <div class="step">
+                    <h4>3. 確保品質</h4>
+                    <ul>
+                        <li>選擇符合衛生與安全標準的原料，確保食品品質</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="title" onclick="toggleContent('section2')">二、供應商選擇與談判</div>
+        <div class="content" id="section2">
+            <div class="process-steps">
+                <h4>供應商選擇與談判</h4>
+                <div class="step">
+                    <h4>1. 供應商篩選</h4>
+                    <ul>
+                        <li>比較價格、品質、供貨穩定性及售後服務</li>
+                    </ul>
+                </div>
+                <div class="step">
+                    <h4>2. 價格談判</h4>
+                    <ul>
+                        <li>爭取批量折扣，確保採購成本控制</li>
+                    </ul>
+                </div>
+                <div class="step">
+                    <h4>3. 建立長期合作關係</h4>
+                    <ul>
+                        <li>穩定供應鏈，降低突發性供應問題</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="title" onclick="toggleContent('section3')">三、採購流程</div>
+        <div class="content" id="section3">
+            <div class="process-steps">
+                <h4>採購流程</h4>
+                <div class="step">
+                    <h4>1. 比價與試樣</h4>
+                    <ul>
+                        <li>定期評估不同供應商，確保品質與價格的最佳平衡</li>
+                    </ul>
+                </div>
+                <div class="step">
+                    <h4>2. 訂單管理</h4>
+                    <ul>
+                        <li>使用系統化的採購單據，確保訂單準確</li>
+                    </ul>
+                </div>
+                <div class="step">
+                    <h4>3. 驗收與入庫</h4>
+                    <ul>
+                        <li>檢查貨品品質、數量及保存期限，符合標準後入庫</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="title" onclick="toggleContent('section4')">四、庫存管理</div>
+        <div class="content" id="section4">
+            <div class="process-steps">
+                <h4>庫存管理</h4>
+                <div class="step">
+                    <h4>1. 先進先出（FIFO）</h4>
+                    <ul>
+                        <li>確保食材依照進貨時間順序使用，減少過期浪費</li>
+                    </ul>
+                </div>
+                <div class="step">
+                    <h4>2. 庫存控制</h4>
+                    <ul>
+                        <li>定期盤點，減少損耗與缺貨風險</li>
+                    </ul>
+                </div>
+                <div class="step">
+                    <h4>3. 存放條件</h4>
+                    <ul>
+                        <li>冷藏、冷凍、乾貨區分存放，確保食材新鮮度</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="title" onclick="toggleContent('section5')">五、食品安全與法規遵循</div>
+        <div class="content" id="section5">
+            <div class="process-steps">
+                <h4>食品安全與法規遵循</h4>
+                <div class="step">
+                    <h4>1. 符合衛生標準</h4>
+                    <ul>
+                        <li>遵守食品安全法規，定期檢查供應商合規性</li>
+                    </ul>
+                </div>
+                <div class="step">
+                    <h4>2. 保存紀錄</h4>
+                    <ul>
+                        <li>記錄進貨日期、批號及來源，確保可追溯性</li>
+                    </ul>
+                </div>
+                <div class="step">
+                    <h4>3. 人員培訓</h4>
+                    <ul>
+                        <li>教育員工正確存放及處理食材的方法，降低污染風險</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="title" onclick="toggleContent('section6')">六、成本與利潤控制</div>
+        <div class="content" id="section6">
+            <div class="process-steps">
+                <h4>成本與利潤控制</h4>
+                <div class="step">
+                    <h4>1. 成本分析</h4>
+                    <ul>
+                        <li>定期檢視採購與成本比例，避免過高原料成本影響利潤</li>
+                    </ul>
+                </div>
+                <div class="step">
+                    <h4>2. 減少浪費</h4>
+                    <ul>
+                        <li>精準採購，合理使用剩餘食材，降低食材浪費</li>
+                    </ul>
+                </div>
+                <div class="step">
+                    <h4>3. 提升效率</h4>
+                    <ul>
+                        <li>利用數據分析與數位工具提升採購與庫存管理的準確性</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="editor-credit">編輯/整理 Joseph Chen</div>
+</body>
+</html>
