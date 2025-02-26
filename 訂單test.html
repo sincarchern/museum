@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>大清早餐店訂餐系統</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f7;
+      color: #333;
+      line-height: 1.5;
+    }
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      padding: 8px 0;
+    }
+    .checkbox-container input {
+      width: auto;
+      margin-right: 8px;
+    }
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-top: 0;
+      padding: 12px 0;
+      font-size: 24px;
+      border-bottom: 2px solid #f0f0f0;
+    }
+    .form-group {
+      margin-bottom: 16px;
+      background-color: #f9f9f9;
+      padding: 12px;
+      border-radius: 8px;
+    }
+    .form-group-flex {
+      display: flex;
+      gap: 16px;
+      background-color: #f9f9f9;
+      padding: 12px;
+      border-radius: 8px;
+    }
+    .form-group-flex .form-group {
+      flex: 1;
+      margin-bottom: 0;
+      padding: 0;
+      background-color: transparent;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #555;
+    }
+    label strong {
+      font-weight: 700 !important;
+    }
+    select, input, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      background-color: white;
+    }
+    input[type="number"] {
+      width: 80px;
+      text-align: center;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 8px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #totalAmount {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: right;
+      margin: 16px 0;
+      padding: 16px;
+      background-color: #e9f7e9;
+      border-radius: 8px;
+      border-left: 4px solid #4CAF50;
+    }
+    #orderDetails {
+      margin-top: 24px;
+    }
+    h3 {
+      margin-top: 0;
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+      background-color: #f2f2f2;
+      border-radius: 8px 8px 0 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px 8px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+      color: #555;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    tr:hover {
+      background-color: #f0f0f0;
+    }
+    .delete-btn {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      width: auto;
+    }
+    .delete-btn:hover {
+      background-color: #e60000;
+    }
+    textarea {
+      resize: vertical;
+    }
+    #orderInfo {
+      background-color: #f0f7ff;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      border-left: 4px solid #007bff;
+    }
+    #orderInfo p {
+      margin: 8px 0;
+    }
+    #pickupTimeGroup {
+      display: none; /* 初始隱藏取餐時間 */
+    }
+    #orderClosedMessage {
+      color: #fff;
+      font-weight: bold;
+      text-align: center;
+      display: none; /* 初始隱藏 */
+      background-color: #ff4d4d;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+    #submitOrderBtn {
+      background-color: #007bff;
+      margin-top: 20px;
+    }
+    #submitOrderBtn:hover {
+      background-color: #0069d9;
+    }
+    .nextDayNotice {
+      color: #fff;
+      font-weight: bold;
+      display: none;
+      background-color: #ff6600;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 8px;
+      text-align: center;
+    }
+    .submit-section {
+      margin-top: 24px;
+      border-top: 2px solid #f0f0f0;
+      padding-top: 16px;
+    }
+    #orderSuccessMessage {
+      display: none;
+      background-color: #dff0d8;
+      color: #3c763d;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+      border: 1px solid #d6e9c6;
+    }
+    .order-total-row {
+      font-weight: bold;
+      background-color: #e9f7e9 !important;
+    }
+    .order-total-row td {
+      padding: 16px 8px;
+      border-top: 2px solid #4CAF50;
+    }
+    .title-suffix {
+      margin-left: 10px;
+    }
+    .section-title {
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    
+    /* Mobile optimization */
+    @media (max-width: 768px) {
+      body {
+        padding: 8px;
+      }
+      .container {
+        padding: 12px;
+        border-radius: 8px;
+      }
+      .form-group-flex {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .form-group-flex .form-group {
+        margin-bottom: 0;
+      }
+      table {
+        font-size: 14px;
+      }
+      th, td {
+        padding: 10px 6px;
+      }
+      .responsive-table {
+        overflow-x: auto;
+        display: block;
+        width: 100%;
+        -webkit-overflow-scrolling: touch;
+        margin-bottom: 16px;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      }
+      .mobile-flex {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .mobile-flex label {
+        margin-bottom: 0;
+        margin-right: 8px;
+        min-width: 50px;
+      }
+      .delete-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+      }
+      h1 {
+        font-size: 20px;
+      }
+      #totalAmount {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>大清早餐店訂餐系統</h1>
+    <div id="orderClosedMessage">目前無法訂餐，請於營業時間內訂購。</div>
+    <div id="orderSuccessMessage">訂單已成功送出！我們期待為您服務。</div>
+    
+    <div class="section-title">填寫訂單資訊</div>
+    
+    <form id="orderForm">
+      <!-- 姓氏和稱謂在同一行 -->
+      <div class="form-group-flex">
+        <div class="form-group">
+          <label for="customerName"><strong>姓氏：</strong></label>
+          <input type="text" id="customerName" placeholder="例如：王" required>
+        </div>
+        <div class="form-group">
+          <label for="customerTitle"><strong>稱謂：</strong></label>
+          <select id="customerTitle">
+            <option value="先生">先生</option>
+            <option value="小姐">小姐</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="customerPhone"><strong>手機號碼：</strong></label>
+        <input type="tel" id="customerPhone" placeholder="例如：0912345678" required>
+      </div>
+
+      <div class="form-group">
+        <label for="orderDate"><strong>選擇訂餐日期：</strong></label>
+        <select id="orderDate">
+          <option value="today">今日</option>
+          <option value="tomorrow" id="tomorrowOption">明日</option>
+        </select>
+        <div class="nextDayNotice" id="nextDayNotice">您正在訂購明日的餐點</div>
+      </div>
+
+      <div class="form-group">
+        <label for="category"><strong>選擇類別：</strong></label>
+        <select id="category" onchange="updateMenuOptions()">
+          <option value="hamburger">漢堡類</option>
+          <option value="toast">吐司類</option>
+          <option value="beverage">飲料類</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="item"><strong>選擇餐點：</strong></label>
+        <select id="item">
+          <!-- 餐點選項會根據類別更新 -->
+        </select>
+      </div>
+      
+      <div class="form-group" id="cheeseOption" style="display: none;">
+        <label class="checkbox-container">
+          <input type="checkbox" id="addCheese"> 
+          <span>+起司 (10元)</span>
+        </label>
+      </div>
+
+      <div class="form-group mobile-flex">
+        <label for="quantity"><strong>數量：</strong></label>
+        <input type="number" id="quantity" value="1" min="1">
+      </div>
+
+      <div class="form-group">
+        <label for="remarks"><strong>備註：</strong></label>
+        <textarea id="remarks" rows="2"></textarea>
+      </div>
+
+      <!-- 取餐時間欄位（初始隱藏） -->
+      <div class="form-group" id="pickupTimeGroup">
+        <label for="pickupTime"><strong>取餐時間：</strong></label>
+        <input type="time" id="pickupTime" required>
+      </div>
+
+      <button type="button" onclick="addToOrder()">加入訂單</button>
+    </form>
+
+    <p id="totalAmount">總金額：0元</p>
+
+    <div id="orderDetails">
+      <div class="section-title">訂購明細</div>
+      <div id="orderInfo">
+        <p><strong>訂購者：</strong><span id="infoCustomerName">未提供</span></p>
+        <p><strong>手機：</strong><span id="infoCustomerPhone">未提供</span></p>
+        <p><strong>訂餐日期：</strong><span id="infoOrderDate">今日</span></p>
+        <p><strong>訂餐時間：</strong><span id="orderTime"></span></p>
+        <p><strong>取餐時間：</strong><span id="infoPickupTime">未選擇</span></p>
+        <p><strong>備註：</strong><span id="infoRemarks">無</span></p>
+      </div>
+      <div class="responsive-table">
+        <table id="orderTable">
+          <thead>
+            <tr>
+              <th>餐點名稱</th>
+              <th>數量</th>
+              <th>單價</th>
+              <th>金額</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 訂單明細將顯示在這裡 -->
+          </tbody>
+          <tfoot>
+            <!-- 總金額會在這裡顯示 -->
+          </tfoot>
+        </table>
+      </div>
+      
+      <div class="submit-section">
+        <button id="submitOrderBtn" type="button" onclick="submitOrder()">提交訂單</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 營業時間設定（24 小時制）
+    const OPEN_HOUR = 6;  // 早上 6 點
+    const CLOSE_HOUR = 10; // 早上 10 點
+    const ORDER_STOP_MINUTES = 30; // 取餐前 30 分鐘停止訂餐
+    const NEXT_DAY_ORDER_HOUR = 18; // 晚上 6 點後可以訂明天的餐
+
+    let orderItems = [];  // 儲存訂單中的餐點項目
+    let isNextDayOrder = false; // 是否為次日訂餐
+
+    // 每類餐點的選項
+    const menuOptions = {
+      hamburger: [
+        { name: '雞肉漢堡', price: 70 },
+        { name: '豬肉漢堡', price: 80 }
+      ],
+      toast: [
+        { name: '雞肉吐司', price: 50 },
+        { name: '豬肉吐司', price: 60 }
+      ],
+      beverage: [
+        { name: '紅茶 - 小杯', price: 10 },
+        { name: '紅茶 - 中杯', price: 15 },
+        { name: '紅茶 - 大杯', price: 20 },
+        { name: '奶茶 - 小杯', price: 10 },
+        { name: '奶茶 - 中杯', price: 15 },
+        { name: '奶茶 - 大杯', price: 20 }
+      ]
+    };
+
+    // 檢查現在是否可以訂餐（根據營業時間判斷）
+    function canOrderNow() {
+      const now = new Date();
+      const currentHour = now.getHours();
+      
+      // 如果是營業時間內，可以訂今天的餐
+      if (currentHour >= OPEN_HOUR && currentHour < CLOSE_HOUR) {
+        return true;
+      }
+      
+      // 如果是晚上6點後，可以訂明天的餐
+      if (currentHour >= NEXT_DAY_ORDER_HOUR) {
+        isNextDayOrder = true;
+        document.getElementById('orderDate').value = 'tomorrow';
+        document.getElementById('infoOrderDate').textContent = '明日';
+        document.getElementById('nextDayNotice').style.display = 'block';
+        return true;
+      }
+      
+      // 其他時間不可訂餐
+      return false;
+    }
+
+    // 檢查是否超過訂餐截止時間
+    function isOrderClosed(pickupTime) {
+      const now = new Date();
+      const pickupDateTime = new Date(now.toDateString() + ' ' + pickupTime);
+      const cutoffTime = new Date(pickupDateTime.getTime() - ORDER_STOP_MINUTES * 60000);
+      return now > cutoffTime;
+    }
+
+    // 更新取餐時間選項
+    function updatePickupTime() {
+      const pickupTimeInput = document.getElementById('pickupTime');
+      const now = new Date();
+      const orderDate = document.getElementById('orderDate').value;
+      
+      // 設定最小和最大取餐時間
+      let minTime, maxTime;
+      
+      if (orderDate === 'today') {
+        // 今日訂單：最小取餐時間為當前時間 + 30 分鐘
+        const minTimeDate = new Date(now.getTime() + ORDER_STOP_MINUTES * 60000);
+        minTime = minTimeDate.toTimeString().slice(0, 5);
+        
+        // 最大時間為營業結束時間
+        maxTime = `${CLOSE_HOUR.toString().padStart(2, '0')}:00`;
+      } else {
+        // 明日訂單：取餐時間範圍為營業時間
+        minTime = `${OPEN_HOUR.toString().padStart(2, '0')}:00`;
+        maxTime = `${CLOSE_HOUR.toString().padStart(2, '0')}:00`;
+      }
+
+      pickupTimeInput.min = minTime;
+      pickupTimeInput.max = maxTime;
+      
+      // 如果目前設定的時間超出範圍，重設為有效值
+      if (pickupTimeInput.value < minTime || pickupTimeInput.value > maxTime) {
+        pickupTimeInput.value = minTime;
+      }
+    }
+
+    // 顯示或隱藏訂單表單
+    function toggleOrderForm(visible) {
+      document.getElementById('orderForm').style.display = visible ? 'block' : 'none';
+      document.getElementById('orderDetails').style.display = visible ? 'block' : 'none';
+      document.getElementById('totalAmount').style.display = visible ? 'block' : 'none';
+      document.getElementById('orderClosedMessage').style.display = visible ? 'none' : 'block';
+    }
+
+    // 更新餐點選項
+    function updateMenuOptions() {
+      const category = document.getElementById('category').value;
+      const itemSelect = document.getElementById('item');
+      const cheeseOption = document.getElementById('cheeseOption');
+      
+      itemSelect.innerHTML = '';  // 清空選項
+
+      // 根據選擇的類別更新餐點選項
+      menuOptions[category].forEach(option => {
+        const optionElement = document.createElement('option');
+        optionElement.value = option.name;
+        optionElement.setAttribute('data-price', option.price);
+        optionElement.textContent = `${option.name} - ${option.price}元`;
+        itemSelect.appendChild(optionElement);
+      });
+      
+      // 僅在漢堡和吐司類別顯示起司選項
+      if (category === 'hamburger' || category === 'toast') {
+        cheeseOption.style.display = 'block';
+      } else {
+        cheeseOption.style.display = 'none';
+        document.getElementById('addCheese').checked = false;
+      }
+    }
+
+    // 加入訂單
+    function addToOrder() {
+      // 檢查是否填寫姓氏和手機號碼
+      const customerName = document.getElementById('customerName').value;
+      const customerTitle = document.getElementById('customerTitle').value;
+      const customerPhone = document.getElementById('customerPhone').value;
+      
+      if (!customerName || !customerPhone) {
+        alert('請填寫姓氏和手機號碼');
+        return;
+      }
+      
+      const itemSelect = document.getElementById('item');
+      const quantityInput = document.getElementById('quantity');
+      const addCheeseCheckbox = document.getElementById('addCheese');
+
+      const selectedItem = itemSelect.options[itemSelect.selectedIndex];
+      let price = parseInt(selectedItem.getAttribute('data-price'));
+      const quantity = parseInt(quantityInput.value);
+      
+      // 檢查是否加起司
+      const addCheese = addCheeseCheckbox.checked;
+      let itemName = selectedItem.value;
+      
+      // 若加起司，增加價格並修改名稱
+      if (addCheese) {
+        price += 10;
+        itemName += ' +起司';
+      }
+      
+      const totalAmount = price * quantity;
+
+      // 將餐點項目加入訂單
+      const orderItem = {
+        id: Date.now(), // 使用時間戳記作為每個項目的唯一ID
+        name: itemName,
+        quantity: quantity,
+        price: price,
+        amount: totalAmount
+      };
+      orderItems.push(orderItem);
+
+      // 更新訂單明細
+      updateOrderDetails();
+
+      // 顯示取餐時間欄位
+      document.getElementById('pickupTimeGroup').style.display = 'block';
+      
+      // 更新取餐時間
+      updatePickupTime();
+      
+      // 滾動到訂單明細部分
+      document.getElementById('orderDetails').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // 刪除餐點項目
+    function deleteOrderItem(itemId) {
+      // 刪除指定ID的餐點項目
+      orderItems = orderItems.filter(item => item.id !== itemId);
+
+      // 更新訂單表格和總金額
+      updateOrderDetails();
+    }
+
+    // 更新訂單明細
+    function updateOrderDetails() {
+      const orderTableBody = document.getElementById('orderTable').getElementsByTagName('tbody')[0];
+      const orderTableFoot = document.getElementById('orderTable').getElementsByTagName('tfoot')[0];
+      const totalAmountElement = document.getElementById('totalAmount');
+      const submitOrderBtn = document.getElementById('submitOrderBtn');
+
+      let grandTotal = 0;
+      orderTableBody.innerHTML = ''; // 清空表格主體
+      orderTableFoot.innerHTML = ''; // 清空表格尾部
+
+      // 更新訂單明細
+      orderItems.forEach((item, index) => {
+        const newRow = orderTableBody.insertRow();
+        const mealCell = newRow.insertCell(0);
+        const qtyCell = newRow.insertCell(1);
+        const priceCell = newRow.insertCell(2);
+        const amountCell = newRow.insertCell(3);
+        const deleteCell = newRow.insertCell(4);
+
+        mealCell.textContent = item.name;
+        qtyCell.textContent = item.quantity;
+        priceCell.textContent = `${item.price}元`;
+        amountCell.textContent = `${item.amount}元`;
+        deleteCell.innerHTML = `<button class="delete-btn" onclick="deleteOrderItem(${item.id})">刪除</button>`;
+
+        grandTotal += item.amount;  // 累加金額
+      });
+
+      // 在表格底部添加總金額行
+      if (orderItems.length > 0) {
+        const totalRow = orderTableFoot.insertRow();
+        totalRow.className = 'order-total-row';
+        
+        const labelCell = totalRow.insertCell(0);
+        labelCell.colSpan = 3;
+        labelCell.textContent = '總計金額';
+        labelCell.style.textAlign = 'right';
+        
+        const totalCell = totalRow.insertCell(1);
+        totalCell.textContent = `${grandTotal}元`;
+        totalCell.style.fontWeight = 'bold';
+        
+        const emptyCell = totalRow.insertCell(2);
+        emptyCell.textContent = '';
+      }
+
+      // 顯示總金額
+      totalAmountElement.innerHTML = `總金額：${grandTotal}元`;
+      
+      // 啟用或禁用提交按鈕
+      submitOrderBtn.disabled = orderItems.length === 0;
+    }
+
+    // 提交訂單
+    function submitOrder() {
+      // 檢查訂單是否有餐點
+      if (orderItems.length === 0) {
+        alert('請至少添加一個餐點');
+        return;
+      }
+      
+      // 檢查是否選擇取餐時間
+      const pickupTime = document.getElementById('pickupTime').value;
+      if (!pickupTime) {
+        alert('請選擇取餐時間');
+        return;
+      }
+      
+      // 這裡可以加入將訂單發送到伺服器的代碼
+      
+      // 顯示成功訊息
+      document.getElementById('orderForm').style.display = 'none';
+      document.getElementById('orderDetails').style.display = 'none';
+      document.getElementById('totalAmount').style.display = 'none';
+      document.getElementById('orderSuccessMessage').style.display = 'block';
+      
+      // 清空訂單（實際應用中，可能需要保留訂單資訊以供查詢）
+      orderItems = [];
+    }
+
+    // 新增時間顯示功能
+    function updateOrderTime() {
+      const now = new Date();
+      const options = {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      };
+      document.getElementById('orderTime').textContent = now.toLocaleString('zh-TW', options);
+    }
+
+    // 設置訂餐日期變更處理函數
+    document.getElementById('orderDate').addEventListener('change', function() {
+      const isNextDay = this.value === 'tomorrow';
+      document.getElementById('nextDayNotice').style.display = isNextDay ? 'block' : 'none';
+      document.getElementById('infoOrderDate').textContent = isNextDay ? '明日' : '今日';
+      updatePickupTime();
+    });
+
+    // 更新客戶完整姓名（姓氏+稱謂）
+    function updateCustomerFullName() {
+      const customerName = document.getElementById('customerName').value;
+      const customerTitle = document.getElementById('customerTitle').value;
+      if (customerName) {
+        document.getElementById('infoCustomerName').textContent = customerName + customerTitle;
+      } else {
+        document.getElementById('infoCustomerName').textContent = '未提供';
+      }
+    }
+
+    // 新增即時資訊更新
+    document.getElementById('customerName').addEventListener('input', updateCustomerFullName);
+    document.getElementById('customerTitle').addEventListener('change', updateCustomerFullName);
+
+    document.getElementById('customerPhone').addEventListener('input', function() {
+      document.getElementById('infoCustomerPhone').textContent = this.value || '未提供';
+    });
+
+    document.getElementById('pickupTime').addEventListener('input', function() {
+      document.getElementById('infoPickupTime').textContent = this.value || '未選擇';
+    });
+
+    document.getElementById('remarks').addEventListener('input', function() {
+      document.getElementById('infoRemarks').textContent = this.value || '無';
+    });
+
+    // 檢查螢幕大小並適應手機瀏覽模式
+    function checkScreenSize() {
+      const isMobile = window.innerWidth <= 768;
+      const container = document.querySelector('.container');
+      
+      if (isMobile) {
+        container.style.borderRadius = '0';
+        document.body.style.padding = '0';
+      } else {
+        container.style.borderRadius = '12px';
+        document.body.style.padding = '16px';
+      }
+    }
+
+    // 頁面載入時初始化
+    window.onload = function() {
+      updateMenuOptions();
+      updateOrderTime();
+      checkScreenSize();
+
+      // 檢查是否可以訂餐
+      const orderNow = canOrderNow();
+      toggleOrderForm(orderNow);
+      
+      if (orderNow) {
+        // 設定次日訂餐選項的狀態
+        const now = new Date();
+        const currentHour = now.getHours();
+        
+        // 如果現在是晚上6點後，預設選擇明日訂餐
+        if (currentHour >= NEXT_DAY_ORDER_HOUR) {
+          document.getElementById('orderDate').value = 'tomorrow';
+          document.getElementById('infoOrderDate').textContent = '明日';
+          document.getElementById('nextDayNotice').style.display = 'block';
+        }
+      }
+
+      // 每秒更新一次時間
+      setInterval(updateOrderTime, 1000);
+    };
+    
+    // 監聽視窗大小變化以適應手機瀏覽模式
+    window.addEventListener('resize', checkScreenSize);
+  </script>
+</body>
+</html>
