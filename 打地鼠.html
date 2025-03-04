@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>打地鼠遊戲</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            padding: 20px;
+            margin: 0;
+        }
+        #game-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 600px;
+            width: 100%;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .hole {
+            aspect-ratio: 1 / 1;
+            background-color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        .heart {
+            font-size: 4vw;
+            max-font-size: 64px;
+            color: #ff4136;
+            transition: opacity 0.3s;
+        }
+        .content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255,255,255,0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+            box-sizing: border-box;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 10;
+            font-size: 0.8vw;
+            max-font-size: 14px;
+            overflow-y: auto;
+        }
+        .hole.active .heart {
+            opacity: 0;
+        }
+        .hole.active .content {
+            opacity: 1;
+        }
+        #score-display, #timer-display {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+            text-align: center;
+        }
+        #content-display {
+            width: 100%;
+            max-width: 600px;
+            min-height: 100px;
+            background-color: #fff;
+            border: 2px solid #ff4136;
+            border-radius: 10px;
+            margin-top: 20px;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+        }
+        #restart-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #ff4136;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #restart-btn:hover {
+            background-color: #d32f2f;
+        }
+        @media screen and (max-width: 600px) {
+            .heart {
+                font-size: 8vw;
+            }
+            .content {
+                font-size: 2vw;
+                padding: 5px;
+            }
+            #score-display, #timer-display {
+                font-size: 20px;
+            }
+            #content-display {
+                font-size: 16px;
+            }
+        }
+        #bottom-banner {
+            width: 100%;
+            text-align: center;
+            background-color: red;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>打地鼠遊戲</h1>
+    <div id="score-display">分數: 0</div>
+    <div id="timer-display">剩餘時間: 60秒</div>
+    <div id="game-container">
+        <div class="hole" data-index="0" data-points="10">
+            <div class="heart">❤️</div>
+            <div class="content">
+                <h3>吸引力法則：</h3>
+                物以類聚，人以群分。人們通常會被與自己相似的人所吸引。這不僅僅包括外貌，還包括興趣、價值觀和背景。這種現象可以解釋為尋求穩定感和認同感的一種自然傾向。
+            </div>
+        </div>
+        <div class="hole" data-index="1" data-points="10">
+            <div class="heart">❤️</div>
+            <div class="content">
+                <h3>賽特菲效應：</h3>
+                當事情未完成時，我們的大腦會不斷地提醒我們去完成它。這在戀愛中也很常見，比如當戀愛中的某個重要話題沒有結論時，我們會不斷地想到它，直到問題解決。
+            </div>
+        </div>
+        <div class="hole" data-index="2" data-points="10">
+            <div class="heart">❤️</div>
+            <div class="content">
+                <h3>強化效應：</h3>
+                獎勵和懲罰可以影響一個人的行為。在戀愛中，當一方不斷地給予對方正面反饋和獎勵（如稱讚、關心、禮物），會強化對方的愛情感受，反之亦然。
+            </div>
+        </div>
+        <div class="hole" data-index="3" data-points="10">
+            <div class="heart">❤️</div>
+            <div class="content">
+                <h3>鄰近效應：</h3>
+                人們傾向於對經常見到的人產生好感。這是一種曝光效應，即我們越是見到某個人或某個事物，我們對其的喜愛程度就會越高。在戀愛中，這解釋了為什麼同事、同學或鄰居之間更容易產生愛情。
+            </div>
+        </div>
+        <div class="hole" data-index="4" data-points="10">
+            <div class="heart">❤️</div>
+            <div class="content">
+                <h3>感覺和情感轉移：</h3>
+                當我們在特定情境下感到興奮或緊張時，這些情感可能會轉移到身邊的人身上。在約會中，選擇一些具有冒險性或刺激性的活動，可以讓對方更容易感受到愛情的火花。
+            </div>
+        </div>
+        <div class="hole" data-index="5" data-points="10">
+            <div class="heart">❤️</div>
+            <div class="content">
+                <h3>羅密歐與朱麗葉效應：</h3>
+                當戀愛受到外界（如父母、社會等）的強烈反對時，戀人之間的感情反而可能變得更加堅定。這可以理解為一種反抗和捍衛愛情的心理反應。
+            </div>
+        </div>
+        <div class="hole" data-index="6" data-points="10">
+            <div class="heart">❤️</div>
+            <div class="content">愛你</div>
+        </div>
+        <div class="hole" data-index="7" data-points="10">
+            <div class="heart">❤️</div>
+            <div class="content">想你</div>
+        </div>
+        <div class="hole" data-index="8" data-points="10">
+            <div class="heart">❤️</div>
+            <div class="content">盼你</div>
+        </div>
+    </div>
+    <div id="content-display">點擊激活的心形按鈕查看內容</div>
+    <button id="restart-btn">再玩一次</button>
+    <div id="bottom-banner">All to Show</div>
+
+    <script>
+        const holes = document.querySelectorAll('.hole');
+        const scoreDisplay = document.getElementById('score-display');
+        const timerDisplay = document.getElementById('timer-display');
+        const contentDisplay = document.getElementById('content-display');
+        const restartBtn = document.getElementById('restart-btn');
+        let score = 0;
+        let timeLeft = 60;
+        let gameTimer;
+        let popupTimer;
+
+        function resetHoles() {
+            holes.forEach(hole => hole.classList.remove('active'));
+        }
+
+        function popRandomHole() {
+            resetHoles();
+            const randomHole = holes[Math.floor(Math.random() * holes.length)];
+            randomHole.classList.add('active');
+            popupTimer = setTimeout(() => randomHole.classList.remove('active'), 3000);
+        }
+
+        function startGame() {
+            score = 0;
+            timeLeft = 60;
+            scoreDisplay.textContent = `分數: ${score}`;
+            timerDisplay.textContent = `剩餘時間: ${timeLeft}秒`;
+            contentDisplay.textContent = '點擊激活的心形按鈕查看內容';
+            gameTimer = setInterval(() => {
+                timeLeft--;
+                timerDisplay.textContent = `剩餘時間: ${timeLeft}秒`;
+                if (timeLeft <= 0) endGame();
+            }, 1000);
+            popRandomHole();
+            setInterval(popRandomHole, 4000);
+        }
+
+        function endGame() {
+            clearInterval(gameTimer);
+            clearTimeout(popupTimer);
+            resetHoles();
+            alert(`遊戲結束！你的分數是 ${score}`);
+        }
+
+        restartBtn.addEventListener('click', startGame);
+        holes.forEach(hole => hole.addEventListener('click', function() {
+            if (this.classList.contains('active')) {
+                score += parseInt(this.dataset.points);
+                scoreDisplay.textContent = `分數: ${score}`;
+                contentDisplay.textContent = this.querySelector('.content').textContent;
+                this.classList.remove('active');
+            }
+        }));
+
+        startGame();
+    </script>
+</body>
+</html>
