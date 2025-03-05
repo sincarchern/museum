@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>店長學概要</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script>
+        // Interactive navigation script
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const arrow = document.querySelector(`[data-target="${sectionId}"] svg`);
+            
+            if (section.classList.contains('hidden')) {
+                section.classList.remove('hidden');
+                arrow.classList.add('transform', 'rotate-90');
+            } else {
+                section.classList.add('hidden');
+                arrow.classList.remove('transform', 'rotate-90');
+            }
+        }
+    </script>
+    <style>
+        .section-header {
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .section-header:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+        .content-section {
+            line-height: 1.6;
+        }
+        .content-section strong {
+            color: #1a202c;
+        }
+        .content-section p {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-center mb-8">店長學概要</h1>
+        
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <!-- Part 1: 領導力 -->
+            <div class="border-b">
+                <div 
+                    class="section-header p-4 flex justify-between items-center bg-blue-50"
+                    onclick="toggleSection('part1')"
+                    data-target="part1"
+                >
+                    <h2 class="text-xl font-semibold">Part 1: 領導力</h2>
+                    <svg class="w-6 h-6 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+                <div id="part1" class="p-4 hidden content-section">
+                    <h3 class="text-lg font-semibold mb-4">目標：提升店長的領導能力，從內在激發員工的動力與投入感</h3>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-bold mb-2">店長的四種領導定位</h4>
+                        <ul class="list-disc pl-5">
+                            <li class="mb-4"><strong>指導型</strong>：對新進員工提供具體的指導和支持。</li>
+                            <li class="mb-4"><strong>參與型</strong>：鼓勵有經驗但缺乏動力的員工參與決策。</li>
+                            <li class="mb-4"><strong>支持型</strong>：為員工提供情感支持，增強團隊凝聚力。</li>
+                            <li class="mb-4"><strong>授權型</strong>：給予員工自主權，讓他們能夠主動解決問題。</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-bold mb-2">七大指標創造幸福工作</h4>
+                        <ul class="list-disc pl-5">
+                            <li class="mb-4">
+                                <strong>工作與生活的平衡</strong>
+                                <p>解釋：提供彈性工作時間或選擇性工作的機會，讓員工能夠更好地兼顧家庭和工作。</p>
+                                <p class="text-sm text-gray-600">案例：某店長允許員工根據個人需求調整工作時間，結果員工的工作滿意度和生活品質大幅提升。</p>
+                            </li>
+                            <li class="mb-4">
+                                <strong>成就感</strong>
+                                <p>解釋：設立具挑戰性的目標並給予適當的支持，讓員工感受到成就感。</p>
+                                <p class="text-sm text-gray-600">案例：某店長每月設立銷售目標，並在達成目標後給予表揚和獎勵，激勵員工持續努力。</p>
+                            </li>
+                            <li class="mb-4">
+                                <strong>認同感</strong>
+                                <p>解釋：讓員工感受到自己是團隊的一部分，並為團隊的成功做出貢獻。</p>
+                                <p class="text-sm text-gray-600">案例：某店長定期舉行團隊建設活動，增加員工之間的互動和凝聚力，提升團隊的整體士氣。</p>
+                            </li>
+                            <li class="mb-4">
+                                <strong>職業發展</strong>
+                                <p>解釋：提供培訓和發展機會，幫助員工提升技能和職業成長。</p>
+                                <p class="text-sm text-gray-600">案例：某店長為員工提供定期培訓計劃，讓員工學習新技能，並提供晉升的機會，吸引和留住人才。</p>
+                            </li>
+                            <li class="mb-4">
+                                <strong>團隊合作</strong>
+                                <p>解釋：促進團隊合作，讓員工能夠在合作中學習和成長。</p>
+                                <p class="text-sm text-gray-600">案例：某店長鼓勵員工之間的合作，並建立跨部門合作的機制，提高工作效率和創造力。</p>
+                            </li>
+                            <li class="mb-4">
+                                <strong>工作環境</strong>
+                                <p>解釋：創造一個舒適和安全的工作環境，讓員工感到放心和舒適。</p>
+                                <p class="text-sm text-gray-600">案例：某店長對工作場所進行了改造，增加了休息區和綠色植物，提升了員工的工作舒適度。</p>
+                            </li>
+                            <li class="mb-4">
+                                <strong>溝通</strong>
+                                <p>解釋：建立有效的溝通機制，確保員工能夠隨時反映問題和建議。</p>
+                                <p class="text-sm text-gray-600">案例：某店長設立了意見箱和定期的員工會議，讓員工能夠自由地表達意見和建議，並及時解決問題。</p>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-bold mb-2">4P 策動改變（Purpose, People, Process, Practice）</h4>
+                        <ul class="list-disc pl-5">
+                            <li class="mb-4">
+                                <strong>Purpose (目標)</strong>
+                                <p>設定明確的目標和使命，讓團隊有清晰的方向感。</p>
+                                <p class="text-sm text-gray-600">案例說明：某店長為團隊設定了每月銷售額增加10%的目標，並透過定期會議溝通目標進度，讓員工知道努力的方向和意義。</p>
+                            </li>
+                            <li class="mb-4">
+                                <strong>People (人員)</strong>
+                                <p>了解員工的需求和動機，打造以人為本的管理風格。</p>
+                                <p class="text-sm text-gray-600">案例說明：某店長通過個別會談了解員工的職業發展需求，為每位員工制定個性化的培訓計劃，提升員工的滿意度和工作積極性。</p>
+                            </li>
+                            <li class="mb-4">
+                                <strong>Process (過程)</strong>
+                                <p>優化工作流程，提高效率和質量。</p>
+                                <p class="text-sm text-gray-600">案例說明：某店長發現結帳流程繁瑣，於是引進了自動結帳系統，減少了顧客等待時間，提高了顧客滿意度。</p>
+                            </li>
+                            <li class="mb-4">
+                                <strong>Practice (實踐)</strong>
+                                <p>強調不斷的實踐和反思，促進團隊的自主學習和成長。</p>
+                                <p class="text-sm text-gray-600">案例說明：某店長每月舉辦一次反思會議，讓員工分享工作中的挑戰和成功經驗，彼此學習，不斷改進工作方法。</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Part 2: 深化體驗 -->
+            <div>
+                <div 
+                    class="section-header p-4 flex justify-between items-center bg-green-50"
+                    onclick="toggleSection('part2')"
+                    data-target="part2"
+                >
+                    <h2 class="text-xl font-semibold">Part 2: 深化體驗</h2>
+                    <svg class="w-6 h-6 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+                <div id="part2" class="p-4 hidden content-section">
+                    <h3 class="text-lg font-semibold mb-4">目標：通過卓越的顧客服務體驗來增強顧客忠誠度，從而促進業績的持續增長</h3>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-bold mb-2">EPS深化服務落地（Energy, Process, System）</h4>
+                        <ul class="list-disc pl-5">
+                            <li class="mb-4">
+                                <strong>Energy (能量)</strong>
+                                <p>提升員工的服務熱忱，讓他們在工作中展現積極的能量。</p>
+                                <p class="text-sm text-gray-600">案例說明：某店長定期舉辦員工激勵活動，如員工表揚會和團隊建設活動，激發員工的服務熱情，提升工作效率。</p>
+                            </li>
+                            <li class="mb-4">
+                                <strong>Process (過程)</strong>
+                                <p>優化服務流程，確保每個環節都能順利進行。</p>
+                                <p class="text-sm text-gray-600">案例說明：某店長通過分析顧客反饋，優化了商品陳列和購物路線，提升顧客的購物體驗。</p>
+                            </li>
+                            <li class="mb-4">
+                                <strong>System (系統)</strong>
+                                <p>建立系統化的服務標準，確保一致且高品質的服務體驗。</p>
+                                <p class="text-sm text-gray-600">案例說明：某店長制定了標準化的服務流程，培訓員工按照流程提供服務，確保每位顧客都能獲得一致且高品質的服務體驗。</p>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-bold mb-2">把握關鍵接觸點，建立品牌優勢</h4>
+                        <p>案例說明：某店長發現顧客在結帳時常遇到問題，於是他加強了結帳過程中的服務，並安排專人協助顧客解決問題，提升了顧客滿意度和回購率。</p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-bold mb-2">三階段提升卓越體驗</h4>
+                        <ul class="list-disc pl-5">
+                            <li class="mb-4">
+                                <strong>設計階段</strong>
+                                <p>確定目標顧客的需求和期待，設計符合顧客期望的體驗。</p>
+                                <p class="text-sm text-gray-600">案例說明：某店長通過顧客調查，發現顧客對快速結帳和貼心服務有需求，於是他設計了自動結帳系統和增設了顧客服務台，滿足顧客期待。</p>
+                            </li>
+                            <li class="mb-4">
+                                <strong>實施階段</strong>
+                                <p>把設計好的顧客服務方案實施出來，確保每個細節都能到位。</p>
+                                <p class="text-sm text-gray-600">案例說明：某店長根據設計的顧客服務方案，安排專人培訓員工，確保每位員工都能提供一致的高品質服務。</p>
+                            </li>
+                            <li class="mb-4">
+                                <strong>反饋階段</strong>
+                                <p>收集顧客反饋，不斷改進和提升體驗，實現回購和推薦。</p>
+                                <p class="text-sm text-gray-600">案例說明：某店長設立了顧客反饋機制，及時根據顧客的意見調整服務策略，提升顧客滿意度。</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-8">
+            <p class="bg-gray-800 text-white p-2 rounded">2025 Joseph 編輯整理</p>
+        </div>
+    </div>
+</body>
+</html>
