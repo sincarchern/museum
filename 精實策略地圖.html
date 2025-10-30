@@ -1,0 +1,127 @@
+<!doctype html>
+
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>精實企業組織發展的策略地圖</title>
+  <meta name="author" content="Joseph" />
+  <style>
+    /* Reset & base */
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans TC', 'Segoe UI', Roboto, 'Microsoft JhengHei', 'PingFang TC', 'Helvetica Neue', Arial; background:linear-gradient(180deg,#f7fbff,#ffffff);color:#123;}
+    .container{max-width:1100px;margin:32px auto;padding:24px}
+    header{display:flex;justify-content:space-between;align-items:center;gap:16px}
+    h1{font-size:20px;margin:0}
+    .meta{color:#556; font-size:13px}/* Strategy map layout */
+.map{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px;align-items:stretch}
+.card{background:#fff;border-radius:14px;padding:18px;box-shadow:0 6px 18px rgba(18,34,56,0.08);min-height:150px;display:flex;flex-direction:column;gap:8px}
+.card h3{margin:0;font-size:16px;color:#09213a}
+.card p{margin:0;color:#334;line-height:1.45;font-size:14px}
+.card .quote{margin-top:auto;font-size:13px;color:#556;font-style:italic}
+
+/* center leadership */
+.center-wrap{grid-column:1/-1;display:flex;justify-content:center;margin-top:8px}
+.center-circle{width:220px;height:220px;border-radius:50%;background:linear-gradient(135deg,#0b6ba8,#63b3d8);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;box-shadow:0 10px 30px rgba(11,107,168,0.18);text-align:center;padding:18px}
+.center-circle h2{margin:0;font-size:18px}
+.center-circle p{font-size:13px;margin-top:8px;opacity:0.95}
+
+/* Quadrant labels */
+.quadrant-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+
+/* footer */
+.actions{margin-top:18px;display:flex;gap:10px}
+.btn{background:#0b6ba8;color:#fff;padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:600}
+.btn.secondary{background:#eef6fb;color:#0b6ba8}
+
+/* responsive */
+@media (max-width:880px){.map{grid-template-columns:1fr}.center-circle{width:180px;height:180px}.container{padding:16px}}
+
+/* visual connectors */
+.connector{position:relative}
+.connector::after{content:"";position:absolute;left:50%;top:50%;width:calc(100% - 40px);height:2px;background:linear-gradient(90deg, rgba(11,107,168,0.12), rgba(11,107,168,0.02));transform:translate(-50%,-50%);z-index:0}
+/* small print */
+.note{font-size:13px;color:#445;margin-top:14px}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>精實企業組織發展的策略地圖</h1>
+        <div class="meta">關鍵在於：領導者思維促進團隊共學組織 • 2025年6月16日</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:13px;color:#445">作者：Joseph</div>
+      </div>
+    </header><!-- Map area -->
+<section class="map">
+
+  <!-- Customer (顧客構面) -->
+  <article class="card">
+    <h3>顧客構面 — 創造並交付顧客價值</h3>
+    <p>策略以顧客價值為核心：明確設定價值主張、設計價值流程，並以顧客需求為導向驗證每一項改善。</p>
+    <p class="quote">「即使探索與設定客戶價值目標至關重要，流程如果沒有再造，仍會造成浪費。」</p>
+  </article>
+
+  <!-- Internal Process (內部流程構面) -->
+  <article class="card">
+    <h3>內部流程構面 — 流程再造與價值流管理</h3>
+    <p>系統性地檢視價值流（Value Stream），移除非價值活動；採用看板、標準作業、5S與Kaizen等工具，推動流程精實化。</p>
+    <p class="quote">Kiichiro Toyoda：在不產生浪費的情況下共同努力創造附加價值。</p>
+  </article>
+
+  <!-- Center: Leadership -->
+  <div class="center-wrap">
+    <div class="center-circle">
+      <h2>領導者思維（策略地圖的核心驅動力）</h2>
+      <p>系統思維 + 學習導向 + 服務型領導<br>啟動並維護共學文化，促使流程與組織一體化。</p>
+    </div>
+  </div>
+
+  <!-- Learning & Growth (學習與成長構面) -->
+  <article class="card">
+    <h3>學習與成長構面 — 共學型組織與文化</h3>
+    <p>建立跨領域共學機制（跨部門小組、Gemba Walk、內部工作坊與實作型學習），把知識轉化為經常性實踐。</p>
+    <p class="quote">Henry Ford：能夠了解他人的觀點，並從他人的角度與自己的角度並行看待事物。</p>
+  </article>
+
+  <!-- Financial (財務構面) -->
+  <article class="card">
+    <h3>財務構面 — 永續經營與避免損失</h3>
+    <p>財務指標反映流程改善與顧客價值的成果：透過減少浪費與效率提升，穩健提升營運績效與長期競爭力。</p>
+    <p class="quote">Peter Drucker：浪費=損失，避免損失是商業的第一規則。</p>
+  </article>
+
+</section>
+
+<div class="note">要點：流程再造需要由共學組織驅動；共學組織的形成與深耕，則仰賴領導者的思維與日常行動。</div>
+
+<div class="actions">
+  <button class="btn" id="downloadBtn">下載 HTML 檔</button>
+  <button class="btn secondary" id="printBtn">列印 / 另存為 PDF</button>
+</div>
+
+<footer style="margin-top:18px;color:#556;font-size:13px">
+  <div>引用：Henry Ford、Kiichiro Toyoda、Taiichi Ohno、Fujio Cho、Peter Drucker 等精實領導者言論與理念。</div>
+</footer>
+
+  </div>  <script>
+    // 下載 HTML 檔案
+    document.getElementById('downloadBtn').addEventListener('click', function(){
+      const filename = '精實策略地圖.html';
+      const content = document.documentElement.outerHTML;
+      const blob = new Blob([content], {type: 'text/html;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = filename; document.body.appendChild(a); a.click();
+      setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 500);
+    });
+
+    // 列印
+    document.getElementById('printBtn').addEventListener('click', function(){
+      window.print();
+    });
+  </script></body>
+</html>
