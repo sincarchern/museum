@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>梅花易數・數字起卦</title>
+<style>
+:root{--bg:#f3efe6;--card:#fbf8f1;--ink:#23201b;--mute:#6f675a;--line:#d9d1c0;--acc:#9a2f2f;--box-sizing:border-box;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1a17;--card:#25231f;--ink:#ece6d8;--mute:#a39b8a;--line:#3a362f;--acc:#e08a7a}}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Serif TC","Songti TC","PMingLiU",serif;line-height:1.7}
+main{max-width:520px;margin:0 auto;padding:28px 18px 40px}
+h1{font-size:30px;margin:0 0 4px;letter-spacing:.12em;font-weight:700}
+.sub{color:var(--mute);margin:0 0 22px;font-size:15px}
+.in{display:flex;gap:10px}
+.in input{flex:1;min-width:0;font:inherit;font-size:20px;text-align:center;padding:12px 8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:6px}
+.in input:focus,button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.btns{display:flex;gap:10px;margin:12px 0 6px}
+button{font:inherit;cursor:pointer;border-radius:6px;padding:12px 16px;border:1px solid var(--acc)}
+#go{flex:2;background:var(--acc);color:#fff;font-size:18px;letter-spacing:.2em}
+#rnd{flex:1;background:transparent;color:var(--acc)}
+.hint{font-size:13px;color:var(--mute);margin:6px 0 0;min-height:20px}
+#out{margin-top:22px}
+.row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.gua{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 8px;text-align:center}
+.gua b{display:block;font-size:13px;color:var(--mute);font-weight:400}
+.gua .nm{font-size:20px;margin:8px 0 2px;font-weight:700}
+.gua small{color:var(--mute);font-size:12px}
+.hex{width:64px;margin:10px auto 0}
+.yao{display:flex;justify-content:space-between;height:7px;margin:5px 0}
+.yao i{display:block;height:100%;background:var(--ink);width:100%}
+.yao.yin i{width:42%}
+.yao.mv i{background:var(--acc)}
+.tiyong{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px}
+.tiyong p{margin:2px 0}
+.tag{font-weight:700;color:var(--acc)}
+.calc{font-size:13px;color:var(--mute);margin-top:12px}
+.guaci{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px}.guaci p{margin:4px 0}.guaci .ci{font-size:17px}.guaci .note{font-size:12px;color:var(--mute)}
+footer{margin-top:30px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--mute)}
+</style>
+</head>
+<body>
+<main>
+<h1>梅花易數</h1>
+<p class="sub">數字起卦。心裡想著一件事，憑直覺輸入兩個數字。</p>
+<div class="in">
+<input id="a" type="number" inputmode="numeric" min="1" placeholder="第一個數" aria-label="第一個數字">
+<input id="b" type="number" inputmode="numeric" min="1" placeholder="第二個數" aria-label="第二個數字">
+</div>
+<div class="btns"><button id="go">起卦</button><button id="rnd">隨機</button></div>
+<p class="hint" id="hint">請輸入兩個正整數。</p>
+<div id="out" aria-live="polite"></div>
+<footer>僅供文化娛樂與自我省思，不構成任何決策建議。<br>小路・梅花易數</footer>
+</main>
+<script>
+var N=["乾","兌","離","震","巽","坎","艮","坤"];
+var L=[[1,1,1],[1,1,0],[1,0,1],[1,0,0],[0,1,1],[0,1,0],[0,0,1],[0,0,0]];
+var EL=["金","金","火","木","木","水","土","土"];
+var T=[["乾","夬","大有","大壯","小畜","需","大畜","泰"],
+["履","兌","睽","歸妹","中孚","節","損","臨"],
+["同人","革","離","豐","家人","既濟","賁","明夷"],
+["無妄","隨","噬嗑","震","益","屯","頤","復"],
+["姤","大過","鼎","恆","巽","井","蠱","升"],
+["訟","困","未濟","解","渙","坎","蒙","師"],
+["遯","咸","旅","小過","漸","蹇","艮","謙"],
+["否","萃","晉","豫","觀","比","剝","坤"]];
+var SHENG={"木":"火","火":"土","土":"金","金":"水","水":"木"};
+var KE={"木":"土","土":"水","水":"火","火":"金","金":"木"};
+var GC={"乾":"元亨利貞。","坤":"元亨，利牝馬之貞。君子有攸往，先迷後得主，利西南得朋，東北喪朋。安貞吉。","屯":"元亨利貞，勿用有攸往，利建侯。","蒙":"亨。匪我求童蒙，童蒙求我。初筮告，再三瀆，瀆則不告。利貞。","需":"有孚，光亨，貞吉。利涉大川。","訟":"有孚，窒。惕中吉。終凶。利見大人，不利涉大川。","師":"貞，丈人吉，無咎。","比":"吉。原筮元永貞，無咎。不寧方來，後夫凶。","小畜":"亨。密雲不雨，自我西郊。","履":"履虎尾，不咥人，亨。","泰":"小往大來，吉亨。","否":"否之匪人，不利君子貞，大往小來。","同人":"同人于野，亨。利涉大川，利君子貞。","大有":"元亨。","謙":"亨，君子有終。","豫":"利建侯行師。","隨":"元亨利貞，無咎。","蠱":"元亨，利涉大川。先甲三日，後甲三日。","臨":"元亨利貞。至于八月有凶。","觀":"盥而不薦，有孚顒若。","噬嗑":"亨。利用獄。","賁":"亨。小利有攸往。","剝":"不利有攸往。","復":"亨。出入無疾，朋來無咎。反復其道，七日來復，利有攸往。","無妄":"元亨利貞。其匪正有眚，不利有攸往。","大畜":"利貞。不家食吉，利涉大川。","頤":"貞吉。觀頤，自求口實。","大過":"棟橈，利有攸往，亨。","坎":"習坎，有孚，維心亨，行有尚。","離":"利貞，亨。畜牝牛吉。","咸":"亨，利貞，取女吉。","恆":"亨，無咎，利貞，利有攸往。","遯":"亨，小利貞。","大壯":"利貞。","晉":"康侯用錫馬蕃庶，晝日三接。","明夷":"利艱貞。","家人":"利女貞。","睽":"小事吉。","蹇":"利西南，不利東北。利見大人，貞吉。","解":"利西南。無所往，其來復吉。有攸往，夙吉。","損":"有孚，元吉，無咎，可貞，利有攸往。曷之用？二簋可用享。","益":"利有攸往，利涉大川。","夬":"揚于王庭，孚號有厲，告自邑，不利即戎，利有攸往。","姤":"女壯，勿用取女。","萃":"亨。王假有廟，利見大人，亨，利貞。用大牲吉，利有攸往。","升":"元亨，用見大人，勿恤，南征吉。","困":"亨，貞大人吉，無咎，有言不信。","井":"改邑不改井，無喪無得，往來井井。汔至亦未繘井，羸其瓶，凶。","革":"己日乃孚，元亨利貞，悔亡。","鼎":"元吉，亨。","震":"亨。震來虩虩，笑言啞啞。震驚百里，不喪匕鬯。","艮":"艮其背，不獲其身，行其庭，不見其人，無咎。","漸":"女歸吉，利貞。","歸妹":"征凶，無攸利。","豐":"亨，王假之，勿憂，宜日中。","旅":"小亨，旅貞吉。","巽":"小亨，利有攸往，利見大人。","兌":"亨，利貞。","渙":"亨。王假有廟，利涉大川，利貞。","節":"亨。苦節不可貞。","中孚":"豚魚吉，利涉大川，利貞。","小過":"亨，利貞。可小事，不可大事。飛鳥遺之音，不宜上，宜下，大吉。","既濟":"亨小，利貞。初吉終亂。","未濟":"亨。小狐汔濟，濡其尾，無攸利。"};
+function rel(x,te){var e=EL[x];if(e==te)return["比和",2];if(SHENG[e]==te)return["生體",3];if(KE[te]==e)return["體剋",2];if(SHENG[te]==e)return["洩體",1];return["剋體",0]}
+function mod(n,m){return n%m||m}
+function idx(t){for(var i=0;i<8;i++){if(L[i][0]==t[0]&&L[i][1]==t[1]&&L[i][2]==t[2])return i}}
+function hex(lines,mv){
+ var h='<div class="hex">';
+ for(var i=5;i>=0;i--){h+='<div class="yao'+(lines[i]?'':' yin')+(mv===i?' mv':'')+'">'+(lines[i]?'<i></i>':'<i></i><i></i>')+'</div>'}
+ return h+'</div>';
+}
+function card(t,lines,u,l,mv,note){
+ return '<div class="gua"><b>'+t+'</b>'+hex(lines,mv)+'<div class="nm">'+T[u][l]+'</div><small>上'+N[u]+'下'+N[l]+(note?'<br>'+note:'')+'</small></div>';
+}
+function cast(a,b){
+ var up=mod(a,8)-1,lo=mod(b,8)-1,mv=mod(a+b,6)-1;
+ var ls=L[lo].concat(L[up]);
+ var hu=idx(ls.slice(2,5)),hl=idx(ls.slice(1,4));
+ var c=ls.slice();c[mv]^=1;
+ var bu=idx(c.slice(3)),bl=idx(c.slice(0,3));
+ var tiU=mv>=3; // 動爻在上卦則上為用
+ var ti=tiU?lo:up,yg=tiU?up:lo;
+ var te=EL[ti],ye=EL[yg],v;
+ if(te==ye)v="比和，順遂平穩。";
+ else if(SHENG[ye]==te)v="用生體，外力相助，偏吉。";
+ else if(KE[te]==ye)v="體剋用，可掌控，次吉。";
+ else if(SHENG[te]==ye)v="體生用，耗力付出，偏耗。";
+ else v="用剋體，阻力較大，宜謹慎。";
+ var h='<div class="row">'+card("本卦",ls,up,lo,mv,"動爻：第"+(mv+1)+"爻")+card("互卦",[].concat(L[hl],L[hu]),hu,hl,-1,"看過程")+card("變卦",c,bu,bl,-1,"看結果")+'</div>';
+ h+='<div class="tiyong"><p><span class="tag">體</span> '+N[ti]+'（'+te+'）　<span class="tag">用</span> '+N[yg]+'（'+ye+'）</p><p>'+v+'</p></div>';
+ var r1=rel(hu,te),r2=rel(hl,te),bx=tiU?bu:bl,r3=rel(bx,te);
+ var proc=r1[1]+r2[1]>=4?"過程大致順暢":r1[1]+r2[1]>=3?"過程有起伏":"過程多阻";
+ var endt=r3[1]>=2?"結果向好":r3[1]==1?"結果偏耗，需付出代價":"結果不利，宜保守";
+ var bn=T[up][lo],cn=T[bu][bl];
+ h+='<div class="guaci"><p class="tag">卦辭・本卦'+bn+'</p><p class="ci">'+GC[bn]+'</p>'+(cn!=bn?'<p class="tag">卦辭・變卦'+cn+'</p><p class="ci">'+GC[cn]+'</p>':'')+'</div>';
+ h+='<div class="guaci"><p class="tag">斷語</p><p>起始：'+v+'</p><p>過程：互卦'+N[hu]+'、'+N[hl]+'對體為「'+r1[0]+'」「'+r2[0]+'」，'+proc+'。</p><p>結果：變卦'+N[bx]+'對體為「'+r3[0]+'」，'+endt+'。</p><p class="note">斷語由體用五行生剋規則推算，未計入季節旺衰與外應，請當作自我省思的參考。</p></div>';
+ h+='<p class="calc">'+a+' ÷ 8 餘 '+(a%8)+'，取上卦'+N[up]+'；'+b+' ÷ 8 餘 '+(b%8)+'，取下卦'+N[lo]+'；('+a+'+'+b+') ÷ 6 餘 '+((a+b)%6)+'，動爻第'+(mv+1)+'爻。餘 0 取滿數。</p>';
+ return h;
+}
+var A=document.getElementById("a"),B=document.getElementById("b"),O=document.getElementById("out"),H=document.getElementById("hint");
+function run(){
+ var a=parseInt(A.value,10),b=parseInt(B.value,10);
+ if(!(a>0)||!(b>0)){H.textContent="請輸入兩個大於 0 的整數。";O.innerHTML="";return}
+ H.textContent="";O.innerHTML=cast(a,b);
+}
+document.getElementById("go").onclick=run;
+document.getElementById("rnd").onclick=function(){A.value=1+Math.floor(Math.random()*99);B.value=1+Math.floor(Math.random()*99);run()};
+[A,B].forEach(function(e){e.addEventListener("keydown",function(k){if(k.key==="Enter")run()})});
+</script>
+</body>
+</html>
