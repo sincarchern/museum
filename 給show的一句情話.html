@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>給show的一句情話</title>
+<style>
+:root{--bg:#fbf3ee;--card:#fffaf7;--ink:#4a2f33;--sub:#a67c80;--accent:#c4575f;--accent2:#e58b8f;--line:#f0d9d6;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1e1416;--card:#2a1c1f;--ink:#f4e4e2;--sub:#b88f93;--accent:#e0737b;--accent2:#b8454e;--line:#42292d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1e1416;--card:#2a1c1f;--ink:#f4e4e2;--sub:#b88f93;--accent:#e0737b;--accent2:#b8454e;--line:#42292d;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:"Noto Serif TC","PingFang TC","Microsoft JhengHei",serif;display:flex;align-items:center;justify-content:center;padding:24px}
+main{width:100%;max-width:440px;text-align:center}
+h1{font-size:1.6rem;font-weight:600;letter-spacing:.12em;margin:0 0 6px}
+.hint{color:var(--sub);font-size:.9rem;letter-spacing:.1em;margin:0 0 28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:40px 26px;min-height:200px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(196,87,95,.12)}
+.quote{font-size:1.25rem;line-height:1.9;letter-spacing:.06em;margin:0;transition:opacity .35s,transform .35s}
+.quote.out{opacity:0;transform:translateY(8px)}
+.heart{font-size:1.6rem;color:var(--accent);margin:22px 0 4px}
+button{font:inherit;font-size:1.1rem;letter-spacing:.2em;color:#fff;background:linear-gradient(135deg,var(--accent2),var(--accent));border:0;border-radius:999px;padding:14px 40px;cursor:pointer;box-shadow:0 6px 18px rgba(196,87,95,.35);transition:transform .15s}
+button:active{transform:scale(.96)}
+</style>
+</head>
+<body>
+<main>
+<h1>給show的一句情話</h1>
+<p class="hint">按下按鈕，抽一句</p>
+<div class="card"><p class="quote" id="q">點一下，聽聽我想對你說的話</p></div>
+<div class="heart">♥</div>
+<button id="btn" type="button">抽一句情話</button>
+</main>
+<script>
+const quotes=[
+"你在，就好。",
+"有你，夠了。",
+"還好，是你。",
+"轉身，我就在。",
+"今天，依然很慶幸遇見你。",
+"心似雙絲網，中有千千結。",
+"山水有相逢，而你是我不願錯過的風景。",
+"行至水窮處，只要回頭，你都在。",
+"在所有人都看著我飛得高不高時，只有你在意我累不累。",
+"和你在一起，連沉默都是一種舒適的對話。",
+"你是我靈魂深處最安靜的避風港。",
+"一碗熱湯，兩雙筷子，有你的地方就是家。",
+"天冷了，手伸過來，我幫你暖著。",
+"你是我漫長人生裡，最美好的那場意外。",
+"你是我打亂所有計劃後，最想保留的選擇。",
+"世界很吵，但只要看著你，心就安靜了。",
+"你是我提筆寫到一半，捨不得落款的詩。",
+"走過再多的路，最想停留的，依然是你身旁的那座亭子。",
+"夜深了，遠處的燈火再亮，也比不上你眼中那一抹溫柔。",
+"我不求歲月靜好，只要歲月裡有你。",
+"縱然看遍萬千風景，唯獨在你這裡，我才真正卸下了防備。",
+"本來想寫個宏大的故事，寫著寫著，滿紙都是你的名字。",
+"這輩子最大的輸局，就是甘願敗在你手裡。",
+"一筆劃開歲月，墨色濃淡裡，全是你留下的痕跡。",
+"你是我文字裡最難著墨、也最捨不得結尾的那段留白。",
+"天下萬事皆可算，唯獨對你的心動，全然不在算冊之中。",
+"晚風吹起時，我想到的第一個名字，是你。",
+"漫長時光裡，你是我唯一不想解開的謎。",
+"我把最心愛的杯子留在你那裡了，這樣我就有理由一直回去。",
+"今天的雲好看得不得了，我第一時間拿出了手機，卻發現想發給的人只有你。",
+"筆尖在紙上停了很久，墨水暈開了一小塊，裡面全是不敢落款的心事。",
+"時光會帶走很多東西，但它帶不走我每次看見你時的心跳。",
+"如果餘生是一本長篇小說，你就是我最不想翻過去的那一頁。",
+"經書翻過千萬卷，筆尖落處，寫的卻都是你的名字。",
+"萬物皆空，唯獨對你的感覺，實實在在。",
+"繁華都市裡燈火通明，只有你的那一盞，是我心裡的家。",
+"你是落在我生命裡的光，不耀眼，卻照亮了所有的角落。",
+"今晚的月色真美，風也很溫柔，而我只是恰好想起了你。",
+"酒過三巡，大家都在聊理想，而我只想問你今天累不累。",
+"你想飛，我就做你的風；你想停，我就做你的港。",
+"世間熱烈千千萬萬，我只想給你在歲月裡最安靜的偏愛。",
+"風走過八千里，不問歸期；我繞過半生歲月，只為撞見你。",
+"山有木兮木有枝，心悅君兮君已知。",
+"你是落在我荒原上的一場雨，讓枯木重新有了心跳。",
+"如果時間能被定格，我希望那一秒，正巧是你看向我的時候。",
+"下雨了，傘給你，我陪你淋。"
+];
+const q=document.getElementById('q'),btn=document.getElementById('btn');
+let bag=[],last=-1,busy=false;
+function next(){
+  if(!bag.length){
+    bag=quotes.map((_,i)=>i);
+    for(let i=bag.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[bag[i],bag[j]]=[bag[j],bag[i]];}
+    if(bag[bag.length-1]===last&&bag.length>1){bag.unshift(bag.pop());}
+  }
+  last=bag.pop();
+  return quotes[last];
+}
+btn.addEventListener('click',()=>{
+  if(busy)return;busy=true;
+  q.classList.add('out');
+  setTimeout(()=>{q.textContent=next();q.classList.remove('out');busy=false;},300);
+});
+</script>
+</body>
+</html>
