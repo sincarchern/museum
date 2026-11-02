@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>給show的一句情話</title>
+<style>
+:root{--bg1:#fdf3ee;--bg2:#f6dedd;--card:#fffaf8;--ink:#4a2f33;--sub:#a67c80;--accent:#c4575f;--accent2:#e58b8f;--line:#ecd0cd;--shadow:rgba(196,87,95,.18);--blob:#f4b8b8;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#241719;--bg2:#150e10;--card:#2c1e21;--ink:#f6e8e6;--sub:#b88f93;--accent:#e0737b;--accent2:#b8454e;--line:#4d3036;--shadow:rgba(0,0,0,.45);--blob:#7a3a42;color-scheme:dark}}
+:root[data-theme="dark"]{--bg1:#241719;--bg2:#150e10;--card:#2c1e21;--ink:#f6e8e6;--sub:#b88f93;--accent:#e0737b;--accent2:#b8454e;--line:#4d3036;--shadow:rgba(0,0,0,.45);--blob:#7a3a42;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*{box-sizing:border-box}
+body{margin:0;min-height:100%;position:relative;overflow-x:hidden;background:linear-gradient(170deg,var(--bg1),var(--bg2));background-color:var(--bg1);color:var(--ink);font-family:"Noto Serif TC","PingFang TC","Microsoft JhengHei",serif;display:flex;align-items:center;justify-content:center;padding:32px 20px}
+.blob{position:fixed;border-radius:50%;background:var(--blob);filter:blur(60px);opacity:.45;z-index:0;animation:drift 14s ease-in-out infinite alternate}
+.b1{width:260px;height:260px;top:-70px;left:-80px}
+.b2{width:300px;height:300px;bottom:-110px;right:-100px;animation-delay:-6s}
+@keyframes drift{to{transform:translate(30px,24px) scale(1.12)}}
+main{position:relative;z-index:1;width:100%;max-width:420px;text-align:center}
+.eyebrow{font-size:.78rem;letter-spacing:.5em;color:var(--sub);margin:0 0 10px;padding-left:.5em}
+h1{font-size:clamp(1.55rem,7vw,2rem);font-weight:600;letter-spacing:.14em;margin:0;padding-left:.14em}
+.orn{display:flex;align-items:center;justify-content:center;gap:12px;margin:14px 0 30px;color:var(--accent);font-size:.9rem}
+.orn::before,.orn::after{content:"";width:48px;height:1px;background:linear-gradient(90deg,transparent,var(--accent2))}
+.orn::after{transform:scaleX(-1)}
+.card{position:relative;background:var(--card);border-radius:26px;padding:12px;box-shadow:0 18px 46px var(--shadow)}
+.inner{position:relative;border:1px solid var(--line);border-radius:18px;padding:60px 26px 56px;min-height:300px;display:flex;align-items:center;justify-content:center}
+.inner::before,.inner::after{position:absolute;font-family:Georgia,serif;font-size:4.2rem;line-height:1;color:var(--accent2);opacity:.5}
+.inner::before{content:"\201C";top:10px;left:16px}
+.inner::after{content:"\201D";bottom:-8px;right:16px}
+.quote{margin:0;font-size:clamp(1.15rem,5vw,1.38rem);line-height:2.05;letter-spacing:.08em;text-wrap:balance}
+.quote.idle{color:var(--sub)}
+.quote.show{animation:rise .6s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(12px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.count{height:1.4em;margin:20px 0 22px;color:var(--sub);font-size:.82rem;letter-spacing:.14em}
+button{position:relative;font:inherit;font-size:1.08rem;letter-spacing:.22em;color:#fff;background:linear-gradient(135deg,var(--accent2),var(--accent));border:0;border-radius:999px;padding:16px 46px 16px 48px;cursor:pointer;box-shadow:0 10px 24px var(--shadow);transition:transform .15s,box-shadow .2s}
+button:hover{box-shadow:0 12px 30px var(--shadow)}
+button:active{transform:scale(.95)}
+button:focus-visible{outline:3px solid var(--accent2);outline-offset:4px}
+.fly{position:fixed;z-index:5;pointer-events:none;color:var(--accent);animation:fly 1.3s ease-out forwards}
+@keyframes fly{to{transform:translate(var(--dx),-170px) scale(.6);opacity:0}}
+@media (prefers-reduced-motion:reduce){.blob,.fly,.quote.show{animation:none}}
+.sub{margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.petal{position:fixed;top:-48px;z-index:6;pointer-events:none;animation:fall var(--t) linear forwards}
+@keyframes fall{to{transform:translate(var(--sx),calc(100vh + 80px)) rotate(var(--r));opacity:.85}}
+@media (prefers-reduced-motion:reduce){.petal{animation-duration:.01s}}
+.ghost{background:transparent;color:var(--accent);border:1px solid var(--line);box-shadow:none;font-size:.88rem;letter-spacing:.14em;padding:10px 26px}
+.ghost:hover{box-shadow:none;border-color:var(--accent2)}
+.ghost.on{background:var(--card);border-color:var(--accent2)}
+.ghost.on i{display:inline-block;animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-3px)}}
+</style>
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div>
+<main>
+<header>
+<p class="eyebrow">LOVE NOTE</p>
+<h1>給show的一句情話</h1>
+<div class="orn">♥</div>
+</header>
+<section class="card"><div class="inner"><p class="quote idle" id="q">點一下，聽聽我想對你說的……</p></div></section>
+<div class="count" id="c"></div>
+<button id="btn" type="button">抽一句情話</button>
+<div class="sub"><button id="fbtn" class="ghost" type="button">🌸 送花</button><button id="mbtn" class="ghost" type="button"><i>♪</i> 背景音樂：關</button></div>
+</main>
+<script>
+const quotes=[
+"山水有相逢，而你是我不願錯過的風景。",
+"紅豆生南國，春來發幾枝；願君多採擷，此物最相思。",
+"與你相識，如沐春風；與你相守，不負歲月。",
+"你懂我的欲言又止，這比什麼都珍貴。",
+"和你在一起，連沉默都是一種舒適的對話。",
+"你是我靈魂深處最安靜的避風港。",
+"天冷了，手伸過來，我幫你暖著。",
+"你是我漫長人生裡，最美好的那場意外。",
+"你是我打亂所有計劃後，最想保留的選擇。",
+"世界很吵，但只要看著你，心就安靜了。",
+"你是我提筆寫到一半，捨不得落款的詩。",
+"走過再多的路，最想停留的，依然是你身旁的那座亭子。",
+"夜深了，遠處的燈火再亮，也比不上你眼中那一抹溫柔。",
+"我不求歲月靜好，只要歲月裡有你。",
+"本來想寫個宏大的故事，寫著寫著，滿紙都是你的名字。",
+"這輩子最大的輸局，就是甘願敗在你手裡。",
+"一筆劃開歲月，墨色濃淡裡，全是你留下的痕跡。",
+"原本想寫一篇無關風月的散文，落筆卻句句都是你的影子。",
+"你是我文字裡最難著墨、也最捨不得結尾的那段留白。",
+"天下萬事皆可算，唯獨對你的心動，全然不在算冊之中。",
+"晚風吹起時，我想到的第一個名字，是你。",
+"漫長時光裡，你是我唯一不想解開的謎。",
+"世界紛紛擾擾，你是我心中那座永不落幕的避風港。",
+"今天的雲好看得不得了，我第一時間拿出了手機，卻發現想發給的人只有你。",
+"筆尖在紙上停了很久，墨水暈開了一小塊，裡面全是不敢落款的心事。",
+"走過那條熟悉的小路，腳步不知不覺放慢，彷彿你還在燈火闌珊處。",
+"人生是一趟單程列車，但我很慶幸，對座的那個人是你。",
+"時光會帶走很多東西，但它帶不走我每次看見你時的心跳。",
+"如果餘生是一本長篇小說，你就是我最不想翻過去的那一頁。",
+"世人皆求渡化，而你是我紅塵裡唯一的執念與答案。",
+"參透了那麼多道理，依然在你的眼波裡失守。",
+"經書翻過千萬卷，筆尖落處，寫的卻都是你的名字。",
+"萬物皆空，唯獨對你的感覺，實實在在。",
+"繁華都市裡燈火通明，只有你的那一盞，是我心的歸宿。",
+"遇見你之前，心如無根的漂萍；遇見你之後，心有了想安頓落腳的地方。",
+"你是落在我生命裡的光，不耀眼，卻照亮了所有的角落。",
+"若這是一場漫長的花期，你就是我枝頭上最捨不得謝落的那朵。",
+"文字寫得再漂亮，也抵不過你抬頭對我一笑的瞬間。",
+"你是我平淡歲月裡，最驚豔的一筆筆墨。",
+"今晚的月色真美，風也很溫柔，而我只是恰好想起了你。",
+"文字太輕，說不清這份沉重；酒意太淺，載不動這份深情。",
+"你想飛，我就做你的風；你想停，我就做你的港。",
+"世間熱烈千千萬萬，我只想給你在歲月裡最安靜的偏愛。",
+"林間大霧，而你是我眼中唯一清晰的歸途。",
+"風走過八千里，不問歸期；我繞過半生歲月，只為遇見你。",
+"你是落在我荒原上的一場雨，讓枯木重新有了心跳。",
+"如果時間能被定格，我希望那一秒，正巧是你看向我的時候。",
+"世界運轉得太快，只有在你身旁，時間才願意放慢腳步。"
+];
+const q=document.getElementById('q'),c=document.getElementById('c'),btn=document.getElementById('btn');
+let last=-1,busy=false,n=0;
+function next(){
+  let i;
+  do{i=Math.floor(Math.random()*quotes.length);}while(i===last&&quotes.length>1);
+  last=i;
+  return quotes[i];
+}
+btn.addEventListener('click',()=>{
+  q.textContent=next();
+  q.classList.remove('idle','show');void q.offsetWidth;q.classList.add('show');
+  n++;c.textContent='已抽 '+n+' 次';
+  const r=btn.getBoundingClientRect();
+  for(let i=0;i<7;i++){
+    const h=document.createElement('span');
+    h.className='fly';h.textContent='♥';
+    h.style.left=(r.left+r.width*(0.2+Math.random()*0.6))+'px';
+    h.style.top=(r.top+4)+'px';
+    h.style.fontSize=(12+Math.random()*14)+'px';
+    h.style.setProperty('--dx',((Math.random()-.5)*90)+'px');
+    h.style.animationDelay=(Math.random()*.25)+'s';
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),1700);
+  }
+});
+// 背景音樂：用瀏覽器合成的輕柔音樂盒，不需外部檔案
+const mBtn=document.getElementById('mbtn');
+let ac,master,bus,timer,nextT=0,step=0,playing=false;
+const chords=[[48,55,59,64],[45,52,60,64],[41,48,57,64],[43,50,59,64]];
+const hz=m=>440*Math.pow(2,(m-69)/12);
+function tone(m,t,dur,vol,att){
+  const o=ac.createOscillator(),g=ac.createGain();
+  o.type='sine';o.frequency.value=hz(m);
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.linearRampToValueAtTime(vol,t+att);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  o.connect(g);g.connect(bus);o.start(t);o.stop(t+dur+0.1);
+}
+function sched(){
+  while(nextT<ac.currentTime+1.5){
+    const ch=chords[Math.floor(step/8)%4];
+    if(step%8===0)ch.forEach(m=>tone(m,nextT,7,0.05,1.6));
+    if(Math.random()<0.75){
+      const m=ch[Math.floor(Math.random()*ch.length)]+(Math.random()<0.5?12:24);
+      tone(m,nextT,2,0.07,0.01);
+    }
+    nextT+=0.75;step++;
+  }
+}
+function startMusic(){
+  if(!ac){
+    ac=new (window.AudioContext||window.webkitAudioContext)();
+    master=ac.createGain();master.gain.value=0;master.connect(ac.destination);
+    bus=ac.createGain();bus.connect(master);
+    const d=ac.createDelay(1),fb=ac.createGain();
+    d.delayTime.value=0.45;fb.gain.value=0.4;
+    bus.connect(d);d.connect(fb);fb.connect(d);d.connect(master);
+  }
+  ac.resume();
+  nextT=ac.currentTime+0.1;
+  sched();timer=setInterval(sched,250);
+  master.gain.cancelScheduledValues(ac.currentTime);
+  master.gain.setTargetAtTime(0.6,ac.currentTime,0.6);
+}
+function stopMusic(){
+  master.gain.setTargetAtTime(0,ac.currentTime,0.3);
+  clearInterval(timer);
+  setTimeout(()=>{if(!playing)ac.suspend();},1200);
+}
+mBtn.addEventListener('click',()=>{
+  try{
+    playing=!playing;
+    if(playing)startMusic();else stopMusic();
+    mBtn.classList.toggle('on',playing);
+    mBtn.innerHTML='<i>♪</i> 背景音樂：'+(playing?'開':'關');
+  }catch(e){playing=false;mBtn.textContent='此裝置無法播放音樂';}
+});
+// 送花：花瓣從畫面上方飄落
+const flowers=['🌸','🌷','🌹','🌼','💐','🌺'];
+document.getElementById('fbtn').addEventListener('click',()=>{
+  for(let i=0;i<26;i++){
+    const f=document.createElement('span');
+    f.className='petal';
+    f.textContent=flowers[Math.floor(Math.random()*flowers.length)];
+    f.style.left=(Math.random()*100)+'vw';
+    f.style.fontSize=(18+Math.random()*20)+'px';
+    const t=3+Math.random()*3;
+    f.style.setProperty('--t',t+'s');
+    f.style.setProperty('--sx',((Math.random()-.5)*160)+'px');
+    f.style.setProperty('--r',((Math.random()-.5)*540)+'deg');
+    f.style.animationDelay=(Math.random()*1.2)+'s';
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),(t+1.4)*1000+300);
+  }
+});
+</script>
+</body>
+</html>
