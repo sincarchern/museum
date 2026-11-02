@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>給show的一句情話</title>
+<style>
+:root{--bg1:#fdf4ef;--bg2:#f8e3e1;--card:#fffaf8;--ink:#4a2f33;--sub:#a67c80;--accent:#c4575f;--accent2:#e58b8f;--line:#f0d9d6;--shadow:rgba(196,87,95,.16);color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#241719;--bg2:#171011;--card:#2c1e21;--ink:#f6e8e6;--sub:#b88f93;--accent:#e0737b;--accent2:#b8454e;--line:#45292e;--shadow:rgba(0,0,0,.4);color-scheme:dark}}
+:root[data-theme="dark"]{--bg1:#241719;--bg2:#171011;--card:#2c1e21;--ink:#f6e8e6;--sub:#b88f93;--accent:#e0737b;--accent2:#b8454e;--line:#45292e;--shadow:rgba(0,0,0,.4);color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*{box-sizing:border-box}
+body{margin:0;min-height:100%;background:linear-gradient(170deg,var(--bg1),var(--bg2));background-color:var(--bg1);color:var(--ink);font-family:"Noto Serif TC","PingFang TC","Microsoft JhengHei",serif;display:flex;align-items:center;justify-content:center;padding:28px 20px}
+main{width:100%;max-width:420px;text-align:center}
+header{margin-bottom:26px}
+h1{font-size:clamp(1.5rem,6.5vw,1.9rem);font-weight:600;letter-spacing:.14em;margin:0}
+.orn{display:flex;align-items:center;justify-content:center;gap:12px;margin:12px 0 0;color:var(--accent)}
+.orn::before,.orn::after{content:"";width:44px;height:1px;background:var(--line)}
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:56px 28px 44px;min-height:280px;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 40px var(--shadow)}
+.card::before{content:"“";position:absolute;top:6px;left:22px;font-size:5rem;line-height:1;color:var(--accent2);opacity:.45;font-family:Georgia,serif}
+.quote{margin:0;font-size:clamp(1.15rem,5vw,1.35rem);line-height:2;letter-spacing:.08em;text-wrap:balance;transition:opacity .35s,transform .35s}
+.quote.out{opacity:0;transform:translateY(10px)}
+.quote.idle{color:var(--sub)}
+.count{height:1.4em;margin:18px 0 20px;color:var(--sub);font-size:.85rem;letter-spacing:.12em}
+button{font:inherit;font-size:1.1rem;letter-spacing:.24em;color:#fff;background:linear-gradient(135deg,var(--accent2),var(--accent));border:0;border-radius:999px;padding:15px 44px;cursor:pointer;box-shadow:0 8px 22px var(--shadow);transition:transform .15s}
+button:active{transform:scale(.96)}
+button:focus-visible{outline:3px solid var(--accent2);outline-offset:3px}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>給show的一句情話</h1>
+<div class="orn">♥</div>
+</header>
+<section class="card"><p class="quote idle" id="q">點一下，聽聽我想對你說的……</p></section>
+<div class="count" id="c"></div>
+<button id="btn" type="button">抽一句情話</button>
+</main>
+<script>
+const quotes=[
+"山水有相逢，而你是我不願錯過的風景。",
+"紅豆生南國，春來發幾枝；願君多採擷，此物最相思。",
+"與你相識，如沐春風；與你相守，不負歲月。",
+"你懂我的欲言又止，這比什麼都珍貴。",
+"和你在一起，連沉默都是一種舒適的對話。",
+"你是我靈魂深處最安靜的避風港。",
+"天冷了，手伸過來，我幫你暖著。",
+"你是我漫長人生裡，最美好的那場意外。",
+"你是我打亂所有計劃後，最想保留的選擇。",
+"世界很吵，但只要看著你，心就安靜了。",
+"你是我提筆寫到一半，捨不得落款的詩。",
+"走過再多的路，最想停留的，依然是你身旁的那座亭子。",
+"夜深了，遠處的燈火再亮，也比不上你眼中那一抹溫柔。",
+"我不求歲月靜好，只要歲月裡有你。",
+"本來想寫個宏大的故事，寫著寫著，滿紙都是你的名字。",
+"這輩子最大的輸局，就是甘願敗在你手裡。",
+"一筆劃開歲月，墨色濃淡裡，全是你留下的痕跡。",
+"原本想寫一篇無關風月的散文，落筆卻句句都是你的影子。",
+"你是我文字裡最難著墨、也最捨不得結尾的那段留白。",
+"天下萬事皆可算，唯獨對你的心動，全然不在算冊之中。",
+"晚風吹起時，我想到的第一個名字，是你。",
+"漫長時光裡，你是我唯一不想解開的謎。",
+"世界紛紛擾擾，你是我心中那座永不落幕的避風港。",
+"今天的雲好看得不得了，我第一時間拿出了手機，卻發現想發給的人只有你。",
+"筆尖在紙上停了很久，墨水暈開了一小塊，裡面全是不敢落款的心事。",
+"走過那條熟悉的小路，腳步不知不覺放慢，彷彿你還在燈火闌珊處。",
+"人生是一趟單程列車，但我很慶幸，對座的那個人是你。",
+"時光會帶走很多東西，但它帶不走我每次看見你時的心跳。",
+"如果餘生是一本長篇小說，你就是我最不想翻過去的那一頁。",
+"世人皆求渡化，而你是我紅塵裡唯一的執念與答案。",
+"參透了那麼多道理，依然在你的眼波裡失守。",
+"經書翻過千萬卷，筆尖落處，寫的卻都是你的名字。",
+"萬物皆空，唯獨對你的感覺，實實在在。",
+"繁華都市裡燈火通明，只有你的那一盞，是我心的歸宿。",
+"遇見你之前，心如無根的漂萍；遇見你之後，心有了想安頓落腳的地方。",
+"你是落在我生命裡的光，不耀眼，卻照亮了所有的角落。",
+"若這是一場漫長的花期，你就是我枝頭上最捨不得謝落的那朵。",
+"文字寫得再漂亮，也抵不過你抬頭對我一笑的瞬間。",
+"你是我平淡歲月裡，最驚豔的一筆筆墨。",
+"今晚的月色真美，風也很溫柔，而我只是恰好想起了你。",
+"文字太輕，說不清這份沉重；酒意太淺，載不動這份深情。",
+"你想飛，我就做你的風；你想停，我就做你的港。",
+"世間熱烈千千萬萬，我只想給你在歲月裡最安靜的偏愛。",
+"林間大霧，而你是我眼中唯一清晰的歸途。",
+"風走過八千里，不問歸期；我繞過半生歲月，只為遇見你。",
+"你是落在我荒原上的一場雨，讓枯木重新有了心跳。",
+"如果時間能被定格，我希望那一秒，正巧是你看向我的時候。",
+"世界運轉得太快，只有在你身旁，時間才願意放慢腳步。"
+];
+const q=document.getElementById('q'),c=document.getElementById('c'),btn=document.getElementById('btn');
+let last=-1,busy=false,n=0;
+function next(){
+  let i;
+  do{i=Math.floor(Math.random()*quotes.length);}while(i===last&&quotes.length>1);
+  last=i;
+  return quotes[i];
+}
+btn.addEventListener('click',()=>{
+  if(busy)return;busy=true;
+  q.classList.add('out');
+  setTimeout(()=>{
+    q.textContent=next();
+    q.classList.remove('idle','out');
+    n++;c.textContent='已抽 '+n+' 次';
+    busy=false;
+  },300);
+});
+</script>
+</body>
+</html>
