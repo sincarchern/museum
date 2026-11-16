@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>西洋星座圖鑑｜小路工作室</title>
+<meta name="theme-color" content="#14325c">
+<meta name="description" content="十二星座圖鑑、星座配對與個人本命星盤分析。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f1eee4; --ink:#14325c; --line:#14325c55; --seg:#e8e4d6; --sel:#14325c; --seltxt:#f1eee4; --muted:#14325caa; --chip:#14325c14;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0e2748;--ink:#e9eef6;--line:#e9eef655;--seg:#143562;--sel:#f1eee4;--seltxt:#0e2748;--muted:#e9eef6b0;--chip:#e9eef61a}
+}
+:root[data-theme="dark"]{--bg:#0e2748;--ink:#e9eef6;--line:#e9eef655;--seg:#143562;--sel:#f1eee4;--seltxt:#0e2748;--muted:#e9eef6b0;--chip:#e9eef61a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.75}
+main{max-width:1080px;margin:0 auto;padding:clamp(18px,4vw,34px) 18px 48px}
+.site-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:4px}
+.brand{font-size:13px;letter-spacing:.08em;color:var(--muted);white-space:nowrap;padding-top:10px}
+h1{font-family:"Noto Serif TC","Songti TC",serif;font-weight:900;font-size:clamp(30px,6vw,46px);letter-spacing:.08em;margin:0 0 6px}
+.sub{margin:0 0 22px;color:var(--muted)}
+button,input,select{ -webkit-tap-highlight-color:transparent }
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #c28b38;outline-offset:3px}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.tool-btn{font:inherit;color:var(--ink);background:var(--chip);border:1px solid var(--line);border-radius:7px;padding:7px 12px;cursor:pointer}
+.tool-btn:hover{background:var(--seg)}
+.finder select{margin:0}
+#qo{scroll-margin-top:16px}
+#qo .tabs{flex-wrap:wrap}
+#qo table{margin:0 auto}
+#qo .res svg{max-width:100%}
+#qo .res{align-items:center}
+#qo p{overflow-wrap:anywhere}
+.empty{padding:14px 0;color:var(--muted)}
+@media(max-width:520px){.site-head{align-items:center}.brand{font-size:11px;padding-top:4px}.finder{align-items:stretch}.finder label{width:100%}.finder input{width:100%}.layout{gap:18px}.panel h2{font-size:28px}dl{grid-template-columns:5em 1fr;gap:5px 8px}.frm{grid-template-columns:1fr 1fr}.frm label{min-width:0}.frm input,.frm select{width:100%}.go{width:100%}}
+.finder{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:26px}
+.finder label{font-weight:500}
+input[type=date]{font:inherit;color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:6px;padding:6px 10px}
+.hint{color:var(--muted);font-size:14px}
+.layout{display:grid;gap:28px;grid-template-columns:1fr}
+@media(min-width:820px){.layout{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:start}}
+svg{width:100%;height:auto;max-width:460px;display:block;margin:0 auto}
+.seg{fill:var(--seg);stroke:var(--line);stroke-width:1;cursor:pointer}
+.seg:hover{fill:var(--chip)}
+.sign:focus{outline:none}
+.sign:focus-visible .seg{stroke:var(--ink);stroke-width:3}
+.sign.on .seg{fill:var(--sel)}
+.sign text{fill:var(--ink);pointer-events:none;text-anchor:middle;dominant-baseline:central}
+.sign.on text{fill:var(--seltxt)}
+.g{font-size:26px}.n{font-size:11px;font-family:"Noto Sans TC",sans-serif}
+.ring{fill:none;stroke:var(--line);stroke-width:1}
+.cg{font-size:54px;fill:var(--ink)}.cn{font-family:"Noto Serif TC",serif;font-weight:900;font-size:22px;fill:var(--ink);letter-spacing:.1em}.cd{font-size:12px;fill:var(--muted)}
+.panel{border-top:3px solid var(--ink);padding-top:16px}
+.panel h2{font-family:"Noto Serif TC","Songti TC",serif;font-weight:900;font-size:32px;margin:0;letter-spacing:.06em}
+.dates{color:var(--muted);margin:2px 0 14px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px;padding:0;list-style:none}
+.tags li{background:var(--chip);border-radius:999px;padding:3px 12px;font-size:14px}
+dl{margin:0 0 16px;display:grid;grid-template-columns:5.5em 1fr;gap:6px 10px}
+dt{color:var(--muted)}dd{margin:0}
+.panel p{margin:0 0 14px;max-width:34em}
+.panel h3{font-size:15px;margin:18px 0 8px;font-weight:500;color:var(--muted)}
+.mates{display:flex;flex-wrap:wrap;gap:8px}
+.mates button{font:inherit;color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:6px;padding:4px 12px;cursor:pointer}
+.mates button:hover{background:var(--chip)}
+.tabs{display:flex;gap:4px;margin:0 0 16px;overflow-x:auto}
+.tabs button{font:inherit;color:var(--muted);background:transparent;border:0;border-bottom:2px solid transparent;padding:6px 12px;cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--ink);font-weight:500}
+.stars{letter-spacing:.15em}
+#nat{margin-top:44px;border-top:3px solid var(--ink);padding-top:18px}
+#nat h2{font-family:"Noto Serif TC",serif;font-weight:900;font-size:28px;margin:0 0 4px}
+.frm{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0}
+.frm label{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--muted)}
+.frm input,.frm select{font:inherit;color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:6px;padding:6px 10px;margin:0;min-width:0}
+.go{font:inherit;color:var(--seltxt);background:var(--sel);border:0;border-radius:6px;padding:8px 22px;cursor:pointer;justify-self:start}
+details{grid-column:1/-1}
+.res{display:grid;gap:20px;grid-template-columns:1fr}
+@media(min-width:820px){.res{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+table{border-collapse:collapse;width:100%}td{padding:4px 6px;border-bottom:1px solid var(--line);font-size:14px}
+.wh text{fill:var(--ink);text-anchor:middle;dominant-baseline:central}
+.score{font-family:"Noto Serif TC",serif;font-size:40px;font-weight:900;line-height:1}
+select{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--ink);border-radius:6px;padding:6px 10px;margin-bottom:12px}
+footer{margin-top:34px;color:var(--muted);font-size:13px}
+@media print{body{background:#fff!important;color:#111!important}main{max-width:none;padding:0 10mm}.site-head .brand{color:#555}.finder,.layout,.toolbar,.frm,.go,.tool-btn,details{display:none!important}#nat{margin-top:20px}.panel,.panel *{break-inside:avoid}#qo .tabs{display:none}#qo{display:block}footer{font-size:10px;color:#555}}
+</style>
+</head>
+<body>
+<main>
+  <header class="site-head"><h1>西洋星座圖鑑</h1><div class="brand">小路工作室製作</div></header>
+  <p class="sub">十二星座的性格、感情、工作屬性，加上今日運勢與星座配對，點選星盤即可查看。<span id="todayLabel" class="hint"></span></p>
+  <div class="finder">
+    <label for="bd">輸入生日，找出你的星座</label>
+    <input type="date" id="bd">
+    <span class="hint" id="found" aria-live="polite"></span>
+    <label for="quickSign">快速選擇</label><select id="quickSign" aria-label="快速選擇星座"><option value="">選擇星座</option></select>
+  </div>
+  <div class="layout">
+    <svg id="wheel" viewBox="0 0 400 400" role="group" aria-label="十二星座星盤"></svg>
+    <section class="panel" id="panel" aria-live="polite"></section>
+  </div>
+  <section id='nat'><h2>個人星盤與分析</h2><p class='sub'>輸入出生資料排出本命盤，並看性格、感情、事業、財運、流年、人生週期與合盤。</p><div class='frm'><label>姓名或暱稱<input id='qn' placeholder='例：小路'></label><label>出生日期<input type='date' id='qd'></label><label>出生時間<input type='time' id='qt'></label><label>出生地點<select id='qc'></select></label><details><summary>加入第二人（合盤）</summary><div class='frm'><label>姓名或暱稱<input id='q2n'></label><label>出生日期<input type='date' id='q2d'></label><label>出生時間<input type='time' id='q2t'></label><label>出生地點<select id='q2c'></select></label></div></details><button type='button' class='go' id='qg'>排盤</button><button type='button' class='tool-btn' id='resetForm'>清除資料</button></div><div class='toolbar'><button type='button' class='tool-btn' id='copyResult'>複製分析文字</button><button type='button' class='tool-btn' id='printResult'>列印／另存 PDF</button></div><div id='qo' aria-live='polite'><p class='empty'>填入出生日期後，按下「排盤」即可查看分析。</p></div></section>
+<footer>本頁星座描述、配對分數與運勢為文化／娛樂參考，不代表科學測量或必然結果。個人星盤採簡化星曆與等宮制估算，未納入完整天文曆表、冥王星及歷史日光節約時間校正；出生時間不詳時以 12:00 估算，上升與宮位尤其可能有明顯差異。星座交界日亦可能因出生年份與時間而不同。重要人生決策請勿只依星座分析判斷。</footer>
+</main>
+<script>
+var S=[
+{n:"牡羊座",g:"♈︎",d:"3/21 – 4/19",e:"火",m:"開創",r:"火星",k:["直率","勇敢","衝勁"],t:"天生的起跑者，想到就做，面對挑戰時反應最快。熱情與行動力是最大本錢，也最願意替朋友出頭。",s:"行動果斷、坦率、充滿活力",w:"性子急，容易沒耐心聽完就下結論"},
+{n:"金牛座",g:"♉︎",d:"4/20 – 5/20",e:"土",m:"固定",r:"金星",k:["穩重","務實","享受"],t:"重視踏實與安全感，願意花時間把一件事做到扎實。對美食、質感與舒適的生活有敏銳的品味。",s:"耐力強、可靠、懂得生活",w:"一旦認定就很難改變，容易固執"},
+{n:"雙子座",g:"♊︎",d:"5/21 – 6/20",e:"風",m:"變動",r:"水星",k:["機智","好奇","多變"],t:"反應快、愛交流，對新資訊永遠保持好奇。擅長在不同圈子與話題之間靈活切換。",s:"表達力強、學習快、適應力佳",w:"興趣太多，容易分心、半途轉向"},
+{n:"巨蟹座",g:"♋︎",d:"6/21 – 7/22",e:"水",m:"開創",r:"月亮",k:["體貼","念舊","守護"],t:"情感細膩，重視家人與歸屬感。表面柔軟，保護自己人時卻異常堅定。",s:"同理心高、照顧人、記憶力好",w:"情緒起伏明顯，容易鑽牛角尖"},
+{n:"獅子座",g:"♌︎",d:"7/23 – 8/22",e:"火",m:"固定",r:"太陽",k:["自信","慷慨","舞台"],t:"天生有存在感，願意站在前面帶動氣氛。對喜歡的人與事慷慨大方，也期待被看見與肯定。",s:"領導力、熱情、講義氣",w:"好面子，不易低頭承認失誤"},
+{n:"處女座",g:"♍︎",d:"8/23 – 9/22",e:"土",m:"變動",r:"水星",k:["細膩","分析","精進"],t:"對細節有敏銳的觀察，習慣把事情拆開、整理、做到更好。默默付出，重視實用與品質。",s:"條理分明、負責、判斷精準",w:"要求太高，對自己和他人都容易挑剔"},
+{n:"天秤座",g:"♎︎",d:"9/23 – 10/22",e:"風",m:"開創",r:"金星",k:["平衡","優雅","協調"],t:"追求公平與和諧，善於站在不同角度看事情。審美好，人際關係圓融。",s:"溝通有禮、判斷公允、有美感",w:"難以抉擇，為了和氣容易壓抑想法"},
+{n:"天蠍座",g:"♏︎",d:"10/23 – 11/21",e:"水",m:"固定",r:"冥王星（古典為火星）",k:["深刻","專注","洞察"],t:"情感濃烈而內斂，不輕易交心，一旦投入便全心全意。擅長看穿表象，抓住事情的核心。",s:"意志堅強、專一、洞察力強",w:"防備心重，記仇或占有慾偏強"},
+{n:"射手座",g:"♐︎",d:"11/22 – 12/21",e:"火",m:"變動",r:"木星",k:["自由","樂觀","遠行"],t:"嚮往開闊的視野，愛旅行、愛思辨，對世界充滿信任與好奇。個性坦蕩，不拘小節。",s:"樂觀、誠實、視野寬廣",w:"說話太直，對承諾與細節較不耐煩"},
+{n:"摩羯座",g:"♑︎",d:"12/22 – 1/19",e:"土",m:"開創",r:"土星",k:["自律","耐心","目標"],t:"重視責任與長期累積，願意為目標一步一步爬升。外表沉穩，內心其實很在意成果與信用。",s:"有紀律、扛得住壓力、可靠",w:"對自己太嚴苛，不易放鬆與示弱"},
+{n:"水瓶座",g:"♒︎",d:"1/20 – 2/18",e:"風",m:"固定",r:"天王星（古典為土星）",k:["獨立","創新","理性"],t:"思考跳脫常規，重視自由與獨立。關心群體與未來，對朋友真誠卻保持適度距離。",s:"獨創、客觀、不從眾",w:"情感表達偏冷，有時顯得難以親近"},
+{n:"雙魚座",g:"♓︎",d:"2/19 – 3/20",e:"水",m:"變動",r:"海王星（古典為木星）",k:["感性","想像","包容"],t:"感受力強，富有想像與藝術氣質，容易體察他人的情緒。對世界抱持柔軟而寬容的眼光。",s:"同理心深、直覺敏銳、創意豐富",w:"容易逃避現實，界線感較弱"}
+];
+var L=[["主動出擊，愛得直接熱烈","別急著要結果，給對方一點回應的空間"],["慢熱但專一，重視安定與陪伴","多說出心意，別只用行動表達"],["靠聊天培養默契，需要新鮮感","承諾要說到做到，別讓關係太飄"],["把伴侶當家人，付出細膩","有不安就說出來，別獨自悶著"],["浪漫大方，喜歡被欣賞","偶爾放下面子，傾聽對方的需要"],["以實際的照顧表達愛意","少一點挑剔，多一點讚美"],["重視相處的美感與公平","遇到分歧直接表態，別只求和氣"],["感情濃烈，要求高度信任","學會放手與溝通，別用試探代替詢問"],["自由坦率，不愛被綁住","留時間給關係，也留空間給彼此"],["認真謹慎，確定後長久經營","允許自己示弱，感情不必凡事自律"],["重精神交流，先朋友後戀人","主動表達感受，別只停在理性分析"],["浪漫多情，全心投入","看清現實與界線，別一味遷就"]],
+C=[["創業、業務、運動、新創專案","擅長開局，需要能收尾的夥伴"],["金融、餐飲、設計、房產","步調穩定，適合長期累積的工作"],["媒體、行銷、教學、寫作","點子多、溝通強，需練習專注收尾"],["照護、教育、餐飲、人資","重視團隊氛圍，擅長經營客戶關係"],["管理、表演、品牌、公關","能帶動士氣，適合站在前線的角色"],["研究、編輯、會計、醫療","重流程與品質，是團隊的把關者"],["設計、法律、外交、策展","擅長協調，適合需要美感與公正的位置"],["研究、調查、心理、投資","專注深入，適合需要洞察的任務"],["旅遊、出版、教育、國際業務","喜歡自主與開闊，不適合被瑣事綁死"],["管理、財務、工程、行政","目標導向，適合長線規劃與晉升路徑"],["科技、研發、社會創新、設計","重創意與獨立，適合彈性自主的環境"],["藝術、音樂、療癒、影像創作","靠直覺與想像力，需要創作空間"]],
+B=[[4,8,10],[5,9,3],[6,10,0],[11,7,1],[0,8,2],[1,9,7],[2,10,4],[11,3,5],[0,4,6],[1,5,7],[2,6,8],[3,7,9]],
+M={"火風":78,"土水":78,"火土":58,"風水":58,"火水":46,"土風":50},
+TN=["簡介","感情","工作","運勢","配對"],tab=0;
+function score(a,b){var x=S[a].e,y=S[b].e,s=x===y?82:(M[x+y]||M[y+x]);if(B[a].indexOf(b)>-1||B[b].indexOf(a)>-1)s+=8;return Math.min(s,98)}
+function pair(a,b){var x=S[a].e,y=S[b].e,sc=score(a,b),v=sc>=85?"天生默契":sc>=70?"互補順暢":sc>=55?"需要磨合":"差異較大，需多溝通",t=x===y?"同為"+x+"象，價值觀相近、容易懂彼此，但也容易放大共同的弱點。":(M[x+y]||M[y+x])===78?"元素互補，一方的特質剛好支援另一方，相處自然順暢。":"元素步調不同，需求與節奏有落差，理解差異是相處關鍵。";return "<p><span class='score'>"+sc+"</span> 分　"+S[a].g+S[a].n+" × "+S[b].g+S[b].n+"<br>"+v+"。"+t+"</p>"}
+function stars(n){return "★★★★★".slice(0,n)+"☆☆☆☆☆".slice(0,5-n)}
+function fort(i){var d=new Date(),seed=pkey(d)+i*7919+per*131;function rnd(){seed=(seed*9301+49297)%233280;return seed/233280}rnd();rnd();
+var rows=["整體","感情","工作","財運"].map(function(n){return "<dt>"+n+"</dt><dd class='stars'>"+stars(1+Math.floor(rnd()*5))+"</dd>"}).join(""),
+col=["靛藍","琥珀","松綠","珊瑚","銀灰","紫羅蘭","米白","朱紅"][Math.floor(rnd()*8)],num=1+Math.floor(rnd()*99),
+tips=["今天適合先把最拖延的一件事做完。","多聽一句再回應，會有意外收穫。","主動聯絡一位久未見面的朋友。","花錢前先等一小時，再決定要不要買。","整理桌面或行程，思緒會跟著清爽。","今天的小直覺值得相信，但先查證再行動。"],tip=tips[Math.floor(rnd()*tips.length)];
+return "<p class='dates'>"+(d.getMonth()+1)+" 月 "+d.getDate()+" 日　"+S[i].n+PN[per]+"運勢</p>"+perBar()+"<dl>"+rows+"<dt>幸運色</dt><dd>"+col+"</dd><dt>幸運數字</dt><dd>"+num+"</dd><dt>今日提醒</dt><dd>"+tip+"</dd></dl>"+retro()}
+function tabsBar(){return "<div class='tabs' role='tablist'>"+TN.map(function(n,j){return "<button type='button' role='tab' data-tab='"+j+"' aria-selected='"+(j===tab)+"'>"+n+"</button>"}).join("")+"</div>"}
+function more(i){var h=function(j){return j===tab?"":" hidden"};
+return "<div class='tp' data-t='1'"+h(1)+"><dl><dt>愛情風格</dt><dd>"+L[i][0]+"</dd><dt>相處建議</dt><dd>"+L[i][1]+"</dd><dt>最佳搭檔</dt><dd>"+B[i].map(function(j){return S[j].n}).join("、")+"</dd></dl></div>"+
+"<div class='tp' data-t='2'"+h(2)+"><dl><dt>適合領域</dt><dd>"+C[i][0]+"</dd><dt>工作風格</dt><dd>"+C[i][1]+"</dd><dt>優點</dt><dd>"+S[i].s+"</dd><dt>要留意</dt><dd>"+S[i].w+"</dd></dl></div>"+
+"<div class='tp' data-t='3'"+h(3)+">"+fort(i)+"</div>"+
+"<div class='tp' data-t='4'"+h(4)+"><h3>最佳搭檔與契合度</h3><ul class='tags'>"+B[i].map(function(j){return "<li>"+S[j].g+" "+S[j].n+"　"+score(i,j)+" 分</li>"}).join("")+"</ul><h3>與其他星座配對</h3><select id='pm' aria-label='選擇對象星座'><option value='-1'>選擇對象</option>"+S.map(function(x,j){return "<option value='"+j+"'>"+x.g+" "+x.n+"</option>"}).join("")+"</select><div id='cr'></div></div>"}
+var cx=200,cy=200,R=188,r=108,NS="http://www.w3.org/2000/svg",cur=-1;
+function pt(a,rad){a=a*Math.PI/180;return [(cx+rad*Math.cos(a)).toFixed(1),(cy-rad*Math.sin(a)).toFixed(1)]}
+function el(t,at,p){var x=document.createElementNS(NS,t);for(var k in at)x.setAttribute(k,at[k]);if(p)p.appendChild(x);return x}
+var w=document.getElementById("wheel");
+var quick=document.getElementById("quickSign");
+S.forEach(function(s,i){var o=document.createElement("option");o.value=i;o.textContent=s.g+" "+s.n;quick.appendChild(o)});
+quick.addEventListener("change",function(){if(this.value!=="")pick(+this.value)});
+S.forEach(function(s,i){
+  var a0=180+i*30,a1=a0+30,m=a0+15;
+  var g=el("g",{"class":"sign",tabindex:0,role:"button","aria-label":s.n+" "+s.d},w);
+  var o0=pt(a0,R),o1=pt(a1,R),i0=pt(a0,r),i1=pt(a1,r);
+  el("path",{"class":"seg",d:"M"+o0+"A"+R+" "+R+" 0 0 0 "+o1+"L"+i1+"A"+r+" "+r+" 0 0 1 "+i0+"Z"},g);
+  var p1=pt(m,160),p2=pt(m,128);
+  var t1=el("text",{x:p1[0],y:p1[1],"class":"g"},g);t1.textContent=s.g;
+  var t2=el("text",{x:p2[0],y:p2[1],"class":"n"},g);t2.textContent=s.n;
+  g.addEventListener("click",function(){pick(i)});
+  g.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();pick(i)}});
+});
+el("circle",{cx:cx,cy:cy,r:r-8,"class":"ring"},w);
+var cg=el("text",{x:cx,y:cy-22,"class":"cg","text-anchor":"middle"},w),
+    cn=el("text",{x:cx,y:cy+22,"class":"cn","text-anchor":"middle"},w),
+    cd=el("text",{x:cx,y:cy+46,"class":"cd","text-anchor":"middle"},w);
+function pick(i){
+  cur=i;var s=S[i];if(quick)quick.value=String(i);
+  [].forEach.call(w.querySelectorAll(".sign"),function(g,j){g.classList.toggle("on",j===i)});
+  cg.textContent=s.g;cn.textContent=s.n;cd.textContent=s.d;
+  var mates=S.map(function(x,j){return j}).filter(function(j){return S[j].e===s.e&&j!==i});
+  document.getElementById("panel").innerHTML=
+   "<h2>"+s.g+" "+s.n+"</h2><p class='dates'>"+s.d+"</p>"+tabsBar()+"<div class='tp' data-t='0'"+(tab?" hidden":"")+">"+
+   "<ul class='tags'>"+s.k.map(function(k){return "<li>"+k+"</li>"}).join("")+"</ul>"+
+   "<p>"+s.t+"</p>"+
+   "<dl><dt>元素</dt><dd>"+s.e+"象</dd><dt>性質</dt><dd>"+s.m+"星座</dd><dt>守護星</dt><dd>"+s.r+"</dd><dt>優點</dt><dd>"+s.s+"</dd><dt>要留意</dt><dd>"+s.w+"</dd></dl>"+
+   "<h3>同為"+s.e+"象星座</h3><div class='mates'>"+mates.map(function(j){return "<button type='button' data-i='"+j+"'>"+S[j].g+" "+S[j].n+"</button>"}).join("")+"</div></div>"+more(i);
+}
+document.getElementById("panel").addEventListener("click",function(e){
+  var b=e.target.closest("button[data-i]");if(b)pick(+b.dataset.i)
+});
+var P=document.getElementById("panel");
+P.addEventListener("click",function(e){var b=e.target.closest("button[data-tab]");if(b){tab=+b.dataset.tab;pick(cur)}});
+P.addEventListener("change",function(e){if(e.target.id==="pm"){var j=+e.target.value;document.getElementById("cr").innerHTML=j<0?"":pair(cur,j)}});
+var T=[[120,10],[219,11],[321,0],[420,1],[521,2],[621,3],[723,4],[823,5],[923,6],[1023,7],[1122,8],[1222,9]];
+document.getElementById("bd").addEventListener("change",function(){
+  var v=this.value,f=document.getElementById("found");
+  if(!v){f.textContent="";return}
+  var dt=new Date(v+"T12:00:00");
+  if(Number.isNaN(dt.getTime())||dt>new Date()){f.textContent="請輸入有效的過去日期。";return}
+  var p=v.split("-"),md=+p[1]*100+(+p[2]),idx=9;
+  T.forEach(function(t){if(md>=t[0])idx=t[1]});
+  f.textContent="你的太陽星座是："+S[idx].n+" "+S[idx].g;pick(idx);
+});
+var PL=['太陽','月亮','水星','金星','火星','木星','土星','天王星','海王星'],PG=['☉','☽','☿','♀','♂','♃','♄','♅','♆'],
+CT=[['桃園',24.99,121.3,8],['台北',25.04,121.56,8],['新北',25.01,121.47,8],['基隆',25.13,121.74,8],['新竹',24.81,120.97,8],['台中',24.15,120.67,8],['台南',22.99,120.21,8],['高雄',22.63,120.3,8],['宜蘭',24.76,121.75,8],['花蓮',23.98,121.6,8],['香港',22.32,114.17,8],['上海',31.23,121.47,8],['北京',39.9,116.4,8],['東京',35.68,139.69,9]],
+HT=['自我與形象','財務與資源','溝通與學習','家庭與根基','創作與戀愛','健康與日常工作','伴侶關係','共有資源與蛻變','遠行與信念','事業與名聲','朋友與社群','潛意識與獨處'],
+PN=['今日','本週','本月','年度'],NT=['星盤','性格','感情','事業','財運','流年','週期','合盤'],per=0,nt=0,NC,NC2,NN,NN2,rd=Math.PI/180,
+EL=[[48.3313,3.24587e-5,7.0047,5e-8,29.1241,1.01444e-5,.387098,0,.205635,5.59e-10,168.6562,4.0923344368],[76.6799,2.4659e-5,3.3946,2.75e-8,54.891,1.38374e-5,.72333,0,.006773,-1.302e-9,48.0052,1.6021302244],[49.5574,2.11081e-5,1.8497,-1.78e-8,286.5016,2.92961e-5,1.523688,0,.093405,2.516e-9,18.6021,.5240207766],[100.4542,2.76854e-5,1.303,-1.557e-7,273.8777,1.64505e-5,5.20256,0,.048498,4.469e-9,19.895,.0830853001],[113.6634,2.3898e-5,2.4886,-1.081e-7,339.3939,2.97661e-5,9.55475,0,.055546,-9.499e-9,316.967,.0334442282],[74.0005,1.3978e-5,.7733,1.9e-8,96.6612,3.0565e-5,19.18171,-1.55e-8,.047318,7.45e-9,142.5905,.011725806],[131.7806,3.0173e-5,1.77,-2.55e-7,272.8461,-6.027e-6,30.05826,3.313e-8,.008606,2.15e-9,260.2471,.005995147]],
+ND={火:'被看見、有行動與挑戰的空間',土:'安全感、穩定與看得見的成果',風:'交流、自由與新鮮感',水:'情感連結、信任與歸屬感'},
+LV={火:'熱情直接，需要心動與衝勁',土:'穩定踏實，以行動與陪伴表達',風:'聊得來、有空間，重視心靈共鳴',水:'深度連結、全心投入，需要安全感'},
+AT={開創:'主動靠近，想掌握關係節奏',固定:'一旦認定就忠誠，但怕被背叛、不易放手',變動:'順應對方調整，需要彈性與被理解'},
+BL={火:'急躁，一言不合容易起衝突',土:'固執，不開心時冷處理',風:'過度理性，遇到壓力會逃避',水:'情緒化，容易冷戰或翻舊帳'},
+MN={火:'敢賺敢花，重視機會與魄力',土:'務實儲蓄，重視保障與長期累積',風:'靠資訊與人脈賺錢，花費項目多元',水:'憑感覺與安全感理財，容易為情感花錢'},
+SP={開創:'想買就買的衝動型',固定:'偏愛收藏、長期持有',變動:'隨需求與心情調整的彈性型'},
+AS=[[0,'合',7],[60,'六分',4],[90,'刑',5],[120,'拱',5],[180,'衝',7]];
+function s360(x){x%=360;return x<0?x+360:x}
+function sn(x){return Math.sin(x*rd)}
+function cs(x){return Math.cos(x*rd)}
+function gi(l){return Math.floor(s360(l)/30)}
+function kep(M,e){var E=M+e/rd*sn(M)*(1+e*cs(M));for(var k=0;k<6;k++)E-=(E-e/rd*sn(E)-M)/(1-e*cs(E));return E}
+function pos(d){var ws=282.9404+4.70935e-5*d,Ms=356.047+.9856002585*d,es=.016709-1.151e-9*d,E=kep(Ms,es),xv=cs(E)-es,yv=Math.sqrt(1-es*es)*sn(E),ls=s360(Math.atan2(yv,xv)/rd+ws),rs=Math.sqrt(xv*xv+yv*yv),pr=3.82394e-5*d,xs=rs*cs(ls-pr),ys=rs*sn(ls-pr),o=[ls];
+var Nm=125.1228-.0529538083*d,wm=318.0634+.1643573223*d,Mm=115.3654+13.0649929509*d,Em=kep(Mm,.0549),um=Math.atan2(Math.sqrt(1-.0549*.0549)*sn(Em),cs(Em)-.0549)/rd+wm,D=Nm+wm+Mm-Ms-ws,ci=cs(5.1454),
+lm=Math.atan2(sn(Nm)*cs(um)+cs(Nm)*sn(um)*ci,cs(Nm)*cs(um)-sn(Nm)*sn(um)*ci)/rd-1.274*sn(Mm-2*D)+.658*sn(2*D)-.186*sn(Ms)-.059*sn(2*Mm-2*D)-.057*sn(Mm-2*D+Ms)+.053*sn(Mm+2*D)+.046*sn(2*D-Ms)+.041*sn(Mm-Ms)-.035*sn(D)-.031*sn(Mm+Ms);
+o.push(s360(lm));var Mj=19.895+.0830853001*d,Mt=316.967+.0334442282*d;
+EL.forEach(function(e,k){var N=e[0]+e[1]*d,ii=e[2]+e[3]*d,w=e[4]+e[5]*d,a=e[6]+e[7]*d,ec=e[8]+e[9]*d,M=e[10]+e[11]*d,En=kep(M,ec),x=a*(cs(En)-ec),y=a*Math.sqrt(1-ec*ec)*sn(En),r=Math.sqrt(x*x+y*y),u=Math.atan2(y,x)/rd+w,xh=r*(cs(N)*cs(u)-sn(N)*sn(u)*cs(ii)),yh=r*(sn(N)*cs(u)+cs(N)*sn(u)*cs(ii)),l=Math.atan2(yh+ys,xh+xs)/rd+pr;
+if(k==3)l+=-.332*sn(2*Mj-5*Mt-67.6)-.056*sn(2*Mj-2*Mt+21)+.042*sn(3*Mj-5*Mt+21)-.036*sn(Mj-2*Mt)+.022*cs(Mj-Mt)+.023*sn(2*Mj-3*Mt+52)-.016*sn(Mj-5*Mt-69);
+if(k==4)l+=.812*sn(2*Mj-5*Mt-67.6)-.229*cs(2*Mj-4*Mt-2)+.119*sn(Mj-2*Mt-3)+.046*sn(2*Mj-6*Mt-69)+.014*sn(Mj-3*Mt+32);
+o.push(s360(l))});return o}
+function chart(dv,tv,c){var p=dv.split('-'),t=tv.split(':'),ct=CT[c],ms=Date.UTC(+p[0],+p[1]-1,+p[2],+t[0]-ct[3],+t[1]),jd=ms/864e5+2440587.5,d=jd-2451543.5,ra=s360(280.46061837+360.98564736629*(jd-2451545)+ct[2]),ep=23.4393-3.563e-7*d;
+return {ms:ms,L:pos(d),mc:s360(Math.atan2(sn(ra),cs(ra)*cs(ep))/rd),asc:s360(Math.atan2(cs(ra),-(sn(ra)*cs(ep)+Math.tan(ct[1]*rd)*sn(ep)))/rd)}}
+function hs(ch,l){return Math.floor(s360(l-ch.asc)/30)+1}
+function asp(A,B2,same){var r=[];A.forEach(function(a,i){B2.forEach(function(b,j){if(same&&j<=i)return;var x=Math.abs(a-b)%360;x=x>180?360-x:x;AS.forEach(function(s){var o=Math.abs(x-s[0]);if(o<=s[2])r.push({i:i,j:j,t:s,o:o})})})});return r.sort(function(u,v){return u.o-v.o})}
+function nowd(){return Date.now()/864e5+2440587.5-2451543.5}
+function pkey(d){var y=d.getFullYear(),m=d.getMonth()+1;return per==0?y*10000+m*100+d.getDate():per==1?y*100+Math.floor((d-new Date(y,0,1))/6048e5):per==2?y*100+m:y}
+function perBar(){return '<div class=tabs>'+PN.map(function(n,j){return '<button type=button data-per='+j+' aria-selected='+(j===per)+'>'+n+'</button>'}).join('')+'</div>'}
+function retro(){var d=nowd(),a=pos(d),b=pos(d+1),r=[];for(var i=2;i<7;i++)if(s360(b[i]-a[i]+180)-180<0)r.push(PL[i]);return '<h3>行星逆行與重要天象</h3><p>太陽目前在'+S[gi(a[0])].n+'；逆行中的行星：'+(r.join('、')||'目前無')+'。</p>'}
+function wheel(ch){var v=el('svg',{viewBox:'0 0 400 400','class':'wh'}),A=function(l){return 180+l-ch.asc},t=function(x,y,s,z){var e=el('text',{x:x,y:y,'font-size':z},v);e.textContent=s};
+[190,140,60].forEach(function(q){el('circle',{cx:200,cy:200,r:q,'class':'ring'},v)});
+for(var k=0;k<12;k++){var a=pt(A(30*k),140),b=pt(A(30*k),190),h=pt(180+30*k,60),h2=pt(180+30*k,140),m=pt(A(30*k+15),165);el('line',{x1:a[0],y1:a[1],x2:b[0],y2:b[1],'class':'ring'},v);el('line',{x1:h[0],y1:h[1],x2:h2[0],y2:h2[1],'class':'ring'},v);t(m[0],m[1],S[k].g,20)}
+ch.L.forEach(function(l,i){var p=pt(A(l),108-(i%2)*24);t(p[0],p[1],PG[i],17)});
+var q=pt(180,152);t(q[0],q[1],'AC',11);q=pt(A(ch.mc),152);t(q[0],q[1],'MC',11);return v.outerHTML}
+function rw(k,v){return '<dt>'+k+'</dt><dd>'+v+'</dd>'}
+function showNat(){var ch=NC,N=ch.L,g=function(l){return S[gi(l)]},sun=g(N[0]),mo=g(N[1]),ve=g(N[3]),ma=g(N[4]),as=g(ch.asc),mc=g(ch.mc),h2=g(ch.asc+30),h12=g(ch.asc+330),H=function(l){return HT[hs(ch,l)-1]},TD=pos(nowd()),age=(Date.now()-ch.ms)/31556926e3,yr=new Date(ch.ms).getFullYear(),
+cyc=function(p){var k=Math.floor(age/p);return (k?'上次約 '+(k*p).toFixed(1)+' 歲（'+Math.round(yr+k*p)+' 年）；':'')+'下次約 '+((k+1)*p).toFixed(1)+' 歲（'+Math.round(yr+(k+1)*p)+' 年）'},
+ta=asp([TD[5],TD[6]],[N[0],N[1],ch.asc,N[3]],0).slice(0,5).map(function(a){return '行運'+PG[a.i+5]+' '+a.t[1]+' 本命'+['☉','☽','AC','♀'][a.j]+'（'+a.o.toFixed(1)+'°）'}).join('、')||'目前沒有緊密的相位',X;
+if(nt==7&&NC2){var ap=asp(N.slice(0,5),NC2.L.slice(0,5),0),sc=55;ap.forEach(function(a){sc+={0:5,60:4,90:-3,120:6,180:-2}[a.t[0]]});sc=Math.max(30,Math.min(98,sc));
+X='<p><span class=score>'+sc+'</span> 分　'+NN+' × '+NN2+'</p><p>'+ap.slice(0,6).map(function(a){return NN+PG[a.i]+' '+a.t[1]+' '+NN2+PG[a.j]+'（'+a.o.toFixed(1)+'°）'}).join('<br>')+'</p><p>以日、月、水、金、火之間的相位粗略估算，僅供參考。</p>'}
+else if(nt==7)X='<p>請展開「加入第二人」並輸入對方資料。</p>';
+else X=[
+'<div class=res>'+wheel(ch)+'<table>'+PL.map(function(n,i){return '<tr><td>'+PG[i]+' '+n+'</td><td>'+g(N[i]).n+' '+Math.floor(N[i]%30)+'°</td><td>第'+hs(ch,N[i])+'宮</td></tr>'}).join('')+'<tr><td>上升</td><td>'+as.n+' '+Math.floor(ch.asc%30)+'°</td><td></td></tr><tr><td>天頂</td><td>'+mc.n+' '+Math.floor(ch.mc%30)+'°</td><td></td></tr></table></div><h3>主要相位</h3><p>'+asp(N,N,1).slice(0,8).map(function(a){return PG[a.i]+' '+a.t[1]+' '+PG[a.j]+'（'+a.o.toFixed(1)+'°）'}).join('、')+'</p>',
+'<dl>'+rw('太陽 · 核心',sun.n+'：'+sun.k.join('、'))+rw('外在性格','上升'+as.n+'，給人'+as.k.join('、')+'的印象')+rw('內在需求','月亮'+mo.n+'，需要'+ND[mo.e])+rw('潛意識','第12宮'+h12.n+'，深處也渴望'+ND[h12.e])+'</dl><p>'+sun.t+'</p>',
+'<dl>'+rw('愛情需求','金星'+ve.n+'：'+LV[ve.e])+rw('依附模式','月亮'+mo.n+'：'+AT[mo.m])+rw('相處盲點','火星'+ma.n+'：'+BL[ma.e])+rw('適合的伴侶',B[gi(N[3])].map(function(j){return S[j].n}).join('、')+'（依金星）')+'</dl>',
+'<dl>'+rw('職涯方向','天頂'+mc.n+'：'+C[gi(ch.mc)][0])+rw('工作優勢',sun.s+'；'+C[gi(N[0])][1])+rw('要留意',sun.w)+'</dl>',
+'<dl>'+rw('金錢觀','第2宮'+h2.n+'：'+MN[h2.e])+rw('消費傾向','金星'+ve.n+'：'+SP[ve.m])+rw('財務機會','木星在第'+hs(ch,N[5])+'宮：'+H(N[5])+'方面容易有機會')+rw('風險提醒','土星在第'+hs(ch,N[6])+'宮：'+H(N[6])+'方面需要紀律與耐心')+'</dl>',
+'<dl>'+rw('木星流經','第'+hs(ch,TD[5])+'宮（'+H(TD[5])+'）：成長與機會的焦點')+rw('土星流經','第'+hs(ch,TD[6])+'宮（'+H(TD[6])+'）：責任與整頓的焦點')+'</dl><h3>行運相位</h3><p>'+ta+'</p>',
+'<p>目前約 '+age.toFixed(1)+' 歲。</p><dl>'+rw('土星回歸',cyc(29.46))+rw('木星回歸',cyc(11.86))+'</dl><p>土星回歸常是重新檢視責任與人生方向的階段；木星回歸帶來新一輪成長與機會。</p>'][nt];
+document.getElementById('qo').innerHTML='<div class=tabs>'+NT.map(function(n,j){return '<button type=button data-nt='+j+' aria-selected='+(j===nt)+'>'+n+'</button>'}).join('')+'</div>'+X}
+['qc','q2c'].forEach(function(id){document.getElementById(id).innerHTML=CT.map(function(c,j){return '<option value='+j+'>'+c[0]+'</option>'}).join('')});
+document.addEventListener('click',function(e){var b=e.target.closest('button[data-per]');if(b){per=+b.dataset.per;pick(cur)}b=e.target.closest('button[data-nt]');if(b){nt=+b.dataset.nt;showNat()}});
+document.getElementById('qg').addEventListener('click',function(){
+ var v=function(i){return document.getElementById(i).value},now=new Date(),today=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0'),d1=v('qd'),d2=v('q2d');
+ if(!d1){document.getElementById('qo').innerHTML='<p class=hint>請先輸入你的出生日期。</p>';document.getElementById('qd').focus();return}
+ if(d1>today){document.getElementById('qo').innerHTML='<p class=hint>出生日期不能晚於今天。</p>';return}
+ if(d2&&d2>today){document.getElementById('qo').innerHTML='<p class=hint>第二人的出生日期不能晚於今天。</p>';return}
+ NC=chart(d1,v('qt')||'12:00',+v('qc'));NN=v('qn')||'你';NC2=d2?chart(d2,v('q2t')||'12:00',+v('q2c')):null;NN2=v('q2n')||'對方';nt=0;showNat();document.getElementById('qo').scrollIntoView({behavior:'smooth',block:'start'});
+});
+// Clear form and analysis
+ document.getElementById('resetForm').addEventListener('click',function(){['qn','qd','qt','q2n','q2d','q2t'].forEach(function(id){document.getElementById(id).value=''});document.getElementById('qc').selectedIndex=0;document.getElementById('q2c').selectedIndex=0;NC=NC2=null;document.getElementById('qo').innerHTML='<p class=empty>填入出生日期後，按下「排盤」即可查看分析。</p>';});
+ document.getElementById('copyResult').addEventListener('click',function(){var el=document.getElementById('qo'),txt=el.innerText.trim();if(!txt||el.querySelector('.empty')){alert('請先完成排盤，再複製分析結果。');return}var done=function(){alert('分析文字已複製。')};if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(done).catch(function(){fallbackCopy(txt,done)})}else fallbackCopy(txt,done)});
+ function fallbackCopy(txt,done){var ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done()}catch(e){alert('複製失敗，請改用選取文字的方式複製。')}ta.remove()}
+ document.getElementById('printResult').addEventListener('click',function(){if(!NC){alert('請先完成排盤。');return}window.print()});
+// END
+pick(0);
+var todayLabel=document.getElementById("todayLabel");if(todayLabel){var now=new Date(),todayValue=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");todayLabel.textContent="　｜　今日："+now.getFullYear()+"/"+(now.getMonth()+1)+"/"+now.getDate();["bd","qd","q2d"].forEach(function(id){document.getElementById(id).max=todayValue})}
+</script>
+</body>
+</html>
