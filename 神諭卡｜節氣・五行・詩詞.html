@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>神諭卡｜節氣・五行・詩詞</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4efe6;--el:#fcf9f2;--fg:#26231e;--mut:#6b6355;--bd:#dcd2c0;--ac:#b0523f;--tint:#000;--lift:12%;--sh:0 16px 36px -16px rgba(38,35,30,.22);--cb:#26231e;--cp:rgba(244,239,230,.08);color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151411;--el:#201e1a;--fg:#ece6d9;--mut:#a39b8c;--bd:#3b372e;--tint:#fff;--lift:38%;--sh:0 18px 40px -14px rgba(0,0,0,.65);--cb:#1b1915;--cp:rgba(236,230,217,.06);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#151411;--el:#201e1a;--fg:#ece6d9;--mut:#a39b8c;--bd:#3b372e;--tint:#fff;--lift:38%;--sh:0 18px 40px -14px rgba(0,0,0,.65);--cb:#1b1915;--cp:rgba(236,230,217,.06);color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;--ink:color-mix(in srgb,var(--ac),var(--tint) var(--lift))}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);background:radial-gradient(900px 420px at 50% -6%,color-mix(in srgb,var(--ac) 14%,transparent),transparent) var(--bg);color:var(--fg);font-family:"Noto Serif TC","Songti TC","PMingLiU",serif;line-height:1.75;min-height:100vh;min-height:100dvh}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.top-nav{max-width:820px;margin:0 auto;padding:12px 20px 0;display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+.icon-btn{font-size:.85rem;color:var(--mut);background:var(--el);border:1px solid var(--bd);border-radius:999px;padding:9px 16px;min-height:44px;cursor:pointer}
+.icon-btn:hover{color:var(--fg);border-color:var(--ac)}
+main{max-width:820px;margin:0 auto;padding:12px 20px 56px;text-align:center}
+.eye{font-family:Georgia,serif;font-size:.78rem;letter-spacing:.42em;color:var(--mut);text-transform:uppercase}
+h1{font-weight:500;letter-spacing:.55em;margin:6px 0 0 .55em;font-size:2.05rem}
+.orn{display:flex;align-items:center;gap:12px;justify-content:center;color:var(--mut);margin:12px auto 24px;max-width:280px;font-size:.65rem}
+.orn::before,.orn::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--bd),transparent)}
+.sub{color:var(--mut);margin:0 0 24px;font-size:.95rem}
+.hide{display:none!important}
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:560px;margin:0 auto}
+.tile{--c:var(--ac);color:var(--fg);background:var(--el);border:1px solid var(--bd);border-top:3.5px solid var(--c);border-radius:12px;padding:22px 14px 18px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;transition:transform .25s,box-shadow .25s,border-color .25s}
+@media(hover:hover){.tile:hover{transform:translateY(-4px);box-shadow:var(--sh);border-color:var(--c)}}
+.tile.mix{grid-column:1/-1;flex-direction:row;justify-content:center;gap:18px;padding:18px 20px}
+.tile .g{font-size:2.7rem;color:var(--c);line-height:1.1;font-weight:500}
+.tile b{font-weight:600;letter-spacing:.32em;margin-left:.32em;font-size:1.05rem}
+.tile .e{font-family:Georgia,serif;font-size:.72rem;letter-spacing:.2em;color:var(--mut)}
+.tile .d{font-size:.8rem;color:var(--mut)}
+.bar{display:flex;align-items:center;justify-content:space-between;max-width:600px;margin:0 auto 10px}
+.back{border:0;background:none;color:var(--mut);cursor:pointer;padding:10px 6px;min-height:44px}
+.back:hover{color:var(--ink)}
+#dt{font-weight:600;letter-spacing:.32em;margin:0 0 4px .32em;font-size:1.38rem;color:var(--ink)}
+#q{width:100%;max-width:480px;font:inherit;font-size:1rem;padding:11px 16px;border:1px solid var(--bd);border-radius:10px;background:var(--el);color:var(--fg);text-align:center}
+#q:focus{outline:none;border-color:var(--ac);box-shadow:0 0 0 3px color-mix(in srgb,var(--ac) 18%,transparent)}
+.controls{display:flex;flex-direction:column;align-items:center;gap:14px;margin:16px 0 8px}
+.seg{display:inline-flex;border:1px solid var(--ac);border-radius:999px;overflow:hidden;background:var(--el)}
+.seg button{font-size:.9rem;border:0;background:none;color:var(--ink);padding:10px 18px;min-height:44px;cursor:pointer}
+.seg button.on{background:var(--ac);color:#fff}
+.toggle-lbl{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:.88rem;color:var(--mut);min-height:36px}
+.toggle-lbl input{accent-color:var(--ac);width:16px;height:16px}
+.go{font-weight:600;font-size:1rem;letter-spacing:.45em;border:0;background:var(--ac);color:#fff;padding:12px 42px 12px 46px;min-height:46px;border-radius:999px;cursor:pointer;box-shadow:0 10px 24px -8px color-mix(in srgb,var(--ac) 65%,transparent)}
+.go:active{transform:translateY(1px)}
+#row{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.slot{width:220px;max-width:100%;perspective:1100px}
+.pos{font-size:.85rem;color:var(--mut);letter-spacing:.32em;margin-bottom:10px;font-weight:500}
+.card-wrap{aspect-ratio:2/3;position:relative;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.22,1,.36,1);cursor:pointer;animation:dealIn .55s cubic-bezier(.2,.8,.2,1) backwards;border-radius:14px}
+.card-wrap.flipped{transform:rotateY(180deg)}
+@keyframes dealIn{from{opacity:0;transform:translateY(22px) scale(.95)}to{opacity:1;transform:none}}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;box-shadow:var(--sh)}
+.card-back{background:var(--cb);border:1px solid color-mix(in srgb,var(--ac) 50%,var(--bd));padding:10px;display:flex;color:color-mix(in srgb,var(--ac) 60%,#e6dec8)}
+.card-back-inner{width:100%;height:100%;border:1px solid color-mix(in srgb,var(--ac) 40%,transparent);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:repeating-linear-gradient(45deg,var(--cp) 0 2px,transparent 2px 10px)}
+.card-back-symbol{width:44px;height:44px;border:1px solid currentColor;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:var(--cb)}
+.card-back-hint{font-size:.78rem;letter-spacing:.25em}
+.card-front{transform:rotateY(180deg);border:1.5px solid var(--ac);background:var(--el);padding:9px}
+.inner{height:100%;border:1px solid var(--bd);border-radius:8px;padding:10px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:5px;position:relative}
+.art{width:100%;aspect-ratio:5/3;background:color-mix(in srgb,var(--ac) 11%,var(--el));border-radius:6px;color:var(--ink);overflow:hidden}
+.art svg{width:100%;height:100%;display:block}
+.nm{font-size:1.85rem;letter-spacing:.28em;margin:6px 0 0 .28em;color:var(--ink);font-weight:600;line-height:1.3}
+.img{font-size:.84rem;color:var(--mut)}
+.kw{font-size:.96rem;letter-spacing:.38em;margin-left:.38em;font-weight:600}
+.tag{margin-top:auto;font-size:.76rem;letter-spacing:.22em;color:var(--ink);border:1px solid var(--ac);border-radius:999px;padding:1px 12px}
+.seal{position:absolute;top:14px;right:14px;width:24px;height:24px;background:var(--ac);color:#fff;font-size:.72rem;font-weight:600;display:flex;align-items:center;justify-content:center;border-radius:4px}
+.rev .art svg,.rev .nm{transform:rotate(180deg)}
+.flipnote{margin-top:14px;font-size:.85rem;color:var(--mut)}
+.read{max-width:600px;margin:30px auto 0;text-align:left;background:var(--el);border:1px solid var(--bd);border-radius:14px;padding:22px 24px;box-shadow:var(--sh);animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.read h3{font-weight:600;letter-spacing:.32em;font-size:1.05rem;margin:0 0 8px;color:var(--ink)}
+.qq{font-size:.96rem;padding:8px 12px;margin-bottom:8px;background:color-mix(in srgb,var(--ac) 7%,transparent);border-radius:8px}
+.r{padding:14px 0;border-bottom:1px dashed var(--bd)}
+.r b{color:var(--ink);display:block;font-weight:600;font-size:1.02rem;margin-bottom:3px}
+.r .si{font-size:.84rem;color:var(--mut);margin-bottom:4px}
+.rel,.sum{margin:10px 0;padding:10px 14px;border-left:3px solid var(--ac);background:color-mix(in srgb,var(--ac) 8%,transparent);border-radius:0 8px 8px 0;font-size:.92rem}
+.sum{margin-top:14px}
+.act{display:flex;gap:10px;margin-top:20px;justify-content:center;flex-wrap:wrap}
+.act button{font-size:.9rem;border:1px solid var(--ac);background:none;color:var(--ink);border-radius:999px;padding:10px 22px;min-height:44px;cursor:pointer}
+.act button:hover{background:var(--ac);color:#fff}
+.modal-backdrop{position:fixed;inset:0;background:rgba(15,14,12,.58);backdrop-filter:blur(4px);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px}
+.modal{background:var(--el);border:1px solid var(--bd);border-radius:16px;width:100%;max-width:680px;max-height:84vh;max-height:84dvh;display:flex;flex-direction:column;overflow:hidden;text-align:left}
+.modal-head{padding:12px 22px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
+.modal-head h3{margin:0;font-size:1.1rem;letter-spacing:.25em}
+.modal-close{font-size:1.5rem;line-height:1;background:none;border:0;color:var(--mut);cursor:pointer;min-width:44px;min-height:44px}
+.modal-tabs{display:flex;gap:8px;padding:8px 22px 0;border-bottom:1px solid var(--bd);overflow-x:auto}
+.modal-tab{font-size:.9rem;background:none;border:0;border-bottom:2px solid transparent;color:var(--mut);padding:10px 12px;min-height:44px;cursor:pointer;white-space:nowrap}
+.modal-tab.on{color:var(--fg);border-bottom-color:var(--ac);font-weight:600}
+.modal-body{padding:18px 22px;overflow-y:auto;flex:1}
+.dict-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.dict-item,.hist-item{border:1px solid var(--bd);border-radius:10px;padding:12px 14px;background:var(--bg)}
+.hist-item{margin-bottom:12px}
+.dh{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:4px}
+.dh b{font-size:1.05rem;letter-spacing:.15em;color:var(--ink)}
+.dh span,.hm{font-size:.8rem;color:var(--mut)}
+.dict-item p{margin:4px 0 0;font-size:.86rem;line-height:1.55}
+.hm{display:flex;justify-content:space-between;margin-bottom:6px}
+.hq{font-weight:600;font-size:.92rem;margin-bottom:6px}
+.foot{margin-top:44px;color:var(--mut);font-size:.78rem;letter-spacing:.08em}
+@media(max-width:520px){
+.tiles{grid-template-columns:1fr}
+.slot{width:195px}
+.read{padding:18px 16px}
+#row.t3{flex-wrap:nowrap;gap:8px}
+.t3 .slot{width:auto;flex:1 1 0;min-width:0}
+.t3 .pos{font-size:.74rem;letter-spacing:.1em}
+.t3 .inner{padding:6px 4px;gap:3px}
+.t3 .nm{font-size:1.1rem;letter-spacing:.06em;margin-left:.06em}
+.t3 .img,.t3 .seal,.t3 .card-back-hint{display:none}
+.t3 .kw{font-size:.8rem;letter-spacing:.12em;margin-left:.12em}
+.t3 .tag{font-size:.66rem;padding:0 7px;letter-spacing:.1em}
+.t3 .card-back-symbol{width:34px;height:34px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<nav class="top-nav">
+<button class="icon-btn" id="btn-dict">📖 牌義總覽</button>
+<button class="icon-btn" id="btn-hist">🕰️ 抽牌紀錄</button>
+<button class="icon-btn" id="btn-theme">🌓 外觀</button>
+</nav>
+<main>
+<div class="eye">ORACLE DECK</div>
+<h1>神諭卡</h1>
+<div class="orn">◆</div>
+<div id="home">
+<p class="sub">擇一副牌，靜心凝神再抽</p>
+<div class="tiles" id="tiles"></div>
+</div>
+<div id="play" class="hide">
+<div class="bar"><button class="back" id="back">‹ 換一副牌</button><span class="eye" id="de"></span></div>
+<h2 id="dt"></h2>
+<p class="sub" id="ds"></p>
+<input id="q" aria-label="你的問題（選填）" placeholder="默念或寫下你的問題（選填）" maxlength="100">
+<div class="controls">
+<div class="seg"><button class="on" id="m1">單張指引</button><button id="m3">三張・過去／現在／未來</button></div>
+<label class="toggle-lbl"><input type="checkbox" id="opt-rev" checked><span>包含逆位解讀</span></label>
+</div>
+<button class="go" id="draw">抽牌</button>
+<div id="row"></div>
+<div class="flipnote hide" id="fn">輕點每張牌，親手翻開</div>
+<div class="read hide" id="read" aria-live="polite"></div>
+</div>
+<div class="foot">僅供自我省思與心靈對話參考，重大決定請多方評估</div>
+</main>
+<div class="modal-backdrop hide" id="modal-bg">
+<div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+<div class="modal-head"><h3 id="modal-title">牌義總覽</h3><button class="modal-close" id="modal-close" aria-label="關閉">×</button></div>
+<div class="modal-tabs hide" id="modal-tabs"></div>
+<div class="modal-body" id="modal-body"></div>
+</div>
+</div>
+<script>
+var S=[
+["立春","冰裂東風","起始","萬事待發，先動一步便有路。","勉強開局只會耗神，先等根扎穩。"],
+["雨水","春雨潤地","滋養","適合補給、學習、被照顧。","給得太急反成氾濫，需設邊界。"],
+["驚蟄","春雷喚蟲","覺醒","沉睡之事被喚醒，行動時機到了。","驚動過早，先看清再出手。"],
+["春分","晝夜均分","平衡","取得中道，各方皆宜。","失衡的一端正在呼救，調整比堅持重要。"],
+["清明","草木清朗","澄澈","看得清楚，也適合追思與整理。","情緒蒙塵，別在混濁時做決定。"],
+["穀雨","雨生百穀","收成之始","耕耘有回應，穩定累積。","種子未落土，空等無益。"],
+["立夏","萬物漸盛","展開","能量上揚，宜公開、宜出手。","鋒芒過露，留意消耗。"],
+["小滿","麥穗將盈","將滿未滿","八分最好，知足便是福。","求滿反損，停手才是智慧。"],
+["芒種","芒穗播收","忙而有序","繁忙但值得，分清先後。","四面開工，反而一事無成。"],
+["夏至","日長之極","巔峰","光最盛處，亦是轉折之始。","盛極將衰，預作收斂。"],
+["小暑","暑氣初蒸","悶熱","壓力漸增，需要節奏與水分。","燥而躁，先降溫再說話。"],
+["大暑","酷熱如蒸","煎熬","最難的一段，撐過便會轉。","過度硬撐，休息不是退縮。"],
+["立秋","涼意初至","轉向","由外放轉為內收，開始盤點。","仍執著夏日的節奏，難以放下。"],
+["處暑","暑氣止息","止歇","事情趨緩，宜結束拖延之事。","該停不停，餘熱反傷。"],
+["白露","露凝草葉","清冷","細微而真實的感受，值得珍惜。","寒意入心，別自我隔絕。"],
+["秋分","晝夜再分","衡量","再次權衡，取捨得宜。","猶豫不決，天平久懸。"],
+["寒露","露寒欲霜","警覺","提早準備，防患未然。","過度憂慮，把風當成霜。"],
+["霜降","霜覆大地","沉澱","放手落葉，守住根本。","害怕失去，反而凍住了自己。"],
+["立冬","水始成冰","收藏","進入蟄伏，儲備為先。","封閉過久，應有一扇窗。"],
+["小雪","雪輕未積","輕盈","小小的好意與寧靜，不必追求大事。","心緒飄忽，難以落地。"],
+["大雪","雪封山路","靜止","暫停是必要的，享受空白。","被困之感，需要有人同行。"],
+["冬至","陰極一陽生","回返","最暗的一天，亦是新生之始。","不信光會來，所以錯過微光。"],
+["小寒","寒意漸深","耐心","慢慢來，耐得住的人走得遠。","寒中硬碰，保暖勝過逞強。"],
+["大寒","歲末極寒","圓滿","一個循環將盡，感謝與告別。","未完之事纏身，需要好好結案。"]
+];
+var W=[
+["春芽","木·破土","萌發","新計畫正在冒頭，給它空間。","嫩芽被踩踏，保護初生的想法。","#4a7f4e"],
+["喬木","木·根深葉茂","穩長","長期投入有成，根基紮實。","自恃高大，風來易折，需要彈性。","#4a7f4e"],
+["藤蔓","木·攀援而上","借力","適合結盟與借力，懂得依附亦是智慧。","纏繞過緊，反成彼此負擔。","#4a7f4e"],
+["林海","木·萬葉成聲","眾力","集體的力量，整體大於個體。","迷失林中，需要一個方向標。","#4a7f4e"],
+["星火","火·一點即燃","靈感","一個念頭足以燎原，先把它記下。","火苗太小，需添柴而非自責。","#c04a30"],
+["烈焰","火·光熱俱盛","熱情","全力投入，光與熱都在你手中。","燃燒過旺，記得留一點給明天。","#c04a30"],
+["燭光","火·靜室微明","陪伴","溫柔照亮身邊的人。","燭淚將盡，別再為他人燃盡自己。","#c04a30"],
+["餘燼","火·灰中有溫","餘溫","結束之後仍有暖意，珍惜它。","撥弄舊灰，只剩煙塵。","#c04a30"],
+["沃土","土·承載萬物","包容","容納與孕育，現在適合耐心培養。","過度承擔，土地也會貧瘠。","#8f6a1f"],
+["高山","土·巍然不動","穩固","堅守立場，不被風吹動。","固步自封，山擋住了自己的路。","#8f6a1f"],
+["田畝","土·春種秋收","耕耘","一分耕耘，按時節收穫。","只耕不歇，土地需要休養。","#8f6a1f"],
+["塵埃","土·歸於平常","放下","塵歸塵，不必放大眼前的瑣事。","塵蒙了心，該擦亮看事的眼。","#8f6a1f"],
+["礦脈","金·深藏地底","潛質","你有尚未開採的價值。","埋沒太久，需要有人挖掘或自己動手。","#66707e"],
+["刀鋒","金·寒光一線","決斷","該斬斷時就斬斷，乾脆俐落。","言語如刃，先收鋒再說話。","#66707e"],
+["鐘聲","金·餘音悠長","警醒","一個提醒正在響起，聽進去。","噪音太多，鐘聲被淹沒。","#66707e"],
+["金秋","金·秋收肅殺","收斂","收束、整理、斷捨離。","收得太緊，連該留的都丟了。","#66707e"],
+["清泉","水·山間初流","澄明","直覺清澈，信任你的第一念。","泉眼堵塞，情緒未得疏通。","#3d6fa3"],
+["江河","水·奔流入海","前行","順勢而行，一路向前。","洪水氾濫，先疏導再行動。","#3d6fa3"],
+["深海","水·靜水流深","智慧","沉靜之下有深度，不必急於表態。","深不見底，別沉入無謂的思慮。","#3d6fa3"],
+["冰川","水·凝而不動","凍結","暫時封存，等待時機融解。","冰封太久，需要一點暖意去鬆動。","#3d6fa3"]
+];
+var P=[
+["明月","千里共此一輪","思念","心有所繫，距離並不真的隔開你們。","思念成執，看月久了忘了腳下的路。"],
+["孤舟","一葉江上","獨行","一個人走反而清楚，適合自我決定。","孤立無援之感，該向岸上伸手。"],
+["落花","隨水而去","無常","接受消逝，美正因短暫而成立。","抓著凋零不放，錯過新的枝頭。"],
+["折柳","長亭送別","離別","好好道別，才有下一段。","拖延告別，雙方都累。"],
+["飛鴻","雲外傳書","消息","遠方的訊息將至，保持開放。","音訊遲滯，別猜，直接問。"],
+["春水","冰消東流","流動","僵住的事正在鬆動，順勢而行。","水勢太急，先築堤再前進。"],
+["秋風","蕭瑟入窗","轉折","局勢變了，調整姿態便能安然。","一味感傷，看不見風帶來的清爽。"],
+["寒霜","曉岸覆白","磨礪","嚴寒是考驗，也使人更清醒。","硬撐成冰，需要一點暖意。"],
+["長亭","道旁歇腳","駐足","停一停是為了看清下一程。","停得太久，路就荒了。"],
+["古道","黃沙斜陽","漫長","路遠而穩，慢慢走自有答案。","迷路感強，回到最初的方向。"],
+["孤燈","夜雨窗前","守候","微光足夠，耐心會被回應。","等待變成逃避，該自己出門了。"],
+["濁酒","對影成三","放懷","暫且放下，與自己和解。","借酒澆愁愁更深，換個出口。"],
+["古琴","高山流水","知音","有人懂你，或你將遇見懂你的人。","曲高和寡，先把自己彈清楚。"],
+["長劍","匣中有光","志氣","時機將至，磨亮自己。","鋒芒傷人，也傷了自己。"],
+["寒梅","雪中一枝","堅貞","逆境中仍開，你的堅持有價值。","孤傲過頭，錯把固執當風骨。"],
+["翠竹","虛心有節","風骨","彎而不折，謙遜中自有力量。","外直內空，需要真實的充實。"],
+["秋菊","籬下悠然","隱逸","遠離喧囂，過自己的節奏。","退得太遠，與世界失聯。"],
+["青蓮","出泥不染","清淨","身處複雜，仍能守住自己。","潔癖太重，容不下一絲不完美。"],
+["子規","夜啼歸去","鄉愁","心在召喚你回到根源。","困在過去的家園，忘了此刻的歸處。"],
+["煙雨","江南朦朧","迷離","看不清時，先不必急著定論。","朦朧久了，該讓視線清晰起來。"],
+["長河","落日圓","壯闊","格局放大，眼前之事自然變小。","被浩大淹沒，從一小步開始。"],
+["斷橋","殘雪初融","重逢","舊緣有再相遇的可能。","重逢未必是重來，別執著於舊樣子。"],
+["空山","新雨人語","空靈","清空雜念，答案自己浮現。","空虛感而非空靈，需要連結。"],
+["青山","相看不厭","恆久","有些事不變，是你的依靠。","一成不變成了藉口，該出門看看。"]
+];
+var DK={
+j:{g:"節",n:"節氣",e:"SOLAR TERMS",t:"節氣神諭卡",s:"二十四節氣，順時序流轉",c:"#5a7f52",d:S,r:"立春至大寒・24 張"},
+w:{g:"行",n:"五行",e:"FIVE PHASES",t:"五行神諭卡",s:"木火土金水；三張牌陣會顯示相生相剋",c:"#c04a30",d:W,r:"木火土金水・20 張"},
+p:{g:"詩",n:"詩詞",e:"POETIC IMAGERY",t:"詩詞神諭卡",s:"二十四張古典詩詞意象牌",c:"#b0523f",d:P,r:"明月、孤舟、寒梅……24 張"},
+m:{g:"混",n:"混抽",e:"MIXED DECK",t:"混抽神諭卡",s:"三副牌合一；節氣與五行牌相鄰時會顯示生剋",c:"#786899",d:S.concat(W,P),r:"節氣、五行、詩詞合併・68 張",x:1}
+};
+var SH={"木":"火","火":"土","土":"金","金":"水","水":"木"};
+var KE={"木":"土","土":"水","水":"火","火":"金","金":"木"};
+var TE={5:"土",11:"土",17:"土",23:"土"};
+var cur=null,mode=1,lastDrawText="",reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches;
+function $(id){return document.getElementById(id)}
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!==undefined)e.textContent=x;return e}
+function rnd(){return window.crypto&&crypto.getRandomValues?crypto.getRandomValues(new Uint32Array(1))[0]/4294967296:Math.random()}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(rnd()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function own(c){return DK.j.d.indexOf(c)>-1?DK.j:DK.w.d.indexOf(c)>-1?DK.w:DK.p}
+function elem(c){
+var i=S.indexOf(c);
+if(i>-1)return TE[i]||(i<5?"木":i<11?"火":i<17?"金":"水");
+if(W.indexOf(c)>-1)return c[1].charAt(0);
+return null}
+function seeded(s){var h=0;for(var i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return function(){h=(h*1664525+1013904223)>>>0;return h/4294967296}}
+function art(c){
+var o=own(c),r=seeded(c[0]),h="";
+if(o===DK.j){
+var i=S.indexOf(c),x=22+i/23*156,y=60-34*Math.cos(2*Math.PI*(i-9)/24);
+h='<circle cx="'+x+'" cy="'+y+'" r="13" fill="currentColor" fill-opacity=".85"/><path d="M0 92Q50 80 100 90T200 88V120H0Z" fill="currentColor" fill-opacity=".3"/><path d="M0 104Q60 96 120 104T200 100" fill="none" stroke="currentColor" stroke-opacity=".5"/>'
+}else if(o===DK.w){
+var m={
+"木":'<path d="M100 108V30M100 80q-26-4-30-24 22 2 30 24zM100 62q26-4 30-24-22 2-30 24zM100 44q-14-2-18-16 14 2 18 16z" fill="currentColor" fill-opacity=".82"/>',
+"火":'<path d="M100 14C122 46 140 62 130 88c-6 16-20 22-30 22s-24-6-28-22c-6-22 12-34 18-52 8 10 8 18 10 26 8-10 8-24 0-48z" fill="currentColor" fill-opacity=".85"/>',
+"土":'<path d="M20 106L80 40l40 46 22-26 38 46z" fill="currentColor" fill-opacity=".48"/><path d="M44 106L100 52l56 54z" fill="currentColor" fill-opacity=".82"/>',
+"金":'<circle cx="100" cy="64" r="40" fill="none" stroke="currentColor" stroke-width="5"/><rect x="82" y="46" width="36" height="36" fill="currentColor" fill-opacity=".82"/>',
+"水":'<path d="M20 50q20-18 40 0t40 0 40 0 40 0M20 74q20-18 40 0t40 0 40 0 40 0M20 98q20-18 40 0t40 0 40 0 40 0" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>'
+};
+h=m[c[1].charAt(0)]
+}else{
+var mx=40+r()*120,my=22+r()*26,a=58+r()*20,b=72+r()*18;
+h='<circle cx="'+mx+'" cy="'+my+'" r="'+(10+r()*6)+'" fill="currentColor" fill-opacity=".85"/><path d="M0 '+(a+20)+'L'+(30+r()*30)+' '+a+'L'+(80+r()*30)+' '+(a+14)+'L'+(130+r()*30)+' '+(a-6)+'L200 '+(a+16)+'V120H0Z" fill="currentColor" fill-opacity=".22"/><path d="M0 '+(b+26)+'L'+(40+r()*40)+' '+b+'L'+(110+r()*30)+' '+(b+20)+'L'+(160+r()*20)+' '+(b+4)+'L200 '+(b+22)+'V120H0Z" fill="currentColor" fill-opacity=".45"/>'
+}
+return '<svg viewBox="0 0 200 120" aria-hidden="true">'+h+'</svg>'}
+function rel(a,b){
+if(a===b)return a+"與"+b+"同氣，能量疊加共鳴。";
+if(SH[a]===b)return a+"生"+b+"：前者滋養後者，順勢而成。";
+if(SH[b]===a)return b+"生"+a+"：後者回補前者，得道多助。";
+if(KE[a]===b)return a+"剋"+b+"：前者制約後者，需要果斷取捨。";
+return b+"剋"+a+"：後者牽制前者，留意潛在阻力。"}
+Object.keys(DK).forEach(function(k){
+var d=DK[k],b=el("button","tile"+(d.x?" mix":""));
+b.style.setProperty("--c",d.c);
+b.appendChild(el("div","g",d.g));
+var w=el("div");w.appendChild(el("b",null,d.n));w.appendChild(el("div","e",d.e));w.appendChild(el("div","d",d.r));
+b.appendChild(w);b.onclick=function(){openDeck(k)};$("tiles").appendChild(b)});
+function clearTable(){$("row").innerHTML="";$("read").className="read hide";$("fn").className="flipnote hide"}
+function openDeck(k){
+cur=DK[k];
+document.documentElement.style.setProperty("--ac",cur.c);
+$("dt").textContent=cur.t;$("ds").textContent=cur.s;$("de").textContent=cur.e;
+clearTable();$("home").className="hide";$("play").className="";
+window.scrollTo(0,0)}
+$("back").onclick=function(){$("play").className="hide";$("home").className="";document.documentElement.style.removeProperty("--ac")};
+function setMode(m){mode=m;$("m1").className=m===1?"on":"";$("m3").className=m===3?"on":"";clearTable()}
+$("m1").onclick=function(){setMode(1)};
+$("m3").onclick=function(){setMode(3)};
+function draw(){
+var q=$("q").value.trim(),allowRev=$("opt-rev").checked,row=$("row"),rd=$("read");
+clearTable();rd.innerHTML="";
+row.className=mode===3?"t3":"";
+var pos=mode===3?["過去","現在","未來"]:["此刻的指引"];
+var picked=shuffle(cur.d).slice(0,mode).map(function(c){return{c:c,rev:allowRev?rnd()<.5:false}});
+var txt="【"+cur.t+"】\n"+(q?"問：「"+q+"」\n":""),flipped=0,hist=[],revN=0,els=[];
+rd.appendChild(el("h3",null,"牌陣解讀"));
+if(q)rd.appendChild(el("div","qq","問：「"+q+"」"));
+$("fn").className="flipnote";
+picked.forEach(function(p,n){
+var c=p.c,o=cur.x?own(c):cur,col=c[5]||o.c,e=elem(c);
+if(e)els.push(e);if(p.rev)revN++;
+var slot=el("div","slot");slot.appendChild(el("div","pos",pos[n]));
+var dir=p.rev?"逆位":"正位";
+var wrap=el("div","card-wrap");
+wrap.style.setProperty("--ac",col);wrap.style.animationDelay=(n*.15)+"s";
+wrap.tabIndex=0;wrap.setAttribute("role","button");wrap.setAttribute("aria-label",pos[n]+"，點擊翻牌");
+var back=el("div","face card-back"),bi=el("div","card-back-inner");
+bi.appendChild(el("div","card-back-symbol",cur.g));bi.appendChild(el("div","card-back-hint","點擊翻牌"));
+back.appendChild(bi);
+var front=el("div","face card-front"+(p.rev?" rev":"")),inner=el("div","inner");
+inner.appendChild(el("div","seal",o.g));
+var ad=el("div","art");ad.innerHTML=art(c);inner.appendChild(ad);
+inner.appendChild(el("div","nm",c[0]));inner.appendChild(el("div","img",c[1]));inner.appendChild(el("div","kw",c[2]));inner.appendChild(el("div","tag",dir));
+front.appendChild(inner);wrap.appendChild(back);wrap.appendChild(front);slot.appendChild(wrap);row.appendChild(slot);
+var done=false;
+function reveal(){
+if(done)return;done=true;
+wrap.classList.add("flipped");wrap.setAttribute("aria-label",pos[n]+"："+c[0]+"，"+dir);
+flipped++;
+if(flipped===mode){
+$("fn").className="flipnote hide";
+setTimeout(function(){rd.className="read";rd.scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"})},reduce?0:600)}}
+wrap.onclick=reveal;
+wrap.onkeydown=function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();reveal()}};
+var line=p.rev?c[4]:c[3],r=el("div","r");
+r.appendChild(el("b",null,pos[n]+"・"+c[0]+"（"+dir+"）"+c[2]));
+r.appendChild(el("div","si",c[1]));r.appendChild(el("div",null,line));rd.appendChild(r);
+txt+=pos[n]+"・"+c[0]+"（"+dir+"｜"+c[2]+"）："+line+"\n";
+hist.push(pos[n]+"："+c[0]+"("+dir+")");
+var nx=picked[n+1];
+if(nx){var a=elem(c),b=elem(nx.c);if(a&&b){var t=rel(a,b);rd.appendChild(el("div","rel","五行生剋："+t));txt+="　↳ 五行生剋："+t+"\n"}}
+});
+if(mode===3){
+var cnt={},top=null;
+els.forEach(function(e){cnt[e]=(cnt[e]||0)+1;if(cnt[e]>=2)top=e});
+var s="三張中有 "+revN+" 張逆位"+(revN===0?"，整體順勢。":revN===3?"，整體宜放慢、先調整內在。":"，順中有需留意之處。");
+if(top)s+="五行以「"+top+"」為主，能量偏向此氣。";
+rd.appendChild(el("div","sum","綜合提示："+s));txt+="綜合提示："+s+"\n"}
+lastDrawText=txt.trim();
+saveHistory({time:new Date().toLocaleString("zh-TW",{hour12:false,month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"}),deck:cur.t,q:q||"（無特定問題，靜心指引）",cards:hist.join(" ／ ")});
+var act=el("div","act"),again=el("button",null,"再抽一次"),cp=el("button",null,"複製解讀");
+again.onclick=function(){draw();window.scrollTo({top:$("row").offsetTop-120,behavior:reduce?"auto":"smooth"})};
+cp.onclick=function(){copyText(lastDrawText,cp)};
+act.appendChild(again);act.appendChild(cp);rd.appendChild(act)}
+$("draw").onclick=draw;
+$("q").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();draw()}});
+function copyText(t,b){
+function ok(){b.textContent="✓ 已複製";setTimeout(function(){b.textContent="複製解讀"},2000)}
+function fb(){
+var ta=document.createElement("textarea");ta.value=t;ta.style.cssText="position:fixed;opacity:0";document.body.appendChild(ta);ta.select();
+try{document.execCommand("copy");ok()}catch(e){b.textContent="請手動選取複製"}
+document.body.removeChild(ta)}
+if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(ok,fb);else fb()}
+function store(k,v){try{if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){}}
+function load(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function saveHistory(item){
+var l=[];try{l=JSON.parse(load("oracle_history")||"[]")}catch(e){}
+l.unshift(item);store("oracle_history",JSON.stringify(l.slice(0,30)))}
+(function(){var t=load("oracle_theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)})();
+$("btn-theme").onclick=function(){
+var c=document.documentElement.getAttribute("data-theme");
+var dark=c==="dark"||(!c&&window.matchMedia&&matchMedia("(prefers-color-scheme:dark)").matches);
+var n=dark?"light":"dark";document.documentElement.setAttribute("data-theme",n);store("oracle_theme",n)};
+var mbg=$("modal-bg"),mt=$("modal-title"),tabs=$("modal-tabs"),mb=$("modal-body"),lastFocus=null;
+function openModal(){lastFocus=document.activeElement;mbg.className="modal-backdrop";$("modal-close").focus()}
+function closeModal(){mbg.className="modal-backdrop hide";if(lastFocus)lastFocus.focus()}
+$("modal-close").onclick=closeModal;
+mbg.onclick=function(e){if(e.target===mbg)closeModal()};
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!mbg.classList.contains("hide"))closeModal()});
+function dictList(d){
+mb.innerHTML="";var g=el("div","dict-grid");
+d.d.forEach(function(c){
+var col=c[5]||d.c,it=el("div","dict-item");
+it.style.setProperty("--ac",col);it.style.borderLeft="3px solid "+col;
+var h=el("div","dh");h.appendChild(el("b",null,c[0]));h.appendChild(el("span",null,c[1]+"｜"+c[2]));
+it.appendChild(h);it.appendChild(el("p",null,"【正】"+c[3]));it.appendChild(el("p",null,"【逆】"+c[4]));g.appendChild(it)});
+mb.appendChild(g);mb.scrollTop=0}
+$("btn-dict").onclick=function(){
+mt.textContent="牌義總覽（全 68 張）";tabs.className="modal-tabs";tabs.innerHTML="";
+["j","w","p"].forEach(function(k,i){
+var d=DK[k],tb=el("button","modal-tab"+(i?"":" on"),d.n+" ("+d.d.length+")");
+tb.onclick=function(){Array.prototype.forEach.call(tabs.children,function(x){x.classList.remove("on")});tb.classList.add("on");dictList(d)};
+tabs.appendChild(tb)});
+dictList(DK.j);openModal()};
+$("btn-hist").onclick=function(){
+mt.textContent="近期抽牌紀錄";tabs.className="modal-tabs hide";mb.innerHTML="";
+var l=[];try{l=JSON.parse(load("oracle_history")||"[]")}catch(e){}
+if(!l.length)mb.appendChild(el("p","sub","尚無抽牌紀錄，靜心抽一張牌吧。"));
+else{
+l.forEach(function(i){
+var b=el("div","hist-item"),m=el("div","hm");
+m.appendChild(el("span",null,i.deck));m.appendChild(el("span",null,i.time));
+b.appendChild(m);b.appendChild(el("div","hq","問："+i.q));b.appendChild(el("div",null,i.cards));mb.appendChild(b)});
+var w=el("div","act"),cb=el("button",null,"清空紀錄");
+cb.onclick=function(){store("oracle_history",null);$("btn-hist").click()};
+w.appendChild(cb);mb.appendChild(w)}
+openModal()};
+</script>
+</body>
+</html>
