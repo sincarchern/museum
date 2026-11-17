@@ -44,6 +44,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 .finder label{font-weight:500}
 input[type=date]{font:inherit;color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:6px;padding:6px 10px}
 .hint{color:var(--muted);font-size:14px}
+.dsel{display:flex;gap:6px;width:100%}.finder .dsel select,.frm .dsel select,.dsel select{width:auto;flex:1 1 0;min-width:0;margin:0;padding-left:6px;padding-right:6px}.dsel select:first-child{flex:1.4 1 0}
 #todayLabel{display:block;margin-top:4px}
 html{scroll-behavior:smooth}
 .jump{display:flex;gap:8px;margin:0 0 20px}.jump a{color:var(--ink);text-decoration:none;background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:6px 16px;font-size:15px}
@@ -292,6 +293,36 @@ document.getElementById('qg').addEventListener('click',function(){
 // END
 pick(0);
 var todayLabel=document.getElementById("todayLabel");if(todayLabel){var now=new Date(),todayValue=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");todayLabel.textContent="今日："+now.getFullYear()+"/"+(now.getMonth()+1)+"/"+now.getDate();["bd","qd","q2d"].forEach(function(id){document.getElementById(id).max=todayValue})}
+
+// Birthday: year / month / day dropdowns (feed the original hidden date inputs)
+(function(){
+var yNow=new Date().getFullYear(),resets=[];
+function dim(y,m){return new Date(y,m,0).getDate()}
+function opt(sel,v,t){var o=document.createElement("option");o.value=String(v);o.textContent=t;sel.appendChild(o)}
+function build(id){
+ var inp=document.getElementById(id);if(!inp)return;
+ inp.type="hidden";
+ var box=document.createElement("div");box.className="dsel";
+ function mk(k,ph,aria){var s=document.createElement("select");s.id=id+"_"+k;s.setAttribute("aria-label",aria);opt(s,"",ph);box.appendChild(s);return s}
+ var ys=mk("y","年","出生年"),ms=mk("m","月","出生月"),ds=mk("d","日","出生日");
+ for(var y=yNow;y>=1920;y--)opt(ys,y,y+" 年");
+ for(var m=1;m<=12;m++)opt(ms,m,m+" 月");
+ function days(){var n=dim(+ys.value||2000,+ms.value||1),cur=ds.value;while(ds.options.length>1)ds.remove(1);for(var d=1;d<=n;d++)opt(ds,d,d+" 日");ds.value=(cur&&+cur<=n)?cur:""}
+ function sync(){var v=(ys.value&&ms.value&&ds.value)?ys.value+"-"+("0"+ms.value).slice(-2)+"-"+("0"+ds.value).slice(-2):"";if(inp.value!==v){inp.value=v;inp.dispatchEvent(new Event("change",{bubbles:true}))}}
+ days();
+ ys.addEventListener("change",function(){days();sync()});
+ ms.addEventListener("change",function(){days();sync()});
+ ds.addEventListener("change",sync);
+ inp.parentNode.insertBefore(box,inp.nextSibling);
+ if(inp.parentNode.tagName==="LABEL")inp.parentNode.style.gridColumn="1/-1";
+ var lb=document.querySelector('label[for="'+id+'"]');if(lb)lb.htmlFor=id+"_y";
+ inp.focus=function(){ys.focus()};
+ resets.push(function(){ys.value="";ms.value="";days();ds.value=""});
+}
+["bd","qd","q2d"].forEach(build);
+var rb=document.getElementById("resetForm");
+if(rb)rb.addEventListener("click",function(){resets.forEach(function(f){f()})});
+})();
 </script>
 </body>
 </html>
