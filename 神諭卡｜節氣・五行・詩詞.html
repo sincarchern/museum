@@ -101,6 +101,7 @@ h1{font-weight:500;letter-spacing:.55em;margin:6px 0 0 .55em;font-size:2.05rem}
 .hm{display:flex;justify-content:space-between;margin-bottom:6px}
 .hq{font-weight:600;font-size:.92rem;margin-bottom:6px}
 .foot{margin-top:44px;color:var(--mut);font-size:.78rem;letter-spacing:.08em}
+.nxt{margin-top:22px;padding-top:18px;border-top:1px dashed var(--bd);text-align:center}.nxt p{margin:0 0 12px;font-size:.88rem;color:var(--mut)}.nxb{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}.nxb .go{letter-spacing:.2em;padding:12px 26px}.go.alt{background:none;color:var(--ink);border:1.5px solid var(--ac);box-shadow:none}
 .credit{margin-top:10px;font-size:.8rem;letter-spacing:.3em;text-indent:.3em}
 @media(max-width:520px){
 .tiles{grid-template-columns:1fr}
@@ -231,11 +232,164 @@ var P=[
 ["空山","新雨人語","空靈","清空雜念，答案自己浮現。","空虛感而非空靈，需要連結。"],
 ["青山","相看不厭","恆久","有些事不變，是你的依靠。","一成不變成了藉口，該出門看看。"]
 ];
+var B=[
+['乾','天・剛健不息','自強','創始與主導的時刻，堅定向前。','剛過易折，學會示弱與傾聽。'],
+['兌','澤・喜悅相悅','悅納','真誠交流帶來喜悅，說出你的心意。','討好或空談，快樂需要真實內容。'],
+['離','火・光明附麗','明辨','看清真相，依附正確的光源。','過度炫耀或依賴，光也會灼人。'],
+['震','雷・驚而後動','奮起','突發的變動是啟動的契機。','驚慌失措，先站穩再回應。'],
+['巽','風・無孔不入','滲透','柔順而持續，慢慢影響局勢。','猶豫不定，隨風搖擺失了主見。'],
+['坎','水・重險相疊','涉險','身處險境仍守信，誠心便能通過。','陷在憂懼裡，先求援再前行。'],
+['艮','山・止於當止','知止','停下來，是為了看得更遠。','停滯成僵，該動時要動。'],
+['坤','地・厚德載物','柔承','順應與承載，累積比爭先重要。','一味退讓，失去自己的立場。']
+];
+var C=[
+['緋紅','朝霞燃天','熱烈','情感與行動力正濃，勇敢表達。','熱度過頭，易灼傷自己與身邊人。','#b83a3a'],
+['胭脂','頰上微紅','動心','細膩的情意被觸動，值得珍視。','情緒起伏，別因一時感性做決定。','#a8374b'],
+['絳紫','深秋葡萄','沉穩','內斂的力量，成熟而有分量。','壓抑過久，需要出口。','#7a2f55'],
+['赭石','山岩之色','踏實','腳踏實地，慢慢累積就有成果。','固執守舊，土也需要翻新。','#9a5b34'],
+['琥珀','歲月凝光','沉澱','時間讓美好定形，珍惜所存。','困在回憶，光被封在裡面。','#a8741a'],
+['藤黃','秋葉初金','豐收','努力迎來回報，也別忘分享。','貪多，反而什麼都握不牢。','#a88a1a'],
+['秋香','舊綢淡綠','從容','不爭不搶，節奏自有章法。','過於隨性，缺乏方向。','#8a8a3a'],
+['竹青','新篁抽節','正直','有彈性而不失原則。','外表謙和，內心卻緊繃。','#5a8f5a'],
+['松綠','歲寒不凋','堅韌','長久的堅持終見成效。','孤傲自守，需要溫度。','#4a7a55'],
+['黛綠','遠山含煙','幽遠','安靜的距離能帶來清晰。','過度疏離，連結正在淡去。','#3f6b62'],
+['碧色','湖光一泓','澄心','心念澄澈，適合做決定。','表面平靜，底下暗流未解。','#2f8a7a'],
+['天青','雨過雲破','希望','等待有了結果，轉機到來。','期待太高，須留一點彈性。','#4a8aa8'],
+['縹色','晴空淡藍','舒展','放鬆下來，思路自然打開。','漂浮不定，需要落地。','#3f6fa8'],
+['靛藍','染缸深處','專注','沉浸其中，專業與深度並進。','鑽牛角尖，抬頭看看四周。','#34508a'],
+['黛色','眉峰遠山','凝思','靜思之後，答案清晰。','憂思難解，找人說說。','#46506b'],
+['藕荷','荷下淡紫','溫柔','柔和的關係與包容。','過於遷就，委屈累積。','#8a6a96'],
+['紫檀','老木深紅','底蘊','傳承與底氣，不必張揚。','守成太久，缺乏新意。','#6a3f56'],
+['檀色','淺絳暖褐','溫厚','穩定的陪伴與暖意。','依賴成性，需要自立。','#a8603f'],
+['杏黃','晨光初暖','明朗','開朗的心情帶動周圍。','樂觀過頭，忽略風險。','#b8793f'],
+['蒼色','霜後老葉','清冷','冷靜看待，不被情緒牽動。','冷漠隔閡，主動靠近一步。','#5f7f7a'],
+['鴉青','夜羽微光','隱祕','暗處有光，保留一點祕密。','隱瞞造成誤會，適度坦誠。','#4a5560'],
+['煙灰','炊煙裊裊','平淡','平凡日子裡藏著安穩。','日復一日，失去感受力。','#7a7570'],
+['墨色','一筆寫盡','決斷','簡潔有力，直指核心。','過於絕對，留一點餘白。','#3a3a3a'],
+['石青','礦彩凝翠','珍貴','稀有的天賦值得細心保存。','藏而不用，錯失發光機會。','#2f6f8f']
+];
+var H=[
+['子時','23–01・夜半萬籟','孕靜','一天在最靜處悄悄開始，適合收心與沉澱。','夜深難眠，念頭太多，先放下手邊的事。'],
+['丑時','01–03・雞鳴未起','守候','黎明前最暗，耐心等待是對的。','焦慮空轉，睡眠比答案重要。'],
+['寅時','03–05・東方欲曉','破曉','新的一天正在醞釀，先把想法理清。','起得太急，節奏被打亂。'],
+['卯時','05–07・日出霧散','開展','光到了，適合出手，先做第一件事。','急於表現，先好好吃早餐。'],
+['辰時','07–09・朝食正熱','專注','精神最好，處理最難的事。','被瑣事分心，先排好優先順序。'],
+['巳時','09–11・日上三竿','行動','事務順暢推進，適合溝通與決策。','忙而無果，停下來確認方向。'],
+['午時','11–13・日正中天','圓滿','能量頂點，宜總結並分享成果。','盛極而躁，午間小憩是智慧。'],
+['未時','13–15・日影西斜','調整','放緩節奏，檢視上午的進度。','疲倦鬆懈，別在此時做大決定。'],
+['申時','15–17・暮色初動','收尾','補上漏洞，把未完之事收尾。','拖延堆積，挑一件先完成。'],
+['酉時','17–19・日落歸巢','歸返','回到所愛之人身邊，感謝這一天。','仍困在工作中，替自己設一個終點。'],
+['戌時','19–21・燈火可親','安頓','陪伴與家常，讓心落地。','獨自反芻白天的挫折，找人說說。'],
+['亥時','21–23・萬家入夢','歸息','整理思緒，準備安睡。','滑手機耗神，把今天好好結束。']
+];
+var UR=`東風解凍|鬆動|僵局開始融化。|解凍太急，易潰堤。
+蟄蟲始振|甦醒|沉睡的想法微微動起來。|驚醒過早，再養一養。
+魚陟負冰|探路|小心試探，逐步前進。|冰未全化，別冒進。
+獺祭魚|盤點|陳列成果，感恩所得。|炫耀所得，反失謙遜。
+鴻雁來|歸來|遠方的人或消息將至。|音訊延遲，耐心等候。
+草木萌動|萌發|新計畫冒出頭，給它空間。|嫩芽被忽視，需要保護。
+桃始華|初綻|好事初現，順勢而為。|花開未穩，莫過度期待。
+倉庚鳴|傳信|聲音被聽見，正是表達之時。|聒噪無益，說重點。
+鷹化為鳩|蛻變|姿態轉柔，反得人心。|失去鋒芒，別丟了立場。
+玄鳥至|歸巢|回到熟悉之處，重拾連結。|物是人非，調整期待。
+雷乃發聲|宣告|時機成熟，該發聲了。|雷聲大雨點小，別虛張。
+始電|閃現|靈光一閃，立刻記下。|光亮太快，抓不住。
+桐始華|清雅|淡淡的美，簡單最好。|過度修飾，失了本色。
+田鼠化鴽|轉化|低處的人事物升起轉機。|身份錯位，找回定位。
+虹始見|轉晴|風雨後的希望，值得等待。|彩虹易逝，別只顧著看。
+萍始生|漂浮|隨緣而聚，無需強求。|無根漂泊，需要落腳。
+鳴鳩拂羽|整裝|為下一程整理自己。|一再整理，遲遲不動。
+戴勝降桑|時至|農事將起，該行動了。|錯過節氣，補救也來得及。
+螻蟈鳴|喧鬧|活力漸盛，熱鬧起來。|嘈雜擾心，找處安靜。
+蚯蚓出|翻新|土下的努力將要露面。|暴露過早，易受傷害。
+王瓜生|攀升|穩步向上，順勢攀爬。|攀附過度，反失自主。
+苦菜秀|苦盡|苦中帶益，撐過便是甘。|苦澀過久，別勉強吞下。
+靡草死|退場|柔弱者先退，順應自然。|被迫退出，不必自責。
+麥秋至|早收|有一份收成已在眼前。|收成未熟，別太早動手。
+螳螂生|蓄勢|小小的力量也有鋒芒。|螳臂當車，量力而為。
+鵙始鳴|警示|有聲音在提醒你。|警鈴太多，易生焦慮。
+反舌無聲|沉默|沉默是此刻最好的回應。|該說不說，悶在心裡。
+鹿角解|褪舊|卸下舊的負擔，輕裝再生。|捨不得放下，反成枷鎖。
+蜩始鳴|高唱|盡情發聲，把握盛夏。|喧嘩過度，聲嘶力竭。
+半夏生|半途|盛夏中悄悄有一絲陰涼。|半吊子狀態，需要做決定。
+溫風至|悶熱|暖中帶躁，要有節奏。|熱風撲面，別正面硬碰。
+蟋蟀居壁|退守|尋一處蔭涼，暫避鋒芒。|縮得過頭，也有侷限。
+鷹始鷙|奮起|蓄力出擊，準備高飛。|急於出擊，準備不足。
+腐草為螢|重生|腐朽中誕生微光。|沉溺過去，看不見新光。
+土潤溽暑|濕悶|氣悶難耐，先理順再行動。|悶著不說，愈積愈潮。
+大雨時行|洗滌|一場大雨沖走燥熱。|傾盆而下，避開風頭。
+涼風至|轉涼|轉折已到，調整心態。|仍執夏日，不肯換季。
+白露降|凝露|細微的感受正在凝結。|寒涼入心，注意保暖。
+寒蟬鳴|悲秋|最後的鳴唱，珍惜每一聲。|感傷過久，需要振作。
+鷹乃祭鳥|感恩|獲得之後，不忘敬意。|貪得無厭，失去敬意。
+天地始肅|肅靜|氛圍轉為嚴肅，宜自省。|過於嚴苛，對自己放鬆些。
+禾乃登|成熟|穀物將熟，耐心等候。|不等成熟就動手，浪費了。
+鴻雁來|遠行|遷徙的時機，勇敢出發。|思鄉難耐，別逃避現實。
+玄鳥歸|回返|該回到安穩的所在。|不願歸去，流連不返。
+群鳥養羞|儲備|為寒冬囤積資源。|過度囤積，也是恐懼。
+雷始收聲|收斂|收起鋒芒，回歸平靜。|過度壓抑，應有出口。
+蟄蟲坯戶|封門|內收休息，築好巢。|封閉太緊，缺了空氣。
+水始涸|枯水|資源減少，須精簡。|乾涸之感，求援不是弱。
+鴻雁來賓|作客|短暫停留，好好款待。|客居他處，心難安定。
+雀入為蛤|變形|角色轉換，順應變化。|身份混亂，找回自己。
+菊有黃華|傲霜|在涼意中綻放，不減光彩。|孤芳自賞，別拒人千里。
+豺乃祭獸|儀式|以儀式感紀念收成。|形式大於心意，回到核心。
+草木黃落|飄零|放手落葉，是為重生。|抓著枯葉不放，拖累新芽。
+蟄蟲咸俯|蟄伏|全面歸藏，專心休養。|蟄伏太久，錯失時機。
+水始冰|凝結|情勢開始固化，宜謹慎。|冰封過早，留一道縫。
+地始凍|封凍|土地休息，順應停頓。|凍得僵硬，需要暖意。
+雉入為蜃|蛻殼|內在正在轉換。|形變而心未變，換湯不換藥。
+虹藏不見|隱沒|光彩暫退，專注內在。|被遮蔽，別灰心。
+天升地降|分隔|上下不通，暫時分開。|溝通斷裂，主動連結。
+閉塞成冬|閉藏|萬物冬眠，安靜度過。|閉得太久，自我封鎖。
+鶡鴠不鳴|噤聲|寒夜寂靜，無需多言。|沉默成冷戰，需要打破。
+虎始交|孕育|陽氣悄悄萌動，生機的預兆。|過早躁動，時機未到。
+荔挺出|挺立|不畏嚴寒，挺身而出。|逞強硬撐，也要保暖。
+蚯蚓結|蜷縮|蜷縮取暖，積蓄生機。|蜷縮太久，伸展一下。
+麋角解|脫落|舊的角褪去，新的將長。|失落感強，新生在後。
+水泉動|暗湧|地下水脈在動，希望將至。|暗流未顯，莫急著宣布。
+雁北鄉|北返|方向開始轉向，心有所向。|方向未明，先靜待。
+鵲始巢|築巢|開始築起安身之所。|築巢太急，根基未穩。
+雉始雊|鳴叫|在最寒時發聲，為了生命。|聲音被寒風淹沒，換個時機。
+雞始乳|孵育|新生命在寒中孕育。|孵育急躁，需要溫度。
+鷙鳥厲疾|銳利|最敏銳的時刻，精準出擊。|過於凌厲，傷及自己。
+水澤腹堅|堅冰|冰凍至深，也是將解的前夜。|固化太久，等待春風。`;
+var U=UR.split('\n').map(function(s,n){var a=s.split('|'),t=Math.floor(n/3);return[a[0],S[t][0]+'・'+['初候','次候','末候'][n%3],a[1],a[2],a[3],t<6?'#4a7f4e':t<12?'#c04a30':t<18?'#66707e':'#3d6fa3']});
+var FR=`梅花|傲雪|逆境中先開的勇氣被看見。|別孤芳自賞，也需要同伴。|#b04a5a
+山茶|堅貞|情意深厚，耐得住寒。|執著過頭，落得決絕。|#b83a50
+水仙|自照|靜靜欣賞自己的美，亦是力量。|顧影自憐，忘了看向他人。|#7a8f4a
+瑞香|幽香|不張揚的好，自會被人聞到。|香氣太淡，別被忽略。|#9a5a8a
+蘭花|君子|清雅自守，知音自來。|孤高難近，放下身段。|#4f8a6a
+山礬|素雅|樸素中有細緻的美。|太過低調，錯失機會。|#7a8a5a
+迎春|報喜|春天的消息來了，迎上去。|過早張揚，寒意未退。|#a88a1a
+櫻桃|初熟|小小的甜頭，值得慶祝。|貪嘗未熟，反而酸澀。|#b84a5a
+望春|期盼|對未來的期待是力量。|望得太久，別忘了行動。|#9a4a7a
+菜花|尋常|平凡日子裡自有金黃。|被當成理所當然，其實珍貴。|#a88a1a
+杏花|煙雨|含蓄的喜悅，一場春雨剛好。|過於害羞，錯過表白。|#b85a4a
+李花|潔白|心思純淨，適合重新開始。|白得無瑕，容不得半點瑕疵。|#7a7570
+桃花|緣分|人際與情感有好消息。|桃花太旺，辨別真偽。|#c04a6a
+棣棠|質樸|不爭豔，卻堅定。|默默付出，需要被看見。|#a8741a
+薔薇|纏繞|熱烈而帶刺，愛與界線並存。|刺傷人也傷己，修剪一下。|#b0405a
+海棠|嬌美|美好值得珍惜，順其自然。|貪戀外表，忽略內在。|#c04a5a
+梨花|如雪|清白純淨，思念如雪。|沉浸憂傷，似雪易融。|#6a7a7a
+木蘭|高潔|志向高遠，有擔當。|曲高和寡，需要落地。|#8a4a7a
+桐花|將暮|春意將盡，把握最後的美好。|感傷離去，別錯過當下。|#8a6a96
+麥花|平實|默默結穗，成果在後頭。|太過低調，缺乏自我表達。|#7a8a3a
+柳花|飄飛|隨風而行，不必執著落點。|漂泊無根，需要停靠。|#5a8f5a
+牡丹|盛放|圓滿富足，全力綻放的時刻。|盛極當謹，別炫耀過頭。|#a8374b
+荼蘼|終章|最後的花，落幕也有餘香。|不捨結束，才能開始新事。|#7a7570
+楝花|送別|春天的最後一陣風，好好道別。|依依不捨，讓春天走吧。|#6a5a96`;
+var F=FR.split('\n').map(function(s,n){var a=s.split('|'),t=[22,23,0,1,2,3,4,5][Math.floor(n/3)];return[a[0],S[t][0]+'・'+['初候','次候','末候'][n%3],a[1],a[2],a[3],a[4]]});
 var DK={
 j:{g:"節",n:"節氣",e:"SOLAR TERMS",t:"節氣神諭卡",s:"二十四節氣，順時序流轉",c:"#5a7f52",d:S,r:"立春至大寒・24 張"},
 w:{g:"行",n:"五行",e:"FIVE PHASES",t:"五行神諭卡",s:"木火土金水；三張牌陣會顯示相生相剋",c:"#c04a30",d:W,r:"木火土金水・20 張"},
 p:{g:"詩",n:"詩詞",e:"POETIC IMAGERY",t:"詩詞神諭卡",s:"二十四張古典詩詞意象牌",c:"#b0523f",d:P,r:"明月、孤舟、寒梅……24 張"},
-m:{g:"混",n:"混抽",e:"MIXED DECK",t:"混抽神諭卡",s:"三副牌合一；節氣與五行牌相鄰時會顯示生剋",c:"#786899",d:S.concat(W,P),r:"節氣、五行、詩詞合併・68 張",x:1}
+b:{g:"卦",n:"八卦",e:"EIGHT TRIGRAMS",t:"八卦神諭卡",s:"乾兌離震巽坎艮坤；三張牌陣會顯示卦與五行的生剋",c:"#8a5a3c",d:B,r:"乾坤震巽坎離艮兌・8 張"},
+c:{g:"色",n:"傳統色",e:"TRADITIONAL COLORS",t:"傳統色神諭卡",s:"二十四種中國傳統色，以色寫心",c:"#a8374b",d:C,r:"緋紅、天青、靛藍……24 張"},
+h:{g:"時",n:"時辰",e:"TWELVE HOURS",t:"十二時辰神諭卡",s:"單張指引依抽牌當下的時辰；三張則隨機抽取",c:"#5a6f8a",d:H,r:"子丑寅卯……12 張・依當下時辰"},
+u:{g:"候",n:"七十二候",e:"72 PHENOLOGIES",t:"七十二候神諭卡",s:"物候流轉，一候五日；依四季配色",c:"#4a7f4e",d:U,r:"東風解凍、蟄蟲始振……72 張"},
+f:{g:"花",n:"花信風",e:"FLOWER WINDS",t:"花信風神諭卡",s:"小寒至穀雨，二十四番花信風",c:"#b04a5a",d:F,r:"梅花、桃花、牡丹……24 張"},
+m:{g:"混",n:"混抽",e:"MIXED DECK",t:"混抽神諭卡",s:"八副牌合一；節氣、五行、八卦、物候牌相鄰時會顯示生剋",c:"#786899",d:S.concat(W,P,B,C,H,U,F),r:"八副牌合併・208 張",x:1}
 };
 var SH={"木":"火","火":"土","土":"金","金":"水","水":"木"};
 var KE={"木":"土","土":"水","水":"火","火":"金","金":"木"};
@@ -245,16 +399,24 @@ function $(id){return document.getElementById(id)}
 function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!==undefined)e.textContent=x;return e}
 function rnd(){return window.crypto&&crypto.getRandomValues?crypto.getRandomValues(new Uint32Array(1))[0]/4294967296:Math.random()}
 function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(rnd()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
-function own(c){return DK.j.d.indexOf(c)>-1?DK.j:DK.w.d.indexOf(c)>-1?DK.w:DK.p}
+function own(c){for(var k in DK){if(!DK[k].x&&DK[k].d.indexOf(c)>-1)return DK[k]}return DK.p}
 function elem(c){
 var i=S.indexOf(c);
 if(i>-1)return TE[i]||(i<5?"木":i<11?"火":i<17?"金":"水");
 if(W.indexOf(c)>-1)return c[1].charAt(0);
+var bi=B.indexOf(c);if(bi>-1)return['金','金','火','木','木','水','土','土'][bi];
+var ui=U.indexOf(c);if(ui>-1)return elem(S[Math.floor(ui/3)]);
+if(F.indexOf(c)>-1)return'木';
 return null}
 function seeded(s){var h=0;for(var i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return function(){h=(h*1664525+1013904223)>>>0;return h/4294967296}}
 function art(c){
+var ui=U.indexOf(c);if(ui>-1)c=S[Math.floor(ui/3)];
 var o=own(c),r=seeded(c[0]),h="";
-if(o===DK.j){
+if(o===DK.f){for(var z=0;z<5;z++){var g=z*Math.PI*2/5;h+='<circle cx="'+(100+22*Math.sin(g))+'" cy="'+(62-22*Math.cos(g))+'" r="17" fill="currentColor" fill-opacity=".8"/>'}h+='<circle cx="100" cy="62" r="9" fill="#fff" fill-opacity=".55"/>';return '<svg viewBox="0 0 200 120" aria-hidden="true">'+h+'</svg>'}
+if(o===DK.b){var t=['111','110','101','100','011','010','001','000'][B.indexOf(c)];for(var k=0;k<3;k++){var y=84-k*28;h+=t.charAt(k)==='1'?'<rect x="40" y="'+y+'" width="120" height="12" rx="2" fill="currentColor" fill-opacity=".85"/>':'<rect x="40" y="'+y+'" width="50" height="12" rx="2" fill="currentColor" fill-opacity=".85"/><rect x="110" y="'+y+'" width="50" height="12" rx="2" fill="currentColor" fill-opacity=".85"/>'}
+}else if(o===DK.c){h='<rect width="200" height="120" fill="'+c[5]+'"/><circle cx="100" cy="60" r="34" fill="#fff" fill-opacity=".16"/><circle cx="100" cy="60" r="18" fill="#fff" fill-opacity=".16"/>'
+}else if(o===DK.h){var a=H.indexOf(c)*Math.PI/6;h='<circle cx="100" cy="64" r="42" fill="none" stroke="currentColor" stroke-width="4"/><path d="M100 64L'+(100+32*Math.sin(a))+' '+(64-32*Math.cos(a))+'" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><circle cx="100" cy="64" r="5" fill="currentColor"/>'
+}else if(o===DK.j){
 var i=S.indexOf(c),x=22+i/23*156,y=60-34*Math.cos(2*Math.PI*(i-9)/24);
 h='<circle cx="'+x+'" cy="'+y+'" r="13" fill="currentColor" fill-opacity=".85"/><path d="M0 92Q50 80 100 90T200 88V120H0Z" fill="currentColor" fill-opacity=".3"/><path d="M0 104Q60 96 120 104T200 100" fill="none" stroke="currentColor" stroke-opacity=".5"/>'
 }else if(o===DK.w){
@@ -299,7 +461,7 @@ var q=$("q").value.trim(),allowRev=$("opt-rev").checked,row=$("row"),rd=$("read"
 clearTable();rd.innerHTML="";
 row.className=mode===3?"t3":"";
 var pos=mode===3?["過去","現在","未來"]:["此刻的指引"];
-var picked=shuffle(cur.d).slice(0,mode).map(function(c){return{c:c,rev:allowRev?rnd()<.5:false}});
+var picked=((cur===DK.h&&mode===1)?[H[Math.floor(((new Date().getHours()+1)%24)/2)]]:shuffle(cur.d).slice(0,mode)).map(function(c){return{c:c,rev:allowRev?rnd()<.5:false}});
 var txt="【"+cur.t+"】\n"+(q?"問：「"+q+"」\n":""),flipped=0,hist=[],revN=0,els=[];
 rd.appendChild(el("h3",null,"牌陣解讀"));
 if(q)rd.appendChild(el("div","qq","問：「"+q+"」"));
@@ -349,7 +511,12 @@ saveHistory({time:new Date().toLocaleString("zh-TW",{hour12:false,month:"2-digit
 var act=el("div","act"),again=el("button",null,"再抽一次"),cp=el("button",null,"複製解讀");
 again.onclick=function(){draw();window.scrollTo({top:$("row").offsetTop-120,behavior:reduce?"auto":"smooth"})};
 cp.onclick=function(){copyText(lastDrawText,cp)};
-act.appendChild(again);act.appendChild(cp);rd.appendChild(act)}
+act.appendChild(again);act.appendChild(cp);rd.appendChild(act);
+var nx=el('div','nxt');nx.appendChild(el('p',null,'同一件事不建議反覆抽；想換個角度，可以換一副牌，或換一個問題。'));
+var nb=el('div','nxb'),b1=el('button','go','換一副牌再抽'),b2=el('button','go alt','換個問題再抽');
+b1.onclick=function(){$('back').click()};
+b2.onclick=function(){$('q').value='';clearTable();window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});$('q').focus()};
+nb.appendChild(b1);nb.appendChild(b2);nx.appendChild(nb);rd.appendChild(nx)}
 $("draw").onclick=draw;
 $("q").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();draw()}});
 function copyText(t,b){
@@ -384,8 +551,8 @@ var h=el("div","dh");h.appendChild(el("b",null,c[0]));h.appendChild(el("span",nu
 it.appendChild(h);it.appendChild(el("p",null,"【正】"+c[3]));it.appendChild(el("p",null,"【逆】"+c[4]));g.appendChild(it)});
 mb.appendChild(g);mb.scrollTop=0}
 $("btn-dict").onclick=function(){
-mt.textContent="牌義總覽（全 68 張）";tabs.className="modal-tabs";tabs.innerHTML="";
-["j","w","p"].forEach(function(k,i){
+mt.textContent="牌義總覽（全 208 張）";tabs.className="modal-tabs";tabs.innerHTML="";
+["j","w","p","b","c","h","u","f"].forEach(function(k,i){
 var d=DK[k],tb=el("button","modal-tab"+(i?"":" on"),d.n+" ("+d.d.length+")");
 tb.onclick=function(){Array.prototype.forEach.call(tabs.children,function(x){x.classList.remove("on")});tb.classList.add("on");dictList(d)};
 tabs.appendChild(tb)});
