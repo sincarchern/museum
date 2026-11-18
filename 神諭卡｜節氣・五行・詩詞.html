@@ -101,6 +101,11 @@ h1{font-weight:500;letter-spacing:.55em;margin:6px 0 0 .55em;font-size:2.05rem}
 .hm{display:flex;justify-content:space-between;margin-bottom:6px}
 .hq{font-weight:600;font-size:.92rem;margin-bottom:6px}
 .foot{margin-top:44px;color:var(--mut);font-size:.78rem;letter-spacing:.08em}
+.daily{max-width:560px;margin:0 auto 22px;padding:18px 20px;background:var(--el);border:1px solid var(--bd);border-top:3.5px solid var(--ac);border-radius:12px;text-align:center}.dl{font-size:.84rem;color:var(--mut);letter-spacing:.1em}.dm{font-size:1.15rem;font-weight:600;letter-spacing:.14em;color:var(--ink);margin:4px 0 2px}.dn{font-size:.92rem;color:var(--mut);margin-bottom:12px}.opts{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.shufw{width:100%;text-align:center}.shuf{position:relative;width:140px;height:210px;margin:0 auto}.sc{position:absolute;inset:0;border-radius:12px;background:var(--cb);border:1px solid color-mix(in srgb,var(--ac) 50%,var(--bd));box-shadow:var(--sh);animation:shufL 1.6s ease-in-out both;animation-delay:calc(var(--n)*.06s)}.sc:nth-child(even){animation-name:shufR}
+@keyframes shufL{0%,100%{transform:none}35%{transform:translateX(-80px) rotate(-9deg)}65%{transform:translateX(12px) rotate(2deg)}}
+@keyframes shufR{0%,100%{transform:none}35%{transform:translateX(80px) rotate(9deg)}65%{transform:translateX(-12px) rotate(-2deg)}}
+.hs{cursor:pointer;list-style:none}.hs::-webkit-details-marker{display:none}.hf{margin-top:10px;padding-top:10px;border-top:1px dashed var(--bd);white-space:pre-wrap;font-size:.88rem;line-height:1.7}
 .nxt{margin-top:22px;padding-top:18px;border-top:1px dashed var(--bd);text-align:center}.nxt p{margin:0 0 12px;font-size:.88rem;color:var(--mut)}.nxb{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}.nxb .go{letter-spacing:.2em;padding:12px 26px}.go.alt{background:none;color:var(--ink);border:1.5px solid var(--ac);box-shadow:none}
 .credit{margin-top:10px;font-size:.8rem;letter-spacing:.3em;text-indent:.3em}
 @media(max-width:520px){
@@ -131,7 +136,8 @@ h1{font-weight:500;letter-spacing:.55em;margin:6px 0 0 .55em;font-size:2.05rem}
 <h1>神諭卡</h1>
 <div class="orn">◆</div>
 <div id="home">
-<p class="sub">擇一副牌，靜心凝神再抽</p>
+<div class="daily"><div class="dl" id="dl"></div><div class="dm" id="dm"></div><div class="dn" id="dn"></div><button class="go" id="dgo">抽今日牌</button></div>
+<p class="sub">或擇一副牌，靜心凝神再抽</p>
 <div class="tiles" id="tiles"></div>
 </div>
 <div id="play" class="hide">
@@ -141,7 +147,7 @@ h1{font-weight:500;letter-spacing:.55em;margin:6px 0 0 .55em;font-size:2.05rem}
 <input id="q" aria-label="你的問題（選填）" placeholder="默念或寫下你的問題（選填）" maxlength="100">
 <div class="controls">
 <div class="seg"><button class="on" id="m1">單張指引</button><button id="m3">三張・過去／現在／未來</button></div>
-<label class="toggle-lbl"><input type="checkbox" id="opt-rev" checked><span>包含逆位解讀</span></label>
+<div class="opts"><label class="toggle-lbl"><input type="checkbox" id="opt-rev" checked><span>包含逆位解讀</span></label><label class="toggle-lbl"><input type="checkbox" id="opt-rit" checked><span>洗牌儀式</span></label></div>
 </div>
 <button class="go" id="draw">抽牌</button>
 <div id="row"></div>
@@ -456,12 +462,12 @@ $("back").onclick=function(){$("play").className="hide";$("home").className="";d
 function setMode(m){mode=m;$("m1").className=m===1?"on":"";$("m3").className=m===3?"on":"";clearTable()}
 $("m1").onclick=function(){setMode(1)};
 $("m3").onclick=function(){setMode(3)};
-function draw(){
-var q=$("q").value.trim(),allowRev=$("opt-rev").checked,row=$("row"),rd=$("read");
+function draw(fx){
+var q=$("q").value.trim(),allowRev=$("opt-rev").checked,row=$("row"),rd=$("read"),tag=(fx&&fx.length)?"今日牌・":"";
 clearTable();rd.innerHTML="";
 row.className=mode===3?"t3":"";
 var pos=mode===3?["過去","現在","未來"]:["此刻的指引"];
-var picked=((cur===DK.h&&mode===1)?[H[Math.floor(((new Date().getHours()+1)%24)/2)]]:shuffle(cur.d).slice(0,mode)).map(function(c){return{c:c,rev:allowRev?rnd()<.5:false}});
+var picked=((fx&&fx.length)?fx.map(function(p){return p.c}):(cur===DK.h&&mode===1)?[H[Math.floor(((new Date().getHours()+1)%24)/2)]]:pickCards(mode)).map(function(c,i){return{c:c,rev:(fx&&fx.length)?fx[i].rev:allowRev?rnd()<.5:false}});
 var txt="【"+cur.t+"】\n"+(q?"問：「"+q+"」\n":""),flipped=0,hist=[],revN=0,els=[];
 rd.appendChild(el("h3",null,"牌陣解讀"));
 if(q)rd.appendChild(el("div","qq","問：「"+q+"」"));
@@ -496,7 +502,7 @@ var line=p.rev?c[4]:c[3],r=el("div","r");
 r.appendChild(el("b",null,pos[n]+"・"+c[0]+"（"+dir+"）"+c[2]));
 r.appendChild(el("div","si",c[1]));r.appendChild(el("div",null,line));rd.appendChild(r);
 txt+=pos[n]+"・"+c[0]+"（"+dir+"｜"+c[2]+"）："+line+"\n";
-hist.push(pos[n]+"："+c[0]+"("+dir+")");
+hist.push(pos[n]+"："+c[0]+"("+dir+"｜"+c[2]+")");
 var nx=picked[n+1];
 if(nx){var a=elem(c),b=elem(nx.c);if(a&&b){var t=rel(a,b);rd.appendChild(el("div","rel","五行生剋："+t));txt+="　↳ 五行生剋："+t+"\n"}}
 });
@@ -507,18 +513,46 @@ var s="三張中有 "+revN+" 張逆位"+(revN===0?"，整體順勢。":revN===3?
 if(top)s+="五行以「"+top+"」為主，能量偏向此氣。";
 rd.appendChild(el("div","sum","綜合提示："+s));txt+="綜合提示："+s+"\n"}
 lastDrawText=txt.trim();
-saveHistory({time:new Date().toLocaleString("zh-TW",{hour12:false,month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"}),deck:cur.t,q:q||"（無特定問題，靜心指引）",cards:hist.join(" ／ ")});
+saveHistory({time:new Date().toLocaleString("zh-TW",{hour12:false,month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"}),deck:tag+cur.t,q:q||"（無特定問題，靜心指引）",cards:hist.join(" ／ "),full:lastDrawText});
 var act=el("div","act"),again=el("button",null,"再抽一次"),cp=el("button",null,"複製解讀");
-again.onclick=function(){draw();window.scrollTo({top:$("row").offsetTop-120,behavior:reduce?"auto":"smooth"})};
+again.onclick=function(){$("draw").click();window.scrollTo({top:$("row").offsetTop-120,behavior:reduce?"auto":"smooth"})};
 cp.onclick=function(){copyText(lastDrawText,cp)};
-act.appendChild(again);act.appendChild(cp);rd.appendChild(act);
+if(!(fx&&fx.length))act.appendChild(again);act.appendChild(cp);rd.appendChild(act);
 var nx=el('div','nxt');nx.appendChild(el('p',null,'同一件事不建議反覆抽；想換個角度，可以換一副牌，或換一個問題。'));
 var nb=el('div','nxb'),b1=el('button','go','換一副牌再抽'),b2=el('button','go alt','換個問題再抽');
 b1.onclick=function(){$('back').click()};
 b2.onclick=function(){$('q').value='';clearTable();window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});$('q').focus()};
 nb.appendChild(b1);nb.appendChild(b2);nx.appendChild(nb);rd.appendChild(nx)}
-$("draw").onclick=draw;
-$("q").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();draw()}});
+function pickCards(n){if(!cur.x)return shuffle(cur.d).slice(0,n);var ks=Object.keys(DK).filter(function(k){return!DK[k].x}),out=[];while(out.length<n){var d=DK[ks[Math.floor(rnd()*ks.length)]],c=d.d[Math.floor(rnd()*d.d.length)];if(out.indexOf(c)<0)out.push(c)}return out}
+function ritual(done){
+var row=$("row"),w=el("div","shufw"),b=el("div","shuf");
+clearTable();row.className="";
+for(var i=0;i<5;i++){var s=el("div","sc");s.style.setProperty("--n",i);b.appendChild(s)}
+w.appendChild(b);w.appendChild(el("div","flipnote","靜心，默念你的問題……"));row.appendChild(w);
+$("draw").disabled=true;
+setTimeout(function(){$("draw").disabled=false;if($("play").className==="")done()},1700)}
+$("draw").onclick=function(){if($("opt-rit").checked&&!reduce)ritual(draw);else draw()};
+var TD=[[2,4],[2,19],[3,6],[3,21],[4,5],[4,20],[5,6],[5,21],[6,6],[6,21],[7,7],[7,23],[8,8],[8,23],[9,8],[9,23],[10,8],[10,23],[11,7],[11,22],[12,7],[12,22],[1,6],[1,20]];
+function today(){
+var n=new Date(),y=n.getFullYear(),t0=new Date(y,n.getMonth(),n.getDate()),bi=-1,bd=null;
+for(var i=0;i<24;i++){var d=new Date(y,TD[i][0]-1,TD[i][1]);if(d<=t0&&(!bd||d>bd)){bd=d;bi=i}}
+if(bi<0){bi=21;bd=new Date(y-1,11,22)}
+return{i:bi,k:Math.min(2,Math.floor(Math.round((t0-bd)/864e5)/5)),key:y+"-"+(n.getMonth()+1)+"-"+n.getDate()}}
+function showDaily(){
+var t=today(),u=U[t.i*3+t.k];
+$("dl").textContent=new Date().toLocaleDateString("zh-TW",{year:"numeric",month:"long",day:"numeric",weekday:"long"});
+$("dm").textContent=S[t.i][0]+"・"+["初候","次候","末候"][t.k]+"「"+u[0]+"」";
+$("dn").textContent=u[3]}
+$("dgo").onclick=function(){
+var t=today(),uid=load("oracle_uid");
+if(!uid){store("oracle_uid",Math.random().toString(36).slice(2,10));uid=load("oracle_uid")||""}
+var r=seeded(t.key+uid);r();r();
+var ks=["j","w","p","b","c","h","u","f"],k=ks[Math.floor(r()*ks.length)],d=DK[k],c=d.d[Math.floor(r()*d.d.length)],rv=r()<.5;
+openDeck(k);setMode(1);$("q").value="";
+$("ds").textContent="今日牌・"+$("dl").textContent;
+draw([{c:c,rev:rv}])};
+showDaily();
+$("q").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();$("draw").click()}});
 function copyText(t,b){
 function ok(){b.textContent="✓ 已複製";setTimeout(function(){b.textContent="複製解讀"},2000)}
 function fb(){
@@ -562,10 +596,13 @@ mt.textContent="近期抽牌紀錄";tabs.className="modal-tabs hide";mb.innerHTM
 var l=[];try{l=JSON.parse(load("oracle_history")||"[]")}catch(e){}
 if(!l.length)mb.appendChild(el("p","sub","尚無抽牌紀錄，靜心抽一張牌吧。"));
 else{
+mb.appendChild(el("p","sub","點選任一筆，可展開完整解讀。"));
 l.forEach(function(i){
-var b=el("div","hist-item"),m=el("div","hm");
+var b=el("details","hist-item"),sm=el("summary","hs"),m=el("div","hm");
 m.appendChild(el("span",null,i.deck));m.appendChild(el("span",null,i.time));
-b.appendChild(m);b.appendChild(el("div","hq","問："+i.q));b.appendChild(el("div",null,i.cards));mb.appendChild(b)});
+sm.appendChild(m);sm.appendChild(el("div","hq","問："+i.q));sm.appendChild(el("div",null,i.cards));
+b.appendChild(sm);b.appendChild(el("div","hf",i.full||"（舊紀錄沒有完整內容）"));
+mb.appendChild(b)});
 var w=el("div","act"),cb=el("button",null,"清空紀錄");
 cb.onclick=function(){store("oracle_history",null);$("btn-hist").click()};
 w.appendChild(cb);mb.appendChild(w)}
