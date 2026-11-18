@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>讀心術 - 經典撲克魔術</title>
+  <!-- 載入 Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 載入 Google Fonts 繁體中文襯線與黑體字型 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --felt-dark: #072418;
+      --felt-mid: #0d3b28;
+      --felt-light: #145339;
+      --gold-primary: #d4af37;
+      --gold-light: #f3e5ab;
+      --gold-dark: #996515;
+    }
+
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Noto Sans TC', sans-serif;
+      color: #f8fafc;
+      background-color: var(--felt-dark);
+      /* 精緻賭場／魔術師深綠絨布紋理與暗角光暈 */
+      background-image:
+        radial-gradient(circle at 50% 42%, rgba(26, 107, 74, 0.55) 0%, rgba(11, 51, 35, 0.85) 58%, rgba(4, 20, 14, 0.98) 100%),
+        repeating-radial-gradient(circle at 0 0, transparent 0, rgba(255, 255, 255, 0.015) 2px, transparent 4px);
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .font-serif-tc {
+      font-family: 'Noto Serif TC', serif;
+    }
+
+    /* 金色裝飾邊框與文字光澤 */
+    .gold-text {
+      background: linear-gradient(135deg, #f9e29c 0%, #d4af37 50%, #b8860b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 12px rgba(212, 175, 55, 0.25);
+    }
+
+    .gold-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.7), transparent);
+    }
+
+    /* 撲克牌舞台區：確保5張牌與4張牌在桌面與手機皆能完美並排 */
+    .card-stage {
+      position: relative;
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(6px, 2vw, 24px);
+      padding: 12px clamp(8px, 2.5vw, 24px);
+      perspective: 1400px;
+      min-height: clamp(160px, 34vw, 310px);
+    }
+
+    /* 單張撲克牌外框與位移過渡動畫 */
+    .playing-card {
+      position: relative;
+      /* 響應式寬度：確保 5 張並排時在 360px 螢幕也能完整容納且維持標準撲克比例 (2.5 : 3.5) */
+      width: clamp(60px, 17.5vw, 154px);
+      aspect-ratio: 2.5 / 3.5;
+      transform-style: preserve-3d;
+      transition: transform 0.65s cubic-bezier(0.34, 1.36, 0.64, 1), opacity 0.45s ease, filter 0.45s ease;
+      cursor: default;
+      will-change: transform;
+    }
+
+    /* 滑鼠懸停微幅浮起效果（僅限翻開且非洗牌狀態） */
+    .stage-idle .playing-card:hover {
+      transform: translateY(-10px) scale(1.03);
+      z-index: 20;
+    }
+
+    /* 3D 翻轉內層 */
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.7s cubic-bezier(0.25, 0.85, 0.35, 1.15);
+      border-radius: clamp(6px, 1.2vw, 12px);
+      box-shadow:
+        0 10px 22px -5px rgba(0, 0, 0, 0.65),
+        0 4px 8px -2px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.12);
+    }
+
+    /* 蓋牌狀態：旋轉 180 度顯示牌背 */
+    .playing-card.is-flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    /* 牌面揭曉瞬間的微光與縮放強調 */
+    @keyframes revealPulse {
+      0% {
+        box-shadow: 0 10px 22px -5px rgba(0, 0, 0, 0.65), 0 0 0 0 rgba(212, 175, 55, 0);
+      }
+      50% {
+        box-shadow: 0 16px 32px -4px rgba(0, 0, 0, 0.75), 0 0 24px 4px rgba(243, 229, 171, 0.55);
+      }
+      100% {
+        box-shadow: 0 12px 26px -5px rgba(0, 0, 0, 0.65), 0 0 12px 1px rgba(212, 175, 55, 0.25);
+      }
+    }
+
+    .playing-card.just-revealed .card-inner {
+      animation: revealPulse 0.85s ease-out forwards;
+    }
+
+    /* 牌面與牌背共同樣式 */
+    .card-face {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: clamp(6px, 1.2vw, 12px);
+      overflow: hidden;
+    }
+
+    /* 牌面（象牙白紙質感） */
+    .card-front {
+      background: linear-gradient(165deg, #ffffff 0%, #faf7f0 65%, #f1ebe0 100%);
+      border: 1px solid #d6cfc2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 牌背（經典歐式繁複花紋） */
+    .card-back {
+      transform: rotateY(180deg);
+      background: #ffffff;
+      padding: clamp(3px, 0.6vw, 6px);
+      border: 1px solid #cbd5e1;
+    }
+
+    /* 提示文字淡入淡出過渡 */
+    .prompt-text {
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .prompt-hidden {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+
+    /* 金色魔術按鈕樣式 */
+    .magic-btn {
+      position: relative;
+      background: linear-gradient(180deg, #e8c766 0%, #c99b2c 55%, #a87c19 100%);
+      color: #1a1203;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      border: 1px solid #f7e4a3;
+      box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.5),
+        0 0 16px rgba(212, 175, 55, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.65);
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .magic-btn:hover:not(:disabled) {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow:
+        0 10px 26px rgba(0, 0, 0, 0.6),
+        0 0 24px rgba(232, 199, 102, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.85);
+      filter: brightness(1.05);
+    }
+
+    .magic-btn:active:not(:disabled) {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    .magic-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      filter: grayscale(0.4);
+      box-shadow: none;
+    }
+
+    /* 次要按鈕（再試一次） */
+    .magic-btn-secondary {
+      background: linear-gradient(180deg, #134e37 0%, #0b3323 100%);
+      color: #f3e5ab;
+      border: 1px solid rgba(212, 175, 55, 0.75);
+      box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+
+    .magic-btn-secondary:hover:not(:disabled) {
+      background: linear-gradient(180deg, #186044 0%, #0f422e 100%);
+      border-color: #f3e5ab;
+      box-shadow:
+        0 10px 26px rgba(0, 0, 0, 0.65),
+        0 0 20px rgba(212, 175, 55, 0.35);
+    }
+
+    /* 背景漂浮星塵微粒 */
+    .ambient-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(2px 2px at 18% 25%, rgba(243, 229, 171, 0.22), transparent),
+        radial-gradient(2px 2px at 82% 30%, rgba(243, 229, 171, 0.18), transparent),
+        radial-gradient(1.5px 1.5px at 30% 78%, rgba(243, 229, 171, 0.2), transparent),
+        radial-gradient(2px 2px at 74% 82%, rgba(243, 229, 171, 0.16), transparent);
+      z-index: 0;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-amber-400 selection:text-emerald-950">
+  <div class="ambient-glow"></div>
+
+  <!-- 頂部標題區 -->
+  <header class="relative z-10 pt-6 sm:pt-9 pb-2 px-4 text-center">
+    <div class="inline-flex items-center gap-2.5 px-4 py-1 rounded-full border border-amber-400/30 bg-black/25 backdrop-blur-sm mb-2.5">
+      <span class="text-amber-300 text-xs sm:text-sm tracking-widest">♠ ♥ ♦ ♣</span>
+      <span class="text-amber-200/80 text-xs tracking-[0.25em] uppercase">Mind Reading Illusion</span>
+    </div>
+    <h1 class="font-serif-tc text-3xl sm:text-5xl font-black tracking-[0.18em] gold-text">
+      讀心術
+    </h1>
+    <p class="mt-2 text-xs sm:text-sm text-amber-200/80 tracking-[0.2em] text-center font-medium">
+      小路_Josephredu 製作
+    </p>
+    <div class="gold-divider w-48 sm:w-64 mx-auto mt-3"></div>
+  </header>
+
+  <!-- 中央魔術舞台區 -->
+  <main class="relative z-10 flex-1 flex flex-col items-center justify-center w-full px-2 sm:px-6 py-4">
+    <!-- 撲克牌並排展示區 -->
+    <div id="cardStage" class="card-stage stage-idle" aria-live="polite">
+      <!-- 卡片將由 JavaScript 動態渲染 -->
+    </div>
+
+    <!-- 引導提示文字區 -->
+    <div class="mt-6 sm:mt-9 min-h-[3.5rem] flex flex-col items-center justify-center px-4 text-center">
+      <p id="promptText" class="prompt-text font-serif-tc text-xl sm:text-3xl font-bold tracking-wider text-amber-100 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+        心中默選一張
+      </p>
+      <p id="subPromptText" class="prompt-text text-xs sm:text-sm text-emerald-200/75 mt-1.5 tracking-wide">
+        請在腦海中牢記這張牌的花色與點數，不要點擊或說出來
+      </p>
+    </div>
+
+    <!-- 互動控制按鈕區 -->
+    <div class="mt-5 sm:mt-7 flex items-center justify-center gap-4">
+      <button
+        id="actionBtn"
+        type="button"
+        class="magic-btn px-8 sm:px-11 py-3.5 sm:py-4 rounded-full text-base sm:text-lg cursor-pointer"
+      >
+        開始讀心
+      </button>
+    </div>
+  </main>
+
+  <!-- 底部資訊 -->
+  <footer class="relative z-10 pb-5 pt-2 px-4 text-center text-xs text-emerald-200/45 tracking-widest">
+    <span>經典十二宮廷牌心靈感應 · 專注凝視你的選擇</span>
+  </footer>
+
+  <script>
+    /**
+     * 經典撲克牌「讀心術」核心邏輯與傳統宮廷牌 SVG 繪製引擎
+     */
+    (function () {
+      // 1. 定義 12 張傳統宮廷牌（4 種花色 × J、Q、K）
+      const SUITS = [
+        { id: 'spades', symbol: '♠', name: '黑桃', color: '#14171f', isRed: false },
+        { id: 'hearts', symbol: '♥', name: '紅心', color: '#c81e2b', isRed: true },
+        { id: 'diamonds', symbol: '♦', name: '方塊', color: '#c81e2b', isRed: true },
+        { id: 'clubs', symbol: '♣', name: '梅花', color: '#14171f', isRed: false }
+      ];
+
+      const RANKS = [
+        { id: 'J', label: 'J', title: '騎士', crownType: 'jack' },
+        { id: 'Q', label: 'Q', title: '王后', crownType: 'queen' },
+        { id: 'K', label: 'K', title: '國王', crownType: 'king' }
+      ];
+
+      // 建立完整 12 張牌庫
+      const FULL_DECK = [];
+      SUITS.forEach((suit) => {
+        RANKS.forEach((rank) => {
+          FULL_DECK.push({
+            uid: `${suit.id}-${rank.id}`,
+            suit: suit.id,
+            symbol: suit.symbol,
+            suitName: suit.name,
+            color: suit.color,
+            isRed: suit.isRed,
+            rank: rank.id,
+            rankTitle: rank.title,
+            crownType: rank.crownType
+          });
+        });
+      });
+
+      // 狀態管理
+      let currentShownCards = []; // 第一階段顯示的 5 張牌
+      let isAnimating = false;
+      let gamePhase = 'pick'; // 'pick' | 'shuffling' | 'reveal'
+
+      // DOM 元素
+      const cardStage = document.getElementById('cardStage');
+      const promptText = document.getElementById('promptText');
+      const subPromptText = document.getElementById('subPromptText');
+      const actionBtn = document.getElementById('actionBtn');
+
+      /**
+       * Fisher-Yates 洗牌演算法，回傳新陣列
+       */
+      function shuffleArray(array) {
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      /**
+       * 延遲 Promise 工具
+       */
+      function wait(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      /**
+       * 更新提示文字（帶有平滑淡入淡出）
+       */
+      async function setPrompt(mainText, subText = '') {
+        promptText.classList.add('prompt-hidden');
+        subPromptText.classList.add('prompt-hidden');
+        await wait(220);
+        promptText.textContent = mainText;
+        subPromptText.textContent = subText;
+        promptText.classList.remove('prompt-hidden');
+        subPromptText.classList.remove('prompt-hidden');
+      }
+
+      /**
+       * 繪製傳統法式／英式風格宮廷牌面 SVG
+       * 包含角落點數、花色、雙向對稱古典人物紋飾（紅、藍、金、黑傳統配色）
+       */
+      function generateCourtCardSVG(card) {
+        const primary = card.color;
+        const royalBlue = '#1d4ed8';
+        const royalRed = '#c81e2b';
+        const royalGold = '#eab308';
+        const skinTone = '#fde68a';
+
+        // 根據 J / Q / K 繪製上半身古典宮廷人物圖騰（下半身透過 SVG <use> 旋轉 180 度達成傳統撲克雙向對稱）
+        let figureArt = '';
+
+        if (card.crownType === 'king') {
+          // 國王 K：皇冠、鬍鬚、寶劍與皇家幾何長袍
+          figureArt = `
+            <!-- 皇冠 -->
+            <path d="M76 46 L82 32 L92 40 L100 28 L108 40 L118 32 L124 46 Z" fill="${royalGold}" stroke="#111827" stroke-width="2"/>
+            <rect x="76" y="46" width="48" height="6" rx="1" fill="${royalRed}" stroke="#111827" stroke-width="1.8"/>
+            <!-- 捲髮與臉部 -->
+            <path d="M74 52 C68 62, 70 78, 78 82 L122 82 C130 78, 132 62, 126 52 Z" fill="#cbd5e1" stroke="#111827" stroke-width="2"/>
+            <rect x="82" y="52" width="36" height="28" rx="10" fill="${skinTone}" stroke="#111827" stroke-width="2"/>
+            <!-- 五官與八字鬍 -->
+            <circle cx="92" cy="63" r="2.2" fill="#111827"/>
+            <circle cx="108" cy="63" r="2.2" fill="#111827"/>
+            <path d="M90 73 Q100 69 110 73" stroke="#111827" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+            <path d="M88 77 Q100 84 112 77" stroke="#64748b" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <!-- 皇家華麗長袍（紅藍金交錯幾何紋飾） -->
+            <path d="M56 140 L64 88 C74 82, 126 82, 136 88 L144 140 Z" fill="${royalRed}" stroke="#111827" stroke-width="2.2"/>
+            <path d="M72 86 L100 138 L128 86 Z" fill="${royalBlue}" stroke="#111827" stroke-width="2"/>
+            <path d="M85 86 L100 116 L115 86 Z" fill="${royalGold}" stroke="#111827" stroke-width="1.8"/>
+            <!-- 裝飾菱格與肩章 -->
+            <circle cx="68" cy="96" r="7" fill="${royalGold}" stroke="#111827" stroke-width="1.8"/>
+            <circle cx="132" cy="96" r="7" fill="${royalGold}" stroke="#111827" stroke-width="1.8"/>
+            <!-- 寶劍 -->
+            <path d="M137 128 L137 58 L141 50 L145 58 L145 128 Z" fill="#e2e8f0" stroke="#111827" stroke-width="1.8"/>
+            <rect x="131" y="106" width="20" height="4" rx="1" fill="${royalGold}" stroke="#111827" stroke-width="1.5"/>
+          `;
+        } else if (card.crownType === 'queen') {
+          // 王后 Q：珠冠、頭紗、玫瑰花與宮廷禮服
+          figureArt = `
+            <!-- 頭紗與皇冠 -->
+            <path d="M72 52 C64 70, 64 98, 72 115 L128 115 C136 98, 136 70, 128 52 Z" fill="${royalBlue}" stroke="#111827" stroke-width="2"/>
+            <path d="M79 47 L85 34 L94 42 L100 31 L106 42 L115 34 L121 47 Z" fill="${royalGold}" stroke="#111827" stroke-width="2"/>
+            <rect x="79" y="47" width="42" height="5" fill="${royalRed}" stroke="#111827" stroke-width="1.6"/>
+            <!-- 臉龐 -->
+            <rect x="84" y="52" width="32" height="28" rx="12" fill="${skinTone}" stroke="#111827" stroke-width="2"/>
+            <circle cx="93" cy="64" r="2" fill="#111827"/>
+            <circle cx="107" cy="64" r="2" fill="#111827"/>
+            <path d="M96 73 Q100 76 104 73" stroke="${royalRed}" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <!-- 宮廷禮服 -->
+            <path d="M58 140 L68 88 C80 82, 120 82, 132 88 L142 140 Z" fill="${royalGold}" stroke="#111827" stroke-width="2.2"/>
+            <path d="M76 86 L100 138 L124 86 Z" fill="${royalRed}" stroke="#111827" stroke-width="2"/>
+            <circle cx="100" cy="104" r="6" fill="${royalBlue}" stroke="${royalGold}" stroke-width="2"/>
+            <!-- 手持玫瑰花 -->
+            <line x1="65" y1="134" x2="65" y2="96" stroke="#15803d" stroke-width="3"/>
+            <circle cx="65" cy="92" r="8" fill="${royalRed}" stroke="#111827" stroke-width="1.8"/>
+            <circle cx="65" cy="92" r="3" fill="${royalGold}"/>
+          `;
+        } else {
+          // 騎士 J：侍從羽帽、捲髮、長戟與幾何戰袍
+          figureArt = `
+            <!-- 騎士平頂羽帽 -->
+            <path d="M73 48 L80 35 L120 35 L127 48 Z" fill="${royalRed}" stroke="#111827" stroke-width="2"/>
+            <rect x="70" y="48" width="60" height="5" rx="2" fill="${royalGold}" stroke="#111827" stroke-width="1.8"/>
+            <!-- 金色捲髮與側臉 -->
+            <path d="M74 53 C68 64, 70 78, 78 82 L122 82 C130 78, 132 64, 126 53 Z" fill="${royalGold}" stroke="#111827" stroke-width="2"/>
+            <rect x="83" y="53" width="34" height="27" rx="9" fill="${skinTone}" stroke="#111827" stroke-width="2"/>
+            <circle cx="93" cy="64" r="2.1" fill="#111827"/>
+            <circle cx="107" cy="64" r="2.1" fill="#111827"/>
+            <path d="M95 73 L105 73" stroke="#111827" stroke-width="2" stroke-linecap="round"/>
+            <!-- 騎士幾何戰袍 -->
+            <path d="M58 140 L66 88 C78 82, 122 82, 134 88 L142 140 Z" fill="${royalBlue}" stroke="#111827" stroke-width="2.2"/>
+            <rect x="84" y="85" width="32" height="55" fill="${royalRed}" stroke="#111827" stroke-width="2"/>
+            <path d="M84 95 L116 115 M116 95 L84 115 M84 115 L116 135 M116 115 L84 135" stroke="${royalGold}" stroke-width="3"/>
+            <!-- 黃金長戟 -->
+            <line x1="136" y1="138" x2="136" y2="54" stroke="${royalGold}" stroke-width="4" stroke-linecap="round"/>
+            <path d="M136 44 L130 60 L142 60 Z" fill="#cbd5e1" stroke="#111827" stroke-width="1.8"/>
+          `;
+        }
+
+        return `
+          <svg viewBox="0 0 200 280" class="w-full h-full block" xmlns="http://www.w3.org/2000/svg">
+            <!-- 外框細金線 -->
+            <rect x="6" y="6" width="188" height="268" rx="10" fill="none" stroke="#e5dccb" stroke-width="1.5"/>
+
+            <!-- 左上角點數與花色 -->
+            <g fill="${primary}">
+              <text x="23" y="38" font-family="'Noto Serif TC', Georgia, serif" font-size="28" font-weight="900" text-anchor="middle">${card.rank}</text>
+              <text x="23" y="63" font-size="24" text-anchor="middle">${card.symbol}</text>
+            </g>
+
+            <!-- 右下角倒置點數與花色 -->
+            <g fill="${primary}" transform="rotate(180 177 232)">
+              <text x="177" y="220" font-family="'Noto Serif TC', Georgia, serif" font-size="28" font-weight="900" text-anchor="middle">${card.rank}</text>
+              <text x="177" y="245" font-size="24" text-anchor="middle">${card.symbol}</text>
+            </g>
+
+            <!-- 中央古典宮廷人物畫框 -->
+            <g>
+              <defs>
+                <clipPath id="frame-${card.uid}">
+                  <rect x="42" y="24" width="116" height="232" rx="4"/>
+                </clipPath>
+                <g id="half-${card.uid}">
+                  ${figureArt}
+                </g>
+              </defs>
+
+              <!-- 畫框底色 -->
+              <rect x="42" y="24" width="116" height="232" rx="4" fill="#fffdf9" stroke="#1e3a8a" stroke-width="2.2"/>
+
+              <!-- 雙向對稱人物內容 -->
+              <g clip-path="url(#frame-${card.uid})">
+                <use href="#half-${card.uid}" />
+                <use href="#half-${card.uid}" transform="rotate(180 100 140)" />
+                <!-- 中央腰帶分隔線 -->
+                <rect x="42" y="136" width="116" height="8" fill="${royalGold}" stroke="#111827" stroke-width="1.8"/>
+                <line x1="42" y1="140" x2="158" y2="140" stroke="${royalRed}" stroke-width="2" stroke-dasharray="6 4"/>
+              </g>
+
+              <!-- 畫框內側大花色浮水印 -->
+              <text x="58" y="54" font-size="24" fill="${primary}" text-anchor="middle">${card.symbol}</text>
+              <text x="142" y="242" font-size="24" fill="${primary}" text-anchor="middle" transform="rotate(180 142 234)">${card.symbol}</text>
+            </g>
+          </svg>
+        `;
+      }
+
+      /**
+       * 繪製經典歐式繁複幾何牌背 SVG
+       */
+      function generateCardBackSVG() {
+        return `
+          <svg viewBox="0 0 200 280" class="w-full h-full block rounded-[6px]" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="latticePattern" width="16" height="16" patternUnits="userSpaceOnUse">
+                <rect width="16" height="16" fill="#7f1d1d"/>
+                <path d="M8 0 L16 8 L8 16 L0 8 Z" fill="none" stroke="#d4af37" stroke-width="1.1" stroke-opacity="0.65"/>
+                <circle cx="8" cy="8" r="2" fill="#f3e5ab" fill-opacity="0.7"/>
+              </pattern>
+            </defs>
+            <!-- 深紅底色與金色雙層外框 -->
+            <rect x="2" y="2" width="196" height="276" rx="8" fill="#6b141a" stroke="#b8860b" stroke-width="3"/>
+            <rect x="10" y="10" width="180" height="260" rx="5" fill="url(#latticePattern)" stroke="#f3e5ab" stroke-width="1.5"/>
+            <!-- 中央皇家徽章圖騰 -->
+            <g transform="translate(100, 140)">
+              <circle r="38" fill="#581116" stroke="#d4af37" stroke-width="2.5"/>
+              <circle r="31" fill="none" stroke="#f3e5ab" stroke-width="1" stroke-dasharray="3 3"/>
+              <path d="M0 -22 L16 0 L0 22 L-16 0 Z" fill="#991b1b" stroke="#f3e5ab" stroke-width="1.8"/>
+              <circle r="6" fill="#d4af37"/>
+            </g>
+          </svg>
+        `;
+      }
+
+      /**
+       * 建立單張撲克牌 DOM 節點
+       */
+      function createCardElement(card, startFaceDown = false) {
+        const wrapper = document.createElement('div');
+        wrapper.className = `playing-card${startFaceDown ? ' is-flipped' : ''}`;
+        wrapper.dataset.uid = card.uid;
+        wrapper.setAttribute('aria-label', `${card.suitName}${card.rank}`);
+
+        wrapper.innerHTML = `
+          <div class="card-inner">
+            <div class="card-face card-front">
+              ${generateCourtCardSVG(card)}
+            </div>
+            <div class="card-face card-back">
+              ${generateCardBackSVG()}
+            </div>
+          </div>
+        `;
+        return wrapper;
+      }
+
+      /**
+       * 步驟 1：初始化並展示隨機抽取的 5 張宮廷牌
+       */
+      async function initStepOne(isReset = false) {
+        isAnimating = true;
+        gamePhase = 'pick';
+        actionBtn.disabled = true;
+
+        if (isReset) {
+          // 若為重新開始，先將現有牌淡出
+          const oldCards = cardStage.querySelectorAll('.playing-card');
+          oldCards.forEach((el) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(16px) scale(0.92)';
+          });
+          await wait(320);
+        }
+
+        // 從 12 張牌中隨機抽出不重複的 5 張
+        const shuffled = shuffleArray(FULL_DECK);
+        currentShownCards = shuffled.slice(0, 5);
+
+        // 清空並渲染 5 張新牌（先蓋牌再依序快速翻開，增加儀式感）
+        cardStage.innerHTML = '';
+        cardStage.classList.add('stage-idle');
+
+        const cardElements = currentShownCards.map((card) => {
+          const el = createCardElement(card, true);
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(14px)';
+          cardStage.appendChild(el);
+          return el;
+        });
+
+        // 強制重繪後進場並翻開
+        requestAnimationFrame(() => {
+          cardElements.forEach((el, idx) => {
+            setTimeout(() => {
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0)';
+              el.classList.remove('is-flipped');
+            }, idx * 85);
+          });
+        });
+
+        await setPrompt(
+          '心中默選一張',
+          '請在腦海中牢記這張牌的花色與點數，不要點擊或說出來'
+        );
+
+        // 重設按鈕為「開始讀心」
+        actionBtn.textContent = '開始讀心';
+        actionBtn.className = 'magic-btn px-8 sm:px-11 py-3.5 sm:py-4 rounded-full text-base sm:text-lg cursor-pointer';
+
+        await wait(520);
+        actionBtn.disabled = false;
+        isAnimating = false;
+      }
+
+      /**
+       * 步驟 2 & 3：蓋牌 -> 洗牌動畫 -> 抽出完全不同的 4 張牌 -> 一張一張並排翻開
+       */
+      async function runMindReadingSequence() {
+        if (isAnimating) return;
+        isAnimating = true;
+        gamePhase = 'shuffling';
+        actionBtn.disabled = true;
+        cardStage.classList.remove('stage-idle');
+
+        const cardEls = Array.from(cardStage.querySelectorAll('.playing-card'));
+
+        // 1. 更新提示文字
+        setPrompt('正在讀取你的心思...', '請在心中持續默念你選的那張牌');
+
+        // 2. 五張牌依序快速蓋上（翻轉至牌背）
+        cardEls.forEach((el, idx) => {
+          setTimeout(() => {
+            el.classList.add('is-flipped');
+          }, idx * 75);
+        });
+        await wait(750);
+
+        // 3. 聚集至中央並執行多段式交錯洗牌動畫
+        const stageRect = cardStage.getBoundingClientRect();
+        const stageCenterX = stageRect.left + stageRect.width / 2;
+
+        // 計算每張牌移動到正中央的偏移量
+        const offsetsToCenter = cardEls.map((el) => {
+          const rect = el.getBoundingClientRect();
+          const cardCenterX = rect.left + rect.width / 2;
+          return stageCenterX - cardCenterX;
+        });
+
+        // 收攏成一疊
+        cardEls.forEach((el, idx) => {
+          el.style.zIndex = String(10 + idx);
+          el.style.transform = `translateX(${offsetsToCenter[idx]}px) rotate(${(idx - 2) * 2.5}deg)`;
+        });
+        await wait(520);
+
+        // 洗牌交錯動作（左右抽換切牌 3 回合）
+        const shufflePasses = 3;
+        for (let pass = 0; pass < shufflePasses; pass++) {
+          cardEls.forEach((el, idx) => {
+            const direction = (idx + pass) % 2 === 0 ? -1 : 1;
+            const spread = direction * (36 + (idx % 3) * 14);
+            const tilt = direction * (6 + idx * 1.5);
+            el.style.zIndex = String(((idx + pass) % 5) + 10);
+            el.style.transform = `translateX(${offsetsToCenter[idx] + spread}px) translateY(${direction * -8}px) rotate(${tilt}deg)`;
+          });
+          await wait(240);
+
+          // 收回中央疊合
+          cardEls.forEach((el, idx) => {
+            el.style.transform = `translateX(${offsetsToCenter[idx]}px) rotate(${(pass % 2 === 0 ? 1 : -1) * (idx - 2) * 2}deg)`;
+          });
+          await wait(220);
+        }
+
+        // 4. 魔術核心機制：從「原本 5 張以外的剩餘 7 張牌」中隨機選出 4 張
+        const shownUidSet = new Set(currentShownCards.map((c) => c.uid));
+        const remainingSevenCards = FULL_DECK.filter((c) => !shownUidSet.has(c.uid));
+        const fourNewCards = shuffleArray(remainingSevenCards).slice(0, 4);
+
+        // 5. 替換舞台上的牌組為 4 張蓋著的新牌（先集中於中央再並排展開）
+        cardStage.innerHTML = '';
+        const newCardEls = fourNewCards.map((card, idx) => {
+          const el = createCardElement(card, true);
+          // 初始從中央微幅展開的視覺效果
+          const initialOffset = (1.5 - idx) * 28;
+          el.style.transform = `translateX(${initialOffset}px) scale(0.96)`;
+          el.style.zIndex = String(10 + idx);
+          cardStage.appendChild(el);
+          return el;
+        });
+
+        // 強制重繪後，4 張牌整齊並排展開
+        await wait(60);
+        newCardEls.forEach((el) => {
+          el.style.transform = 'translateX(0px) scale(1)';
+        });
+        await wait(580);
+
+        // 6. 一張一張並排翻開
+        await setPrompt('感應完成，請看這四張牌……', '');
+        await wait(300);
+
+        for (let i = 0; i < newCardEls.length; i++) {
+          const el = newCardEls[i];
+          el.classList.remove('is-flipped');
+          el.classList.add('just-revealed');
+          await wait(480);
+        }
+
+        // 7. 揭曉最終魔術台詞與「再試一次」按鈕
+        await wait(200);
+        await setPrompt(
+          '您所默選的一張是不是不見了？',
+          '心靈感應已將你的牌從牌陣中抽離'
+        );
+
+        cardStage.classList.add('stage-idle');
+        actionBtn.textContent = '再試一次';
+        actionBtn.className = 'magic-btn magic-btn-secondary px-8 sm:px-11 py-3.5 sm:py-4 rounded-full text-base sm:text-lg cursor-pointer';
+        actionBtn.disabled = false;
+        gamePhase = 'reveal';
+        isAnimating = false;
+      }
+
+      // 綁定按鈕點擊事件
+      actionBtn.addEventListener('click', () => {
+        if (isAnimating) return;
+        if (gamePhase === 'pick') {
+          runMindReadingSequence();
+        } else if (gamePhase === 'reveal') {
+          initStepOne(true);
+        }
+      });
+
+      // 頁面載入後啟動第一步
+      window.addEventListener('DOMContentLoaded', () => {
+        initStepOne(false);
+      });
+    })();
+  </script>
+</body>
+</html>
