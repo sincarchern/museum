@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#151126"><title>星夜塔羅｜完整占卜系統</title>
+<style>
+:root{--bg:#151126;--panel:#211a35;--panel2:#19142a;--gold:#d9bd7b;--cream:#f5ecd9;--muted:#bdb1cc;--line:#514466;--lav:#b9a2d4}
+*{box-sizing:border-box}body{margin:0;color:var(--cream);font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;background:radial-gradient(ellipse at 50% -5%,#49345f 0,#211a35 35%,#151126 75%);min-height:100vh}
+header{text-align:center;padding:34px 16px 20px}.eyebrow{font-size:11px;letter-spacing:.35em;color:var(--gold)}h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:clamp(30px,6vw,46px);font-weight:500;letter-spacing:.18em;margin:12px 0 6px}.subtitle{color:var(--muted);font-size:14px;letter-spacing:.08em}.stars{color:var(--gold);letter-spacing:.7em;margin-top:15px}
+main{width:min(1080px,93%);margin:auto}.panel{background:linear-gradient(145deg,#2b2242ed,#1c172ef5);border:1px solid var(--line);border-radius:20px;padding:clamp(17px,3vw,28px);margin:16px 0 22px;box-shadow:0 18px 55px #08061155}
+h2{font-size:18px;color:var(--gold);font-weight:500;letter-spacing:.1em;margin:0 0 15px}h3{font-weight:500}p{line-height:1.85}.muted{color:var(--muted);font-size:13px;line-height:1.8}
+textarea,input,select{font:inherit;color:var(--cream);background:#171329;border:1px solid #655477;border-radius:11px;padding:12px;outline:none}textarea{width:100%;min-height:76px;resize:vertical}input{width:100%}select:focus,textarea:focus,input:focus{border-color:var(--gold)}
+label{display:block;color:#d9cde5;font-size:13px;margin:0 0 7px}.field{min-width:0;flex:1}.fields{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}.fields .field{flex:1 1 190px}
+button{font:inherit;cursor:pointer;border-radius:999px;padding:11px 19px;letter-spacing:.06em;transition:.2s}.primary{border:0;background:linear-gradient(110deg,#e0c98f,#b78e52);color:#241a2d;font-weight:700}.secondary{background:transparent;border:1px solid #77668c;color:var(--cream)}button:hover{transform:translateY(-1px);filter:brightness(1.08)}button:disabled{opacity:.4;cursor:not-allowed;transform:none}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.tab{border:1px solid #665579;background:#19142a;color:#d8cce4;padding:9px 14px;font-size:13px}.tab.active{background:#d9bd7b;color:#21172c;border-color:#d9bd7b;font-weight:700}
+.note{border-left:3px solid var(--gold);padding:10px 13px;background:#17132980;color:#cfc2dc;font-size:12px;line-height:1.8;margin-top:15px}
+.hidden{display:none!important}.reading-head{text-align:center}.reading-head .questionline{font-size:13px;color:var(--muted)}
+.cards{display:flex;justify-content:center;gap:clamp(9px,2vw,20px);flex-wrap:wrap;margin:22px auto}.slot{width:clamp(92px,17%,160px);min-width:85px;text-align:center}.slot.wide{width:clamp(75px,12%,112px)}.slot-label{font-size:12px;color:var(--gold);letter-spacing:.08em;min-height:24px;margin-bottom:8px}
+.tarot{aspect-ratio:2/3;width:100%;perspective:900px;cursor:pointer}.inner{height:100%;width:100%;position:relative;transform-style:preserve-3d;transition:transform .75s cubic-bezier(.2,.7,.2,1)}.tarot.flipped .inner{transform:rotateY(180deg)}.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:11px;border:2px solid #c7a66c;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.back{background:repeating-linear-gradient(45deg,#302343 0 7px,#3a2a4e 7px 14px);box-shadow:inset 0 0 0 5px #21182f,inset 0 0 0 7px #b9955b}.back:before{content:"✧";font-size:50px;color:var(--gold);text-shadow:0 0 22px #e8cf8b}.back:after{content:"✦  ✧  ✦";position:absolute;bottom:13px;color:var(--gold);font-size:10px;letter-spacing:.2em}
+.front{transform:rotateY(180deg);background:radial-gradient(circle at 50% 38%,#fff8e7,#dfcda8);color:#382641;padding:7px;text-align:center}.front:before{content:"";position:absolute;inset:5px;border:1px solid #a88756;border-radius:6px}.front>*{position:relative}.front .roman{font:11px Georgia,serif;letter-spacing:.15em}.front .symbol{font-size:clamp(29px,5vw,54px);margin:5px}.front .cardname{font-family:"Noto Serif TC",serif;font-size:clamp(11px,1.7vw,16px);font-weight:700}.front .ornament{font-size:9px;letter-spacing:.15em;color:#8c6740;margin-top:7px}.reversed .front .symbol{transform:rotate(180deg)}
+.interpretations{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:11px}.meaning{background:#1713298c;border:1px solid var(--line);border-radius:13px;padding:14px;text-align:left}.meaning h3{color:var(--gold);font-size:15px;margin:0 0 7px}.status{font-size:11px;color:#c8b8dc;margin-bottom:8px}.meaning p{font-size:13px;margin:0;color:#e8dfef;line-height:1.8}
+.summary{margin-top:16px;padding:17px;border-left:3px solid var(--gold);background:#17132980;border-radius:0 12px 12px 0}.summary h3{color:var(--gold);margin:0 0 8px;font-size:16px}.summary p{font-size:14px;margin:0}
+.cross-layout{display:grid;grid-template-columns:repeat(5,minmax(55px,1fr));gap:7px;max-width:680px;margin:20px auto}.cross-cell{min-height:95px;display:flex;align-items:center;justify-content:center}.cross-cell .slot{width:100%;min-width:0}.cross-cell.empty{visibility:hidden}.cross-cell .slot-label{font-size:10px;min-height:30px}
+.history-item{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #4c405e}.history-item:last-child{border:0}.history-item strong{font-size:13px;color:#eadbbd}.history-item small{display:block;color:var(--muted);margin-top:4px}.history-item button{padding:6px 11px;font-size:12px}
+footer{text-align:center;color:#92869f;font-size:12px;line-height:1.9;padding:14px 20px 35px}
+@media(max-width:560px){header{padding-top:26px}.cross-layout{gap:3px}.cross-cell{min-height:72px}.cross-cell .slot-label{font-size:9px}.cross-cell .front .symbol{font-size:26px}.slot.wide{width:clamp(68px,17%,92px)}.actions>*{flex:1}.panel{border-radius:16px}}
+</style></head>
+<body>
+<header><div class="eyebrow">THE LANGUAGE OF SYMBOLS</div><h1>星夜塔羅</h1><div class="subtitle">在牌與心之間，聽見此刻的自己</div><div class="stars">✧　☾　✧</div></header>
+<main>
+<section class="panel">
+<h2>✦ 一、設定你的占卜</h2>
+<div class="fields"><div class="field"><label for="topic">占卜主題</label><select id="topic"><option value="general">整體方向</option><option value="love">愛情與關係</option><option value="career">工作與事業</option><option value="money">財務與資源</option><option value="people">人際與合作</option><option value="growth">自我成長</option></select></div>
+<div class="field"><label for="spread">選擇牌陣</label><select id="spread"><option value="1">單張指引｜當下提醒</option><option value="3" selected>三張牌｜過去・現在・未來</option><option value="5">五張牌｜關係／情勢分析</option><option value="10">凱爾特十字｜深入探索</option></select></div></div>
+<label for="question">你的問題（選填）</label><textarea id="question" placeholder="例如：面對這段關係，我現在適合採取什麼態度？"></textarea>
+<div class="actions"><button class="primary" id="start">洗牌・開始占卜</button><button class="secondary" id="clear">清除問題</button></div>
+<div class="note">占卜前，先安靜呼吸幾次。把問題聚焦在自己能理解、能選擇、能採取行動的事情上。抽牌後點擊牌背翻牌。</div>
+</section>
+<section class="panel hidden" id="reading">
+<div class="reading-head"><h2 id="readingTitle">你的牌面訊息</h2><div class="questionline" id="questionEcho"></div></div>
+<div id="cardArea"></div><div class="interpretations" id="meanings"></div><div class="summary" id="summary"></div>
+<div class="actions" style="justify-content:center"><button class="primary" id="save">保存本次占卜</button><button class="secondary" id="again">重新抽牌</button><button class="secondary" id="print">列印／存成 PDF</button></div>
+</section>
+<section class="panel" id="historyPanel"><h2>✦ 二、占卜紀錄</h2><p class="muted">紀錄只保存在目前這台裝置的瀏覽器中，不會上傳伺服器。</p><div id="historyList" class="muted">目前還沒有占卜紀錄。</div><div class="actions"><button class="secondary" id="clearHistory">清除全部紀錄</button></div></section>
+<section class="panel"><h2>✦ 使用說明</h2><p class="muted">本系統以 78 張偉特系塔羅牌架構進行隨機抽牌，包含正位與逆位。牌面以原創 CSS 裝飾圖樣呈現，並非傳統塔羅牌原版插畫。解讀內容是依牌義與牌陣位置組合的參考文字，並非連線式 AI 即時生成。</p></section>
+</main><footer>✧ 星夜塔羅 ✧<br>塔羅是一面映照內心的鏡子，不是不可更改的命運判決。<br>請勿以占卜取代醫療、法律、投資或其他專業意見。</footer>
+<div style="text-align:center;color:#92869f;font-size:12px;padding:0 20px 25px;">小路_Josephredu</div>
+<script>
+const majors=[
+["愚者","0","🧳","新的開始・自由・勇氣","允許自己踏出新的一步，保持好奇，也別忽略現實風險。"],
+["魔術師","I","🪄","行動力・資源・創造","你手上已有可運用的條件。把想法化為具體行動，主動創造改變。"],
+["女祭司","II","🌙","直覺・沉靜・未知","暫時不必急著得到答案。安靜觀察，留意內心真正知道的事。"],
+["皇后","III","🌿","滋養・豐盛・關懷","給關係與計畫多一點耐心，也記得善待自己。"],
+["皇帝","IV","👑","秩序・責任・界線","建立清楚的規則與界線。穩定不是控制，而是知道自己能承擔什麼。"],
+["教皇","V","📜","傳承・價值・請益","回到核心價值，向值得信任的人請教；傳統可參考，不必盲從。"],
+["戀人","VI","♡","選擇・連結・真誠","重要的不是迎合，而是誠實面對自己的選擇與關係中的價值觀。"],
+["戰車","VII","🏇","意志・前進・自律","方向確定後，集中力量前進。掌握節奏，不讓情緒牽著走。"],
+["力量","VIII","🦁","溫柔・勇氣・內在力量","真正的力量不必強硬。以耐心和自我理解，慢慢安頓局面。"],
+["隱者","IX","🏮","獨處・尋找答案・沉澱","給自己一些獨處空間。答案可能不在外界，而在更深的自我理解裡。"],
+["命運之輪","X","☸","轉變・循環・時機","局勢正在變動。順勢調整，能掌握的先做好，不能掌握的保持彈性。"],
+["正義","XI","⚖","公平・因果・理性","回到事實與原則，衡量每個選擇的責任，讓決定經得起檢視。"],
+["倒吊人","XII","🙃","換位思考・等待・放下","暫停不等於停滯。試著換個角度，放下無法控制的部分。"],
+["死神","XIII","🦋","結束・轉化・更新","某個階段需要告一段落。結束不一定是失去，也可能是新生的入口。"],
+["節制","XIV","🏺","平衡・調和・耐心","不必走極端。讓不同需求慢慢找到平衡，循序漸進更有力量。"],
+["惡魔","XV","⛓","執著・誘惑・束縛","看清讓自己難以抽身的習慣或依賴。覺察之後，才有重新選擇的自由。"],
+["高塔","XVI","⚡","震盪・真相・重整","原有結構可能需要調整。先穩住自己，再面對問題、重建基礎。"],
+["星星","XVII","⭐","希望・療癒・信任","即使進展緩慢，仍有值得期待的方向。給自己時間恢復與重新相信。"],
+["月亮","XVIII","🌕","不安・想像・迷霧","資訊尚未清楚時，避免急著下結論。分辨直覺、擔憂與客觀事實。"],
+["太陽","XIX","☀","明朗・活力・喜悅","讓事情回到簡單與坦率。看見已經擁有的成果，也分享你的光亮。"],
+["審判","XX","🔔","醒悟・回顧・召喚","回顧過去的經驗，聽見內心真正重視的事，做出成熟的回應。"],
+["世界","XXI","🌍","完成・整合・圓滿","一段旅程逐漸完成。肯定自己的努力，也準備迎接下一個階段。"]
+];
+const suits=[["權杖","🔥","熱情・行動・創意・動力","把熱情化為實際行動，主動嘗試並保持前進的動能。"],["聖杯","💧","情感・關係・感受・連結","留意自己的情緒與關係需求，真誠表達，也尊重彼此的感受。"],["寶劍","⚔️","思考・溝通・抉擇・真相","釐清資訊與想法，用清楚的溝通取代猜測，做出理性判斷。"],["錢幣","🪙","生活・工作・資源・累積","回到日常與實際條件，穩健安排資源，重視長期累積。"]];
+const ranks=[["王牌","A","起點・機會・潛能"],["二","II","選擇・平衡・合作"],["三","III","成長・協作・展開"],["四","IV","穩定・基礎・停頓"],["五","V","挑戰・衝突・調整"],["六","VI","改善・支持・交流"],["七","VII","考驗・策略・堅持"],["八","VIII","行動・熟練・進展"],["九","IX","成熟・接近成果・內省"],["十","X","完成・責任・轉折"],["侍者","P","學習・訊息・好奇"],["騎士","K","推進・追求・變化"],["皇后","Q","照顧・包容・滋養"],["國王","R","掌握・成熟・領導"]];
+const deck=[...majors.map(c=>({name:c[0],num:c[1],symbol:c[2],keywords:c[3],meaning:c[4],major:true})),...suits.flatMap(s=>ranks.map(r=>({name:s[0]+r[0],num:r[1],symbol:s[1],keywords:s[2]+"・"+r[2],meaning:s[3]+" 這張牌提醒你，"+r[2]+"是目前值得留意的課題。",major:false})))];
+const spreads={1:["當下提醒"],3:["過去","現在","未來"],5:["核心狀況","你的立場","對方／外在因素","需要留意","可能方向"],10:["現況","阻礙／交叉因素","根基","過去","可能發展","近期未來","你的態度","外在環境","期待與恐懼","可能結果"]};
+const $=id=>document.getElementById(id);let current=null;
+function shuffled(n){let d=[...deck];for(let i=d.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[d[i],d[j]]=[d[j],d[i]]}return d.slice(0,n).map(c=>({...c,reversed:Math.random()<.32}))}
+function positionText(card,pos,topic){let t=card.meaning;if(card.reversed)t=card.major?"這張牌的能量可能暫時受阻，或需要從相反方向理解。先放慢腳步，看看是否有尚未面對的心情、盲點或過度用力之處。":"這張牌所代表的課題可能出現延遲、失衡或內在拉扯。先整理自己的狀態，不急著推進，找出真正卡住的地方。";let add={love:"在關係中，留意彼此的界線、期待與實際互動，不要只靠猜測理解對方。",career:"在工作上，將目標拆成可執行的小步驟，並確認資源與時間是否足夠。",money:"在財務上，先確認數字、風險與承受能力，避免只憑感覺做重大決定。",people:"在人際互動中，清楚表達、尊重差異，也保留適當的界線。",growth:"在自我成長上，給自己時間練習，不必用別人的進度衡量自己。",general:"回到眼前能掌握的事，讓理解逐步轉化為行動。"}[topic];return t+" "+add}
+function cardHTML(c,i,label,wide=false){return `<div class="slot ${wide?"wide":""}"><div class="slot-label">${label}</div><div class="tarot ${c.reversed?"reversed":""}" role="button" tabindex="0" aria-label="翻開${c.name}"><div class="inner"><div class="face back"></div><div class="face front"><div class="roman">${c.num}</div><div class="symbol">${c.symbol}</div><div class="cardname">${c.name}</div><div class="ornament">✧　✧　✧</div></div></div></div></div>`}
+function attachFlip(){document.querySelectorAll(".tarot").forEach(el=>{el.addEventListener("click",()=>el.classList.add("flipped"));el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();el.classList.add("flipped")}})})}
+function render(){let n=+$("spread").value,topic=$("topic").value,q=$("question").value.trim();current={n,topic,q,cards:shuffled(n),date:new Date().toLocaleString("zh-TW")};$("reading").classList.remove("hidden");$("readingTitle").textContent=n===10?"凱爾特十字｜深入探索":n===5?"五張牌｜情勢分析":n===3?"三張牌｜過去・現在・未來":"單張指引｜當下提醒";$("questionEcho").textContent=q?"你的提問：「"+q+"」":"未設定問題｜請將牌面作為自我整理的參考";
+let area=$("cardArea");area.innerHTML="";if(n===10){let order=[[0,1,2,3,4],[5,6,7,8,9]];let layout=document.createElement("div");layout.className="cross-layout";let map=[null,0,null,null,4,3,1,2,null,5,null,6,7,8,9];map.forEach((idx,k)=>{let cell=document.createElement("div");cell.className="cross-cell"+(idx===null?" empty":"");if(idx!==null)cell.innerHTML=cardHTML(current.cards[idx],idx,spreads[10][idx],true);layout.appendChild(cell)});area.appendChild(layout)}else{let row=document.createElement("div");row.className="cards";current.cards.forEach((c,i)=>row.insertAdjacentHTML("beforeend",cardHTML(c,i,spreads[n][i])));area.appendChild(row)}attachFlip();
+$("meanings").innerHTML="";current.cards.forEach((c,i)=>{let el=document.createElement("article");el.className="meaning";el.innerHTML=`<h3>${spreads[n][i]}｜${c.name}</h3><div class="status">${c.reversed?"逆位":"正位"}・${c.keywords}</div><p>${positionText(c,spreads[n][i],topic)}</p>`;$("meanings").appendChild(el)});
+$("summary").innerHTML=`<h3>✦ 綜合解讀</h3><p>${makeSummary(current)}</p>`;$("reading").scrollIntoView({behavior:"smooth",block:"start"})}
+function makeSummary(r){let c=r.cards,good=c.filter(x=>!x.reversed).length,maj=c.filter(x=>x.major).length;let topicName={general:"整體方向",love:"愛情與關係",career:"工作與事業",money:"財務與資源",people:"人際與合作",growth:"自我成長"}[r.topic];let opening=good>=Math.ceil(c.length*.65)?"整體牌面偏向順勢與可行，適合把握已經出現的條件。":good<=Math.floor(c.length*.35)?"牌面提醒你先整理阻礙與內在壓力，暫時不必急著求快。":"牌面呈現機會與課題並存，關鍵在於調整節奏、看清選擇。";let names=c.map(x=>x.name+(x.reversed?"（逆位）":"（正位）")).join("、");let end=r.n===1?"先選一件你能掌握的小事開始，觀察行動後的變化。":r.n===3?`從過去的經驗、現在的選擇到可能的發展，這組牌提醒你：未來並非定局，仍會受到當下行動影響。`:`這組牌有${maj}張大阿爾克那，顯示這次問題可能牽涉較深層的生命課題。先釐清最重要的核心，再逐步處理細節。`;return `本次主題是「${topicName}」。${opening} 抽到的牌為：${names}。${end} 建議把牌義當成提問的起點：哪些部分符合你的現況？哪些需要更多事實來確認？`}
+function save(){if(!current)return;let logs=JSON.parse(localStorage.getItem("tarotLogs")||"[]");logs.unshift({...current,id:Date.now()});localStorage.setItem("tarotLogs",JSON.stringify(logs.slice(0,30)));renderHistory();$("save").textContent="已保存 ✓";setTimeout(()=>$("save").textContent="保存本次占卜",1400)}
+function renderHistory(){let logs=JSON.parse(localStorage.getItem("tarotLogs")||"[]");let box=$("historyList");if(!logs.length){box.textContent="目前還沒有占卜紀錄。";return}box.innerHTML=logs.map(x=>`<div class="history-item"><div><strong>${x.date}｜${x.n} 張牌</strong><small>${escapeHTML(x.q||"未設定問題")} · ${x.cards.map(c=>c.name+(c.reversed?"逆":"正")).join("、")}</small></div><button class="secondary" data-del="${x.id}">刪除</button></div>`).join("");box.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{let a=JSON.parse(localStorage.getItem("tarotLogs")||"[]").filter(x=>x.id!=b.dataset.del);localStorage.setItem("tarotLogs",JSON.stringify(a));renderHistory()})}
+function escapeHTML(s){return s.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+$("start").onclick=render;$("again").onclick=render;$("save").onclick=save;$("clear").onclick=()=>$("question").value="";$("print").onclick=()=>window.print();$("clearHistory").onclick=()=>{if(confirm("確定清除所有占卜紀錄？")){localStorage.removeItem("tarotLogs");renderHistory()}};renderHistory();
+</script>
+<style>@media print{body{background:white;color:#222}.panel{box-shadow:none;border:1px solid #aaa;background:white;color:#222}.back,.actions,header .stars,footer{display:none!important}.front{print-color-adjust:exact}.meaning{break-inside:avoid;background:white;color:#222;border-color:#aaa}.meaning p,.muted,.questionline{color:#333!important}}</style>
+</body></html>
