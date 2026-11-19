@@ -40,6 +40,7 @@ button{margin-top:18px;background:none;border:1px solid var(--ac);color:var(--ac
 button:focus-visible{outline:2px solid var(--tx);outline-offset:3px}
 svg g:focus-visible{outline:none}
 svg g:focus-visible .dot{stroke:#fff;stroke-width:2}
+.mus{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);right:12px;z-index:4;display:inline-flex;align-items:center;margin:0;min-height:44px;padding:0 14px;background:rgba(0,0,0,.28)}
 .fade{animation:f .7s}
 #fx{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 .clock,.card,.note{position:relative;z-index:1}
@@ -49,6 +50,7 @@ svg g:focus-visible .dot{stroke:#fff;stroke-width:2}
 </head>
 <body>
 <canvas id="fx" aria-hidden="true"></canvas>
+<button class="mus" id="mus" aria-pressed="false">♪ 音樂　關</button>
 <div class="clock" id="clk"></div>
 <div class="date" id="dt"></div>
 <div class="wrap">
@@ -135,6 +137,7 @@ function show(i){
   sel=i;
   fxc=`hsl(${h} ${s}% 82%)`;
   if(kind!=EL[i])setFx(EL[i]);
+  musicSet(i);
   [["nm",t[0]],["hou","初候　"+t[3]],["ln",t[4]]].forEach(([id,v])=>{const e=$(id);e.textContent=v;e.classList.remove("fade");void e.offsetWidth;e.classList.add("fade")});
   $("au").textContent=t[5]?"—— "+t[5]:"";
   $("sb").textContent=(isNow?"此刻":"預覽")+"　·　五行屬"+EL[i];
@@ -218,6 +221,59 @@ function mk(){
 $("sc").onclick=mk;$("cl").onclick=()=>{$("ov").hidden=true};
 $("ov").onclick=e=>{if(e.target.id=="ov")$("ov").hidden=true};
 addEventListener("keydown",e=>{if(e.key=="Escape")$("ov").hidden=true});
+// 背景音樂：以 Web Audio 即時合成，五行對應五音調式（角徵宮商羽）
+const SC5={角:[0,3,5,8,10],徵:[0,2,5,7,9],宮:[0,2,4,7,9],商:[0,2,5,7,10],羽:[0,3,5,7,10]};
+const EM={木:{n:"角",w:"triangle",s:.55,p:.75,v:.16},火:{n:"徵",w:"triangle",s:.45,p:.8,v:.15},土:{n:"宮",w:"sine",s:1.05,p:.55,v:.2},金:{n:"商",w:"sine",s:.8,p:.65,v:.2},水:{n:"羽",w:"sine",s:1.25,p:.55,v:.22}};
+let AC,mg,dl,on=false,mtm=null,nx0=0,dg=0,drone=null,mi=cur;
+const rootOf=i=>164.8*Math.pow(2,((i*5)%12)/12);
+function ainit(){
+  AC=new(window.AudioContext||window.webkitAudioContext)();
+  mg=AC.createGain();mg.gain.value=0;mg.connect(AC.destination);
+  dl=AC.createDelay(2);dl.delayTime.value=.42;
+  const fb=AC.createGain(),wet=AC.createGain();fb.gain.value=.4;wet.gain.value=.45;
+  dl.connect(fb);fb.connect(dl);dl.connect(wet);wet.connect(mg);
+}
+function nt(f,t,d,w,v){
+  const o=AC.createOscillator(),g=AC.createGain();o.type=w;o.frequency.value=f;
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.015);g.gain.exponentialRampToValueAtTime(.0001,t+d);
+  o.connect(g);g.connect(mg);g.connect(dl);o.start(t);o.stop(t+d+.05);
+}
+function stopDrone(){if(!drone)return;const{o,g}=drone,t=AC.currentTime;g.gain.cancelScheduledValues(t);g.gain.setValueAtTime(g.gain.value,t);g.gain.linearRampToValueAtTime(0,t+1);o.stop(t+1.1);drone=null}
+function startDrone(f){const o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;o.type="sine";o.frequency.value=f/2;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.07,t+2);o.connect(g);g.connect(mg);o.start();drone={o,g}}
+function musicSet(i){
+  mi=i;if(!on)return;
+  stopDrone();startDrone(rootOf(i));
+  dg=Math.floor(Math.random()*5);nx0=AC.currentTime+.3;
+  $("mus").textContent=`♪ ${EM[EL[i]].n}調　開`;
+}
+function loop(){
+  if(!on)return;
+  const k=EL[mi],e=EM[k],sc=SC5[e.n],root=rootOf(mi),sp=e.s*(.85+(mi%4)*.08);
+  while(nx0<AC.currentTime+.8){
+    if(Math.random()<e.p){
+      dg=Math.max(0,Math.min(9,dg+[-2,-1,-1,0,1,1,2][Math.floor(Math.random()*7)]));
+      const f=root*Math.pow(2,sc[dg%5]/12)*(dg>=5?2:1);
+      nt(f,nx0,e.s*3.2,e.w,e.v);
+      if(k=="水"&&Math.random()<.5)nt(f*2,nx0+.02,e.s*2,"sine",e.v*.3);
+      if(k=="土"&&Math.random()<.4)nt(root*Math.pow(2,sc[(dg+2)%5]/12),nx0,sp*4,"sine",e.v*.7);
+    }
+    nx0+=sp*(.8+Math.random()*.5);
+  }
+}
+$("mus").onclick=async()=>{
+  const b=$("mus");
+  if(!on){
+    if(!AC)ainit();
+    await AC.resume();on=true;
+    const t=AC.currentTime;mg.gain.cancelScheduledValues(t);mg.gain.setValueAtTime(mg.gain.value,t);mg.gain.linearRampToValueAtTime(.5,t+1.5);
+    mtm=setInterval(loop,200);musicSet(mi);b.setAttribute("aria-pressed","true");
+  }else{
+    on=false;clearInterval(mtm);stopDrone();
+    const t=AC.currentTime;mg.gain.cancelScheduledValues(t);mg.gain.setValueAtTime(mg.gain.value,t);mg.gain.linearRampToValueAtTime(0,t+.8);
+    b.textContent="♪ 音樂　關";b.setAttribute("aria-pressed","false");
+  }
+};
+document.addEventListener("visibilitychange",()=>{if(!AC||!on)return;document.hidden?AC.suspend():AC.resume()});
 const day0=now.toDateString();
 setInterval(()=>{if(new Date().toDateString()!=day0)location.reload()},60000);
 const SC="子丑寅卯辰巳午未申酉戌亥";
