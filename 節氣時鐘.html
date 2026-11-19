@@ -26,6 +26,20 @@ svg{width:100%;height:100%;display:block}
 button{margin-top:18px;background:none;border:1px solid var(--ac);color:var(--ac);font:inherit;font-size:13px;letter-spacing:.2em;padding:8px 20px;border-radius:20px;cursor:pointer;display:none}
 .note{font-size:11px;color:var(--dim);margin-top:26px;opacity:.7;text-align:center}
 .credit{position:relative;z-index:1;font-size:12px;letter-spacing:.3em;color:var(--ac);margin-top:18px;opacity:.85;text-align:center}
+.date{font-size:15px;letter-spacing:.14em;margin-top:8px;text-align:center;line-height:1.7;position:relative;z-index:1}
+.date small{display:block;font-size:13px;color:var(--dim);letter-spacing:.2em}
+.nav{display:flex;align-items:center;justify-content:space-between;width:min(88vw,340px);position:relative;z-index:1;font-size:12px;color:var(--dim);letter-spacing:.15em}
+.arr{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;margin:0;padding:0;font-size:24px;border-radius:50%}
+#bk{min-height:44px}
+#sc,#cl{display:inline-block;min-height:44px}
+#sc,#bk{margin-inline:4px}
+#ov{position:fixed;inset:0;z-index:5;background:rgba(0,0,0,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px}
+#ov[hidden]{display:none}
+#ov img{max-width:100%;max-height:76dvh;border-radius:8px}
+#ov .hint{font-size:13px;color:var(--dim);letter-spacing:.15em}
+button:focus-visible{outline:2px solid var(--tx);outline-offset:3px}
+svg g:focus-visible{outline:none}
+svg g:focus-visible .dot{stroke:#fff;stroke-width:2}
 .fade{animation:f .7s}
 #fx{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 .clock,.card,.note{position:relative;z-index:1}
@@ -36,10 +50,12 @@ button{margin-top:18px;background:none;border:1px solid var(--ac);color:var(--ac
 <body>
 <canvas id="fx" aria-hidden="true"></canvas>
 <div class="clock" id="clk"></div>
+<div class="date" id="dt"></div>
 <div class="wrap">
   <svg viewBox="0 0 320 320" id="ring" role="img" aria-label="二十四節氣環"></svg>
-  <div class="center"><div class="name fade" id="nm"></div><div class="sub" id="sb"></div></div>
+  <div class="center"><div class="name fade" id="nm" aria-live="polite"></div><div class="sub" id="sb"></div></div>
 </div>
+<div class="nav"><button class="arr" id="pv" aria-label="上一個節氣">‹</button><span>滑動、點圓點或用方向鍵切換</span><button class="arr" id="nt" aria-label="下一個節氣">›</button></div>
 <div class="card">
   <div class="hou fade" id="hou"></div>
   <p class="line fade" id="ln"></p>
@@ -47,10 +63,11 @@ button{margin-top:18px;background:none;border:1px solid var(--ac);color:var(--ac
   <div class="ly" id="ly"></div>
   <div class="bar"><i id="pg"></i></div>
   <div class="meta" id="mt"></div>
-  <button id="bk">回到今天</button>
+  <button id="bk">回到今天</button><button id="sc">分享卡片</button>
 </div>
 <div class="note">夏至在上，冬至在下。環上圓點的顏色是五行。大寒、穀雨、大暑、霜降屬土（土旺）。節氣日期為通行近似值，實際可能相差一天。</div>
 <div class="credit">小路_Joseph 工作室製作</div>
+<div id="ov" hidden><img id="im" alt="節氣分享卡片"><div class="hint">長按圖片即可儲存或分享</div><button id="cl">關閉</button></div>
 <script>
 const T=[
 ["小寒",1,5,"雁北鄉","雁向北方試探，冷是春的前奏。","",220],
@@ -100,6 +117,8 @@ for(let i=0;i<24;i++){
   c.setAttribute("cx",x);c.setAttribute("cy",y);c.setAttribute("class","dot");
   g.appendChild(c);g.appendChild(h);g.style.cursor="pointer";
   g.addEventListener("click",()=>show(i));
+  g.setAttribute("tabindex","0");g.setAttribute("role","button");g.setAttribute("aria-label",T[i][0]);
+  g.addEventListener("keydown",e=>{if(e.key=="Enter"||e.key==" "){e.preventDefault();show(i)}});
   const t=document.createElementNS(NS,"title");t.textContent=T[i][0];g.appendChild(t);
   ring.appendChild(g);dots.push(c);
 }
@@ -113,6 +132,7 @@ function show(i){
     c.setAttribute("r",k==i?9:(k==cur?6:4));
     c.setAttribute("fill",k==i?`hsl(${h} ${s}% 78%)`:(k==cur?"rgba(255,255,255,.85)":`hsl(${hh} ${ss}% 70% / .6)`));
   });
+  sel=i;
   fxc=`hsl(${h} ${s}% 82%)`;
   if(kind!=EL[i])setFx(EL[i]);
   [["nm",t[0]],["hou","初候　"+t[3]],["ln",t[4]]].forEach(([id,v])=>{const e=$(id);e.textContent=v;e.classList.remove("fade");void e.offsetWidth;e.classList.add("fade")});
@@ -151,6 +171,55 @@ function draw(tm){
 }
 if(!still)requestAnimationFrame(draw);
 $("bk").onclick=()=>show(cur);
+let sel=cur;
+const go=d=>show((sel+d+24)%24);
+$("pv").onclick=()=>go(-1);$("nt").onclick=()=>go(1);
+addEventListener("keydown",e=>{if(e.key=="ArrowLeft")go(-1);else if(e.key=="ArrowRight")go(1);else if(e.key=="Escape"||e.key=="Home")show(cur)});
+let x0=null;
+document.addEventListener("touchstart",e=>{x0=e.touches[0].clientX},{passive:true});
+document.addEventListener("touchend",e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)>60)go(dx<0?1:-1)},{passive:true});
+const wk="日一二三四五六";
+let lu="";
+try{
+  const p={};new Intl.DateTimeFormat("zh-TW-u-ca-chinese-nu-latn",{year:"numeric",month:"numeric",day:"numeric"}).formatToParts(now).forEach(o=>p[o.type]=o.value);
+  const TG="甲乙丙丁戊己庚辛壬癸",DZ="子丑寅卯辰巳午未申酉戌亥",SX="鼠牛虎兔龍蛇馬羊猴雞狗豬";
+  const cm={正:1,一:1,二:2,三:3,四:4,五:5,六:6,七:7,八:8,九:9,十:10,十一:11,十二:12,冬:11,臘:12};
+  const ry=+p.relatedYear;
+  const gz=ry?TG[(ry+6)%10]+DZ[(ry+8)%12]:p.yearName;
+  const mo=parseInt((p.month||"").replace(/\D/g,""))||cm[(p.month||"").replace(/[閏月]/g,"")],d=parseInt(p.day);
+  const N="一二三四五六七八九",MN=["","正","二","三","四","五","六","七","八","九","十","冬","臘"];
+  const dn=d<=10?"初"+(d==10?"十":N[d-1]):d<20?"十"+N[d-11]:d==20?"二十":d<30?"廿"+N[d-21]:"三十";
+  const sx=SX[DZ.indexOf(gz[1])];
+  if(gz&&mo&&d)lu=`${gz}年（${sx}年）${/閏/.test(p.month)?"閏":""}${MN[mo]}月${dn}`;
+}catch(e){}
+const dtTxt=`${Y}年${now.getMonth()+1}月${now.getDate()}日　星期${wk[now.getDay()]}`;
+$("dt").innerHTML=dtTxt+(lu?`<small>農曆 ${lu}</small>`:"");
+function mk(){
+  const c=document.createElement("canvas");c.width=1080;c.height=1350;const g=c.getContext("2d");
+  const cs=getComputedStyle(document.documentElement),v=n=>cs.getPropertyValue(n).trim(),t=T[sel];
+  const gr=g.createLinearGradient(0,0,540,1350);gr.addColorStop(0,v("--c1"));gr.addColorStop(1,v("--c2"));
+  g.fillStyle=gr;g.fillRect(0,0,1080,1350);
+  const F='"Noto Serif TC","Songti TC","PMingLiU",serif',ac=v("--ac");
+  g.textAlign="center";
+  g.strokeStyle=ac;g.globalAlpha=.35;g.lineWidth=2;g.beginPath();g.arc(540,560,330,0,7);g.stroke();g.globalAlpha=1;
+  g.fillStyle="rgba(238,242,240,.75)";g.font=`34px ${F}`;
+  g.fillText(sel==cur?dtTxt:"二十四節氣",540,150);
+  if(sel==cur&&lu){g.font=`30px ${F}`;g.fillText("農曆 "+lu,540,200)}
+  g.fillStyle=ac;g.font=`600 230px ${F}`;g.fillText(t[0],540,610);
+  g.font=`34px ${F}`;g.fillText("初候　"+t[3]+"　·　五行屬"+EL[sel],540,720);
+  g.fillStyle="#eef2f0";g.font=`52px ${F}`;
+  let y=950;t[4].replace(/，/g,"，\n").split("\n").filter(Boolean).forEach(l=>{g.fillText(l,540,y);y+=84});
+  g.fillStyle="rgba(238,242,240,.65)";g.font=`32px ${F}`;
+  if(t[5])g.fillText("—— "+t[5],540,y+10);
+  const L=LY[t[0]];if(L){g.fillStyle=ac;g.fillText(`♪ ${L[0]}　—— 小路《${L[1]}》`,540,y+70)}
+  g.fillStyle=ac;g.font=`30px ${F}`;g.fillText("小路_Joseph 工作室製作",540,1290);
+  $("im").src=c.toDataURL("image/png");$("ov").hidden=false;
+}
+$("sc").onclick=mk;$("cl").onclick=()=>{$("ov").hidden=true};
+$("ov").onclick=e=>{if(e.target.id=="ov")$("ov").hidden=true};
+addEventListener("keydown",e=>{if(e.key=="Escape")$("ov").hidden=true});
+const day0=now.toDateString();
+setInterval(()=>{if(new Date().toDateString()!=day0)location.reload()},60000);
 const SC="子丑寅卯辰巳午未申酉戌亥";
 function tick(){
   const d=new Date(),p=n=>String(n).padStart(2,"0");
