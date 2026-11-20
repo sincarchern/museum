@@ -40,6 +40,18 @@ button{margin-top:18px;background:none;border:1px solid var(--ac);color:var(--ac
 #ov img{max-width:100%;max-height:76dvh;border-radius:8px}
 #ov .hint{font-size:13px;color:var(--dim);letter-spacing:.15em}
 #vol{position:fixed;top:calc(env(safe-area-inset-top,0px) + 60px);right:12px;z-index:4;width:112px;accent-color:var(--ac);display:none}
+.dtl{text-align:left;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.16);font-size:14px;line-height:1.95}
+.dtl p{margin:0 0 8px}
+.dtl .k{color:var(--ac);letter-spacing:.15em;font-size:12px;margin-right:.6em}
+.dtl .s{color:var(--dim);font-size:13px}
+.date small.fe{color:var(--ac)}
+.fes{max-width:340px;width:100%;text-align:left;margin-top:28px;position:relative;z-index:1;font-size:14px;line-height:1.8}
+.fes h3{font-size:12px;letter-spacing:.3em;color:var(--ac);margin:0 0 10px;font-weight:400}
+.fes p{margin:0 0 12px;border-left:2px solid var(--ac);padding-left:10px}
+.fes b{display:block;font-weight:600}
+.fes span{display:block;font-size:12px;color:var(--dim)}
+.fes i{display:block;font-style:normal;font-size:13px}
+.fes em{display:block;font-style:normal;font-size:11px;color:var(--dim);opacity:.8;margin-top:6px}
 .name.fade{animation:nf .9s cubic-bezier(.2,.7,.2,1)}
 @keyframes nf{from{opacity:0;transform:scale(.92);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
 @media(prefers-reduced-motion:reduce){.fade,.name.fade{animation:none}}
@@ -70,11 +82,13 @@ svg g:focus-visible .dot{stroke:#fff;stroke-width:2}
   <p class="line fade" id="ln"></p>
   <div class="au" id="au"></div>
   <div class="ly" id="ly"></div>
+  <div class="dtl fade" id="dtl"></div>
   <div class="bar"><i id="pg"></i></div>
   <div class="meta" id="mt"></div>
   <button id="bk">回到今天</button><button id="sc">分享卡片</button>
   <div><a class="lnk" href="https://sincarchern.github.io/museum/神諭卡｜節氣・五行・詩詞.html" target="_blank" rel="noopener">抽一張神諭卡 ›</a></div>
 </div>
+<div class="fes" id="fes"></div>
 <div class="note">夏至在上，冬至在下。環上圓點的顏色是五行。大寒、穀雨、大暑、霜降屬土（土旺）。節氣日期依太陽黃經天文計算，以台北時間為準。PageUp／PageDown 以一季為單位切換，數字鍵 1–4 跳到立春、立夏、立秋、立冬。</div>
 <div class="credit">小路_Joseph 工作室製作</div>
 <div id="ov" hidden><img id="im" alt="節氣分享卡片"><div class="hint">長按圖片即可儲存或分享</div><button id="cl">關閉</button></div>
@@ -157,6 +171,9 @@ function show(i){
   musicSet(i);
   [["nm",t[0]],["hou","初候　"+t[3]],["ln",t[4]]].forEach(([id,v])=>{const e=$(id);e.textContent=v;e.classList.remove("fade");void e.offsetWidth;e.classList.add("fade")});
   $("au").textContent=t[5]?"—— "+t[5]:"";
+  {const x=X[i],a=st(i,Y),e=$("dtl");
+  e.innerHTML=`<p>${x[1]}</p><p class="s"><span class="k">時間</span>約 ${a.getMonth()+1} 月 ${a.getDate()} 日　·　太陽黃經 ${(285+15*i)%360}°</p><p class="s"><span class="k">三候</span>${t[3]}、${x[0]}</p><p><span class="k">習俗養生</span>${x[2]}</p>`;
+  e.classList.remove("fade");void e.offsetWidth;e.classList.add("fade")}
   $("sb").textContent=(isNow?"此刻":"預覽")+"　·　五行屬"+EL[i];
   const L=LY[t[0]];$("ly").textContent=L?`♪ ${L[0]}　—— 小路《${L[1]}》`:"";
   $("pg").style.width=isNow?(elapsed/total*100)+"%":"0";
@@ -219,7 +236,63 @@ try{
   if(gz&&mo&&d)lu=`${gz}年（${sx}年）${/閏/.test(p.month)?"閏":""}${MN[mo]}月${dn}`;
 }catch(e){}
 const dtTxt=`${Y}年${now.getMonth()+1}月${now.getDate()}日　星期${wk[now.getDay()]}`;
-$("dt").innerHTML=dtTxt+(lu?`<small>農曆 ${lu}</small>`:"");
+const FS={
+"1-1":["春節","農曆新年，開正拜年、祭祖、發紅包。"],
+"1-4":["接神日","迎接諸神下界，備牲禮、焚香迎神。"],
+"1-9":["天公生","玉皇上帝聖誕，子時備三牲、五果、麵線敬拜。"],
+"1-15":["元宵節","上元節、天官大帝聖誕；吃湯圓、賞燈、猜燈謎。"],
+"2-2":["土地公誕辰","福德正神聖誕，商家與民家祭拜，稱「頭牙」。"],
+"2-3":["文昌帝君誕辰","主掌文運功名，學子到廟祈求考運。"],
+"2-19":["觀音誕辰","觀世音菩薩聖誕，寺廟誦經、祈福。"],
+"3-3":["玄天上帝誕辰","北極玄天上帝聖誕，俗稱「上帝公生」。"],
+"3-15":["保生大帝誕辰","醫藥之神吳真人聖誕，信眾祈求平安健康。"],
+"3-23":["媽祖誕辰","天上聖母聖誕，各地媽祖廟遶境、進香。"],
+"4-8":["佛誕節","浴佛節，釋迦牟尼佛誕辰，寺院浴佛、祈福。"],
+"5-5":["端午節","吃粽子、劃龍舟、掛艾草與菖蒲，驅邪避疫。"],
+"6-19":["觀音成道日","觀世音菩薩成道紀念日。"],
+"6-24":["關聖帝君誕辰","關公聖誕，武廟祭祀；商家亦奉為財神與義神。"],
+"7-1":["開鬼門","中元普渡月初一，鬼門開，拜好兄弟。"],
+"7-7":["七夕","七娘媽生，為孩童祈福，有「做十六歲」的習俗。"],
+"7-15":["中元節","地官大帝聖誕，普渡施孤、祭拜好兄弟。"],
+"7-30":["關鬼門","鬼門關閉，也是地藏王菩薩聖誕。"],
+"8-15":["中秋節","賞月、吃月餅、烤肉，團圓的節日。"],
+"9-9":["重陽節","登高、賞菊、敬老。"],
+"9-19":["觀音出家日","觀世音菩薩出家紀念日。"],
+"10-15":["下元節","水官大帝聖誕，祈求解厄消災。"],
+"12-8":["臘八節","喝臘八粥，佛教紀念釋迦成道。"],
+"12-16":["尾牙","年終祭拜土地公，企業聚餐慰勞員工。"],
+"12-24":["送神","謝灶，眾神上天庭述職。"]
+};
+const lf=new Intl.DateTimeFormat("zh-TW-u-ca-chinese-nu-latn",{month:"numeric",day:"numeric"});
+function lun(d){const p={};lf.formatToParts(d).forEach(o=>p[o.type]=o.value);const m=p.month||"";return{m:parseInt(m.replace(/\D/g,"")),d:parseInt(p.day),leap:/閏|bis/i.test(m)}}
+function lname(a){
+  const N="一二三四五六七八九",MN=["","正","二","三","四","五","六","七","八","九","十","冬","臘"],d=a.d;
+  const dn=d<=10?"初"+(d==10?"十":N[d-1]):d<20?"十"+N[d-11]:d==20?"二十":d<30?"廿"+N[d-21]:"三十";
+  return (a.leap?"閏":"")+MN[a.m]+"月"+dn;
+}
+function fest(d){
+  try{
+    const a=lun(d);if(!a.m||!a.d)return null;
+    const n=lun(new Date(d.getFullYear(),d.getMonth(),d.getDate()+1));
+    if(n.m==1&&n.d==1&&!n.leap)return["除夕","圍爐、守歲、祭祖，辭舊迎新。"];
+    if(!a.leap&&FS[a.m+"-"+a.d])return FS[a.m+"-"+a.d];
+    const k=d.getTime(),y=d.getFullYear();
+    if(st(6,y).getTime()==k)return["清明節","掃墓祭祖、踏青，台灣習慣吃潤餅。"];
+    if(st(23,y).getTime()==k)return["冬至","吃湯圓、祭祖，「冬至大如年」。"];
+  }catch(e){}
+  return null;
+}
+const td=new Date(now.getFullYear(),now.getMonth(),now.getDate()),ft=fest(td);
+$("dt").innerHTML=dtTxt+(lu?`<small>農曆 ${lu}</small>`:"")+(ft?`<small class="fe">今日　${ft[0]}</small>`:"");
+(function(){
+  const out=[];
+  try{for(let k=1;k<=400&&out.length<5;k++){const d=new Date(td.getFullYear(),td.getMonth(),td.getDate()+k),f=fest(d);if(f)out.push({d,f,k})}}catch(e){}
+  let h="<h3>民俗節日</h3>";
+  if(ft)h+=`<p><b>今日　${ft[0]}</b><i>${ft[1]}</i></p>`;
+  h+=out.map(o=>`<p><b>${o.f[0]}</b><span>農曆${lname(lun(o.d))}　·　${o.d.getMonth()+1}月${o.d.getDate()}日　·　${o.k==1?"明天":o.k+" 天後"}</span><i>${o.f[1]}</i></p>`).join("");
+  h+="<em>以台灣常見的習慣為主，各地廟宇的聖誕日期可能略有不同。</em>";
+  if(out.length||ft)$("fes").innerHTML=h;
+})();
 async function mk(){
   try{await document.fonts.ready}catch(e){}
   const c=document.createElement("canvas");c.width=1080;c.height=1350;const g=c.getContext("2d");
@@ -232,6 +305,7 @@ async function mk(){
   g.fillStyle="rgba(238,242,240,.75)";g.font=`34px ${F}`;
   g.fillText(sel==cur?dtTxt:"二十四節氣",540,150);
   if(sel==cur&&lu){g.font=`30px ${F}`;g.fillText("農曆 "+lu,540,200)}
+  if(sel==cur&&ft){g.fillStyle=ac;g.font=`30px ${F}`;g.fillText("今日　"+ft[0],540,252)}
   g.fillStyle=ac;g.beginPath();g.arc(540,310,38,0,7);g.fill();g.fillStyle=v("--c2");g.font=`600 40px ${F}`;g.fillText(EL[sel],540,324);
   g.fillStyle=ac;g.font=`600 230px ${F}`;g.fillText(t[0],540,610);
   g.font=`34px ${F}`;g.fillText("初候　"+t[3]+"　·　五行屬"+EL[sel],540,720);
@@ -266,6 +340,32 @@ function nt(f,t,d,w,v){
 function stopDrone(){if(!drone)return;const{o,g}=drone,t=AC.currentTime;g.gain.cancelScheduledValues(t);g.gain.setValueAtTime(g.gain.value,t);g.gain.linearRampToValueAtTime(0,t+1);o.stop(t+1.1);drone=null}
 function startDrone(f){const o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;o.type="sine";o.frequency.value=f/2;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.07,t+2);o.connect(g);g.connect(mg);o.start();drone={o,g}}
 $("vol").oninput=e=>{if(AC)mg.gain.setTargetAtTime(+e.target.value,AC.currentTime,.1)};
+const X=[
+["鵲始巢、雉始雊","天氣漸寒，但還未到最冷，故稱「小」。寒氣積累，是一年最冷時段的前奏。","吃臘八粥、做年糕；宜早睡暖身，晨間不宜過早出門。"],
+["鷙鳥厲疾、水澤腹堅","二十四節氣的最後一個，天氣最冷，卻也是寒極將生暖的時候。","尾牙、掃塵迎新、備年貨；宜溫補，如薑母鴨、羊肉爐。"],
+["蟄蟲始振、魚陟負冰","二十四節氣之首，象徵春天開始，陽氣回升，萬物萌發。","吃春餅、春捲，迎春、打春；宜疏肝養陽，多食辛甘發散之物。"],
+["鴻雁來、草木萌動","降雪漸少、降雨漸多，雨水滋潤大地，正利春耕。","民間有「春雨貴如油」之說，農家忙備耕；宜健脾祛濕。"],
+["倉庚鳴、鷹化為鳩","春雷驚醒冬眠的蟄蟲，氣溫回升，萬物生長加快。","祭白虎、打小人、驅蟲；宜多吃梨潤燥。"],
+["雷乃發聲、始電","太陽直射赤道，晝夜幾乎等長，此後白晝漸長。","豎蛋、春祭、踏青；宜作息與飲食寒熱均衡。"],
+["田鼠化為鴽、虹始見","氣清景明，萬物皆顯。既是節氣，也是祭祖掃墓、踏青的日子。","掃墓祭祖、吃潤餅、插柳；宜疏肝、少食辛辣。"],
+["鳴鳩拂其羽、戴勝降於桑","春季最後一個節氣，雨水滋潤五穀，稱「雨生百穀」。","採穀雨茶、賞牡丹；宜祛濕健脾。"],
+["蚯蚓出、王瓜生","夏季開始，氣溫明顯升高，雷雨增多，作物進入旺盛生長期。","吃立夏蛋、稱人、嚐新；宜養心，早起避午熱。"],
+["靡草死、麥秋至","夏熟作物的籽粒開始飽滿，卻尚未成熟，故名小滿。","祭蠶神、吃苦菜；濕熱漸重，宜清淡利濕。"],
+["鵙始鳴、反舌無聲","有芒的麥類成熟待收，晚稻等需播種，農事最忙。","送花神、煮梅；梅雨將至，注意防潮、補充水分。"],
+["蜩始鳴、半夏生","一年中白晝最長、太陽最高的一天（北半球），此後白晝漸短。","吃麵、祭祖；宜午間小憩、防暑，飲食清淡。"],
+["蟋蟀居壁、鷹始鷙","暑氣開始，天氣炎熱但還沒到最熱，前後進入伏天。","吃麵、嚐新米；宜防暑、多補水。"],
+["土潤溽暑、大雨時行","一年中最熱的時段，高溫濕熱，雷陣雨多。","喝涼茶、燒仙草；宜避午暑、必要時輕補電解質。"],
+["白露降、寒蟬鳴","秋季開始，暑熱未退，但早晚漸涼，天高氣爽。","貼秋膘、啃秋；宜養肺潤燥，少寒涼。"],
+["天地始肅、禾乃登","「處」是終止，暑氣到此將結束，秋涼漸明顯，穀物成熟。","吃鴨、秋遊；宜防秋燥與「秋乏」。"],
+["玄鳥歸、群鳥養羞","天氣轉涼，夜間水氣凝成露珠，早晚溫差大。","喝白露茶、吃龍眼；宜添衣，早晚保暖。"],
+["蟄蟲坯戶、水始涸","太陽直射赤道，晝夜再次等長，此後夜漸長。","祭月、豎蛋、賞桂；宜潤燥養陰。"],
+["雀入大水為蛤、菊有黃華","露水更冷，氣溫明顯下降，菊花盛開，秋意漸深。","登高、賞菊、喝菊花茶；宜保暖護足、防燥。"],
+["草木黃落、蟄蟲咸俯","秋季最後一個節氣，天氣漸冷、開始有霜，萬物凋零，蟄蟲入土。","吃柿子、賞楓、進補；宜護胃、防秋寒。"],
+["地始凍、雉入大水為蜃","冬季開始，萬物收藏，白晝縮短，氣溫下降。","補冬、吃薑母鴨、羊肉爐、餃子；宜早睡晚起，進補適度。"],
+["天氣上升地氣下降、閉塞而成冬","開始降雪，但雪量不大，氣溫持續下降，天地閉塞。","醃臘肉、曬魚乾、吃糍粑；宜保暖，調養情緒。"],
+["虎始交、荔挺出","降雪量增多，地面可能積雪，天氣更冷。","醃肉、進補、賞雪；宜溫補，注意保暖。"],
+["麋角解、水泉動","北半球白晝最短、夜最長的一天，此後白晝漸長，所謂「陰極陽生」。","吃湯圓、餃子、祭祖，「冬至大如年」；宜溫補、早睡。"]
+];
 function pv(i){
   const t0=new Date(now.getFullYear(),now.getMonth(),now.getDate()),a=st(i,Y),dd=Math.round((a-t0)/864e5);
   const md=`${Y}年${a.getMonth()+1}月${a.getDate()}日`;
