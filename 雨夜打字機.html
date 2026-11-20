@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>雨夜打字機</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400&display=swap">
+<style>
+:root{
+  --bg:#d8e2e8;
+  --ink:#1a2a36;
+  --dim:#5a6e7e;
+  --rain:rgba(55,85,110,.42);
+  --glass:rgba(255,255,255,.48);
+  --lamp:#b86e22;
+  --paper:rgba(252,248,242,.72);
+  --accent:rgba(184,110,34,.18);
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0a1520;
+    --ink:#d6e6ee;
+    --dim:#7a96a8;
+    --rain:rgba(140,185,220,.36);
+    --glass:rgba(140,185,215,.08);
+    --lamp:#f0c878;
+    --paper:rgba(18,32,48,.55);
+    --accent:rgba(240,200,120,.14);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0a1520;
+  --ink:#d6e6ee;
+  --dim:#7a96a8;
+  --rain:rgba(140,185,220,.36);
+  --glass:rgba(140,185,215,.08);
+  --lamp:#f0c878;
+  --paper:rgba(18,32,48,.55);
+  --accent:rgba(240,200,120,.14);
+  color-scheme:dark;
+}
+:root[data-theme="light"]{
+  --bg:#d8e2e8;
+  --ink:#1a2a36;
+  --dim:#5a6e7e;
+  --rain:rgba(55,85,110,.42);
+  --glass:rgba(255,255,255,.48);
+  --lamp:#b86e22;
+  --paper:rgba(252,248,242,.72);
+  --accent:rgba(184,110,34,.18);
+  color-scheme:light;
+}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0;height:100%;
+  background:var(--bg);color:var(--ink);
+  font-family:"Noto Serif TC","Songti TC","PMingLiU",serif;
+  display:flex;flex-direction:column;overflow:hidden;
+}
+#rain{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+header,nav,main,footer,.controls{position:relative;z-index:1}
+header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 18px 2px;
+}
+h1{margin:0;font-weight:300;font-size:1.05rem;letter-spacing:.35em}
+button{
+  font:inherit;color:var(--dim);background:none;
+  border:1px solid var(--dim);border-radius:999px;
+  padding:5px 12px;font-size:.8rem;cursor:pointer;
+  transition:color .2s,border-color .2s,background .2s;
+}
+button:focus-visible{outline:2px solid var(--lamp);outline-offset:2px}
+button[aria-pressed="true"],button.on{color:var(--lamp);border-color:var(--lamp)}
+button:active{transform:scale(.97)}
+nav{
+  display:flex;gap:8px;overflow-x:auto;
+  padding:8px 18px;scrollbar-width:none;
+}
+nav::-webkit-scrollbar{display:none}
+nav button{white-space:nowrap;flex:none}
+.ch{
+  flex:none;align-self:center;color:var(--dim);
+  font-size:.72rem;letter-spacing:.2em;
+  padding-left:10px;border-left:1px solid var(--dim);
+}
+.ch:first-child{border-left:0;padding-left:0}
+main{
+  flex:1;min-height:0;
+  margin:4px 12px 0;
+  border-radius:20px 20px 0 0;
+  background:var(--paper);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  overflow-y:auto;
+  padding:26px 24px 36px;
+  box-shadow:0 -4px 24px var(--accent);
+  -webkit-mask-image:linear-gradient(transparent 0,#000 36px);
+  mask-image:linear-gradient(transparent 0,#000 36px);
+}
+#ttl{margin:0 0 6px;font-weight:400;font-size:1.32rem;letter-spacing:.18em}
+.by{margin:0 0 18px;font-size:.76rem;letter-spacing:.2em;color:var(--dim)}
+#paper p{
+  margin:0;min-height:1.85em;
+  font-weight:300;font-size:1.06rem;
+  line-height:1.9;letter-spacing:.11em;
+}
+#paper p.gap{min-height:1.35em}
+#paper p.typing::after{
+  content:"";display:inline-block;
+  width:2px;height:1.1em;margin-left:3px;
+  vertical-align:-.15em;background:var(--lamp);
+  animation:blink 1s steps(1) infinite;
+}
+@keyframes blink{50%{opacity:0}}
+.controls{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:8px 10px;padding:10px 14px 6px;
+  background:var(--glass);backdrop-filter:blur(4px);
+  border-top:1px solid rgba(128,140,160,.15);
+}
+.controls .btn-group{display:flex;gap:6px;align-items:center}
+.controls button{
+  min-width:40px;padding:6px 11px;font-size:.78rem;
+}
+.controls button.icon{font-size:.95rem;min-width:38px;padding:6px 10px}
+#prog-wrap{
+  flex:1 1 120px;max-width:220px;min-width:90px;
+  display:flex;flex-direction:column;gap:3px;
+}
+#prog-bar{
+  height:4px;border-radius:99px;background:rgba(128,140,160,.22);
+  overflow:hidden;
+}
+#prog-fill{
+  height:100%;width:0%;border-radius:99px;
+  background:var(--lamp);transition:width .25s ease;
+}
+#prog-txt{
+  font-size:.68rem;color:var(--dim);letter-spacing:.08em;
+  text-align:center;white-space:nowrap;
+}
+footer{
+  padding:4px 16px 10px;font-size:.7rem;color:var(--dim);
+  text-align:center;background:var(--glass);
+}
+#panel{
+  position:fixed;z-index:5;
+  left:12px;right:12px;
+  top:calc(env(safe-area-inset-top,0px) + 50px);
+  max-height:74vh;overflow:auto;
+  background:var(--bg);
+  border:1px solid var(--dim);
+  border-radius:18px;padding:14px 16px;
+  display:grid;gap:14px;
+  box-shadow:0 12px 40px rgba(0,0,0,.25);
+}
+#panel[hidden]{display:none}
+.row{display:grid;gap:6px;font-size:.78rem;color:var(--dim);letter-spacing:.12em}
+.seg{display:flex;flex-wrap:wrap;gap:7px}
+.row input[type="range"]{width:100%;accent-color:var(--lamp)}
+@media (prefers-reduced-motion:reduce){
+  #paper p.typing::after{animation:none}
+  button{transition:none}
+}
+</style>
+</head>
+<body>
+<canvas id="rain" aria-hidden="true"></canvas>
+<header>
+  <h1>雨夜打字機</h1>
+  <div style="display:flex;gap:8px">
+    <button id="copyBtn" title="複製目前歌詞">複製</button>
+    <button id="gear" aria-expanded="false" aria-controls="panel">設定</button>
+  </div>
+</header>
+<section id="panel" hidden aria-label="設定">
+  <div class="row">
+    <span>主題</span>
+    <div class="seg" data-k="theme">
+      <button data-v="auto" aria-pressed="true">跟隨系統</button>
+      <button data-v="dark">深色</button>
+      <button data-v="light">淺色</button>
+    </div>
+  </div>
+  <div class="row">
+    <span>背景</span>
+    <div class="seg" data-k="bg">
+      <button data-v="rain" aria-pressed="true">雨夜</button>
+      <button data-v="mist">薄霧</button>
+      <button data-v="stars">星空</button>
+      <button data-v="petal">落花</button>
+    </div>
+  </div>
+  <div class="row">
+    <span>背景音樂</span>
+    <div class="seg" data-k="mu">
+      <button data-v="off" aria-pressed="true">無</button>
+      <button data-v="piano">琴音</button>
+      <button data-v="pad">夜風</button>
+      <button data-v="box">音樂盒</button>
+    </div>
+  </div>
+  <div class="row">
+    <span>打字速度</span>
+    <div class="seg" data-k="spd">
+      <button data-v="0.4">很慢</button>
+      <button data-v="0.7">慢</button>
+      <button data-v="1" aria-pressed="true">中</button>
+      <button data-v="1.6">快</button>
+      <button data-v="2.8">極快</button>
+    </div>
+  </div>
+  <div class="row">
+    <span>播放模式</span>
+    <div class="seg" data-k="mode">
+      <button data-v="seq" aria-pressed="true">順序</button>
+      <button data-v="shuf">隨機</button>
+      <button data-v="one">單曲循環</button>
+    </div>
+  </div>
+  <div class="row">
+    <span>聲音</span>
+    <div class="seg">
+      <button id="snd" aria-pressed="false">雨聲</button>
+      <button id="vo" aria-pressed="false">朗讀（女聲）</button>
+    </div>
+  </div>
+  <div class="row">
+    <label for="vol">音量</label>
+    <input id="vol" type="range" min="0" max="100" value="70">
+  </div>
+</section>
+<nav id="nav" aria-label="歌曲"></nav>
+<main>
+  <h2 id="ttl"></h2>
+  <p class="by">詞：小路_Joseph</p>
+  <div id="paper" aria-live="off"></div>
+</main>
+<div class="controls" aria-label="播放控制">
+  <div class="btn-group">
+    <button id="btnPrev" class="icon" title="上一首">⏮</button>
+    <button id="btnPlay" class="icon" title="播放／暫停">⏸</button>
+    <button id="btnNext" class="icon" title="下一首">⏭</button>
+    <button id="btnReplay" class="icon" title="重新播放">↺</button>
+  </div>
+  <div id="prog-wrap">
+    <div id="prog-bar"><div id="prog-fill"></div></div>
+    <div id="prog-txt">—</div>
+  </div>
+</div>
+<footer id="ft">點歌名換歌 · 點畫面可暫停 · 自動接下一首</footer>
+<script>
+const songs=[
+{n:"山頂前的小路",k:1,c:0,t:`二十多年前 山頂前的小路
+匆匆一瞥 彷彿見到初戀
+幾乎一樣 會說話的眼睛
+安全帽下 天真而燦爛
+
+一次次
+站山頂前的小路邊
+莫名的等待
+只為夢裡能浮現
+更深刻真實的倩影
+
+風吹過舊時光的路口
+回憶輕輕 在心底顫抖
+你的微笑 是溫暖的夢
+讓我再一次 為愛停留`},
+{n:"往事",k:3,c:0,t:`年輕時的那個背影
+在人群裡特別清晰
+不曾說過一句話
+卻在心裡偷偷惦記
+
+你笑的時候陽光更暖
+你走過時風都變輕
+從未奢望能並肩
+只願遠遠望著
+就已滿心歡喜
+
+但有些愛本就適合沉默
+只願在夢裡與你再相逢`},
+{n:"不覺中想起妳",k:7,c:1,t:`不覺中想起妳
+心湖泛起漣漪
+記憶如霧飄移
+夢境依舊真實
+
+街燈映照過去
+歲月帶走曾經
+微風吹過耳際
+仍有妳的聲音
+
+雨滴輕敲窗櫺
+低語化作思念
+心跳未曾平靜
+因為妳走得匆匆
+
+輕輕喚著妳
+靜靜等著妳
+哪怕世界沉寂
+心中依然有妳`},
+{n:"霧中相遇",k:8,c:1,t:`霧氣氤氳銀白世界
+無邊無際如夢如幻
+熟悉街角我佇立等待
+周圍景物柔和溫暖
+
+朦朧霧中你的身影
+依舊那件舊外套
+歲月
+未曾改變你分毫
+你依然微笑
+如當初模樣
+
+風拂過帶著記憶氣息
+時光凝固在這一刻`},
+{n:"常駐足的小路口",k:12,c:2,t:`夕陽拉長了影子
+映在熟悉的小路口
+風吹過往日的悸動
+仍悄悄藏在心頭
+
+這條小路口
+不覺中停留
+怕記憶被歲月沖淡
+歲月更迭 人潮川流
+唯有思念
+始終不曾走
+
+常駐足的小路口
+依舊等候如初
+過去的等待
+化作遙遠的祝福`},
+{n:"畫夢",k:15,c:3,t:`你的眉間畫著柔情
+輕輕一筆像春風
+曾經
+雲彩下藏著秘密
+
+浮雲織成的夢
+真真假假難觸碰
+水波映出的影
+像你溫暖的笑容
+
+夜空掛滿星辰
+卻少了
+最亮的一顆
+
+筆尖遊走
+揮灑思念
+每一筆
+都牽動著心弦`},
+{n:"夢中情人",k:2,c:0,t:`微風輕拂你的長髮
+星光閃耀在你眼眸
+你的笑容像晨曦溫暖
+輕輕喚醒沉睡的心頭
+
+我的夢中情人
+你的身影在心海蕩漾
+用微笑寫詩眼神歌唱
+愛的旋律從未停歇
+
+指尖劃過你溫柔輪廓
+每個瞬間都刻進心窩
+縱然歲月匆匆流轉
+我對你的愛從不更改`},
+{n:"夢中的旋律",k:4,c:0,t:`你是春日裡的綠野芬芳
+也是冬夜裡融化寒霜
+在生命河流裡輕柔流淌
+每一步都與你相伴共往
+
+My Dream Lover
+Your silhouette ripples in my heart’s sea,
+Writing poetry with your smile, singing with your eyes.
+The melody of love never fades away.`},
+{n:"隔世的凝望",k:6,c:1,t:`二十多年前的匆匆一瞥
+帶走我魂牽夢引的心跳
+歲月的風吹散了憧憬
+卻未能抹去那份懷念
+
+一次次夢裡出現的倩影
+如星辰般閃耀黑夜
+腦海中充滿思念的波浪
+卻無處渲洩這份情潮
+
+歲月的長河靜靜流淌
+帶走青春不帶走思念
+當年提不起勇氣的遺憾
+夢裡再尋那匆匆一瞥`},
+{n:"夢中花園",k:9,c:1,t:`微風輕拂那片花園
+海浪輕拍心海岸邊
+你的名字
+刻在這片夢的花園
+淚水澆灌夢想的花園
+
+用山川寫詩 河流歌唱
+愛的聲音永不停息
+夢裏刻著你的名
+這條溪流流著我的夢
+
+一句話 一首歌
+我們都在夢的懷抱`},
+{n:"山頂前的小路•峰廻路轉",k:10,c:1,t:`山頂前的小路
+依舊寂靜如昔
+熟悉身影
+讓心跳快了頻率
+
+二十多年後的今天
+細雨紛紛
+心底的秘密
+隨歲月化作勇氣
+
+妳靜靜聽著
+眼裡閃爍熟悉的光
+沉默許久
+終於輕聲開口
+謝謝你的厚愛
+
+山頂前的小路
+依舊寂靜如昔
+只是這一次
+我不再回頭尋覓`},
+{n:"小路不再曲折",k:11,c:2,t:`歲月靜靜流轉
+風輕輕吹拂臉龐
+那條熟悉的小路
+依舊詩意盎然
+
+你的夢
+是否已經實現
+你的心
+是否依然溫暖
+無論人生如何變幻
+願你擁有
+最美的晴天
+
+願你前方的路
+充滿幸福與希望
+願笑容陪伴你
+不論春夏或風霜`},
+{n:"被愛的獨白",k:13,c:2,t:`落花飄啊飄 隨風飛起
+你的深情
+在耳邊輕輕低語
+可是 我像流水一樣
+不知道
+該在哪裡停留 歇息
+
+你看著我
+眼裡滿是期待
+像春天的細雨
+無聲無息地 落下
+
+落花有意
+流水嘆息
+你還在等
+可我 已經飄遠了`},
+{n:"微笑向前走",k:14,c:2,t:`風吹過了 又是一個路口
+想得太多 反而讓心更沉重
+
+咖啡還溫熱 但故事已降溫
+舊訊息還留著 只是沒人再回應
+
+一直回頭看 怎麼看得見前方的美
+執著過去的因 只會困住自己的心
+
+不住於心 何處不自由
+風吹過後 微笑著向前走`}
+];
+
+const $=s=>document.querySelector(s);
+const paper=$("#paper"),nav=$("#nav"),ttl=$("#ttl"),main=$("main");
+const progFill=$("#prog-fill"),progTxt=$("#prog-txt");
+const btnPlay=$("#btnPlay");
+
+let tok=0, spd=1, ac=null, noise=null, rg=null, on=false, vl=.7;
+let voice=false, mg=null, fx=null, mt=0, padNodes=[];
+let paused=false, cur=0, mode="seq", played=[];
+let totalChars=0, doneChars=0;
+
+const wait=async ms=>{
+  const t=Math.max(8,ms/spd);
+  await new Promise(r=>setTimeout(r,t));
+  while(paused) await new Promise(r=>setTimeout(r,120));
+};
+
+const chs=["初遇與悸動","遺憾與回望","成長與釋懷","轉化與昇華"];
+songs.sort((a,b)=>a.k-b.k);
+songs.forEach((s,i)=>{
+  if(i===0||s.c!==songs[i-1].c){
+    const l=document.createElement("span");
+    l.className="ch";l.textContent=chs[s.c];
+    nav.appendChild(l);
+  }
+  const b=document.createElement("button");
+  b.textContent=(i+1)+" "+s.n;
+  b.onclick=()=>play(i);
+  nav.appendChild(b);
+});
+
+function initAudio(){
+  ac=new(window.AudioContext||window.webkitAudioContext)();
+  const len=ac.sampleRate*2;
+  noise=ac.createBuffer(1,len,ac.sampleRate);
+  const d=noise.getChannelData(0);
+  for(let i=0;i<len;i++) d[i]=Math.random()*2-1;
+  const src=ac.createBufferSource();src.buffer=noise;src.loop=true;
+  const hp=ac.createBiquadFilter();hp.type="highpass";hp.frequency.value=500;
+  const lp=ac.createBiquadFilter();lp.type="lowpass";lp.frequency.value=4500;
+  rg=ac.createGain();rg.gain.value=0;
+  src.connect(hp);hp.connect(lp);lp.connect(rg);rg.connect(ac.destination);src.start();
+  mg=ac.createGain();mg.gain.value=.5*vl;mg.connect(ac.destination);
+  const dl=ac.createDelay(),fb=ac.createGain();
+  dl.delayTime.value=.45;fb.gain.value=.4;
+  dl.connect(fb);fb.connect(dl);dl.connect(mg);
+  fx=ac.createGain();fx.connect(mg);fx.connect(dl);
+}
+function key(){
+  if(!on||!ac) return;
+  const s=ac.createBufferSource(),f=ac.createBiquadFilter(),g=ac.createGain(),t=ac.currentTime;
+  s.buffer=noise;f.type="bandpass";f.frequency.value=1800+Math.random()*900;
+  g.gain.setValueAtTime(Math.max(.3*vl,.0011),t);
+  g.gain.exponentialRampToValueAtTime(.001,t+.05);
+  s.connect(f);f.connect(g);g.connect(ac.destination);
+  s.start(t,Math.random(),.06);
+}
+$("#snd").onclick=e=>{
+  try{
+    if(!ac) initAudio();
+    ac.resume();
+    on=!on;
+    rg.gain.setTargetAtTime(on?.13*vl:0,ac.currentTime,.3);
+  }catch(_){on=false}
+  e.currentTarget.setAttribute("aria-pressed",on);
+};
+$("#vol").oninput=e=>{
+  vl=e.target.value/100;
+  if(rg) rg.gain.setTargetAtTime(on?.13*vl:0,ac.currentTime,.1);
+  if(mg) mg.gain.setTargetAtTime(.5*vl,ac.currentTime,.1);
+};
+$("#vo").onclick=e=>{
+  if(!("speechSynthesis"in window)){e.currentTarget.textContent="不支援";return}
+  voice=!voice;
+  if(voice) speechSynthesis.speak(new SpeechSynthesisUtterance(""));
+  else speechSynthesis.cancel();
+  e.currentTarget.setAttribute("aria-pressed",voice);
+};
+function pick(){
+  const v=speechSynthesis.getVoices().filter(x=>/^zh/i.test(x.lang));
+  return v.find(x=>/yating|hanhan|meijia|mei-jia|google|female|女/i.test(x.name)&&/TW|Hant|臺灣|台灣/i.test(x.lang+x.name))
+    ||v.find(x=>/TW|Hant/i.test(x.lang+x.name))||v[0];
+}
+const FT="點歌名換歌 · 點畫面可暫停 · 自動接下一首";
+const P=$("#panel"),G=$("#gear");
+function A(){if(!ac)initAudio();ac.resume()}
+G.onclick=()=>{P.hidden=!P.hidden;G.setAttribute("aria-expanded",!P.hidden)};
+addEventListener("keydown",e=>{if(e.key==="Escape"){P.hidden=true;G.setAttribute("aria-expanded",false)}});
+
+function setPaused(v){
+  paused=v;
+  btnPlay.textContent=paused?"▶":"⏸";
+  btnPlay.title=paused?"繼續":"暫停";
+  if("speechSynthesis"in window) paused?speechSynthesis.pause():speechSynthesis.resume();
+  $("#ft").textContent=paused?"已暫停，點畫面或按 ▶ 繼續":FT;
+}
+main.onclick=()=>{
+  if(!P.hidden){P.hidden=true;G.setAttribute("aria-expanded",false);return}
+  setPaused(!paused);
+};
+btnPlay.onclick=e=>{e.stopPropagation();setPaused(!paused)};
+
+document.querySelectorAll(".seg[data-k] button").forEach(b=>b.onclick=()=>{
+  const s=b.parentNode;
+  s.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  const k=s.dataset.k,v=b.dataset.v;
+  if(k==="bg"){bg=v;init()}
+  else if(k==="mu"){try{A()}catch(_){}music(v)}
+  else if(k==="spd"){spd=+v}
+  else if(k==="mode"){mode=v;if(mode==="shuf") played=[]}
+  else if(k==="theme"){
+    if(v==="auto") document.documentElement.removeAttribute("data-theme");
+    else document.documentElement.setAttribute("data-theme",v);
+  }
+});
+
+const PENT=[220,261.63,293.66,329.63,392,440,523.25,587.33,659.25,783.99,880];
+function note(f,d,ty,v){
+  const t=ac.currentTime,o=ac.createOscillator(),g=ac.createGain();
+  o.type=ty;o.frequency.value=f;
+  g.gain.setValueAtTime(0,t);
+  g.gain.linearRampToValueAtTime(v,t+.02);
+  g.gain.exponentialRampToValueAtTime(.0008,t+d);
+  o.connect(g);g.connect(fx);o.start(t);o.stop(t+d+.1);
+}
+function music(m){
+  const my=++mt;
+  padNodes.forEach(o=>{try{o.stop()}catch(_){}});padNodes=[];
+  if(m==="off"||!ac) return;
+  if(m==="pad"){
+    [110,164.81,220,261.63].forEach((f,i)=>{
+      const o=ac.createOscillator(),g=ac.createGain(),l=ac.createOscillator(),lg=ac.createGain();
+      o.frequency.value=f;g.gain.value=.06;
+      l.frequency.value=.06+i*.03;lg.gain.value=.04;
+      l.connect(lg);lg.connect(g.gain);o.connect(g);g.connect(fx);
+      o.start();l.start();padNodes.push(o,l);
+    });
+    return;
+  }
+  let i=5;
+  (function tick(){
+    if(my!==mt) return;
+    if(m==="piano"){
+      note(PENT[Math.floor(Math.random()*8)],3.4,"triangle",.2);
+      setTimeout(tick,1500+Math.random()*2000);
+    }else{
+      i=Math.max(4,Math.min(10,i+Math.floor(Math.random()*5)-2));
+      note(PENT[i],1.5,"sine",.16);
+      setTimeout(tick,650);
+    }
+  })();
+}
+function say(txt){
+  if(!voice||spd>2||!("speechSynthesis"in window)) return Promise.resolve();
+  return new Promise(res=>{
+    const u=new SpeechSynthesisUtterance(txt.replace(/•/g," ")),v=pick();
+    u.lang="zh-TW";if(v)u.voice=v;
+    u.pitch=1.05;u.rate=.85;u.volume=vl;
+    u.onend=u.onerror=()=>res();
+    setTimeout(res,txt.length*450+2500);
+    speechSynthesis.speak(u);
+  });
+}
+
+function updateProg(){
+  const pct=totalChars?Math.min(100,Math.round(doneChars/totalChars*100)):0;
+  progFill.style.width=pct+"%";
+  progTxt.textContent=totalChars?`${doneChars} / ${totalChars} 字 · ${pct}%`:"—";
+}
+
+function nextIndex(i){
+  if(mode==="one") return i;
+  if(mode==="shuf"){
+    if(played.length>=songs.length) played=[];
+    let n;
+    do{n=Math.floor(Math.random()*songs.length)}while(played.includes(n)&&played.length<songs.length);
+    played.push(n);
+    return n;
+  }
+  return (i+1)%songs.length;
+}
+
+async function play(i){
+  const my=++tok;
+  cur=i;
+  setPaused(false);
+  if("speechSynthesis"in window){speechSynthesis.cancel();speechSynthesis.resume()}
+  paper.textContent="";
+  ttl.textContent=(i+1)+"　"+songs[i].n;
+  main.scrollTop=0;
+  nav.querySelectorAll("button").forEach((b,j)=>{
+    b.classList.toggle("on",j===i);
+    if(j===i) b.scrollIntoView({inline:"center",block:"nearest"});
+  });
+
+  const lines=songs[i].t.split("\n");
+  totalChars=lines.reduce((a,l)=>a+(l.trim()?l.length:0),0);
+  doneChars=0;
+  updateProg();
+
+  for(const ln of lines){
+    if(my!==tok) return;
+    const p=document.createElement("p");
+    paper.appendChild(p);
+    if(!ln.trim()){p.className="gap";await wait(650);continue}
+    p.classList.add("typing");
+    const sp=say(ln);
+    for(const ch of ln){
+      if(my!==tok) return;
+      p.textContent+=ch;
+      key();
+      doneChars++;
+      if(doneChars%3===0) updateProg();
+      main.scrollTop=main.scrollHeight;
+      await wait(ch===" "?70:100+Math.random()*80);
+    }
+    p.classList.remove("typing");
+    updateProg();
+    await sp;
+    await wait(520);
+  }
+  await wait(3200);
+  if(my===tok) play(nextIndex(i));
+}
+
+$("#btnPrev").onclick=e=>{
+  e.stopPropagation();
+  play((cur-1+songs.length)%songs.length);
+};
+$("#btnNext").onclick=e=>{
+  e.stopPropagation();
+  play(nextIndex(cur));
+};
+$("#btnReplay").onclick=e=>{
+  e.stopPropagation();
+  play(cur);
+};
+
+$("#copyBtn").onclick=async()=>{
+  const s=songs[cur];
+  const text=`${s.n}\n詞：小路_Joseph\n\n${s.t}`;
+  try{
+    await navigator.clipboard.writeText(text);
+    const old=$("#copyBtn").textContent;
+    $("#copyBtn").textContent="已複製";
+    setTimeout(()=>$("#copyBtn").textContent=old,1400);
+  }catch(_){
+    $("#copyBtn").textContent="失敗";
+    setTimeout(()=>$("#copyBtn").textContent="複製",1400);
+  }
+};
+
+const cv=$("#rain"),cx=cv.getContext("2d");
+let W,H,drops=[],col="",lamp="",n=0,bg="rain";
+function size(){
+  const r=devicePixelRatio||1;
+  W=innerWidth;H=innerHeight;
+  cv.width=W*r;cv.height=H*r;
+  cx.setTransform(r,0,0,r,0,0);
+  init();
+}
+function init(){
+  const R=Math.random;
+  if(bg==="rain") drops=Array.from({length:Math.floor(W/7)},()=>({x:R()*W*1.2,y:R()*H,l:10+R()*18,v:6+R()*8}));
+  else if(bg==="mist") drops=Array.from({length:14},()=>({x:R()*W,y:R()*H,r:90+R()*160,v:.15+R()*.35}));
+  else if(bg==="stars") drops=Array.from({length:Math.floor(W/4)},()=>({x:R()*W,y:R()*H,r:.6+R()*1.6,p:R()*6.3}));
+  else drops=Array.from({length:32},()=>({x:R()*W,y:R()*H,s:3+R()*4,v:.6+R(),a:R()*6.3,w:R()*6.3}));
+}
+function other(){
+  const t=n/60;
+  for(const d of drops){
+    if(bg==="mist"){
+      d.x+=d.v;if(d.x-d.r>W)d.x=-d.r;
+      cx.fillStyle=col;cx.globalAlpha=.2;
+      for(let k=1;k<=5;k++){cx.beginPath();cx.arc(d.x,d.y,d.r*k/5,0,6.3);cx.fill()}
+    }else if(bg==="stars"){
+      cx.fillStyle=lamp;cx.globalAlpha=.2+.8*Math.abs(Math.sin(t*.8+d.p));
+      cx.fillRect(d.x,d.y,d.r,d.r);
+    }else{
+      d.y+=d.v;d.x+=Math.sin(t+d.w)*.6;d.a+=.01;
+      if(d.y>H+10){d.y=-10;d.x=Math.random()*W}
+      cx.fillStyle=lamp;cx.globalAlpha=.55;
+      cx.beginPath();cx.ellipse(d.x,d.y,d.s,d.s*.55,d.a,0,6.3);cx.fill();
+    }
+  }
+  cx.globalAlpha=1;
+}
+function frame(){
+  if(n++%60===0){
+    const s=getComputedStyle(document.documentElement);
+    col=s.getPropertyValue("--rain");
+    lamp=s.getPropertyValue("--lamp");
+  }
+  cx.clearRect(0,0,W,H);
+  if(bg!=="rain"){other();requestAnimationFrame(frame);return}
+  cx.strokeStyle=col;cx.lineWidth=1;cx.beginPath();
+  for(const d of drops){
+    cx.moveTo(d.x,d.y);cx.lineTo(d.x-d.l*.2,d.y+d.l);
+    d.y+=d.v;d.x-=d.v*.2;
+    if(d.y>H||d.x<-20){d.y=-20;d.x=Math.random()*W*1.2}
+  }
+  cx.stroke();
+  requestAnimationFrame(frame);
+}
+addEventListener("resize",size);
+size();frame();
+play(0);
+</script>
+</body>
+</html>
