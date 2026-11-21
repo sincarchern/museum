@@ -1,13 +1,112 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#202b29"><title>臺灣建築文化圖鑑｜從時代看見生活</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="從傳統廟宇、日治公共建築到戰後現代場館，60個臺灣建築案例、歷史時間軸、互動地圖與建築工藝的數位圖鑑。">
+<meta name="theme-color" content="#202b29">
+<meta name="author" content="小路_Joseph工作室">
+<title>臺灣建築文化數位博物館｜從建築看見歷史</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f4f1e9;--paper:#fffdf8;--ink:#26312e;--muted:#737a72;--line:#ded8ca;--green:#34564d;--gold:#b18a4b;--rust:#9b5543;--shadow:0 12px 36px #26312e12;--serif:'Noto Serif TC',serif;--sans:'Noto Sans TC',sans-serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.75}button,input,select{font:inherit}button{cursor:pointer}.topbar{position:sticky;top:0;z-index:20;background:#f4f1e9ed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.topinner{max-width:1240px;margin:auto;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{font:700 17px var(--serif);letter-spacing:.08em}.brand span{color:var(--gold)}.nav{display:flex;gap:18px;font-size:13px}.nav a{color:var(--muted);text-decoration:none}.nav a:hover{color:var(--green)}.hero{background:linear-gradient(110deg,#1d302cF2,#263c36E8),radial-gradient(circle at 75% 20%,#c49a5a55,transparent 35%);color:#f7f1e5;padding:76px 24px 62px;position:relative;overflow:hidden}.hero:after{content:'臺灣';position:absolute;right:4%;bottom:-85px;font:900 clamp(130px,24vw,300px) var(--serif);color:#ffffff0a;pointer-events:none}.hero-inner{max-width:1180px;margin:auto;position:relative;z-index:1}.eyebrow{font-size:12px;letter-spacing:.28em;color:#d9bc83}.hero h1{font:900 clamp(34px,5vw,62px)/1.3 var(--serif);letter-spacing:.08em;margin:14px 0}.hero p{max-width:680px;color:#e0e4dc;font-size:15px;margin:0}.hero-meta{display:flex;gap:22px;margin-top:28px;color:#d7d4c9;font-size:12px;flex-wrap:wrap}.hero-meta b{font-size:20px;color:#e7c98f;margin-right:5px}.wrap{max-width:1180px;margin:auto;padding:34px 24px 80px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:8px 0 20px}.section-head h2{font:700 25px var(--serif);margin:0}.section-head p{margin:5px 0 0;color:var(--muted);font-size:13px}.tools{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0 18px}.search{flex:1;min-width:230px;position:relative}.search input{width:100%;padding:13px 16px 13px 42px;border:1px solid var(--line);background:var(--paper);border-radius:8px;color:var(--ink);outline:none}.search:before{content:'⌕';position:absolute;left:15px;top:5px;font-size:25px;color:var(--muted)}.select{padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}.era-tabs{display:flex;gap:8px;overflow:auto;padding:2px 1px 12px;scrollbar-width:thin}.era-tab{white-space:nowrap;border:1px solid var(--line);border-radius:30px;padding:9px 15px;background:transparent;color:var(--muted);font-size:13px}.era-tab.active,.era-tab:hover{background:var(--green);border-color:var(--green);color:white}.resultline{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin:5px 0 14px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.tile{background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 3px 12px #26312e08;transition:.22s;display:flex;flex-direction:column}.tile:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.thumb{height:190px;background:linear-gradient(135deg,#d9d0be,#eee8dc);position:relative;overflow:hidden}.thumb img{width:100%;height:100%;object-fit:cover;display:block}.thumb .fallback{height:100%;display:grid;place-items:center;background:linear-gradient(145deg,#e5dfd2,#c9c0ad);color:#7b7669;font:600 17px var(--serif);letter-spacing:.15em}.era-label{position:absolute;left:12px;top:12px;background:#26312edb;color:#fff;padding:4px 9px;border-radius:3px;font-size:11px}.tile-body{padding:16px 17px 17px;display:flex;flex-direction:column;flex:1}.tile-year{font-size:11px;color:var(--gold);letter-spacing:.1em}.tile h3{font:700 19px/1.45 var(--serif);margin:5px 0 7px}.tile .place{font-size:12px;color:var(--muted)}.tile .desc{font-size:13px;color:#59615b;margin:10px 0 14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}.tag{font-size:10px;color:var(--green);background:#e9eee8;padding:3px 8px;border-radius:20px}.tile-foot{border-top:1px solid #ece7dc;padding:11px 17px;display:flex;justify-content:space-between;align-items:center}.more{border:0;background:none;color:var(--green);font-weight:600;font-size:12px;padding:0}.more:hover{text-decoration:underline}.maplink{font-size:11px;color:var(--muted);text-decoration:none}.empty{grid-column:1/-1;text-align:center;padding:55px 15px;color:var(--muted);background:var(--paper);border:1px dashed var(--line);border-radius:10px}.era-guide{margin-top:64px;background:#e9e5da;border-radius:12px;padding:28px}.era-guide h2{font:700 23px var(--serif);margin:0 0 6px}.era-guide>p{font-size:13px;color:var(--muted);margin:0 0 20px}.guide-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.guide{background:var(--paper);padding:16px;border-radius:7px;border-top:3px solid var(--accent)}.guide small{color:var(--gold);font-size:10px}.guide h3{font:700 15px var(--serif);margin:5px 0}.guide p{font-size:12px;color:#606961;margin:0}.howto{margin-top:54px}.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.how{padding:18px;background:var(--paper);border:1px solid var(--line);border-radius:8px}.how b{display:block;font:700 16px var(--serif);margin-bottom:5px}.how p{font-size:12px;color:var(--muted);margin:0}.sourcebox{margin-top:42px;padding:20px 22px;border-left:3px solid var(--gold);background:#ebe6da;font-size:12px;color:#656b62}.sourcebox a{color:var(--green)}footer{background:#263a34;color:#d9ded6;padding:28px 24px;text-align:center;font-size:11px;letter-spacing:.08em}.modal{display:none;position:fixed;inset:0;background:#111b18b8;z-index:50;padding:22px;overflow:auto}.modal.open{display:grid;place-items:center}.dialog{width:min(900px,100%);max-height:calc(100vh - 44px);overflow:auto;background:var(--paper);border-radius:12px;box-shadow:0 24px 90px #0005;position:relative}.close{position:sticky;top:10px;float:right;margin:10px 10px -48px 0;z-index:2;border:0;background:#26312edd;color:#fff;border-radius:50%;width:36px;height:36px;font-size:20px}.detail-hero{height:300px;background:#ded7c8;position:relative}.detail-hero img{width:100%;height:100%;object-fit:cover}.detail-hero .fallback{height:100%;display:grid;place-items:center;color:#746d5e;font:700 25px var(--serif)}.detail-content{padding:26px 34px 34px}.detail-kicker{font-size:11px;color:var(--gold);letter-spacing:.15em}.detail-content h2{font:900 30px var(--serif);margin:5px 0}.detail-sub{color:var(--muted);font-size:13px;margin-bottom:20px}.detail-summary{font:500 16px/2 var(--serif);border-left:3px solid var(--gold);padding:4px 0 4px 16px;margin:18px 0 25px}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.detail-block{padding:16px;background:#f3f0e8;border-radius:7px}.detail-block h4{font:700 15px var(--serif);margin:0 0 7px;color:var(--green)}.detail-block p{font-size:13px;margin:0;color:#505a53}.detail-block.full{grid-column:1/-1}.factrow{display:grid;grid-template-columns:90px 1fr;gap:8px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}.factrow:last-child{border:0}.factrow b{color:var(--green)}.detail-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.action{display:inline-block;padding:10px 14px;background:var(--green);color:#fff;text-decoration:none;border-radius:6px;font-size:12px}.action.secondary{background:transparent;color:var(--green);border:1px solid var(--green)}.photo-credit{position:absolute;bottom:7px;right:10px;background:#111b18c9;color:white;font-size:10px;padding:3px 7px;border-radius:3px}.photo-credit a{color:white}.loading{font-size:12px;color:var(--muted);padding:12px}
-@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.guide-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.topinner{padding:9px 16px}.nav{gap:10px}.nav a{font-size:11px}.hero{padding:54px 20px 45px}.wrap{padding:25px 15px 55px}.grid{grid-template-columns:1fr;gap:13px}.thumb{height:205px}.section-head{display:block}.section-head h2{font-size:22px}.tools{gap:8px}.search{min-width:100%}.select{flex:1}.guide-grid,.how-grid{grid-template-columns:1fr}.era-guide{padding:20px 16px}.detail-hero{height:220px}.detail-content{padding:22px 18px 26px}.detail-content h2{font-size:25px}.detail-grid{grid-template-columns:1fr}.detail-block.full{grid-column:auto}.factrow{grid-template-columns:76px 1fr}.modal{padding:9px}.dialog{max-height:calc(100vh - 18px)}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.75}
+button,input,select{font:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
+
+/* 頂部導覽列 */
+.topbar{position:sticky;top:0;z-index:20;background:#f4f1e9ed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topinner{max-width:1240px;margin:auto;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font:700 17px var(--serif);letter-spacing:.08em}
+.brand span{color:var(--gold)}
+.nav{display:flex;gap:18px;font-size:13px}
+.nav a{color:var(--muted);text-decoration:none;padding:4px 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.nav a:hover,.nav a.on{color:var(--green)}
+.nav a.on{font-weight:600;border-color:var(--gold)}
+
+/* Hero 區 */
+.hero{background:linear-gradient(110deg,#1d302cF2,#263c36E8),radial-gradient(circle at 75% 20%,#c49a5a55,transparent 35%);color:#f7f1e5;padding:76px 24px 62px;position:relative;overflow:hidden}
+.hero:after{content:'臺灣';position:absolute;right:4%;bottom:-85px;font:900 clamp(130px,24vw,300px) var(--serif);color:#ffffff0a;pointer-events:none}
+.hero-inner{max-width:1180px;margin:auto;position:relative;z-index:1}
+.eyebrow{font-size:12px;letter-spacing:.28em;color:#d9bc83}
+.hero h1{font:900 clamp(34px,5vw,62px)/1.3 var(--serif);letter-spacing:.08em;margin:14px 0}
+.hero p{max-width:680px;color:#e0e4dc;font-size:15px;margin:0}
+.hero-meta{display:flex;gap:22px;margin-top:28px;color:#d7d4c9;font-size:12px;flex-wrap:wrap}
+.hero-meta b{font-size:20px;color:#e7c98f;margin-right:5px}
+
+/* 主版面 */
+.wrap{max-width:1180px;margin:auto;padding:34px 24px 80px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:8px 0 20px}
+.section-head h2{font:700 25px var(--serif);margin:0}
+.section-head p{margin:5px 0 0;color:var(--muted);font-size:13px}
+
+/* 搜尋與篩選工具列 */
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0 16px}
+.search{flex:1;min-width:230px;position:relative;display:flex;align-items:center}
+.search input{width:100%;padding:12px 36px 12px 40px;border:1px solid var(--line);background:var(--paper);border-radius:8px;color:var(--ink);outline:none;min-height:46px}
+.search:before{content:'⌕';position:absolute;left:14px;top:50%;transform:translateY(-52%);font-size:22px;color:var(--muted);pointer-events:none}
+.clear-search{position:absolute;right:8px;border:0;background:#ebe6da;color:var(--muted);width:24px;height:24px;border-radius:50%;font-size:14px;display:none;place-items:center}
+.clear-search.show{display:grid}
+.select{padding:11px 14px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);min-height:46px}
+.tools .tbtn{padding:11px 14px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);font-size:13px;white-space:nowrap;min-height:46px;transition:all .2s}
+.tools .tbtn[aria-pressed=true]{background:var(--rust);border-color:var(--rust);color:#fff}
+.tools .tbtn:hover{border-color:var(--green)}
+.tools .tbtn.img-btn{border-color:var(--gold);color:var(--ink);background:#faf6ec}
+.tools .tbtn.img-btn:hover{background:var(--gold);color:#fff}
+
+/* 時代頁籤 */
+.era-tabs{display:flex;gap:8px;overflow:auto;padding:2px 1px 12px;scrollbar-width:thin}
+.era-tab{white-space:nowrap;border:1px solid var(--line);border-radius:30px;padding:9px 15px;background:transparent;color:var(--muted);font-size:13px;transition:all .2s}
+.era-tab.active,.era-tab:hover{background:var(--green);border-color:var(--green);color:#fff}
+.resultline{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin:5px 0 14px;flex-wrap:wrap;gap:6px}
+
+/* 案例卡片網格 */
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.tile{background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 3px 12px #26312e08;transition:.22s;display:flex;flex-direction:column}
+.tile:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.thumb{height:196px;background:linear-gradient(135deg,#e8e1d1,#f5f1e6);position:relative;overflow:hidden;cursor:pointer}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transform:scale(1);transition:opacity .5s,transform .6s}
+.thumb img.loaded{opacity:1}
+.tile:hover .thumb img{transform:scale(1.05)}
+.thumb .sketch-wrap{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;background:linear-gradient(145deg,#efe9dc,#e2d9c6);position:relative}
+.thumb .sketch-wrap svg{width:100%;height:132px;display:block}
+.thumb .sketch-caption{font:600 12px var(--serif);color:#5c6157;letter-spacing:.12em;margin-top:2px}
+.era-label{position:absolute;left:12px;top:12px;background:#26312ee0;color:#fff;padding:4px 9px;border-radius:3px;font-size:11px;border-left:3px solid var(--gold);z-index:2}
+.img-source-badge{position:absolute;right:10px;bottom:8px;background:#111b18b8;color:#f4f1e9;font-size:10px;padding:2px 7px;border-radius:3px;z-index:2}
+.tile-body{padding:16px 17px 17px;display:flex;flex-direction:column;flex:1}
+.tile-year{font-size:11px;color:var(--gold);letter-spacing:.1em}
+.tile h3{font:700 19px/1.45 var(--serif);margin:5px 0 7px}
+.tile .place{font-size:12px;color:var(--muted)}
+.tile .desc{font-size:13px;color:#59615b;margin:10px 0 14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.tag{font-size:10px;color:var(--green);background:#e9eee8;padding:3px 8px;border-radius:20px}
+.tile-foot{border-top:1px solid #ece7dc;padding:11px 17px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.more{border:0;background:none;color:var(--green);font-weight:600;font-size:12px;padding:0}
+.more:hover{text-decoration:underline}
+.fav{border:1px solid var(--line);background:transparent;color:var(--rust);border-radius:20px;padding:3px 11px;font-size:12px;line-height:1.6}
+.fav[aria-pressed=true]{background:#f3e3dd;border-color:var(--rust)}
+.fav:hover{border-color:var(--rust)}
+.maplink{font-size:11px;color:var(--muted);text-decoration:none}
+.maplink:hover{color:var(--green)}
+.empty{grid-column:1/-1;text-align:center;padding:55px 15px;color:var(--muted);background:var(--paper);border:1px dashed var(--line);border-radius:10px}
+.empty .reset{margin-top:14px;border:1px solid var(--green);background:var(--green);color:#fff;border-radius:6px;padding:9px 18px;font-size:13px}
+
+/* 五個時代導覽卡 */
+.era-guide{margin-top:64px;background:#e9e5da;border-radius:12px;padding:28px}
+.era-guide h2{font:700 23px var(--serif);margin:0 0 6px}
+.era-guide>p{font-size:13px;color:var(--muted);margin:0 0 20px}
+.guide-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.guide{background:var(--paper);padding:16px;border-radius:7px;border-top:3px solid var(--accent);cursor:pointer;transition:transform .2s,box-shadow .2s;text-align:left;border-left:0;border-right:0;border-bottom:0;display:flex;flex-direction:column}
+.guide:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.guide small{color:var(--gold);font-size:10px}
+.guide h3{font:700 15px var(--serif);margin:5px 0;color:var(--ink)}
+.guide p{font-size:12px;color:#606961;margin:0 0 10px;flex:1}
+.guide .guide-go{font-size:11px;color:var(--green);font-weight:600}
 
 /* 建築解剖室 */
 .anatomy{margin-top:58px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:28px;box-shadow:var(--shadow)}
@@ -16,7 +115,7 @@
 .anatomy-visual{background:linear-gradient(145deg,#e9e4d8,#f7f3e9);border-radius:9px;padding:14px;min-height:340px;display:flex;align-items:center;justify-content:center}
 .anatomy-visual svg{width:100%;height:auto;max-height:390px}
 .anatomy-visual .part{cursor:pointer;transition:opacity .2s,stroke-width .2s;outline:none}
-.anatomy-visual .part:hover,.anatomy-visual .part.selected{stroke:#a15c35;stroke-width:5;opacity:1}
+.anatomy-visual .part:hover,.anatomy-visual .part.selected,.anatomy-visual .part:focus-visible{stroke:#a15c35;stroke-width:5;opacity:1}
 .anatomy-visual text{font-family:var(--sans);font-size:12px;fill:#39453e;pointer-events:none}
 .anatomy-info{display:flex;flex-direction:column;gap:12px}
 .part-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
@@ -32,130 +131,1290 @@
 .structure-icon{height:110px;display:grid;place-items:center;background:#e5dfd2;border-radius:6px;color:var(--green);font:700 20px var(--serif)}
 .structure-detail h3{font:700 17px var(--serif);margin:0 0 5px}
 .structure-detail p{font-size:13px;color:#566057;margin:0}
+.structure-examples{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);font-size:12px;color:var(--muted)}
+.ex-chip{border:1px solid var(--green);background:var(--paper);color:var(--green);border-radius:20px;padding:3px 11px;font-size:12px}
+.ex-chip:hover{background:var(--green);color:#fff}
 .anatomy-note{font-size:11px;color:var(--muted);margin-top:14px}
+
+/* 建築觀察入門與資料說明 */
+.howto{margin-top:54px}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.how{padding:18px;background:var(--paper);border:1px solid var(--line);border-radius:8px}
+.how b{display:block;font:700 16px var(--serif);margin-bottom:5px}
+.how p{font-size:12px;color:var(--muted);margin:0}
+.sourcebox{margin-top:42px;padding:20px 22px;border-left:3px solid var(--gold);background:#ebe6da;font-size:12px;color:#656b62;border-radius:0 8px 8px 0}
+.sourcebox a{color:var(--green)}
+footer{background:#263a34;color:#d9ded6;padding:28px 24px;text-align:center;font-size:11px;letter-spacing:.08em}
+
+/* 彈窗共用與詳細圖鑑 Modal */
+.modal{display:none;position:fixed;inset:0;background:#111b18b8;z-index:50;padding:18px;overflow:auto}
+.modal.open{display:grid;place-items:center}
+.dialog{width:min(900px,100%);max-height:calc(100vh - 36px);overflow:auto;background:var(--paper);border-radius:12px;box-shadow:0 24px 90px #0005;position:relative}
+.dialog-bar{position:sticky;top:0;z-index:5;background:#fffdf8f2;backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.dialog-bar-title{font:700 14px var(--serif);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dialog-bar-btns{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.bar-btn{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:6px;padding:5px 10px;font-size:12px}
+.bar-btn:hover{border-color:var(--green);color:var(--green)}
+.close{border:0;background:#26312e;color:#fff;border-radius:50%;width:32px;height:32px;font-size:18px;display:grid;place-items:center}
+.detail-hero{height:300px;background:#e8e1d1;position:relative;overflow:hidden}
+.detail-hero img{width:100%;height:100%;object-fit:cover;display:block}
+.detail-hero .sketch-wrap{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;background:linear-gradient(145deg,#efe9dc,#dfd5c0)}
+.detail-hero .sketch-wrap svg{width:min(420px,90%);height:190px}
+.detail-hero .sketch-caption{font:700 16px var(--serif);color:#4f5750;margin-top:8px;letter-spacing:.14em}
+.photo-credit{position:absolute;bottom:8px;right:10px;background:#111b18cc;color:#fff;font-size:10px;padding:3px 8px;border-radius:3px}
+.photo-credit a{color:#fff}
+.detail-content{padding:24px 32px 32px}
+.detail-kicker{font-size:11px;color:var(--gold);letter-spacing:.15em}
+.detail-content h2{font:900 30px var(--serif);margin:5px 0}
+.detail-sub{color:var(--muted);font-size:13px;margin-bottom:18px}
+.detail-summary{font:500 16px/2 var(--serif);border-left:3px solid var(--gold);padding:4px 0 4px 16px;margin:16px 0 22px}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.detail-block{padding:16px;background:#f3f0e8;border-radius:7px}
+.detail-block h4{font:700 15px var(--serif);margin:0 0 7px;color:var(--green)}
+.detail-block p{font-size:13px;margin:0;color:#505a53}
+.detail-block.full{grid-column:1/-1}
+.factrow{display:grid;grid-template-columns:90px 1fr;gap:8px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}
+.factrow:last-child{border:0}
+.factrow b{color:var(--green)}
+.detail-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.action{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;background:var(--green);color:#fff;text-decoration:none;border-radius:6px;font-size:12px;border:1px solid var(--green)}
+.action.secondary{background:transparent;color:var(--green)}
+.action.fav-big{background:transparent;color:var(--rust);border-color:var(--rust)}
+.action.fav-big[aria-pressed=true]{background:var(--rust);color:#fff}
+.stepnav{display:flex;gap:10px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+.stepnav .action{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:transparent;color:var(--green)}
+.stepnav .action:last-child{text-align:right;justify-content:flex-end}
+.stepnav .action:hover:not(:disabled){background:var(--green);color:#fff}
+.stepnav .action:disabled{opacity:.35;cursor:default}
+.kbd-hint{font-size:11px;color:var(--muted);margin-top:8px;text-align:center}
+
+/* 圖檔管理彈窗 */
+.img-dlg{width:min(760px,100%);max-height:calc(100vh - 36px);overflow:auto;background:var(--paper);border-radius:12px;box-shadow:0 24px 90px #0005}
+.img-dlg-body{padding:20px 24px 26px}
+.img-toolbar{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;background:#f3f0e8;padding:14px;border-radius:8px;margin-bottom:14px}
+.field-grp{display:flex;flex-direction:column;gap:4px;font-size:12px}
+.field-grp label{font-weight:600;color:var(--green)}
+.field-grp select,.field-grp input[type=text]{padding:9px 11px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink)}
+.img-upload-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.img-status-msg{font-size:12px;color:var(--green);min-height:20px;margin-bottom:10px}
+.img-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.img-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 11px;background:#f8f5ec;border:1px solid var(--line);border-radius:7px;font-size:12px}
+.img-row-name{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.img-row-tag{font-size:11px;color:var(--green);flex-shrink:0}
+.img-row-tag.default{color:var(--muted)}
+.img-row-btns{display:flex;gap:4px;flex-shrink:0}
+.tiny-btn{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:4px;padding:3px 8px;font-size:11px}
+.tiny-btn:hover{border-color:var(--green);color:var(--green)}
+.tiny-btn.del{color:var(--rust)}
+
+
+/* 數位博物館擴充模組 */
+.museum-intro{display:grid;grid-template-columns:1.5fr 1fr;gap:24px;align-items:center;background:#e9e5da;border-radius:12px;padding:28px;margin-bottom:42px}.eyebrow-dark{font-size:10px;letter-spacing:.2em;color:var(--gold);font-weight:700}.museum-intro h2{font:700 23px var(--serif);margin:7px 0}.museum-intro p{font-size:13px;color:#5d665e;margin:0}.intro-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.intro-stats div{background:#fffdf8;padding:14px 8px;text-align:center;border-radius:7px}.intro-stats b{display:block;font:700 25px var(--serif);color:var(--green)}.intro-stats span{font-size:11px;color:var(--muted)}
+.museum-section{margin:54px 0}.timeline{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;position:relative}.time-card{border:0;border-top:4px solid var(--accent);background:var(--paper);padding:15px 13px;text-align:left;border-radius:7px;box-shadow:0 3px 12px #26312e08;min-height:190px}.time-card small{color:var(--gold);font-size:10px}.time-card h3{font:700 15px var(--serif);margin:6px 0}.time-card p{font-size:11px;color:#626a63;margin:0 0 9px}.time-card span{font-size:10px;color:var(--green);font-weight:700}.small-note{font-size:11px;color:var(--muted)}
+.map-controls{display:flex;align-items:center;gap:12px;margin-bottom:10px}.architecture-map{height:480px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#e8e5dc;position:relative}.map-fallback{height:100%;display:grid;place-items:center;text-align:center;padding:30px;color:var(--muted);font-size:13px}.region-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.region-links button{border:1px solid var(--line);background:var(--paper);padding:7px 11px;border-radius:20px;color:var(--green);font-size:12px}.story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.story-card,.craft-card{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:17px}.story-card h3,.craft-card h3{font:700 16px var(--serif);margin:0 0 7px}.story-card p,.craft-card p{font-size:12px;color:var(--muted);margin:0 0 10px}.story-card span{font-size:10px;color:var(--gold)}.craft-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.craft-icon{font-size:25px;margin-bottom:5px}.people-panel{margin-top:20px;background:#e9e5da;padding:20px;border-radius:9px}.people-panel h3{font:700 18px var(--serif);margin:0 0 5px}.people-panel p{font-size:12px;color:#5d665e;margin:0 0 12px}.people-list{display:flex;gap:8px;flex-wrap:wrap}.people-list span{font-size:11px;background:#fffdf8;padding:6px 10px;border-radius:20px;color:var(--green)}
+.quiz-card{max-width:760px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:24px;box-shadow:var(--shadow)}.quiz-progress{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}.quiz-card h3{font:700 20px var(--serif);margin:18px 0}.quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:9px}.quiz-option{padding:12px;border:1px solid var(--line);background:#faf8f2;border-radius:7px;text-align:left;color:var(--ink);font-size:13px}.quiz-option:hover{border-color:var(--green)}.quiz-option:disabled{cursor:default;opacity:.8}.quiz-option.correct{background:#e4eee5;border-color:#477b58}.quiz-option.wrong{background:#f4e5df;border-color:#a85d49}.quiz-feedback{font-size:12px;color:var(--green);min-height:22px}.quiz-card .action{margin-top:8px}.detail-source{margin-top:18px;padding:14px;background:#ebe6da;border-radius:7px;font-size:12px;color:#5d665e}.detail-source a{color:var(--green);font-weight:600}.detail-source small{display:block;margin-top:5px;color:var(--muted)}
+
+.compare-box{margin-top:18px;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:18px}.compare-box h3{font:700 17px var(--serif);margin:0 0 5px}.compare-box p{font-size:12px;color:var(--muted)}.compare-inputs{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}.compare-inputs label{font-size:12px;color:var(--green);font-weight:600}.compare-inputs input{display:block;margin-top:5px;max-width:100%;font-size:11px}.compare-stage{height:340px;position:relative;overflow:hidden;background:#e8e1d1;border-radius:8px}.compare-stage>img,.before-layer img{width:100%;height:100%;object-fit:contain;display:block}.before-layer{position:absolute;inset:0;width:50%;overflow:hidden;border-right:2px solid #fff}.before-layer img{width:calc(100vw - 80px);max-width:1080px;object-fit:cover;object-position:left center}.compare-label{position:absolute;top:10px;background:#1d302cdd;color:white;padding:3px 9px;border-radius:3px;font-size:11px}.before-label{left:10px}.after-label{right:10px}.compare-range{display:flex;align-items:center;gap:12px;margin-top:10px;font-size:12px;color:var(--green)}.compare-range input{flex:1}
+
+@media(max-width:950px){.timeline{grid-template-columns:repeat(4,1fr)}.craft-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.museum-intro{grid-template-columns:1fr;padding:20px}.story-grid{grid-template-columns:1fr}.architecture-map{height:390px}.timeline{grid-template-columns:repeat(2,1fr)}.quiz-options{grid-template-columns:1fr}.intro-stats b{font-size:21px}}
+
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.guide-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:760px){.anatomy{padding:20px 15px}.anatomy-layout{grid-template-columns:1fr}.anatomy-visual{min-height:250px}.structure-detail{grid-template-columns:1fr}.structure-icon{height:75px}.part-tabs{grid-template-columns:repeat(2,1fr)}}
-
-</style></head>
+@media(max-width:640px){.img-toolbar{grid-template-columns:1fr}.img-list{grid-template-columns:1fr}}
+@media(max-width:600px){
+  .topinner{padding:9px 16px}.nav{gap:10px}.nav a{font-size:11px}
+  .hero{padding:54px 20px 45px}.wrap{padding:25px 15px 55px}
+  .grid{grid-template-columns:1fr;gap:13px}.thumb{height:205px}
+  .section-head{display:block}.section-head h2{font-size:22px}
+  .tools{gap:8px}.search{min-width:100%}.select,.tools .tbtn{flex:1}
+  .guide-grid,.how-grid{grid-template-columns:1fr}.era-guide{padding:20px 16px}
+  .detail-hero{height:220px}.detail-content{padding:20px 16px 24px}.detail-content h2{font-size:24px}
+  .detail-grid{grid-template-columns:1fr}.detail-block.full{grid-column:auto}.factrow{grid-template-columns:76px 1fr}
+  .modal{padding:8px}.dialog,.img-dlg{max-height:calc(100vh - 16px)}.kbd-hint{display:none}
+  .stepnav{flex-direction:column}.stepnav .action:last-child{text-align:left;justify-content:flex-start}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+</style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+</head>
 <body>
-<header class="topbar"><div class="topinner"><div class="brand">臺灣建築<span>文化</span>圖鑑</div><nav class="nav"><a href="#atlas">建築圖鑑</a><a href="#eras">時代導覽</a><a href="#anatomy">建築解剖室</a><a href="#learn">怎麼看建築</a></nav></div></header>
-<section class="hero"><div class="hero-inner"><div class="eyebrow">TAIWAN ARCHITECTURE ATLAS · DIGITAL MUSEUM</div><h1>從一棟建築，<br>讀懂一段臺灣故事。</h1><p>建築不只是屋頂、牆面與材料，也是時代留下的生活痕跡。從傳統廟宇、殖民時期公共建築，到戰後住宅與現代文化場館，循著年代走進臺灣的建築風景。</p><div class="hero-meta"><span><b id="heroCount">30</b>個代表案例</span><span><b>5</b>個歷史時期</span><span><b>01</b>份互動圖鑑</span></div></div></section>
-<main class="wrap">
-<section id="atlas"><div class="section-head"><div><h2>建築探索索引</h2><p>依年代、地區或建築名稱尋找案例；點選卡片閱讀完整介紹。</p></div></div>
-<div class="tools"><label class="search"><input id="search" type="search" placeholder="搜尋建築名稱、地區、建築師或風格…" autocomplete="off"></label><select class="select" id="placeFilter"><option value="">全部地區</option><option>臺北市</option><option>新北市</option><option>桃園市</option><option>新竹市</option><option>臺中市</option><option>彰化縣</option><option>臺南市</option><option>高雄市</option><option>南投縣</option><option>嘉義市</option></select><select class="select" id="typeFilter"><option value="">全部類型</option><option>宗教建築</option><option>公共建築</option><option>交通建築</option><option>住宅聚落</option><option>文化建築</option><option>城郭設施</option></select></div>
-<div class="era-tabs" id="eraTabs"></div><div class="resultline"><span id="resultText">載入建築案例…</span><span>點選卡片可展開圖鑑</span></div><div class="grid" id="grid"></div></section>
-<section class="era-guide" id="eras"><h2>五個時代，五種建築風景</h2><p>先理解時代背景，再看建築形式，會更容易讀懂建築背後的社會變化。</p><div class="guide-grid" id="guideGrid"></div></section>
+<header class="topbar">
+  <div class="topinner">
+    <div class="brand">臺灣建築<span>文化</span>圖鑑</div>
+    <nav class="nav" aria-label="主要導覽">
+      <a href="#atlas">建築圖鑑</a>
+      <a href="#timeline">歷史時間軸</a>
+      <a href="#map">建築地圖</a>
+      <a href="#eras">時代導覽</a>
+      <a href="#crafts">工藝人物</a>
+      <a href="#anatomy">建築解剖室</a>
+      <a href="#quiz">知識挑戰</a>
+    </nav>
+  </div>
+</header>
 
-<section class="anatomy" id="anatomy">
- <div class="section-head"><div><h2>建築解剖室｜拆開一棟建築來看</h2><p>從屋頂、樑柱到基礎，認識建築如何站立、遮蔽、採光與回應環境。</p></div></div>
- <p class="anatomy-intro">先以臺灣傳統木構建築作為示範。點選圖面上的構件，或使用下方名稱按鈕，閱讀它的位置、功能與現場觀察方法。這是概念示意圖，並非特定古蹟的實測圖或施工圖。</p>
- <div class="anatomy-layout">
-  <div class="anatomy-visual" aria-label="傳統木構建築構件示意圖">
-   <svg viewBox="0 0 560 360" role="img" aria-label="傳統木構建築屋頂、屋脊、屋瓦、樑、柱與基礎示意">
-    <defs><pattern id="tilePattern" width="18" height="10" patternUnits="userSpaceOnUse"><path d="M0 9 Q9 -2 18 9" fill="none" stroke="#8c6845" stroke-width="1.5"/></pattern></defs>
-    <path d="M82 145 L280 52 L478 145 L450 161 L280 83 L110 161 Z" fill="#b77b48" stroke="#79543b" stroke-width="3" class="part selected" data-part="roof"/>
-    <path d="M82 145 L280 52 L478 145" fill="none" stroke="#704b34" stroke-width="5" class="part" data-part="ridge"/>
-    <path d="M105 147 L280 69 L455 147" fill="none" stroke="url(#tilePattern)" stroke-width="16" class="part" data-part="tiles"/>
-    <path d="M124 158 L124 250 M436 158 L436 250 M280 104 L280 250" stroke="#8b5b36" stroke-width="14" stroke-linecap="round" class="part" data-part="column"/>
-    <path d="M110 166 L450 166" stroke="#a36b3f" stroke-width="13" class="part" data-part="beam"/>
-    <path d="M104 250 L456 250" stroke="#876447" stroke-width="15" class="part" data-part="base"/>
-    <path d="M88 265 L472 265 L455 300 L105 300 Z" fill="#b9aa91" stroke="#82745e" stroke-width="2" class="part" data-part="foundation"/>
-    <path d="M65 310 H495" stroke="#8b8a7d" stroke-width="2"/>
-    <g fill="#39453e" font-size="12"><text x="290" y="35">屋脊</text><text x="455" y="123">屋瓦</text><text x="45" y="135">屋頂</text><text x="463" y="185">樑</text><text x="292" y="208">柱</text><text x="460" y="248">柱腳</text><text x="468" y="286">基礎</text></g>
-    <g stroke="#a15c35" stroke-width="2" fill="none"><path d="M325 38 L290 52"/><path d="M450 128 L430 143"/><path d="M85 137 L115 151"/><path d="M460 180 L425 166"/><path d="M310 203 L290 203"/><path d="M455 244 L437 250"/><path d="M460 280 L440 280"/></g>
-   </svg>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">TAIWAN ARCHITECTURE ATLAS · DIGITAL MUSEUM</div>
+    <h1>從一棟建築，<br>讀懂一段臺灣故事。</h1>
+    <p>建築不只是屋頂、牆面與材料，也是時代留下的生活痕跡。從傳統廟宇、殖民時期公共建築，到戰後住宅與現代文化場館，循著年代走進臺灣的建築風景。</p>
+    <div class="hero-meta">
+      <span><b id="heroCount">60</b>個代表案例</span>
+      <span><b>6</b>個歷史時期</span>
+      <span><b id="heroCustomCount">0</b>張自訂圖檔</span>
+    </div>
   </div>
-  <div class="anatomy-info">
-   <div class="part-tabs" id="partTabs">
-    <button class="part-btn active" data-part="roof">屋頂</button><button class="part-btn" data-part="ridge">屋脊</button><button class="part-btn" data-part="tiles">屋瓦</button><button class="part-btn" data-part="beam">樑</button><button class="part-btn" data-part="column">柱</button><button class="part-btn" data-part="base">柱腳</button><button class="part-btn" data-part="foundation">基礎</button>
-   </div>
-   <div class="part-detail" id="partDetail" aria-live="polite"><h3>屋頂｜遮蔽與造型</h3><p>屋頂負責遮陽、擋雨，也常是傳統建築最醒目的視覺特徵。屋面曲線、出簷深度與屋頂形式，會影響建築外觀及室內環境。</p><div class="look">現場觀察：從側面看屋頂坡度、出簷長度，以及屋頂與牆身的比例。</div></div>
-  </div>
- </div>
- <div class="structure-area"><h3 style="font:700 19px var(--serif);margin:0">不同構造，如何讓建築站穩？</h3><p class="anatomy-intro">同樣是建築，不同年代與用途會採用不同結構系統。切換下列類型比較。</p>
-  <div class="structure-tabs" id="structureTabs"><button class="structure-btn active" data-structure="wood">傳統木構</button><button class="structure-btn" data-structure="brick">磚石承重</button><button class="structure-btn" data-structure="rc">鋼筋混凝土</button><button class="structure-btn" data-structure="steel">鋼構</button></div>
-  <div class="structure-detail" id="structureDetail"><div class="structure-icon">木構架</div><div><h3>傳統木構｜樑柱共同承重</h3><p>以柱、樑及屋架組成骨架，荷重透過構件傳遞至柱腳與基礎。傳統廟宇常見木構架、斗栱或疊斗等構件；實際作法會因地域、年代與匠派而不同。觀察時可留意柱距、樑架層次與接合方式。</p></div></div>
- </div>
- <p class="anatomy-note">學習提醒：圖鑑內容以文化與建築入門為目的；構件名稱、結構形式可能因地域與建築類型而異，不能取代專業結構圖說或現場安全鑑定。</p>
 </section>
 
-<section class="howto" id="learn"><div class="section-head"><div><h2>建築觀察入門</h2><p>看建築，不妨從這三個層次開始。</p></div></div><div class="how-grid"><div class="how"><b>01｜先看外觀與比例</b><p>觀察入口、窗戶、屋頂、立面軸線與量體比例。建築如何面對街道？它希望呈現什麼樣的形象？</p></div><div class="how"><b>02｜再看材料與構造</b><p>辨認磚、石、木、瓦、鋼筋混凝土等材料。材料的選擇，往往反映當時的技術、經濟條件與地方環境。</p></div><div class="how"><b>03｜最後看生活與時代</b><p>追問建築為誰而建、原本做什麼、後來如何改變。建築的價值，也存在於使用者的記憶與地方生活之中。</p></div></div></section>
-<div class="sourcebox"><b>資料使用與查證說明</b><br>本圖鑑為入門導覽與教學展示用途。建築年代可能涉及創建、改建、完工或現存建物年代，閱讀個案時應留意其定義；建築師、指定身分、修復沿革及開放資訊，請以主管機關與個案官方資料為準。<br>延伸查詢：<a href="https://nchdb.boch.gov.tw/" target="_blank" rel="noopener">文化部文化資產局・國家文化資產網</a> ｜ <a href="https://www.nmth.gov.tw/" target="_blank" rel="noopener">國立臺灣歷史博物館</a></div>
-</main><footer>臺灣建築文化圖鑑｜以建築閱讀土地，以故事理解時代<br><span style="opacity:.7">小路_Joseph工作室</span></footer>
-<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="建築案例詳細介紹"><div class="dialog"><button class="close" id="close" aria-label="關閉">×</button><div id="detail"></div></div></div>
+<main class="wrap">
+
+  <section class="museum-intro">
+    <div class="intro-copy"><span class="eyebrow-dark">DIGITAL HERITAGE · LEARN · EXPLORE</span><h2>一座可以慢慢走讀的臺灣建築博物館</h2><p>從城門、廟宇、街屋、眷村到當代公共建築，透過年代、地圖、構造與生活故事，認識建築如何回應土地，也如何留下時代的痕跡。</p></div>
+    <div class="intro-stats"><div><b id="statCases">60</b><span>建築案例</span></div><div><b>6</b><span>歷史時期</span></div><div><b>4</b><span>構造類型</span></div></div>
+  </section>
+  <section class="museum-section" id="timeline"><div class="section-head"><div><h2>臺灣建築歷史時間軸</h2><p>把建築放回時代脈絡，理解政治、產業、技術與生活如何改變空間。</p></div></div><div class="timeline" id="timelineList"></div><p class="small-note">年代為概略分期，並非所有地區同步轉變；個別建築仍須區分創建、完工、改建及現存建物年代。</p></section>
+  <section class="museum-section" id="map"><div class="section-head"><div><h2>臺灣建築文化地圖</h2><p>依地區探索案例；點選標記可開啟建築介紹。地圖標記為區位導覽用途。</p></div></div><div class="map-controls"><select id="mapRegion" class="select"><option value="">全臺灣</option><option>北部</option><option>中部</option><option>南部</option><option>東部</option><option>離島</option></select><span id="mapCount" class="small-note">載入地圖案例…</span></div><div id="architectureMap" class="architecture-map"><div class="map-fallback">地圖需要網路連線載入。若未顯示，仍可使用下方地區索引探索案例。</div></div><div class="region-links" id="regionLinks"></div></section>
+  <section class="museum-section" id="before-after"><div class="section-head"><div><h2>建築前世今生｜保存與再利用</h2><p>一棟建築的生命不只在落成那一天，也包含用途改變、修復與社區重新使用。</p></div></div><div class="story-grid" id="reuseGrid"></div><div class="compare-box"><h3>自己建立一組建築前後對照</h3><p>上傳修復前、修復後照片，拖曳滑桿比較。照片只在目前瀏覽器頁面暫時顯示，不會上傳到伺服器。</p><div class="compare-inputs"><label>修復前照片 <input type="file" id="beforePhoto" accept="image/*"></label><label>修復後照片 <input type="file" id="afterPhoto" accept="image/*"></label></div><div class="compare-stage" id="compareStage"><img id="afterImage" alt="修復後照片"><div class="before-layer" id="beforeLayer"><img id="beforeImage" alt="修復前照片"></div><span class="compare-label before-label">修復前</span><span class="compare-label after-label">修復後</span></div><label class="compare-range">左右拖曳比較 <input type="range" id="compareRange" min="0" max="100" value="50"></label><p class="small-note" id="compareStatus">請分別選擇兩張照片開始比較。</p></div></section>
+  <section class="museum-section" id="crafts"><div class="section-head"><div><h2>建築工藝與人物誌</h2><p>從材料、匠藝與設計者，讀懂建築背後的知識傳承。</p></div></div><div class="craft-grid" id="craftGrid"></div><div class="people-panel"><h3>建築師、匠師與營造團隊</h3><p>建築不是單一個人的作品。除了設計者，也要看見木作、石作、剪黏、彩繪、泥作、施工與修復團隊的貢獻。</p><div id="peopleList" class="people-list"></div></div></section>
+
+  <section id="atlas">
+    <div class="section-head">
+      <div>
+        <h2>建築探索索引</h2>
+        <p>依年代、地區或建築名稱尋找案例；點選卡片閱讀完整介紹，或匯入本機建築照片。</p>
+      </div>
+    </div>
+
+    <div class="tools">
+      <label class="search">
+        <input id="search" type="search" placeholder="搜尋建築名稱、地區、建築師或風格…" autocomplete="off" aria-label="搜尋建築案例">
+        <button type="button" class="clear-search" id="clearSearch" aria-label="清除搜尋文字">×</button>
+      </label>
+      <select class="select" id="placeFilter" aria-label="依地區篩選">
+        <option value="">全部地區</option>
+      </select>
+      <select class="select" id="typeFilter" aria-label="依建築類型篩選">
+        <option value="">全部類型</option>
+        <option>宗教建築</option>
+        <option>公共建築</option>
+        <option>交通建築</option>
+        <option>住宅聚落</option>
+        <option>文化建築</option>
+        <option>城郭設施</option>
+      </select>
+      <button type="button" class="tbtn" id="favToggle" aria-pressed="false">♡ 我的收藏（0）</button>
+      <button type="button" class="tbtn" id="rndBtn">🎲 隨機一棟</button>
+      <button type="button" class="tbtn img-btn" id="openImgMgrBtn">🖼️ 圖檔管理</button>
+    </div>
+
+    <div class="era-tabs" id="eraTabs" role="tablist" aria-label="歷史時期分頁"></div>
+    <div class="resultline">
+      <span id="resultText">載入建築案例…</span>
+      <span>支援圖片上傳與網址指定；自訂圖檔僅存目前瀏覽器，不會自動同步</span>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="era-guide" id="eras">
+    <h2>六個時代，六種建築風景</h2>
+    <p>先理解時代背景，再看建築形式，會更容易讀懂建築背後的社會變化（點擊卡片可篩選該時代案例）。</p>
+    <div class="guide-grid" id="guideGrid"></div>
+  </section>
+
+  <section class="anatomy" id="anatomy">
+    <div class="section-head">
+      <div>
+        <h2>建築解剖室｜拆開一棟建築來看</h2>
+        <p>從屋頂、樑柱到基礎，認識建築如何站立、遮蔽、採光與回應環境。</p>
+      </div>
+    </div>
+    <p class="anatomy-intro">先以臺灣傳統木構建築作為示範。點選圖面上的構件，或使用下方名稱按鈕，閱讀它的位置、功能與現場觀察方法。這是概念示意圖，並非特定古蹟的實測圖或施工圖。</p>
+    <div class="anatomy-layout">
+      <div class="anatomy-visual" aria-label="傳統木構建築構件示意圖">
+        <svg viewBox="0 0 560 360" role="img" aria-label="傳統木構建築屋頂、屋脊、屋瓦、樑、柱與基礎示意">
+          <defs>
+            <pattern id="tilePattern" width="18" height="10" patternUnits="userSpaceOnUse">
+              <path d="M0 9 Q9 -2 18 9" fill="none" stroke="#8c6845" stroke-width="1.5"/>
+            </pattern>
+          </defs>
+          <path d="M82 145 L280 52 L478 145 L450 161 L280 83 L110 161 Z" fill="#b77b48" stroke="#79543b" stroke-width="3" class="part selected" data-part="roof"/>
+          <path d="M82 145 L280 52 L478 145" fill="none" stroke="#704b34" stroke-width="5" class="part" data-part="ridge"/>
+          <path d="M105 147 L280 69 L455 147" fill="none" stroke="url(#tilePattern)" stroke-width="16" class="part" data-part="tiles"/>
+          <path d="M124 158 L124 250 M436 158 L436 250 M280 104 L280 250" stroke="#8b5b36" stroke-width="14" stroke-linecap="round" class="part" data-part="column"/>
+          <path d="M110 166 L450 166" stroke="#a36b3f" stroke-width="13" class="part" data-part="beam"/>
+          <path d="M104 250 L456 250" stroke="#876447" stroke-width="15" class="part" data-part="base"/>
+          <path d="M88 265 L472 265 L455 300 L105 300 Z" fill="#b9aa91" stroke="#82745e" stroke-width="2" class="part" data-part="foundation"/>
+          <path d="M65 310 H495" stroke="#8b8a7d" stroke-width="2"/>
+          <g fill="#39453e" font-size="12">
+            <text x="290" y="35">屋脊</text>
+            <text x="455" y="123">屋瓦</text>
+            <text x="45" y="135">屋頂</text>
+            <text x="463" y="185">樑</text>
+            <text x="292" y="208">柱</text>
+            <text x="460" y="248">柱腳</text>
+            <text x="468" y="286">基礎</text>
+          </g>
+          <g stroke="#a15c35" stroke-width="2" fill="none">
+            <path d="M325 38 L290 52"/><path d="M450 128 L430 143"/><path d="M85 137 L115 151"/>
+            <path d="M460 180 L425 166"/><path d="M310 203 L290 203"/><path d="M455 244 L437 250"/><path d="M460 280 L440 280"/>
+          </g>
+        </svg>
+      </div>
+      <div class="anatomy-info">
+        <div class="part-tabs" id="partTabs">
+          <button type="button" class="part-btn active" data-part="roof">屋頂</button>
+          <button type="button" class="part-btn" data-part="ridge">屋脊</button>
+          <button type="button" class="part-btn" data-part="tiles">屋瓦</button>
+          <button type="button" class="part-btn" data-part="beam">樑</button>
+          <button type="button" class="part-btn" data-part="column">柱</button>
+          <button type="button" class="part-btn" data-part="base">柱腳</button>
+          <button type="button" class="part-btn" data-part="foundation">基礎</button>
+        </div>
+        <div class="part-detail" id="partDetail" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="structure-area">
+      <h3 style="font:700 19px var(--serif);margin:0">不同構造，如何讓建築站穩？</h3>
+      <p class="anatomy-intro">同樣是建築，不同年代與用途會採用不同結構系統。切換下列類型比較並點選代表案例。</p>
+      <div class="structure-tabs" id="structureTabs">
+        <button type="button" class="structure-btn active" data-structure="wood">傳統木構</button>
+        <button type="button" class="structure-btn" data-structure="brick">磚石承重</button>
+        <button type="button" class="structure-btn" data-structure="rc">鋼筋混凝土</button>
+        <button type="button" class="structure-btn" data-structure="steel">鋼構</button>
+      </div>
+      <div class="structure-detail" id="structureDetail"></div>
+    </div>
+    <p class="anatomy-note">學習提醒：圖鑑內容以文化與建築入門為目的；構件名稱、結構形式可能因地域與建築類型而異，不能取代專業結構圖說或現場安全鑑定。</p>
+  </section>
+
+  <section class="howto" id="learn">
+    <div class="section-head">
+      <div>
+        <h2>建築觀察入門</h2>
+        <p>看建築，不妨從這三個層次開始。</p>
+      </div>
+    </div>
+    <div class="how-grid">
+      <div class="how"><b>01｜先看外觀與比例</b><p>觀察入口、窗戶、屋頂、立面軸線與量體比例。建築如何面對街道？它希望呈現什麼樣的形象？</p></div>
+      <div class="how"><b>02｜再看材料與構造</b><p>辨認磚、石、木、瓦、鋼筋混凝土等材料。材料的選擇，往往反映當時的技術、經濟條件與地方環境。</p></div>
+      <div class="how"><b>03｜最後看生活與時代</b><p>追問建築為誰而建、原本做什麼、後來如何改變。建築的價值，也存在於使用者的記憶與地方生活之中。</p></div>
+    </div>
+  </section>
+
+
+  <section class="museum-section" id="quiz"><div class="section-head"><div><h2>建築知識挑戰</h2><p>用幾道小題目，看看自己是否讀懂臺灣建築的線索。</p></div></div><div class="quiz-card"><div class="quiz-progress"><span id="quizProgress">第 1 題／5 題</span><span id="quizScore">答對 0 題</span></div><h3 id="quizQuestion">準備開始</h3><div id="quizOptions" class="quiz-options"></div><p id="quizFeedback" aria-live="polite" class="quiz-feedback">選擇一個答案開始挑戰。</p><button id="quizNext" class="action" type="button">開始挑戰</button></div></section>
+
+  <div class="sourcebox">
+    <b>資料使用與查證說明</b><br>
+    本圖鑑為入門導覽與教學展示用途。60 個案例的內容屬於整理初稿，新增案例尤其需要逐案以主管機關、館舍及地方政府資料核實。建築年代可能涉及創建、改建、完工或現存建物年代，閱讀個案時應留意其定義；建築師、指定身分、修復沿革及開放資訊，請以官方資料為準。地圖標記部分採城市或地標近似座標，並非測量定位。<br>
+    延伸查詢：<a href="https://nchdb.boch.gov.tw/" target="_blank" rel="noopener">文化部文化資產局・國家文化資產網</a> ｜ <a href="https://www.nmth.gov.tw/" target="_blank" rel="noopener">國立臺灣歷史博物館</a>
+  </div>
+</main>
+
+<footer>
+  臺灣建築文化數位博物館｜從建築看見歷史，從空間讀懂臺灣<br>
+  <span style="opacity:.7">小路_Joseph工作室</span>
+</footer>
+
+<!-- 建築案例詳細彈窗 -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="dialogBarTitle">
+  <div class="dialog" id="dialog">
+    <div class="dialog-bar">
+      <div class="dialog-bar-title" id="dialogBarTitle">建築詳細圖鑑</div>
+      <div class="dialog-bar-btns">
+        <button type="button" class="bar-btn" id="replaceCaseImgBtn">🖼️ 更換本棟照片</button>
+        <button type="button" class="bar-btn" id="copyLinkBtn">🔗 複製連結</button>
+        <button type="button" class="close" id="close" aria-label="關閉視窗">×</button>
+      </div>
+    </div>
+    <div id="detail"></div>
+  </div>
+</div>
+
+<!-- 圖檔管理彈窗 -->
+<div class="modal" id="imgModal" role="dialog" aria-modal="true" aria-labelledby="imgDlgTitle">
+  <div class="img-dlg">
+    <div class="dialog-bar">
+      <div class="dialog-bar-title" id="imgDlgTitle">🖼️ 建築圖檔管理（本機壓縮上傳／網址指定）</div>
+      <div class="dialog-bar-btns">
+        <button type="button" class="close" id="closeImgModal" aria-label="關閉圖檔管理">×</button>
+      </div>
+    </div>
+    <div class="img-dlg-body">
+      <div class="img-toolbar">
+        <div class="field-grp">
+          <label for="targetCaseSelect">1. 選擇要設定的建築案例</label>
+          <select id="targetCaseSelect"></select>
+        </div>
+        <div class="field-grp">
+          <label for="customUrlInput">2. 輸入圖片網址（或下方選取本機檔案）</label>
+          <input type="text" id="customUrlInput" placeholder="https://example.com/building.jpg">
+        </div>
+        <button type="button" class="action" id="applyUrlBtn">套用網址</button>
+      </div>
+
+      <div class="img-upload-row">
+        <label class="action" for="singleUploadInput" style="cursor:pointer">📁 上傳單張本機照片（自動壓縮）</label>
+        <input type="file" id="singleUploadInput" accept="image/*" style="display:none">
+        <label class="action secondary" for="batchUploadInput" style="cursor:pointer">📂 批次匯入多張（依檔名／編號自動比對）</label>
+        <input type="file" id="batchUploadInput" accept="image/*" multiple style="display:none">
+        <button type="button" class="action fav-big" id="clearAllImgBtn">清除全部自訂圖檔</button>
+      </div>
+      <div class="img-status-msg" id="imgStatusMsg" aria-live="polite"></div>
+      <div class="img-list" id="imgList"></div>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="quickReplaceInput" accept="image/*" style="display:none">
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <script>
-const eras=[
-{name:'清領時期',years:'1683–1895',color:'#9b5543',intro:'以閩南、客家等移民帶入的營造傳統為基礎，廟宇、宅第、書院、城郭與商業街市逐步形成。建築常以院落、中軸、木構架及磚石材料組織空間。',traits:'中軸院落、三合院、木構架、紅磚與石材、燕尾脊、剪黏與木石雕刻。'},
-{name:'日治前期',years:'1895–1920',color:'#b18a4b',intro:'殖民政府推動行政與都市建設，官署、法院、車站、博物館等公共建築大量出現。西洋歷史式樣與日本近代建築技術在臺灣交會。',traits:'紅磚、石材、拱窗、柱式、山牆、穹頂、對稱立面與公共建築軸線。'},
-{name:'日治中後期',years:'1920–1945',color:'#54776e',intro:'都市化與商業活動發展，鋼筋混凝土逐漸普及。建築風格從歷史式樣走向折衷、裝飾藝術與現代主義，並出現百貨、郵局、市役所等新型態空間。',traits:'鋼筋混凝土、洗石子、幾何裝飾、水平線條、騎樓街屋與現代設備。'},
-{name:'戰後初期',years:'1945–1960',color:'#7b6b8e',intro:'政權轉換、人口移動與住宅需求，使眷村、宿舍及簡易住宅成為重要生活空間。建築常以經濟、快速與因地制宜為優先。',traits:'連棟平房、木造宿舍、磚造住宅、簡易構造、巷弄與居民自行增建。'},
-{name:'戰後現代',years:'1960–1990',color:'#64727d',intro:'經濟起飛與都市化帶動公寓、公共設施、校園及文化場館興建。現代主義、國際式建築與重新詮釋的中國傳統形式並存。',traits:'鋼筋混凝土、幾何量體、清水混凝土、機能分區、大跨距與現代公共空間。'}
+const eras = [
+  {name:'荷西與明鄭時期',years:'1624–1683',color:'#7c6b58',intro:'荷蘭、西班牙勢力與明鄭政權先後進入臺灣，城堡、港口、行政據點及聚落逐漸形成。現存遺構與後世改建須分層理解。',traits:'城堡、砲臺、港口、行政據點、早期聚落。'},
+  {name:'清領時期',years:'1683–1895',color:'#9b5543',intro:'閩南、客家等移民帶入的營造傳統持續發展，廟宇、宅第、書院、城郭與商業街市逐步形成。',traits:'中軸院落、三合院、木構架、紅磚與石材、燕尾脊、剪黏與木石雕刻。'},
+  {name:'日治時期',years:'1895–1945',color:'#b18a4b',intro:'殖民政府推動行政、交通與都市建設，官署、法院、車站、博物館、百貨及市役所等公共建築大量出現；建築形式由西洋歷史式樣逐步走向折衷、裝飾藝術與現代主義。',traits:'紅磚、石材、古典柱式、穹頂、鋼筋混凝土、洗石子、幾何裝飾、騎樓街屋與現代設備。'},
+  {name:'戰後初期',years:'1945–1960',color:'#7b6b8e',intro:'政權轉換、人口移動與住宅需求，使眷村、宿舍及簡易住宅成為重要生活空間。建築常以經濟、快速與因地制宜為優先。',traits:'連棟平房、木造宿舍、磚造住宅、簡易構造、巷弄與居民自行增建。'},
+  {name:'戰後現代',years:'1960–1990',color:'#64727d',intro:'經濟起飛與都市化帶動公寓、公共設施、校園及文化場館興建。現代主義、國際式建築與重新詮釋的傳統形式並存。',traits:'鋼筋混凝土、幾何量體、清水混凝土、機能分區、大跨距與現代公共空間。'},
+  {name:'當代建築',years:'1990–至今',color:'#477b78',intro:'全球化、文化創意、地方再生與永續議題，帶動公共文化場館、交通建設與複合式空間發展。建築更重視環境回應、公共性與城市生活。',traits:'大跨距、複合機能、綠建築、地方創生、永續設計與公共空間。'}
 ];
-const cases=[
-// 清領
-{id:1,name:'彰化孔廟',year:'1726（創建）',era:0,place:'彰化縣彰化市',type:'宗教建築',style:'閩南官式孔廟',architect:'傳統匠師營造（個別設計者待考）',use:'祭祀孔子、地方文教與儒學祭典',summary:'以中軸線串連門、庭院與主要殿堂，呈現傳統官學孔廟的禮制空間。',history:'彰化孔廟創建於清雍正年間，後世歷經修建。今日所見建築並非單一年代完整留存，閱讀時宜區分創建年代與現存建築的重修年代。',architecture:'可從中軸、泮池、門廡與大成殿理解孔廟的空間層次。屋頂、木構、彩繪與石作共同構成莊重而有秩序的建築表情。',observe:'由入口沿中軸向內走，觀察空間如何逐層收束；再留意屋頂、柱列與殿堂尺度如何表現禮制。',tags:['孔廟','中軸','傳統木構'],query:'彰化孔廟',map:'彰化孔廟'},
-{id:2,name:'艋舺龍山寺',year:'1738（創建）',era:0,place:'臺北市萬華區',type:'宗教建築',style:'閩南傳統寺廟',architect:'歷代匠師修建',use:'民間信仰、地方祭祀與社區活動',summary:'寺廟空間與艋舺聚落發展緊密相連，是臺北早期城市生活的重要文化地標。',history:'由泉州移民於清乾隆年間創建，歷經地震、戰爭及多次修復。現存建築與裝飾反映不同時代匠師的技藝累積。',architecture:'以多進式院落組織前殿、正殿及後殿，屋脊、剪黏、石雕、木雕與藻井是重要工藝元素。',observe:'從廟埕進入三川殿，留意視線如何被引導至正殿；抬頭觀察藻井與屋脊剪黏，辨認不同工藝的材料與層次。',tags:['寺廟','剪黏','木石雕刻'],query:'艋舺龍山寺',map:'艋舺龍山寺'},
-{id:3,name:'新竹城隍廟',year:'1748（創建）',era:0,place:'新竹市北區',type:'宗教建築',style:'閩南傳統寺廟',architect:'歷代匠師修建',use:'城隍信仰、地方祭典與市街生活',summary:'廟宇、廟埕與周邊市集構成緊密的生活場域，展現信仰空間與商業街區的共生。',history:'創建於清乾隆年間，與竹塹地區的移墾、城鎮發展及地方信仰密切相關。歷代修建使今日建築呈現多期累積的樣貌。',architecture:'以廟埕連結街市，殿堂沿軸線排列，屋脊裝飾、木石雕刻與彩繪呈現傳統廟宇工藝。',observe:'除了看殿宇，也要站在廟埕觀察周邊店舖、攤販與人流，理解廟宇如何成為城市公共生活的中心。',tags:['城隍信仰','廟埕','街區'],query:'新竹城隍廟',map:'新竹城隍廟'},
-{id:4,name:'鹿港龍山寺',year:'清乾隆年間（現址興建）',era:0,place:'彰化縣鹿港鎮',type:'宗教建築',style:'閩南傳統寺廟',architect:'傳統匠師營造',use:'觀音信仰與地方祭祀',summary:'保存完整的寺廟空間與木構工藝，尤其戲臺藻井常是參觀者理解傳統構造的入口。',history:'鹿港龍山寺的歷史可追溯至清代，現址建築與後續修復共同構成今日所見風貌。它也反映鹿港曾經繁盛的港口商業與信仰網絡。',architecture:'主要殿堂沿中軸排列，木構架、斗栱、藻井、石雕及屋脊裝飾值得細看。戲臺藻井兼具聲學、結構與視覺效果。',observe:'在戲臺下方抬頭看藻井的層層收束，再比較殿堂木構與石構件的比例、接合方式。',tags:['寺廟','藻井','木構技藝'],query:'鹿港龍山寺',map:'鹿港龍山寺'},
-{id:5,name:'大龍峒保安宮',year:'1805（創建）',era:0,place:'臺北市大同區',type:'宗教建築',style:'閩南傳統寺廟',architect:'歷代匠師修建',use:'保生大帝信仰與地方祭祀',summary:'從建築工藝修復與社區參與，可看見古蹟保存如何延續地方信仰與生活。',history:'保安宮於清嘉慶年間創建，主祀保生大帝。歷經多次修建與近代修復，保存工作也成為臺灣傳統寺廟維護的重要案例。',architecture:'殿堂配置、屋脊剪黏、彩繪、木雕與石雕交織，修復工程重視傳統工法與裝飾細節。',observe:'留意不同殿堂的屋頂形式與裝飾差異，也可觀察修復後新舊材料如何銜接。',tags:['寺廟','傳統工藝','修復'],query:'大龍峒保安宮',map:'大龍峒保安宮'},
-{id:6,name:'板橋林家花園',year:'1847 起（興建）',era:0,place:'新北市板橋區',type:'住宅聚落',style:'閩南宅第與園林融合',architect:'林本源家族營建，匠師參與',use:'家族宅第、接待與園林休憩',summary:'宅第與庭園相互交織，呈現清代富商家族的生活空間、社會地位與審美趣味。',history:'林本源家族自十九世紀中葉起逐步興建宅第與園林，歷經多階段擴建。園內建築、池水、假山及植栽形成層次豐富的遊園動線。',architecture:'傳統院落、廳堂、亭榭與園林景觀並置，透過門洞、廊道、窗景與水面創造移步換景的效果。',observe:'沿著園路移動，觀察同一景物如何透過門洞、窗框與廊道改變；也可比較宅第空間與園林空間的尺度差異。',tags:['宅第','園林','移步換景'],query:'板橋林家花園',map:'林本源園邸'},
-{id:7,name:'臺北府城北門（承恩門）',year:'1884（完成）',era:0,place:'臺北市中正區',type:'城郭設施',style:'清代城門與磚石構造',architect:'清代官府主持營建',use:'城防、城市出入口與交通節點',summary:'北門是臺北府城現存城門中重要的清代遺構，見證城牆拆除後城市道路與交通的改變。',history:'臺北府城於清光緒年間興建，北門為城門之一。日治時期城牆陸續拆除，城門留存下來，今日周邊已成為現代交通空間。',architecture:'厚實磚石牆體、門洞、城樓及防禦性開口，呈現城門兼具通行與防禦的功能。',observe:'不要只看城樓，試著從道路與廣場想像城牆原本延伸的方向，理解古城門與現代都市道路的關係。',tags:['城門','磚石','城市防禦'],query:'臺北府城北門 承恩門',map:'臺北府城北門'},
-{id:8,name:'竹塹城迎曦門',year:'1827（城門建置年代）',era:0,place:'新竹市東區',type:'城郭設施',style:'清代城門與城垣遺構',architect:'清代官府主持營建；現貌歷經修建',use:'城防、城市出入口',summary:'從迎曦門可以認識竹塹城的城郭系統，以及古城如何轉變為今日市中心。',history:'迎曦門是清代竹塹城的重要城門。今日所見城樓與周邊環境經過後世修整，應將歷史城門與現存建築年代分開理解。',architecture:'城門結合門洞、城樓與城垣系統，呈現傳統城防設施的空間關係。',observe:'站在城門周邊辨認道路方向，想像城牆環繞城市的範圍，再觀察城門如何被現代道路包圍。',tags:['城門','城郭','都市變遷'],query:'新竹迎曦門',map:'新竹迎曦門'},
-// 日治前期
-{id:9,name:'臺北賓館',year:'1901（完工）',era:1,place:'臺北市中正區',type:'公共建築',style:'巴洛克式樣與日式和館並置',architect:'日籍建築師團隊；歷經設計調整',use:'原臺灣總督官邸，現為國家重要接待場所',summary:'西式官邸主體與日式和館、庭園並置，呈現殖民時期建築文化的複合性。',history:'原為臺灣總督官邸，1901 年完工，後續曾改建。建築及庭園反映殖民政府的接待、居住與權力展示需求。',architecture:'主體以西洋歷史式樣呈現，室內外空間另有日式和館與庭園，兩種空間文化在同一場域並存。',observe:'比較主樓立面與和館的材料、尺度及空間習慣，思考不同建築文化如何被安排在同一座官邸中。',tags:['官邸','巴洛克','和館'],query:'臺北賓館',map:'臺北賓館'},
-{id:10,name:'臺南地方法院（司法博物館）',year:'1912（興建時期）',era:1,place:'臺南市中西區',type:'公共建築',style:'西洋歷史式樣、巴洛克元素',architect:'森山松之助等設計團隊',use:'原法院，現為司法博物館',summary:'圓頂、塔樓、古典柱式與對稱立面，將司法制度的權威感具體呈現在城市街景中。',history:'建築興建於日治時期，曾作為臺南地方法院使用，後經修復再利用為司法博物館。建築本身也是理解近代司法制度與城市發展的歷史入口。',architecture:'外觀可見古典柱式、圓頂、塔樓與裝飾細節，內部空間依司法機關的行政、審理與服務需求配置。',observe:'從主要入口看立面軸線，再留意圓頂、塔樓與窗列如何形成視覺焦點；進入室內可思考司法空間如何安排人員與民眾動線。',tags:['法院','圓頂','歷史式樣'],query:'臺南地方法院 司法博物館',map:'司法博物館'},
-{id:11,name:'北投溫泉博物館',year:'1913（公共浴場啟用）',era:1,place:'臺北市北投區',type:'文化建築',style:'磚造、西式與日式空間並用',architect:'日治時期公共浴場建築',use:'原公共浴場，現為地方文化展示館',summary:'一樓公共浴場與二樓日式休憩空間，讓人看見近代休閒文化如何進入臺灣日常。',history:'原為北投公共浴場，啟用於日治時期。建築停用後經保存修復，轉型為溫泉文化展示場館。',architecture:'磚造建築結合不同樓層的空間性格，一樓浴場帶有西式公共設施特色，二樓設有日式榻榻米休憩空間。',observe:'比較一樓浴場與二樓休憩空間的尺度、材料及光線，理解建築如何因應不同使用情境。',tags:['公共浴場','溫泉文化','再利用'],query:'北投溫泉博物館',map:'北投溫泉博物館'},
-{id:12,name:'新竹車站',year:'1913（現存站房完工）',era:1,place:'新竹市東區',type:'交通建築',style:'歐洲歷史主義式樣',architect:'松ケ崎萬長',use:'鐵路車站',summary:'高聳中央入口與對稱立面，讓車站成為城市的門面，也象徵近代交通網絡的建立。',history:'現存站房於日治時期完工，持續作為鐵路車站使用。車站不只是交通設施，也影響周邊商業、旅館與街道發展。',architecture:'立面以中央入口為視覺中心，搭配山牆、窗列與屋頂量體，呈現當時公共建築常見的歐洲歷史主義語彙。',observe:'從正面觀察中央入口與左右立面的對稱關係，再思考站房如何銜接月台、人流與城市道路。',tags:['車站','對稱立面','鐵道'],query:'新竹車站',map:'新竹火車站'},
-{id:13,name:'國立臺灣博物館',year:'1915（開館）',era:1,place:'臺北市中正區',type:'文化建築',style:'希臘神殿式與古典柱式',architect:'野村一郎等設計團隊',use:'自然史與臺灣文化展示',summary:'以古典神殿語彙建立博物館形象，讓知識、收藏與公共教育有了具體的建築場所。',history:'博物館於日治時期開館，建築原本承載殖民政府的博物展示與知識分類功能，戰後延續博物館用途。',architecture:'入口柱列、對稱立面與中央穹頂是重要特徵，古典建築語彙被用來營造知識機構的莊嚴感。',observe:'觀察柱式、入口台階與穹頂如何形成儀式性的進入經驗；也可留意博物館如何面向公園與城市開放。',tags:['博物館','古典柱式','穹頂'],query:'國立臺灣博物館 本館',map:'國立臺灣博物館'},
-{id:14,name:'臺中州廳',year:'1913 起（興建與擴建）',era:1,place:'臺中市西區',type:'公共建築',style:'西洋歷史式樣官署建築',architect:'日治時期官署建築團隊',use:'原州行政機關，後續有不同公共用途',summary:'官署建築與道路、廣場及周邊公共設施共同構成城市行政中心。',history:'臺中州廳是日治時期臺中州行政中心，建築歷經興建、擴建與後續修復。其沿革反映行政制度與都市中心的變化。',architecture:'以對稱配置、中央入口與古典裝飾語彙建立官署的正式形象，量體與立面具有公共建築的秩序感。',observe:'比較中央入口、柱列、窗戶與屋頂線條，並觀察建築如何與周邊道路及廣場構成行政空間。',tags:['州廳','官署','都市規劃'],query:'臺中州廳',map:'臺中州廳'},
-{id:15,name:'臺南州廳（國立臺灣文學館）',year:'1916（完工）',era:1,place:'臺南市中西區',type:'公共建築',style:'巴洛克與西洋歷史式樣',architect:'森山松之助',use:'原臺南州廳，現為國立臺灣文學館',summary:'華麗立面、穹頂與馬薩式屋頂，展現日治時期大型官署建築的城市尺度。',history:'建築於日治時期作為臺南州廳使用，戰後用途轉變，後來成為國立臺灣文學館。保存再利用使舊官署轉化為文化場館。',architecture:'立面具有古典與巴洛克元素，屋頂、塔樓及穹頂形成豐富輪廓，內部空間則因應行政與後來展示需求調整。',observe:'由街道遠看整體輪廓，再靠近觀察入口、窗框、柱式與屋頂細節；思考官署如何轉型為文學展示空間。',tags:['官署','巴洛克','文化再利用'],query:'國立臺灣文學館 臺南州廳',map:'國立臺灣文學館'},
-{id:16,name:'總統府（原臺灣總督府）',year:'1919（落成）',era:1,place:'臺北市中正區',type:'公共建築',style:'辰野式語彙與西洋歷史主義',architect:'長野宇平治競圖得標，森山松之助修改設計',use:'原臺灣總督府，現為總統府',summary:'中央高塔、紅磚與淺色石帶形成鮮明輪廓，是臺灣近代政治史的重要建築。',history:'建築於 1919 年落成，原為臺灣總督府。戰爭期間受損，戰後修復並改作總統府。其用途隨政權更替而改變，建築也因此承載多層歷史記憶。',architecture:'平面與立面具有軸線秩序，中央塔樓成為視覺焦點；紅磚與石材線帶形成豐富的立面節奏。',observe:'從遠處辨認中央塔樓與水平線條，再觀察立面材料交替。也可討論同一建築在不同政治時期如何被賦予不同象徵。',tags:['總督府','政治建築','紅磚石帶'],query:'總統府 臺灣總督府',map:'總統府'},
-// 日治中後期
-{id:17,name:'臺北郵局',year:'1930（現存建築年代）',era:2,place:'臺北市大同區',type:'公共建築',style:'古典折衷式公共建築',architect:'日治時期郵政建築設計團隊',use:'郵政與通信服務',summary:'厚實量體與規整立面呈現公共機構的秩序感，也見證近代郵政與城市商業發展。',history:'臺北郵局位於臺北城北側交通與商業活動交會處，郵政功能與鐵道、商業及人口流動密切相關。',architecture:'外觀以規整立面、古典比例與厚實量體建立公共機構形象，入口與窗列形成清楚節奏。',observe:'看入口如何被強調、窗列如何排列，再思考郵局作為公共服務設施，如何與街道及人流連結。',tags:['郵局','公共服務','古典折衷'],query:'臺北郵局',map:'臺北郵局'},
-{id:18,name:'林百貨',year:'1932（開幕）',era:2,place:'臺南市中西區',type:'公共建築',style:'裝飾藝術風格與現代商業建築',architect:'梅澤捨次郎',use:'原百貨公司，現為歷史建築與商業空間',summary:'電梯、樓層配置與屋頂設施呈現近代百貨文化，也記錄臺南商業現代化。',history:'林百貨於 1932 年開幕，是當時臺南重要的現代商業設施。停業多年後經修復再利用，重新成為城市文化與觀光節點。',architecture:'鋼筋混凝土構造與簡潔立面，內部以樓層、電梯及垂直動線組織百貨空間。屋頂神社遺構是特殊歷史線索。',observe:'搭乘或步行樓層動線，留意電梯、樓梯、採光與展示空間；也可上屋頂觀察建築與舊城街區的關係。',tags:['百貨','裝飾藝術','商業現代化'],query:'林百貨 臺南',map:'林百貨'},
-{id:19,name:'嘉義舊監獄',year:'1922（興建時期）',era:2,place:'嘉義市東區',type:'公共建築',style:'放射狀監獄建築',architect:'日治時期監獄建築系統',use:'原監獄設施，現為文化資產展示場域',summary:'放射狀配置將管理中心、走道與舍房連結，建築平面本身呈現制度與權力關係。',history:'嘉義舊監獄是日治時期監獄建築的重要保存案例。它不只是一棟歷史建築，也保存了監獄制度、管理方式與受刑人生活的空間線索。',architecture:'以中央管理空間向外延伸舍房與走道，透過視線與動線安排達到集中管理。建築構造及細部反映當時監獄設施的規劃邏輯。',observe:'從平面配置理解管理中心如何掌握各區動線；參觀時也應兼顧建築保存與監禁歷史的人權議題。',tags:['監獄','放射狀平面','制度空間'],query:'嘉義舊監獄',map:'嘉義舊監獄'},
-{id:20,name:'臺北公會堂（中山堂）',year:'1936（完工）',era:2,place:'臺北市中正區',type:'文化建築',style:'折衷主義與現代結構',architect:'井手薰',use:'集會、表演與公共文化活動',summary:'大型集會空間結合近代設備與結構技術，建築與臺灣近代政治文化事件密切相連。',history:'1936 年完工，原為臺北公會堂。1945 年臺灣受降典禮在此舉行，戰後持續作為公共集會與表演場所。',architecture:'採鋼骨鋼筋混凝土及大跨距結構，室內配置需支援集會與表演，外觀呈現折衷式樣與現代設備特色。',observe:'觀察入口、門廳與大廳的尺度轉換，理解大跨距空間如何支援大量觀眾與公共活動。',tags:['公會堂','集會空間','大跨距'],query:'臺北中山堂',map:'臺北中山堂'},
-{id:21,name:'臺南車站',year:'1936（啟用）',era:2,place:'臺南市東區',type:'交通建築',style:'折衷式樣與現代化處理',architect:'日治時期鐵道建築設計團隊',use:'鐵路車站',summary:'車站立面、候車空間與周邊道路共同構成城市交通門戶。',history:'現存站房於日治時期啟用，長期服務臺南鐵路運輸。車站與前站商業、旅館及市區發展關係密切。',architecture:'正面以對稱構圖與簡化古典語彙呈現公共建築的莊重感，內部依候車、售票與通行需求配置。',observe:'從站前廣場看建築如何迎接旅客，再觀察入口、候車空間與月台之間的動線。',tags:['車站','鐵道','城市門戶'],query:'臺南車站',map:'臺南火車站'},
-{id:22,name:'高雄車站（舊站）',year:'1941（啟用）',era:2,place:'高雄市三民區',type:'交通建築',style:'帝冠式',architect:'日治時期鐵道建築設計團隊',use:'原鐵路車站，現為保存展示空間',summary:'鋼筋混凝土主體結合日本式屋頂語彙，是戰時帝冠式建築的代表案例之一。',history:'舊高雄車站於 1941 年啟用，後因鐵路地下化工程而移築保存，成為認識高雄鐵道與都市變遷的重要場域。',architecture:'主體採近代結構，屋頂形式帶有日本傳統建築意象，呈現近代工程技術與象徵性形式的結合。',observe:'比較建築主體與屋頂形式，理解帝冠式如何將現代建築結構與傳統屋頂意象結合；也可認識移築保存的工程意義。',tags:['帝冠式','車站','移築保存'],query:'高雄車站 舊站',map:'高雄車站舊站'},
-{id:23,name:'高雄市役所（高雄市立歷史博物館）',year:'1939（啟用）',era:2,place:'高雄市鹽埕區',type:'公共建築',style:'折衷式官署建築',architect:'日治時期市政建築團隊',use:'原市役所，現為高雄市立歷史博物館',summary:'從市政辦公廳舍轉為歷史博物館，呈現公共建築再利用與城市記憶的延續。',history:'原為高雄市役所，戰後曾延續行政用途，後來轉型為高雄市立歷史博物館。建築用途的變化與高雄城市發展相互呼應。',architecture:'以對稱立面、中央入口及折衷式裝飾建立市政機關形象，內部空間後續配合博物館展示需求調整。',observe:'觀察入口與立面秩序，再思考行政辦公空間如何轉化為展覽、教育與公共參與空間。',tags:['市役所','博物館','再利用'],query:'高雄市立歷史博物館',map:'高雄市立歷史博物館'},
-// 戰後初期
-{id:24,name:'四四南村',year:'1948 起（眷村形成）',era:3,place:'臺北市信義區',type:'住宅聚落',style:'眷村聚落與連棟住宅',architect:'軍方規劃、居民共同營造生活環境',use:'原眷村住宅，現為文化保存與公共活動空間',summary:'低矮住宅、巷弄與居民生活痕跡，呈現戰後初期的居住條件與鄰里關係。',history:'四四南村是臺北早期眷村之一，與軍眷安置及戰後城市擴張有關。部分空間保存後轉作文化展示與公共活動使用。',architecture:'住宅單元尺度較小，巷道與院落緊密，後期增建及生活設施反映居民因應家庭需求的調整。',observe:'留意屋頂、牆面、門窗與巷道尺度，想像家戶如何共享生活空間，以及居民如何透過增建回應需求。',tags:['眷村','住宅','生活記憶'],query:'四四南村',map:'四四南村'},
-{id:25,name:'中興新村',year:'1955 起（規劃興建）',era:3,place:'南投縣南投市',type:'住宅聚落',style:'田園城市規劃與公務員住宅',architect:'整體規劃團隊',use:'原臺灣省政府辦公與員工居住新市鎮',summary:'低密度住宅、綠地與公共設施並置，是戰後整體規劃新市鎮的重要案例。',history:'中興新村自 1950 年代中期規劃興建，配合臺灣省政府遷駐而逐步發展。其道路、住宅、機關與公共設施呈現整體都市規劃思維。',architecture:'住宅多為低層量體，街廓、林蔭道路、公共空間與機關建築共同構成生活環境。',observe:'不要只看單棟房屋，建議沿街步行，觀察道路尺度、綠帶、住宅退縮與公共設施的配置。',tags:['新市鎮','田園城市','聚落'],query:'中興新村',map:'中興新村'},
-{id:26,name:'勝利新村',year:'日治宿舍群，戰後延續使用',era:3,place:'屏東縣屏東市',type:'住宅聚落',style:'日式宿舍群與戰後眷舍生活',architect:'日治時期官舍規劃，戰後續用',use:'原官舍與眷舍，部分轉為文化創意空間',summary:'日式宿舍的屋頂、庭院與通風構件，記錄建築如何適應南臺灣氣候與家庭生活。',history:'聚落建築源自日治時期官舍，戰後由不同機關與家庭接續使用。使用者的生活調整與增建，使聚落呈現跨時代的生活層次。',architecture:'可見木構造、切妻或寄棟屋頂、庭院、通風百葉與遮陽花架等構件，反映氣候適應與住宅尺度。',observe:'看屋頂形式、通風百葉、庭院與遮陽設施，思考建築如何回應高溫、多雨及家庭日常。',tags:['日式宿舍','眷舍','氣候適應'],query:'屏東勝利星村 勝利新村',map:'勝利星村'},
-// 戰後現代
-{id:27,name:'東海大學路思義教堂',year:'1963（落成）',era:4,place:'臺中市西屯區',type:'文化建築',style:'現代主義薄殼結構',architect:'貝聿銘、陳其寬',use:'校園宗教與集會空間',summary:'四片曲面薄殼向上收攏，讓結構、光線與宗教空間形成鮮明整體。',history:'路思義教堂於 1963 年落成，位於東海大學校園核心。它是臺灣現代建築發展中經常被討論的代表作品。',architecture:'以四片雙曲面薄殼形成主要空間，外覆黃色面磚，曲面結構同時塑造外觀與室內氛圍。',observe:'繞行教堂觀察四片曲面如何相互支撐，再進入室內感受光線、尺度與結構如何共同塑造空間。',tags:['現代主義','薄殼結構','校園建築'],query:'東海大學路思義教堂',map:'路思義教堂'},
-{id:28,name:'國父紀念館',year:'1972（落成）',era:4,place:'臺北市信義區',type:'文化建築',style:'現代結構詮釋傳統屋頂意象',architect:'王大閎',use:'紀念、展覽、表演與公共活動',summary:'以現代建築技術重新詮釋傳統屋頂與大出簷，形成具有象徵性的公共建築。',history:'國父紀念館於 1972 年落成，作為紀念與公共文化活動場館。其建築形式反映戰後官方公共建築對傳統形式的再詮釋。',architecture:'主體以現代結構支撐大屋頂與深出簷，外觀具有傳統建築意象，內部則配置大型集會與展演空間。',observe:'觀察屋頂與柱列的比例，再比較外觀傳統意象與內部現代機能的差異。',tags:['王大閎','大出簷','公共文化'],query:'國父紀念館',map:'國父紀念館'},
-{id:29,name:'中正紀念堂',year:'1980（落成）',era:4,place:'臺北市中正區',type:'文化建築',style:'宮殿式紀念建築',architect:'楊卓成',use:'紀念性建築與公共文化活動場域',summary:'白色量體、藍色屋頂與大型階梯，透過尺度與軸線形成強烈的紀念性空間。',history:'中正紀念堂於 1980 年落成，建築與周邊廣場、牌樓及園區共同構成大型紀念性都市空間。其歷史詮釋與公共使用方式也隨社會變遷持續受到討論。',architecture:'主體採八角形屋頂與宮殿式形式，白牆、藍瓦及大型階梯形成鮮明對比，園區軸線強調儀式性與紀念性。',observe:'從園區入口沿軸線接近主體，感受廣場、階梯與建築尺度如何安排人的視線與行進方向；也可討論紀念建築的公共意義。',tags:['紀念建築','宮殿式','都市軸線'],query:'國立中正紀念堂',map:'中正紀念堂'},
-{id:30,name:'臺北市立美術館',year:'1983（開館）',era:4,place:'臺北市中山區',type:'文化建築',style:'現代主義與幾何量體',architect:'高而潘',use:'現代與當代藝術展示、教育推廣',summary:'以幾何量體組織展覽空間，建築本身也成為理解現代美術館的入口。',history:'臺北市立美術館於 1983 年開館，是臺灣重要的公立現代美術館。建築與周邊公園、公共文化設施共同構成城市文化空間。',architecture:'幾何量體、清楚的空間組織與展覽動線是觀察重點，建築形式回應美術館展示、典藏與公共教育需求。',observe:'留意量體如何堆疊、展廳如何串連，以及自然光與人工照明如何影響觀看作品的經驗。',tags:['美術館','現代主義','幾何量體'],query:'臺北市立美術館',map:'臺北市立美術館'}
+
+const cases = [
+  {id:1,name:'彰化孔廟',year:'1726（創建）',era:1,place:'彰化縣彰化市',type:'宗教建築',style:'閩南官式孔廟',architect:'傳統匠師營造（個別設計者待考）',use:'祭祀孔子、地方文教與儒學祭典',summary:'以中軸線串連門、庭院與主要殿堂，呈現傳統官學孔廟的禮制空間。',history:'彰化孔廟創建於清雍正年間，後世歷經修建。今日所見建築並非單一年代完整留存，閱讀時宜區分創建年代與現存建築的重修年代。',architecture:'可從中軸、泮池、門廡與大成殿理解孔廟的空間層次。屋頂、木構、彩繪與石作共同構成莊重而有秩序的建築表情。',observe:'由入口沿中軸向內走，觀察空間如何逐層收束；再留意屋頂、柱列與殿堂尺度如何表現禮制。',tags:['孔廟','中軸','傳統木構'],query:'彰化孔廟',map:'彰化孔廟'},
+  {id:2,name:'艋舺龍山寺',year:'1738（創建）',era:1,place:'臺北市萬華區',type:'宗教建築',style:'閩南傳統寺廟',architect:'歷代匠師修建',use:'民間信仰、地方祭祀與社區活動',summary:'寺廟空間與艋舺聚落發展緊密相連，是臺北早期城市生活的重要文化地標。',history:'由泉州移民於清乾隆年間創建，歷經地震、戰爭及多次修復。現存建築與裝飾反映不同時代匠師的技藝累積。',architecture:'以多進式院落組織前殿、正殿及後殿，屋脊、剪黏、石雕、木雕與藻井是重要工藝元素。',observe:'從廟埕進入三川殿，留意視線如何被引導至正殿；抬頭觀察藻井與屋脊剪黏，辨認不同工藝的材料與層次。',tags:['寺廟','剪黏','木石雕刻'],query:'艋舺龍山寺',map:'艋舺龍山寺'},
+  {id:3,name:'新竹城隍廟',year:'1748（創建）',era:1,place:'新竹市北區',type:'宗教建築',style:'閩南傳統寺廟',architect:'歷代匠師修建',use:'城隍信仰、地方祭典與市街生活',summary:'廟宇、廟埕與周邊市集構成緊密的生活場域，展現信仰空間與商業街區的共生。',history:'創建於清乾隆年間，與竹塹地區的移墾、城鎮發展及地方信仰密切相關。歷代修建使今日建築呈現多期累積的樣貌。',architecture:'以廟埕連結街市，殿堂沿軸線排列，屋脊裝飾、木石雕刻與彩繪呈現傳統廟宇工藝。',observe:'除了看殿宇，也要站在廟埕觀察周邊店舖、攤販與人流，理解廟宇如何成為城市公共生活的中心。',tags:['城隍信仰','廟埕','街區'],query:'新竹城隍廟',map:'新竹城隍廟'},
+  {id:4,name:'鹿港龍山寺',year:'清乾隆年間（現址興建）',era:1,place:'彰化縣鹿港鎮',type:'宗教建築',style:'閩南傳統寺廟',architect:'傳統匠師營造',use:'觀音信仰與地方祭祀',summary:'保存完整的寺廟空間與木構工藝，尤其戲臺藻井常是參觀者理解傳統構造的入口。',history:'鹿港龍山寺的歷史可追溯至清代，現址建築與後續修復共同構成今日所見風貌。它也反映鹿港曾經繁盛的港口商業與信仰網絡。',architecture:'主要殿堂沿中軸排列，木構架、斗栱、藻井、石雕及屋脊裝飾值得細看。戲臺藻井兼具聲學、結構與視覺效果。',observe:'在戲臺下方抬頭看藻井的層層收束，再比較殿堂木構與石構件的比例、接合方式。',tags:['寺廟','藻井','木構技藝'],query:'鹿港龍山寺',map:'鹿港龍山寺'},
+  {id:5,name:'大龍峒保安宮',year:'1805（創建）',era:1,place:'臺北市大同區',type:'宗教建築',style:'閩南傳統寺廟',architect:'歷代匠師修建',use:'保生大帝信仰與地方祭祀',summary:'從建築工藝修復與社區參與，可看見古蹟保存如何延續地方信仰與生活。',history:'保安宮於清嘉慶年間創建，主祀保生大帝。歷經多次修建與近代修復，保存工作也成為臺灣傳統寺廟維護的重要案例。',architecture:'殿堂配置、屋脊剪黏、彩繪、木雕與石雕交織，修復工程重視傳統工法與裝飾細節。',observe:'留意不同殿堂的屋頂形式與裝飾差異，也可觀察修復後新舊材料如何銜接。',tags:['寺廟','傳統工藝','修復'],query:'大龍峒保安宮',map:'大龍峒保安宮'},
+  {id:6,name:'板橋林家花園',year:'1847 起（興建）',era:1,place:'新北市板橋區',type:'住宅聚落',style:'閩南宅第與園林融合',architect:'林本源家族營建，匠師參與',use:'家族宅第、接待與園林休憩',summary:'宅第與庭園相互交織，呈現清代富商家族的生活空間、社會地位與審美趣味。',history:'林本源家族自十九世紀中葉起逐步興建宅第與園林，歷經多階段擴建。園內建築、池水、假山及植栽形成層次豐富的遊園動線。',architecture:'傳統院落、廳堂、亭榭與園林景觀並置，透過門洞、廊道、窗景與水面創造移步換景的效果。',observe:'沿著園路移動，觀察同一景物如何透過門洞、窗框與廊道改變；也可比較宅第空間與園林空間的尺度差異。',tags:['宅第','園林','移步換景'],query:'板橋林家花園',map:'林本源園邸'},
+  {id:7,name:'臺北府城北門（承恩門）',year:'1884（完成）',era:1,place:'臺北市中正區',type:'城郭設施',style:'清代城門與磚石構造',architect:'清代官府主持營建',use:'城防、城市出入口與交通節點',summary:'北門是臺北府城現存城門中重要的清代遺構，見證城牆拆除後城市道路與交通的改變。',history:'臺北府城於清光緒年間興建，北門為城門之一。日治時期城牆陸續拆除，城門留存下來，今日周邊已成為現代交通空間。',architecture:'厚實磚石牆體、門洞、城樓及防禦性開口，呈現城門兼具通行與防禦的功能。',observe:'不要只看城樓，試著從道路與廣場想像城牆原本延伸的方向，理解古城門與現代都市道路的關係。',tags:['城門','磚石','城市防禦'],query:'臺北府城北門 承恩門',map:'臺北府城北門'},
+  {id:8,name:'竹塹城迎曦門',year:'1827（城門建置年代）',era:1,place:'新竹市東區',type:'城郭設施',style:'清代城門與城垣遺構',architect:'清代官府主持營建；現貌歷經修建',use:'城防、城市出入口',summary:'從迎曦門可以認識竹塹城的城郭系統，以及古城如何轉變為今日市中心。',history:'迎曦門是清代竹塹城的重要城門。今日所見城樓與周邊環境經過後世修整，應將歷史城門與現存建築年代分開理解。',architecture:'城門結合門洞、城樓與城垣系統，呈現傳統城防設施的空間關係。',observe:'站在城門周邊辨認道路方向，想像城牆環繞城市的範圍，再觀察城門如何被現代道路包圍。',tags:['城門','城郭','都市變遷'],query:'新竹迎曦門',map:'新竹迎曦門'},
+  {id:9,name:'臺北賓館',year:'1901（完工）',era:2,place:'臺北市中正區',type:'公共建築',style:'巴洛克式樣與日式和館並置',architect:'日籍建築師團隊；歷經設計調整',use:'原臺灣總督官邸，現為國家重要接待場所',summary:'西式官邸主體與日式和館、庭園並置，呈現殖民時期建築文化的複合性。',history:'原為臺灣總督官邸，1901 年完工，後續曾改建。建築及庭園反映殖民政府的接待、居住與權力展示需求。',architecture:'主體以西洋歷史式樣呈現，室內外空間另有日式和館與庭園，兩種空間文化在同一場域並存。',observe:'比較主樓立面與和館的材料、尺度及空間習慣，思考不同建築文化如何被安排在同一座官邸中。',tags:['官邸','巴洛克','和館'],query:'臺北賓館',map:'臺北賓館'},
+  {id:10,name:'臺南地方法院（司法博物館）',year:'1912（興建時期）',era:2,place:'臺南市中西區',type:'公共建築',style:'西洋歷史式樣、巴洛克元素',architect:'森山松之助等設計團隊',use:'原法院，現為司法博物館',summary:'圓頂、塔樓、古典柱式與對稱立面，將司法制度的權威感具體呈現在城市街景中。',history:'建築興建於日治時期，曾作為臺南地方法院使用，後經修復再利用為司法博物館。建築本身也是理解近代司法制度與城市發展的歷史入口。',architecture:'外觀可見古典柱式、圓頂、塔樓與裝飾細節，內部空間依司法機關的行政、審理與服務需求配置。',observe:'從主要入口看立面軸線，再留意圓頂、塔樓與窗列如何形成視覺焦點；進入室內可思考司法空間如何安排人員與民眾動線。',tags:['法院','圓頂','歷史式樣'],query:'臺南地方法院 司法博物館',map:'司法博物館'},
+  {id:11,name:'北投溫泉博物館',year:'1913（公共浴場啟用）',era:2,place:'臺北市北投區',type:'文化建築',style:'磚造、西式與日式空間並用',architect:'日治時期公共浴場建築',use:'原公共浴場，現為地方文化展示館',summary:'一樓公共浴場與二樓日式休憩空間，讓人看見近代休閒文化如何進入臺灣日常。',history:'原為北投公共浴場，啟用於日治時期。建築停用後經保存修復，轉型為溫泉文化展示場館。',architecture:'磚造建築結合不同樓層的空間性格，一樓浴場帶有西式公共設施特色，二樓設有日式榻榻米休憩空間。',observe:'比較一樓浴場與二樓休憩空間的尺度、材料及光線，理解建築如何因應不同使用情境。',tags:['公共浴場','溫泉文化','再利用'],query:'北投溫泉博物館',map:'北投溫泉博物館'},
+  {id:12,name:'新竹車站',year:'1913（現存站房完工）',era:2,place:'新竹市東區',type:'交通建築',style:'歐洲歷史主義式樣',architect:'松ケ崎萬長',use:'鐵路車站',summary:'高聳中央入口與對稱立面，讓車站成為城市的門面，也象徵近代交通網絡的建立。',history:'現存站房於日治時期完工，持續作為鐵路車站使用。車站不只是交通設施，也影響周邊商業、旅館與街道發展。',architecture:'立面以中央入口為視覺中心，搭配山牆、窗列與屋頂量體，呈現當時公共建築常見的歐洲歷史主義語彙。',observe:'從正面觀察中央入口與左右立面的對稱關係，再思考站房如何銜接月台、人流與城市道路。',tags:['車站','對稱立面','鐵道'],query:'新竹車站',map:'新竹火車站'},
+  {id:13,name:'國立臺灣博物館',year:'1915（開館）',era:2,place:'臺北市中正區',type:'文化建築',style:'希臘神殿式與古典柱式',architect:'野村一郎等設計團隊',use:'自然史與臺灣文化展示',summary:'以古典神殿語彙建立博物館形象，讓知識、收藏與公共教育有了具體的建築場所。',history:'博物館於日治時期開館，建築原本承載殖民政府的博物展示與知識分類功能，戰後延續博物館用途。',architecture:'入口柱列、對稱立面與中央穹頂是重要特徵，古典建築語彙被用來營造知識機構的莊嚴感。',observe:'觀察柱式、入口台階與穹頂如何形成儀式性的進入經驗；也可留意博物館如何面向公園與城市開放。',tags:['博物館','古典柱式','穹頂'],query:'國立臺灣博物館 本館',map:'國立臺灣博物館'},
+  {id:14,name:'臺中州廳',year:'1913 起（興建與擴建）',era:2,place:'臺中市西區',type:'公共建築',style:'西洋歷史式樣官署建築',architect:'日治時期官署建築團隊',use:'原州行政機關，後續有不同公共用途',summary:'官署建築與道路、廣場及周邊公共設施共同構成城市行政中心。',history:'臺中州廳是日治時期臺中州行政中心，建築歷經興建、擴建與後續修復。其沿革反映行政制度與都市中心的變化。',architecture:'以對稱配置、中央入口與古典裝飾語彙建立官署的正式形象，量體與立面具有公共建築的秩序感。',observe:'比較中央入口、柱列、窗戶與屋頂線條，並觀察建築如何與周邊道路及廣場構成行政空間。',tags:['州廳','官署','都市規劃'],query:'臺中州廳',map:'臺中州廳'},
+  {id:15,name:'臺南州廳（國立臺灣文學館）',year:'1916（完工）',era:2,place:'臺南市中西區',type:'公共建築',style:'巴洛克與西洋歷史式樣',architect:'森山松之助',use:'原臺南州廳，現為國立臺灣文學館',summary:'華麗立面、穹頂與馬薩式屋頂，展現日治時期大型官署建築的城市尺度。',history:'建築於日治時期作為臺南州廳使用，戰後用途轉變，後來成為國立臺灣文學館。保存再利用使舊官署轉化為文化場館。',architecture:'立面具有古典與巴洛克元素，屋頂、塔樓及穹頂形成豐富輪廓，內部空間則因應行政與後來展示需求調整。',observe:'由街道遠看整體輪廓，再靠近觀察入口、窗框、柱式與屋頂細節；思考官署如何轉型為文學展示空間。',tags:['官署','巴洛克','文化再利用'],query:'國立臺灣文學館 臺南州廳',map:'國立臺灣文學館'},
+  {id:16,name:'總統府（原臺灣總督府）',year:'1919（落成）',era:2,place:'臺北市中正區',type:'公共建築',style:'辰野式語彙與西洋歷史主義',architect:'長野宇平治競圖得標，森山松之助修改設計',use:'原臺灣總督府，現為總統府',summary:'中央高塔、紅磚與淺色石帶形成鮮明輪廓，是臺灣近代政治史的重要建築。',history:'建築於 1919 年落成，原為臺灣總督府。戰爭期間受損，戰後修復並改作總統府。其用途隨政權更替而改變，建築也因此承載多層歷史記憶。',architecture:'平面與立面具有軸線秩序，中央塔樓成為視覺焦點；紅磚與石材線帶形成豐富的立面節奏。',observe:'從遠處辨認中央塔樓與水平線條，再觀察立面材料交替。也可討論同一建築在不同政治時期如何被賦予不同象徵。',tags:['總督府','政治建築','紅磚石帶'],query:'總統府 臺灣總督府',map:'總統府'},
+  {id:17,name:'臺北郵局',year:'1930（現存建築年代）',era:2,place:'臺北市大同區',type:'公共建築',style:'古典折衷式公共建築',architect:'日治時期郵政建築設計團隊',use:'郵政與通信服務',summary:'厚實量體與規整立面呈現公共機構的秩序感，也見證近代郵政與城市商業發展。',history:'臺北郵局位於臺北城北側交通與商業活動交會處，郵政功能與鐵道、商業及人口流動密切相關。',architecture:'外觀以規整立面、古典比例與厚實量體建立公共機構形象，入口與窗列形成清楚節奏。',observe:'看入口如何被強調、窗列如何排列，再思考郵局作為公共服務設施，如何與街道及人流連結。',tags:['郵局','公共服務','古典折衷'],query:'臺北郵局',map:'臺北郵局'},
+  {id:18,name:'林百貨',year:'1932（開幕）',era:2,place:'臺南市中西區',type:'公共建築',style:'裝飾藝術風格與現代商業建築',architect:'梅澤捨次郎',use:'原百貨公司，現為歷史建築與商業空間',summary:'電梯、樓層配置與屋頂設施呈現近代百貨文化，也記錄臺南商業現代化。',history:'林百貨於 1932 年開幕，是當時臺南重要的現代商業設施。停業多年後經修復再利用，重新成為城市文化與觀光節點。',architecture:'鋼筋混凝土構造與簡潔立面，內部以樓層、電梯及垂直動線組織百貨空間。屋頂神社遺構是特殊歷史線索。',observe:'搭乘或步行樓層動線，留意電梯、樓梯、採光與展示空間；也可上屋頂觀察建築與舊城街區的關係。',tags:['百貨','裝飾藝術','商業現代化'],query:'林百貨 臺南',map:'林百貨'},
+  {id:19,name:'嘉義舊監獄',year:'1922（興建時期）',era:2,place:'嘉義市東區',type:'公共建築',style:'放射狀監獄建築',architect:'日治時期監獄建築系統',use:'原監獄設施，現為文化資產展示場域',summary:'放射狀配置將管理中心、走道與舍房連結，建築平面本身呈現制度與權力關係。',history:'嘉義舊監獄是日治時期監獄建築的重要保存案例。它不只是一棟歷史建築，也保存了監獄制度、管理方式與受刑人生活的空間線索。',architecture:'以中央管理空間向外延伸舍房與走道，透過視線與動線安排達到集中管理。建築構造及細部反映當時監獄設施的規劃邏輯。',observe:'從平面配置理解管理中心如何掌握各區動線；參觀時也應兼顧建築保存與監禁歷史的人權議題。',tags:['監獄','放射狀平面','制度空間'],query:'嘉義舊監獄',map:'嘉義舊監獄'},
+  {id:20,name:'臺北公會堂（中山堂）',year:'1936（完工）',era:2,place:'臺北市中正區',type:'文化建築',style:'折衷主義與現代結構',architect:'井手薰',use:'集會、表演與公共文化活動',summary:'大型集會空間結合近代設備與結構技術，建築與臺灣近代政治文化事件密切相連。',history:'1936 年完工，原為臺北公會堂。1945 年臺灣受降典禮在此舉行，戰後持續作為公共集會與表演場所。',architecture:'採鋼骨鋼筋混凝土及大跨距結構，室內配置需支援集會與表演，外觀呈現折衷式樣與現代設備特色。',observe:'觀察入口、門廳與大廳的尺度轉換，理解大跨距空間如何支援大量觀眾與公共活動。',tags:['公會堂','集會空間','大跨距'],query:'臺北中山堂',map:'臺北中山堂'},
+  {id:21,name:'臺南車站',year:'1936（啟用）',era:2,place:'臺南市東區',type:'交通建築',style:'折衷式樣與現代化處理',architect:'日治時期鐵道建築設計團隊',use:'鐵路車站',summary:'車站立面、候車空間與周邊道路共同構成城市交通門戶。',history:'現存站房於日治時期啟用，長期服務臺南鐵路運輸。車站與前站商業、旅館及市區發展關係密切。',architecture:'正面以對稱構圖與簡化古典語彙呈現公共建築的莊重感，內部依候車、售票與通行需求配置。',observe:'從站前廣場看建築如何迎接旅客，再觀察入口、候車空間與月台之間的動線。',tags:['車站','鐵道','城市門戶'],query:'臺南車站',map:'臺南火車站'},
+  {id:22,name:'高雄車站（舊站）',year:'1941（啟用）',era:2,place:'高雄市三民區',type:'交通建築',style:'帝冠式',architect:'日治時期鐵道建築設計團隊',use:'原鐵路車站，現為保存展示空間',summary:'鋼筋混凝土主體結合日本式屋頂語彙，是戰時帝冠式建築的代表案例之一。',history:'舊高雄車站於 1941 年啟用，後因鐵路地下化工程而移築保存，成為認識高雄鐵道與都市變遷的重要場域。',architecture:'主體採近代結構，屋頂形式帶有日本傳統建築意象，呈現近代工程技術與象徵性形式的結合。',observe:'比較建築主體與屋頂形式，理解帝冠式如何將現代建築結構與傳統屋頂意象結合；也可認識移築保存的工程意義。',tags:['帝冠式','車站','移築保存'],query:'高雄車站 舊站',map:'高雄車站舊站'},
+  {id:23,name:'高雄市役所（高雄市立歷史博物館）',year:'1939（啟用）',era:2,place:'高雄市鹽埕區',type:'公共建築',style:'折衷式官署建築',architect:'日治時期市政建築團隊',use:'原市役所，現為高雄市立歷史博物館',summary:'從市政辦公廳舍轉為歷史博物館，呈現公共建築再利用與城市記憶的延續。',history:'原為高雄市役所，戰後曾延續行政用途，後來轉型為高雄市立歷史博物館。建築用途的變化與高雄城市發展相互呼應。',architecture:'以對稱立面、中央入口及折衷式裝飾建立市政機關形象，內部空間後續配合博物館展示需求調整。',observe:'觀察入口與立面秩序，再思考行政辦公空間如何轉化為展覽、教育與公共參與空間。',tags:['市役所','博物館','再利用'],query:'高雄市立歷史博物館',map:'高雄市立歷史博物館'},
+  {id:24,name:'四四南村',year:'1948 起（眷村形成）',era:3,place:'臺北市信義區',type:'住宅聚落',style:'眷村聚落與連棟住宅',architect:'軍方規劃、居民共同營造生活環境',use:'原眷村住宅，現為文化保存與公共活動空間',summary:'低矮住宅、巷弄與居民生活痕跡，呈現戰後初期的居住條件與鄰里關係。',history:'四四南村是臺北早期眷村之一，與軍眷安置及戰後城市擴張有關。部分空間保存後轉作文化展示與公共活動使用。',architecture:'住宅單元尺度較小，巷道與院落緊密，後期增建及生活設施反映居民因應家庭需求的調整。',observe:'留意屋頂、牆面、門窗與巷道尺度，想像家戶如何共享生活空間，以及居民如何透過增建回應需求。',tags:['眷村','住宅','生活記憶'],query:'四四南村',map:'四四南村'},
+  {id:25,name:'中興新村',year:'1955 起（規劃興建）',era:3,place:'南投縣南投市',type:'住宅聚落',style:'田園城市規劃與公務員住宅',architect:'整體規劃團隊',use:'原臺灣省政府辦公與員工居住新市鎮',summary:'低密度住宅、綠地與公共設施並置，是戰後整體規劃新市鎮的重要案例。',history:'中興新村自 1950 年代中期規劃興建，配合臺灣省政府遷駐而逐步發展。其道路、住宅、機關與公共設施呈現整體都市規劃思維。',architecture:'住宅多為低層量體，街廓、林蔭道路、公共空間與機關建築共同構成生活環境。',observe:'不要只看單棟房屋，建議沿街步行，觀察道路尺度、綠帶、住宅退縮與公共設施的配置。',tags:['新市鎮','田園城市','聚落'],query:'中興新村',map:'中興新村'},
+  {id:26,name:'勝利新村',year:'日治宿舍群，戰後延續使用',era:3,place:'屏東縣屏東市',type:'住宅聚落',style:'日式宿舍群與戰後眷舍生活',architect:'日治時期官舍規劃，戰後續用',use:'原官舍與眷舍，部分轉為文化創意空間',summary:'日式宿舍的屋頂、庭院與通風構件，記錄建築如何適應南臺灣氣候與家庭生活。',history:'聚落建築源自日治時期官舍，戰後由不同機關與家庭接續使用。使用者的生活調整與增建，使聚落呈現跨時代的生活層次。',architecture:'可見木構造、切妻或寄棟屋頂、庭院、通風百葉與遮陽花架等構件，反映氣候適應與住宅尺度。',observe:'看屋頂形式、通風百葉、庭院與遮陽設施，思考建築如何回應高溫、多雨及家庭日常。',tags:['日式宿舍','眷舍','氣候適應'],query:'屏東勝利星村 勝利新村',map:'勝利星村'},
+  {id:27,name:'東海大學路思義教堂',year:'1963（落成）',era:4,place:'臺中市西屯區',type:'文化建築',style:'現代主義薄殼結構',architect:'貝聿銘、陳其寬',use:'校園宗教與集會空間',summary:'四片曲面薄殼向上收攏，讓結構、光線與宗教空間形成鮮明整體。',history:'路思義教堂於 1963 年落成，位於東海大學校園核心。它是臺灣現代建築發展中經常被討論的代表作品。',architecture:'以四片雙曲面薄殼形成主要空間，外覆黃色面磚，曲面結構同時塑造外觀與室內氛圍。',observe:'繞行教堂觀察四片曲面如何相互支撐，再進入室內感受光線、尺度與結構如何共同塑造空間。',tags:['現代主義','薄殼結構','校園建築'],query:'東海大學路思義教堂',map:'路思義教堂'},
+  {id:28,name:'國父紀念館',year:'1972（落成）',era:4,place:'臺北市信義區',type:'文化建築',style:'現代結構詮釋傳統屋頂意象',architect:'王大閎',use:'紀念、展覽、表演與公共活動',summary:'以現代建築技術重新詮釋傳統屋頂與大出簷，形成具有象徵性的公共建築。',history:'國父紀念館於 1972 年落成，作為紀念與公共文化活動場館。其建築形式反映戰後官方公共建築對傳統形式的再詮釋。',architecture:'主體以現代結構支撐大屋頂與深出簷，外觀具有傳統建築意象，內部則配置大型集會與展演空間。',observe:'觀察屋頂與柱列的比例，再比較外觀傳統意象與內部現代機能的差異。',tags:['王大閎','大出簷','公共文化'],query:'國父紀念館',map:'國父紀念館'},
+  {id:29,name:'中正紀念堂',year:'1980（落成）',era:4,place:'臺北市中正區',type:'文化建築',style:'宮殿式紀念建築',architect:'楊卓成',use:'紀念性建築與公共文化活動場域',summary:'白色量體、藍色屋頂與大型階梯，透過尺度與軸線形成強烈的紀念性空間。',history:'中正紀念堂於 1980 年落成，建築與周邊廣場、牌樓及園區共同構成大型紀念性都市空間。其歷史詮釋與公共使用方式也隨社會變遷持續受到討論。',architecture:'主體採八角形屋頂與宮殿式形式，白牆、藍瓦及大型階梯形成鮮明對比，園區軸線強調儀式性與紀念性。',observe:'從園區入口沿軸線接近主體，感受廣場、階梯與建築尺度如何安排人的視線與行進方向；也可討論紀念建築的公共意義。',tags:['紀念建築','宮殿式','都市軸線'],query:'國立中正紀念堂',map:'中正紀念堂'},
+  {id:30,name:'臺北市立美術館',year:'1983（開館）',era:4,place:'臺北市中山區',type:'文化建築',style:'現代主義與幾何量體',architect:'高而潘',use:'現代與當代藝術展示、教育推廣',summary:'以幾何量體組織展覽空間，建築本身也成為理解現代美術館的入口。',history:'臺北市立美術館於 1983 年開館，是臺灣重要的公立現代美術館。建築與周邊公園、公共文化設施共同構成城市文化空間。',architecture:'幾何量體、清楚的空間組織與展覽動線是觀察重點，建築形式回應美術館展示、典藏與公共教育需求。',observe:'留意量體如何堆疊、展廳如何串連，以及自然光與人工照明如何影響觀看作品的經驗。',tags:['美術館','現代主義','幾何量體'],query:'臺北市立美術館',map:'臺北市立美術館'}
+  ,{id:31,name:'安平古堡（熱蘭遮城遺址）',year:'1624 起（荷蘭時期建城）',era:0,place:'臺南市安平區',type:'城郭設施',style:'歐洲式稜堡與殖民據點',architect:'荷蘭東印度公司工程體系（個別設計者待考）',use:'歷史遺址、文化展示與觀光',summary:'從堡壘遺構理解臺灣早期海洋貿易、殖民治理與港口防禦。',history:'荷蘭勢力於 17 世紀在大員建立熱蘭遮城，後歷經政權更替、拆改與再利用。今日園區包含不同時期遺構與後來設施，不能將現貌視為完整原城。',architecture:'可從城牆、磚石遺構、砲臺與地勢理解防禦設施，也要留意後世修復及展示設施的介入。',observe:'觀察遺址與現代園區的界線，思考港口、海岸線與防禦位置的關係。',tags:['荷蘭時期','城堡','海洋貿易'],query:'安平古堡 熱蘭遮城',map:'安平古堡'},
+  {id:32,name:'赤崁樓（普羅民遮城遺址）',year:'1653（荷蘭時期建置）',era:0,place:'臺南市中西區',type:'城郭設施',style:'荷蘭城堡遺址與清代樓閣',architect:'荷蘭東印度公司工程體系；後世多次改建',use:'歷史古蹟與文化展示',summary:'同一地點疊合荷蘭城堡、清代樓閣與近代保存設施，是臺南城市歷史的縮影。',history:'荷蘭時期稱普羅民遮城，鄭氏與清代以後用途及建築形貌多次改變。今日所見樓閣並非 17 世紀城堡原貌。',architecture:'遺址層、清代樓閣、碑刻與庭園共同構成複合場域，適合觀察建築如何被不同政權重新詮釋。',observe:'比較不同年代構件與碑刻，避免把現存樓閣直接等同荷蘭時期原建築。',tags:['荷蘭時期','清代改建','歷史層疊'],query:'赤崁樓 普羅民遮城',map:'赤崁樓'},
+  {id:33,name:'金門模範街',year:'1920 年代（街屋群形成）',era:2,place:'金門縣金城鎮',type:'住宅聚落',style:'閩洋折衷街屋',architect:'地方匠師與商戶營建',use:'商業街屋與歷史街區',summary:'街屋立面融合閩南傳統與近代洋樓語彙，呈現金門僑鄉文化與商業往來。',history:'街區形成與金門近代商業、僑匯及城市發展有關，建築常見傳統材料與外來裝飾語彙並置。',architecture:'連續街屋、騎樓或廊道、立面裝飾與店住混合，反映商業活動與家庭生活的結合。',observe:'沿街比較各棟立面的窗型、山牆、裝飾與店面尺度，觀察不同家庭如何表現身份與經濟能力。',tags:['金門','街屋','僑鄉文化'],query:'金門模範街',map:'金門模範街'},
+  {id:34,name:'金門水頭聚落',year:'明清至近代（聚落持續發展）',era:1,place:'金門縣金城鎮',type:'住宅聚落',style:'閩南傳統聚落與洋樓',architect:'地方匠師、僑民與家族營建',use:'居住、宗族活動與文化觀光',summary:'傳統閩南建築與僑鄉洋樓並存，呈現移民、家族與跨海資金的建築印記。',history:'水頭聚落由不同時期家族建築累積而成，近代僑民返鄉興建洋樓，形成多層次聚落景觀。',architecture:'可見傳統合院、燕尾脊、紅磚牆及融合西式立面的洋樓，聚落巷弄與宗族空間相互連結。',observe:'比較合院與洋樓的材料、樓層、開窗及裝飾，思考海外經驗如何回到家鄉建築。',tags:['閩南聚落','洋樓','僑鄉'],query:'金門水頭聚落',map:'水頭聚落'},
+  {id:35,name:'澎湖天后宮',year:'清代以前已有信仰發展（沿革多期）',era:1,place:'澎湖縣馬公市',type:'宗教建築',style:'閩南傳統廟宇',architect:'歷代地方匠師修建',use:'媽祖信仰與地方祭祀',summary:'廟宇工藝與港口聚落相連，反映澎湖海洋生活、信仰及地方社會。',history:'天后宮歷史悠久，現存建築歷經多次修建，個別構件年代不一。應以文化資產調查及廟方資料核對各期沿革。',architecture:'傳統廟宇格局搭配木雕、石雕、彩繪與屋脊裝飾，呈現離島工藝與海洋信仰特色。',observe:'觀察廟宇與港市街區的關係，並辨認不同修建階段留下的材料與裝飾差異。',tags:['澎湖','媽祖信仰','廟宇工藝'],query:'澎湖天后宮',map:'澎湖天后宮'},
+  {id:36,name:'淡水紅毛城',year:'1628／1644（不同政權建置與重建）',era:0,place:'新北市淡水區',type:'城郭設施',style:'西式堡壘與領事官邸建築群',architect:'西班牙、荷蘭及英國等不同時期建置者',use:'歷史遺址與文化展示',summary:'堡壘與領事官邸並存，呈現北臺灣港口、貿易與國際勢力交會的歷史。',history:'淡水紅毛城歷經西班牙、荷蘭、清廷及英國等不同時期使用與修築，園區建築具有多層歷史。',architecture:'堡壘厚牆、砲臺與後期領事官邸形成不同建築類型的組合，材料及空間功能各異。',observe:'先分辨堡壘與官邸，再比較牆體厚度、開口、室內尺度及景觀視野。',tags:['西式堡壘','領事官邸','淡水'],query:'淡水紅毛城',map:'淡水紅毛城'},
+  {id:37,name:'迪化街歷史街區',year:'19 世紀末至 20 世紀初（街區發展）',era:2,place:'臺北市大同區',type:'住宅聚落',style:'閩南、仿巴洛克與現代主義街屋',architect:'地方商號、匠師與建築師群體',use:'商業、居住與文化創意空間',summary:'街屋立面記錄大稻埕茶葉、布業與南北貨商業興盛，也見證街區再生。',history:'大稻埕因港口貿易與商業活動發展，迪化街沿線建築涵蓋不同時期形式，並非單一風格街道。',architecture:'可見連棟街屋、騎樓、立面裝飾、深長店屋與後側居住空間，反映店住合一的商業模式。',observe:'沿街比較立面年代差異，留意騎樓、店面開口與樓上住宅如何分配。',tags:['大稻埕','街屋','商業史'],query:'迪化街歷史街區',map:'迪化街'},
+  {id:38,name:'大溪老街',year:'日治時期至戰後（街屋群發展）',era:2,place:'桃園市大溪區',type:'住宅聚落',style:'巴洛克裝飾街屋與閩南街屋',architect:'地方匠師與商戶營建',use:'商業街區、居住與文化觀光',summary:'街屋立面裝飾與河運、木器產業及地方商業記憶相互連結。',history:'大溪因河運與商業發展形成街市，現存街屋多經不同時期修建，立面裝飾展現地方經濟與工藝。',architecture:'連續街屋、騎樓、牌樓式立面及裝飾線腳，反映商業街道的展示性與店住混合。',observe:'從街道兩側比較立面裝飾、店面尺度與屋身深度，並思考河運興衰如何改變街區。',tags:['桃園','街屋','河運商業'],query:'大溪老街',map:'大溪老街'},
+  {id:39,name:'北港朝天宮',year:'1694（創建傳統年代）',era:1,place:'雲林縣北港鎮',type:'宗教建築',style:'閩南傳統廟宇',architect:'歷代匠師修建',use:'媽祖信仰、地方祭典與商業街區',summary:'廟宇與進香、商業及街區生活相連，是理解臺灣民間信仰空間的重要案例。',history:'朝天宮創建年代及歷代修建需參照廟方與文化資產資料；今日建築包含多期工程與工藝。',architecture:'多進式廟宇空間、屋脊裝飾、木石雕刻與彩繪構成豐富視覺層次。',observe:'由廟埕觀察進香人流、商業街道與廟宇入口的關係，再近看屋脊與木石工藝。',tags:['媽祖信仰','進香','廟宇工藝'],query:'北港朝天宮',map:'北港朝天宮'},
+  {id:40,name:'三峽祖師廟',year:'1769（創建傳統年代；現貌多期修建）',era:1,place:'新北市三峽區',type:'宗教建築',style:'閩南寺廟與石雕藝術',architect:'歷代匠師；近代修建工藝團隊',use:'祖師信仰與地方祭祀',summary:'石雕、木雕與廟宇空間相互交織，呈現近代臺灣寺廟工藝的豐富層次。',history:'祖師廟歷經多次重建與修復，今日所見有近代匠師工藝的重要成果，不能簡化為單一清代原貌。',architecture:'殿堂沿軸線配置，石柱、石雕、木構及屋脊裝飾形成繁複工藝系統。',observe:'選擇一根石柱或一組雕刻，觀察題材、刀法、構圖與構件在建築中的位置。',tags:['石雕','寺廟','匠師工藝'],query:'三峽祖師廟',map:'三峽祖師廟'},
+  {id:41,name:'新莊慈祐宮',year:'18 世紀（創建沿革）',era:1,place:'新北市新莊區',type:'宗教建築',style:'閩南傳統寺廟',architect:'歷代地方匠師修建',use:'媽祖信仰與老街生活',summary:'廟宇、老街與河運記憶彼此交織，呈現新莊早期市街發展。',history:'慈祐宮與新莊街市及河運歷史關係密切，建築經多次修建，需區分創建與現存構件年代。',architecture:'傳統廟宇殿堂、屋脊裝飾與木石工藝，與周邊街屋構成連續的歷史街區。',observe:'從廟前街道觀察廟宇與商業街屋的尺度關係，留意廟埕如何成為公共活動空間。',tags:['新莊','媽祖廟','老街'],query:'新莊慈祐宮',map:'新莊慈祐宮'},
+  {id:42,name:'臺中火車站（舊站）',year:'1917（現存站房啟用）',era:2,place:'臺中市中區',type:'交通建築',style:'辰野式紅磚與鋼筋混凝土車站',architect:'臺灣總督府鐵道部設計團隊',use:'鐵路車站與鐵道文化展示',summary:'紅磚立面、中央山牆與車站大跨距空間，記錄鐵道帶動臺中市街發展。',history:'舊站房於日治時期啟用，後因新站啟用而轉型保存及再利用，周邊鐵道園區延續交通記憶。',architecture:'紅磚與石材裝飾、中央入口及屋架構成車站形象，需同時理解站房與月台系統。',observe:'由站前廣場看立面比例，再進入站體觀察候車空間、月台與鐵道設施的關係。',tags:['車站','紅磚','鐵道文化'],query:'臺中火車站 舊站',map:'臺中火車站舊站'},
+  {id:43,name:'高雄車站（舊站）',year:'1941（現存舊站房落成）',era:2,place:'高雄市三民區',type:'交通建築',style:'現代主義與折衷式車站',architect:'鐵道部設計團隊',use:'鐵路交通與歷史建築保存',summary:'圓弧量體與現代化站房語彙，見證高雄港都交通與城市擴張。',history:'舊站房在鐵路地下化工程中移築保存，作為歷史建築與城市記憶的一部分。',architecture:'具有圓弧形立面、水平線條與現代公共建築的空間組織，保存方式本身也是重要議題。',observe:'比較舊站房與新站的交通組織，理解保存建築如何與大型基礎建設共存。',tags:['高雄','車站','移築保存'],query:'高雄車站 舊站房',map:'高雄車站舊站'},
+  {id:44,name:'臺北中山堂',year:'1936（落成）',era:2,place:'臺北市中正區',type:'文化建築',style:'折衷式公共集會建築',architect:'井手薰',use:'公共集會、表演藝術與文化活動',summary:'大型集會空間見證臺北公共生活與政治文化的轉變。',history:'建築原為臺北公會堂，戰後更名中山堂，持續作為集會與藝文場館使用。',architecture:'入口、門廳與大尺度集會空間構成公共建築核心，外觀兼具現代與歷史式樣語彙。',observe:'留意入口如何引導人流，並觀察大廳、觀眾席與舞台的空間關係。',tags:['公會堂','表演空間','井手薰'],query:'臺北中山堂',map:'臺北中山堂'},
+  {id:45,name:'高雄市立歷史博物館',year:'1939（原高雄市役所落成）',era:2,place:'高雄市鹽埕區',type:'文化建築',style:'現代主義與裝飾藝術語彙',architect:'日治時期市役所設計團隊',use:'原市役所，現為歷史博物館',summary:'市政官署轉為博物館，建築用途變化映照高雄城市治理與港都發展。',history:'原為高雄市役所，戰後曾作市政府辦公空間，後轉型為高雄市立歷史博物館。',architecture:'立面具有幾何線條與公共建築的秩序感，內部空間隨行政及展示用途調整。',observe:'觀察入口、立面線條與室內展覽空間，思考行政建築如何轉化為公共文化場館。',tags:['市役所','文化再利用','高雄'],query:'高雄市立歷史博物館',map:'高雄市立歷史博物館'},
+  {id:46,name:'嘉義舊監獄',year:'1919（建置年代）',era:2,place:'嘉義市東區',type:'公共建築',style:'放射狀監獄建築與木造構造',architect:'日治時期監獄建築設計體系',use:'原監獄設施，現為文化資產展示',summary:'以中央監視與放射狀舍房組織空間，呈現近代監獄制度及建築管理觀念。',history:'嘉義舊監獄為日治時期監獄建築的重要保存案例，後經修復開放，需留意不同建築區域與修復年代。',architecture:'放射狀平面、中央監視空間、舍房與木構屋架形成特殊配置。',observe:'從中央空間理解視線控制與管理動線，並觀察木構屋架與舍房尺度。',tags:['監獄建築','放射狀平面','文化資產'],query:'嘉義舊監獄',map:'嘉義舊監獄'},
+  {id:47,name:'花蓮松園別館',year:'1943（建築群形成時期）',era:2,place:'花蓮縣花蓮市',type:'公共建築',style:'日式木造宿舍與庭園',architect:'日治時期機關宿舍建築團隊',use:'原軍事相關辦公宿舍，現為文化展示空間',summary:'木造宿舍與松林地景共同保存花蓮近代歷史與生活記憶。',history:'建築群與日治時期軍事及行政使用有關，戰後用途延續轉變，今日作為文化空間。',architecture:'木造屋架、日式屋頂、木窗與庭園環境構成建築特色，需從群落而非單棟理解。',observe:'觀察建築如何順應坡地與樹林，留意屋簷、窗戶、通風及庭園之間的關係。',tags:['花蓮','日式宿舍','木構'],query:'花蓮松園別館',map:'松園別館'},
+  {id:48,name:'四四南村',year:'1948 起（眷村聚落形成）',era:3,place:'臺北市信義區',type:'住宅聚落',style:'戰後眷村與連棟住宅',architect:'軍方規劃、居民共同營造',use:'原眷村住宅，現為文化保存與公共空間',summary:'小尺度住宅、巷弄與生活痕跡，呈現戰後遷徙與鄰里互助。',history:'四四南村是臺北早期眷村之一，部分空間保存後轉為文化展示與公共活動場域。',architecture:'低矮住宅、狹窄巷道及後期增建反映家庭需求與資源條件。',observe:'留意家戶入口、共用空間與巷道尺度，想像鄰里生活如何在有限空間中展開。',tags:['眷村','戰後住宅','生活記憶'],query:'四四南村',map:'四四南村'},
+  {id:49,name:'寶藏巖國際藝術村',year:'戰後聚落；2004 起保存再利用',era:3,place:'臺北市中正區',type:'住宅聚落',style:'山坡聚落與文化再利用',architect:'居民長期營造；後續保存團隊',use:'原聚落，現為藝術家進駐與文化空間',summary:'依山而建的巷弄聚落，呈現非正式居住、社區保存與藝術再生的交會。',history:'聚落隨戰後人口移動形成，後經保存運動與再利用規劃，成為藝術村。',architecture:'順應坡地的住宅、階梯、巷道與平台形成獨特空間，建築尺度與地形緊密相依。',observe:'沿階梯慢行，觀察房屋如何依地形錯落，並思考保存如何兼顧居民記憶與新使用。',tags:['聚落保存','藝術村','坡地建築'],query:'寶藏巖國際藝術村',map:'寶藏巖國際藝術村'},
+  {id:50,name:'眷村文物館（馬祖新村）',year:'1950 年代（眷村聚落形成）',era:3,place:'桃園市中壢區',type:'住宅聚落',style:'戰後眷村住宅與宿舍群',architect:'軍方規劃、居民共同營造',use:'原眷村，現為文化保存與展演空間',summary:'以住宅群、巷弄與公共空間保存戰後移民家庭的生活記憶。',history:'馬祖新村為桃園重要眷村聚落，經保存與再利用後成為文化場域。',architecture:'住宅尺度、院落、屋頂與巷弄配置反映戰後居住條件及家庭生活。',observe:'比較不同住宅單元與公共空間，理解聚落的日常互助與文化混融。',tags:['桃園','眷村','文化保存'],query:'馬祖新村眷村文物館',map:'馬祖新村'},
+  {id:51,name:'中興新村省府宿舍群',year:'1956 起（新市鎮發展）',era:4,place:'南投縣南投市',type:'住宅聚落',style:'田園城市與現代公務員住宅',architect:'整體都市規劃團隊',use:'原省府行政與員工居住，現為歷史聚落',summary:'林蔭道路、低密度住宅與公共設施形成整體規劃的新市鎮生活環境。',history:'中興新村配合省政府遷駐而逐步發展，街廓、機關、住宅與綠地共同構成城市計畫。',architecture:'住宅退縮、庭院、林蔭道路與公共建築相互搭配，重點不只在單棟建築，而在整體空間。',observe:'步行觀察街道寬度、綠帶、住宅退縮與公共設施距離，理解田園城市理念如何落地。',tags:['新市鎮','田園城市','戰後規劃'],query:'中興新村',map:'中興新村'},
+  {id:52,name:'國立中正紀念堂',year:'1980（落成）',era:4,place:'臺北市中正區',type:'文化建築',style:'紀念性建築與中國宮殿式語彙',architect:'楊卓成',use:'紀念空間、公共活動與文化場館',summary:'巨大尺度、軸線與紀念性空間，適合討論建築形式、政治象徵與公共使用。',history:'建築落成後成為臺北重要公共地標，隨社會變遷，其象徵意義與空間使用也持續被討論。',architecture:'大尺度平台、軸線、主體量體與屋頂形式形成強烈紀念性，周邊園區亦是公共開放空間。',observe:'從自由廣場望向主體，觀察軸線、尺度與人群活動，並討論公共空間如何承載不同記憶。',tags:['紀念性建築','軸線','公共空間'],query:'國立中正紀念堂',map:'中正紀念堂'},
+  {id:53,name:'臺中國家歌劇院',year:'2016（正式啟用）',era:5,place:'臺中市西屯區',type:'文化建築',style:'曲牆與非正交空間設計',architect:'伊東豊雄與設計團隊',use:'歌劇、戲劇、音樂與公共文化活動',summary:'以曲面牆體與連續空間挑戰傳統盒狀劇場，成為當代臺灣公共建築代表。',history:'由國際競圖及長期工程完成，建築與周邊都市開發、表演藝術政策密切相關。',architecture:'曲牆、孔洞與連續空間構成複雜幾何系統，結構、聲學與舞台機能需整合設計。',observe:'沿公共空間移動，觀察曲面如何引導視線與動線，再理解劇場專業空間與公共區域的關係。',tags:['當代建築','表演藝術','伊東豊雄'],query:'臺中國家歌劇院',map:'臺中國家歌劇院'},
+  {id:54,name:'衛武營國家藝術文化中心',year:'2018（正式啟用）',era:5,place:'高雄市鳳山區',type:'文化建築',style:'大型曲面屋頂與開放式公共空間',architect:'Mecanoo 建築師事務所',use:'音樂廳、歌劇院、戲劇院與表演藝術',summary:'以連續屋頂與開放空間串連多座表演場館，讓文化設施成為城市公共生活的一部分。',history:'場館利用原軍事用地轉型，兼具文化建設與都市空間再生意義。',architecture:'大型屋頂、戶外榕樹廣場與多廳院組織構成複合場館，需兼顧聲學、動線與公共性。',observe:'從戶外廣場觀察屋頂如何包覆場館，再比較不同表演廳的入口與空間尺度。',tags:['當代建築','文化再生','Mecanoo'],query:'衛武營國家藝術文化中心',map:'衛武營'},
+  {id:55,name:'蘭陽博物館',year:'2010（正式開館）',era:5,place:'宜蘭縣頭城鎮',type:'文化建築',style:'單面山意象與地景建築',architect:'姚仁喜／大元建築工場',use:'宜蘭自然與人文展示',summary:'建築量體取意宜蘭單面山地景，讓博物館造型與濕地環境產生對話。',history:'博物館位於烏石港周邊，建築與地方自然環境、展示教育及區域觀光相互連結。',architecture:'斜向量體、石材外牆與不同角度的窗洞呼應地景意象，建築周邊保留濕地環境。',observe:'從不同距離觀察建築輪廓與山形的關係，再留意展廳如何引入自然光與景觀。',tags:['地景建築','博物館','宜蘭'],query:'蘭陽博物館',map:'蘭陽博物館'},
+  {id:56,name:'高雄市立圖書館總館',year:'2014（啟用）',era:5,place:'高雄市前鎮區',type:'文化建築',style:'懸吊結構與綠化立面',architect:'劉培森建築師事務所',use:'公共圖書館與城市文化服務',summary:'以懸吊結構、空中花園與開放閱覽空間，重新想像大型公共圖書館。',history:'新總館成為亞洲新灣區公共文化設施之一，圖書館功能與城市開放空間結合。',architecture:'外柱、懸吊樓板、綠化陽台與大面積玻璃共同形成建築表情，需兼顧遮陽與熱環境。',observe:'觀察外部柱列與樓層關係，進入室內比較採光、閱讀空間與公共動線。',tags:['圖書館','懸吊結構','綠化'],query:'高雄市立圖書館總館',map:'高雄市立圖書館總館'},
+  {id:57,name:'臺北表演藝術中心',year:'2022（正式開幕）',era:5,place:'臺北市士林區',type:'文化建築',style:'球體量體與模組化劇場',architect:'OMA／大都會建築事務所',use:'劇場、展演與文化活動',summary:'以球體量體與三座劇場的組合，打破傳統劇場建築的單一入口與封閉形式。',history:'建築由國際競圖方案發展而來，與士林夜市及周邊街區形成新的文化節點。',architecture:'球體與盒狀劇場組合，公共參觀動線與劇場後台機能交織，空間組織具有高度辨識度。',observe:'從外部辨認三個主要量體，再了解公共參觀路徑與劇場專業動線如何分流。',tags:['當代建築','劇場','OMA'],query:'臺北表演藝術中心',map:'臺北表演藝術中心'},
+  {id:58,name:'新北市立圖書館總館',year:'2015（啟用）',era:5,place:'新北市板橋區',type:'文化建築',style:'現代公共建築與垂直綠化',architect:'建築設計團隊（以官方館舍資料為準）',use:'公共圖書館與市民學習空間',summary:'以複合式樓層與公共閱讀空間回應人口密集城市的文化服務需求。',history:'新北市總館作為大型公共圖書館，承擔閱讀、資訊與社區文化服務。',architecture:'多樓層閱讀空間、採光與公共動線是觀察重點；實際設計者及工程資料宜以館方資料核實。',observe:'觀察不同樓層如何分配兒童、一般閱覽及多媒體服務，思考圖書館如何成為城市公共客廳。',tags:['公共圖書館','閱讀空間','新北'],query:'新北市立圖書館總館',map:'新北市立圖書館總館'},
+  {id:59,name:'桃園市立圖書館新總館',year:'2022（啟用）',era:5,place:'桃園市桃園區',type:'文化建築',style:'當代複合式公共文化建築',architect:'建築設計團隊（以官方館舍資料為準）',use:'圖書館、展演與公共文化服務',summary:'以複合文化服務與公共空間回應桃園人口成長及城市文化需求。',history:'新總館位於桃園藝文特區，與周邊展演及公共設施共同構成文化生活圈。',architecture:'垂直分層的閱讀、活動與服務空間，需從人流、採光、開放空間及交通接近性整體觀察。',observe:'從入口到各樓層觀察動線是否清楚，並思考圖書館如何與周邊藝文設施串連。',tags:['桃園','圖書館','複合文化'],query:'桃園市立圖書館新總館',map:'桃園市立圖書館新總館'},
+  {id:60,name:'故宮南部院區',year:'2015（開館）',era:5,place:'嘉義縣太保市',type:'文化建築',style:'當代文化建築與景觀水域',architect:'姚仁喜／大元建築工場',use:'亞洲藝術文化典藏、研究與展示',summary:'以當代建築語彙與水景地景組織博物館，回應南部文化資源與區域發展。',history:'南部院區以亞洲藝術文化為定位，建築與周邊景觀、公共教育及區域交通相互連結。',architecture:'建築量體、入口、展廳與水域景觀共同構成參觀經驗，展示空間需兼顧典藏環境與觀眾動線。',observe:'從戶外水景與建築量體關係開始，再觀察展廳如何控制光線與參觀節奏。',tags:['博物館','當代建築','嘉義'],query:'國立故宮博物院南部院區',map:'故宮南部院區'}
+
 ];
-const grid=document.getElementById('grid'),tabs=document.getElementById('eraTabs'),search=document.getElementById('search'),placeFilter=document.getElementById('placeFilter'),typeFilter=document.getElementById('typeFilter');let activeEra=-1;
-document.getElementById('heroCount').textContent=cases.length;
-function renderTabs(){tabs.innerHTML='';const all=document.createElement('button');all.className='era-tab'+(activeEra===-1?' active':'');all.textContent='全部時期';all.onclick=()=>{activeEra=-1;renderTabs();render()};tabs.append(all);eras.forEach((e,i)=>{const b=document.createElement('button');b.className='era-tab'+(activeEra===i?' active':'');b.textContent=e.name+' · '+e.years;b.onclick=()=>{activeEra=i;renderTabs();render()};tabs.append(b)})}
-function cardImage(c){return `<div class="thumb" data-img="${c.id}"><div class="fallback">${c.name}</div><span class="era-label">${eras[c.era].name}</span></div>`}
-function render(){const q=search.value.trim().toLowerCase(),pl=placeFilter.value,ty=typeFilter.value;const filtered=cases.filter(c=>(activeEra<0||c.era===activeEra)&&(!pl||c.place.includes(pl))&&(!ty||c.type===ty)&&(!q||[c.name,c.place,c.style,c.architect,c.summary,c.tags.join(' ')].join(' ').toLowerCase().includes(q)));grid.innerHTML='';document.getElementById('resultText').textContent=`目前顯示 ${filtered.length} / ${cases.length} 個案例`;
-if(!filtered.length){grid.innerHTML='<div class="empty">沒有找到符合條件的建築。<br>試試其他關鍵字或清除篩選條件。</div>';return}
-filtered.forEach(c=>{const d=document.createElement('article');d.className='tile';d.innerHTML=`${cardImage(c)}<div class="tile-body"><div class="tile-year">${c.year}</div><h3>${c.name}</h3><div class="place">⌖ ${c.place}　｜　${c.type}</div><p class="desc">${c.summary}</p><div class="tags">${c.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div><div class="tile-foot"><button class="more">閱讀建築故事　→</button><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.map)}" target="_blank" rel="noopener">地圖位置 ↗</a></div>`;d.querySelector('.more').onclick=()=>openDetail(c);d.querySelector('.thumb').onclick=()=>openDetail(c);grid.append(d);loadCommons(c,d.querySelector('.thumb'),false)})}
-function loadCommons(c,container,large){const query=encodeURIComponent(c.query+' Taiwan architecture');const api=`https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${query}&gsrnamespace=6&gsrlimit=8&prop=imageinfo&iiprop=url%7Cextmetadata&iiurlwidth=${large?1400:760}&format=json&origin=*`;fetch(api).then(r=>r.json()).then(data=>{const pages=data.query&&data.query.pages?Object.values(data.query.pages):[];let p=pages.find(x=>/\.(jpg|jpeg|png|webp)$/i.test(x.title||''))||pages[0];if(!p||!p.imageinfo||!p.imageinfo[0])return;const info=p.imageinfo[0],img=document.createElement('img');img.loading='lazy';img.alt=c.name+' 建築照片（維基共享資源）';img.src=info.thumburl||info.url;img.onerror=()=>{};const eraBadge=container.querySelector('.era-label');container.innerHTML='';container.append(img);if(eraBadge)container.append(eraBadge);const cr=document.createElement('div');cr.className='photo-credit';const a=document.createElement('a');a.href=info.descriptionurl;a.target='_blank';a.rel='noopener';a.textContent='圖片來源：Wikimedia Commons';cr.append(a);container.append(cr) }).catch(()=>{})}
-function openDetail(c){const modal=document.getElementById('modal'),detail=document.getElementById('detail');detail.innerHTML=`<div class="detail-hero" id="detailHero"><div class="fallback">${c.name}</div></div><div class="detail-content"><div class="detail-kicker">${eras[c.era].name}　｜　${eras[c.era].years}</div><h2>${c.name}</h2><div class="detail-sub">${c.year}　・　${c.place}　・　${c.type}</div><p class="detail-summary">${c.summary}</p><div class="factrow"><b>建築風格</b><span>${c.style}</span></div><div class="factrow"><b>設計／營造</b><span>${c.architect}</span></div><div class="factrow"><b>原始用途</b><span>${c.use}</span></div><div class="detail-grid" style="margin-top:20px"><div class="detail-block"><h4>一、歷史脈絡</h4><p>${c.history}</p></div><div class="detail-block"><h4>二、建築特色</h4><p>${c.architecture}</p></div><div class="detail-block full"><h4>三、現場觀察指南</h4><p>${c.observe}</p></div><div class="detail-block full"><h4>四、所屬時代的建築背景</h4><p>${eras[c.era].intro}<br><br><b>時代常見特色：</b>${eras[c.era].traits}</p></div></div><div class="detail-actions"><a class="action" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.map)}" target="_blank" rel="noopener">開啟地圖導航 ↗</a><a class="action secondary" href="https://nchdb.boch.gov.tw/" target="_blank" rel="noopener">查詢國家文化資產網 ↗</a><a class="action secondary" href="https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=${encodeURIComponent(c.query)}" target="_blank" rel="noopener">更多建築照片 ↗</a></div></div>`;modal.classList.add('open');document.body.style.overflow='hidden';loadCommons(c,document.getElementById('detailHero'),true)}
-function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow=''}document.getElementById('close').onclick=closeModal;document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});[search,placeFilter,typeFilter].forEach(x=>x.addEventListener('input',render));
+
+// DOM 參照
+const grid = document.getElementById('grid');
+const tabs = document.getElementById('eraTabs');
+const search = document.getElementById('search');
+const clearSearchBtn = document.getElementById('clearSearch');
+const placeFilter = document.getElementById('placeFilter');
+const typeFilter = document.getElementById('typeFilter');
+const favToggle = document.getElementById('favToggle');
+const rndBtn = document.getElementById('rndBtn');
+const openImgMgrBtn = document.getElementById('openImgMgrBtn');
+const modalEl = document.getElementById('modal');
+const dialogEl = document.getElementById('dialog');
+const detailEl = document.getElementById('detail');
+const dialogBarTitle = document.getElementById('dialogBarTitle');
+const replaceCaseImgBtn = document.getElementById('replaceCaseImgBtn');
+const copyLinkBtn = document.getElementById('copyLinkBtn');
+const closeBtn = document.getElementById('close');
+const imgModalEl = document.getElementById('imgModal');
+const closeImgModalBtn = document.getElementById('closeImgModal');
+const targetCaseSelect = document.getElementById('targetCaseSelect');
+const customUrlInput = document.getElementById('customUrlInput');
+const applyUrlBtn = document.getElementById('applyUrlBtn');
+const singleUploadInput = document.getElementById('singleUploadInput');
+const batchUploadInput = document.getElementById('batchUploadInput');
+const clearAllImgBtn = document.getElementById('clearAllImgBtn');
+const imgStatusMsg = document.getElementById('imgStatusMsg');
+const imgListEl = document.getElementById('imgList');
+const quickReplaceInput = document.getElementById('quickReplaceInput');
+
+let activeEra = -1;
+let visible = [];
+let lastFocus = null;
+let currentCase = null;
+let favOnly = false;
+let isComposing = false;
+const favs = new Set();
+
+// 輕量化自訂圖檔儲存（僅存於 localStorage，原始碼不內嵌肥大 Base64）
+const IMG_STORAGE_KEY = 'atlasCustomPhotos_v1';
+const customPhotos = new Map();
+
+function loadCustomPhotos() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(IMG_STORAGE_KEY) || '{}');
+    Object.entries(saved).forEach(([id, obj]) => {
+      if (obj && obj.src) customPhotos.set(+id, { src: obj.src, label: obj.label || '自訂圖檔' });
+    });
+  } catch (e) {}
+  updateCustomPhotoCounter();
+}
+
+function saveCustomPhotos() {
+  const payload = {};
+  customPhotos.forEach((v, k) => { payload[k] = v; });
+  try {
+    localStorage.setItem(IMG_STORAGE_KEY, JSON.stringify(payload));
+  } catch (e) {
+    imgStatusMsg.textContent = '提醒：瀏覽器儲存空間已滿，部分圖檔僅在本次瀏覽有效。';
+  }
+  updateCustomPhotoCounter();
+}
+
+function updateCustomPhotoCounter() {
+  const el = document.getElementById('heroCustomCount');
+  if (el) el.textContent = customPhotos.size;
+}
+
+// 透過 Canvas 自動壓縮上傳的本機照片為輕量 Data URL（寬度上限 960px，JPEG 品質 0.78）
+function compressImageFile(file, maxWidth = 960, quality = 0.78) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = () => {
+      const img = new Image();
+      img.onerror = reject;
+      img.onload = () => {
+        const scale = img.width > maxWidth ? maxWidth / img.width : 1;
+        const w = Math.max(1, Math.round(img.width * scale));
+        const h = Math.max(1, Math.round(img.height * scale));
+        const canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.src = String(reader.result || '');
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// 五種建築專屬古典線稿 SVG（輕量向量、離線即現）
+function getArchSketchSVG(c) {
+  const color = eras[c.era] ? eras[c.era].color : '#34564d';
+  if (c.type === '宗教建築') {
+    return `<svg viewBox="0 0 320 150" aria-hidden="true">
+      <path d="M35 72 Q95 58 160 36 Q225 58 285 72" fill="none" stroke="${color}" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M52 84 Q106 72 160 54 Q214 72 268 84" fill="none" stroke="#34564d" stroke-width="2.5"/>
+      <path d="M78 84 V128 M124 72 V128 M196 72 V128 M242 84 V128" stroke="#34564d" stroke-width="2.5"/>
+      <rect x="138" y="92" width="44" height="36" fill="none" stroke="${color}" stroke-width="2"/>
+      <line x1="25" y1="128" x2="295" y2="128" stroke="#737a72" stroke-width="2"/>
+    </svg>`;
+  }
+  if (c.type === '公共建築' && (c.era === 1 || c.era === 2)) {
+    return `<svg viewBox="0 0 320 150" aria-hidden="true">
+      <path d="M126 56 A34 34 0 0 1 194 56 Z" fill="none" stroke="${color}" stroke-width="2.8"/>
+      <line x1="160" y1="14" x2="160" y2="22" stroke="${color}" stroke-width="2.5"/>
+      <rect x="64" y="56" width="192" height="72" fill="none" stroke="#34564d" stroke-width="2.5"/>
+      <path d="M138 128 V96 A22 22 0 0 1 182 96 V128" fill="none" stroke="${color}" stroke-width="2.5"/>
+      <rect x="84" y="74" width="22" height="34" rx="11" fill="none" stroke="#737a72" stroke-width="1.8"/>
+      <rect x="214" y="74" width="22" height="34" rx="11" fill="none" stroke="#737a72" stroke-width="1.8"/>
+      <line x1="35" y1="128" x2="285" y2="128" stroke="#737a72" stroke-width="2"/>
+    </svg>`;
+  }
+  if (c.type === '交通建築' || c.type === '城郭設施') {
+    return `<svg viewBox="0 0 320 150" aria-hidden="true">
+      <polygon points="122,58 160,26 198,58" fill="none" stroke="${color}" stroke-width="2.8"/>
+      <rect x="56" y="58" width="208" height="70" fill="none" stroke="#34564d" stroke-width="2.5"/>
+      <path d="M138 128 V88 A22 22 0 0 1 182 88 V128" fill="none" stroke="${color}" stroke-width="2.5"/>
+      <line x1="56" y1="76" x2="264" y2="76" stroke="#b18a4b" stroke-width="2" stroke-dasharray="6 4"/>
+      <line x1="32" y1="128" x2="288" y2="128" stroke="#737a72" stroke-width="2"/>
+    </svg>`;
+  }
+  if (c.type === '住宅聚落') {
+    return `<svg viewBox="0 0 320 150" aria-hidden="true">
+      <polygon points="44,82 96,48 148,82" fill="none" stroke="${color}" stroke-width="2.6"/>
+      <rect x="56" y="82" width="80" height="46" fill="none" stroke="#34564d" stroke-width="2.2"/>
+      <polygon points="158,76 218,40 278,76" fill="none" stroke="#34564d" stroke-width="2.6"/>
+      <rect x="170" y="76" width="96" height="52" fill="none" stroke="#34564d" stroke-width="2.2"/>
+      <rect x="196" y="94" width="22" height="34" fill="none" stroke="${color}" stroke-width="2"/>
+      <line x1="28" y1="128" x2="292" y2="128" stroke="#737a72" stroke-width="2"/>
+    </svg>`;
+  }
+  return `<svg viewBox="0 0 320 150" aria-hidden="true">
+    <path d="M88 128 Q126 42 160 24 Q194 42 232 128" fill="none" stroke="${color}" stroke-width="3"/>
+    <path d="M116 128 Q144 64 160 44 Q176 64 204 128" fill="none" stroke="#34564d" stroke-width="2.2"/>
+    <line x1="160" y1="24" x2="160" y2="128" stroke="#b18a4b" stroke-width="2" stroke-dasharray="5 4"/>
+    <line x1="40" y1="128" x2="280" y2="128" stroke="#737a72" stroke-width="2"/>
+  </svg>`;
+}
+
+// 初始化地區選項
+function initPlaceOptions() {
+  const places = [...new Set(cases.map(c => c.place.slice(0, 3)))];
+  places.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p;
+    opt.textContent = p;
+    placeFilter.append(opt);
+  });
+}
+
+// 讀取收藏
+try {
+  JSON.parse(localStorage.getItem('atlasFavs') || '[]').forEach(x => favs.add(x));
+} catch (e) {}
+
+document.getElementById('heroCount').textContent = cases.length;
+
+function saveFavs() {
+  try {
+    localStorage.setItem('atlasFavs', JSON.stringify([...favs]));
+  } catch (e) {}
+  updFavToggle();
+}
+
+function updFavToggle() {
+  favToggle.setAttribute('aria-pressed', favOnly);
+  favToggle.textContent = (favOnly ? '♥ 只看收藏' : '♡ 我的收藏') + '（' + favs.size + '）';
+}
+
+function favBtn(c, big) {
+  const b = document.createElement('button');
+  b.type = 'button';
+  const paint = () => {
+    const on = favs.has(c.id);
+    b.setAttribute('aria-pressed', on);
+    b.textContent = big ? (on ? '♥ 已收藏' : '♡ 加入收藏') : (on ? '♥' : '♡');
+    b.setAttribute('aria-label', (on ? '取消收藏 ' : '收藏 ') + c.name);
+  };
+  b.className = big ? 'action fav-big' : 'fav';
+  paint();
+  b.onclick = e => {
+    e.stopPropagation();
+    favs.has(c.id) ? favs.delete(c.id) : favs.add(c.id);
+    saveFavs();
+    paint();
+    if (favOnly && !big) render();
+  };
+  return b;
+}
+
+// 時代頁籤
+function renderTabs() {
+  const prev = tabs.scrollLeft;
+  tabs.innerHTML = '';
+  const all = document.createElement('button');
+  all.type = 'button';
+  all.className = 'era-tab' + (activeEra === -1 ? ' active' : '');
+  all.textContent = '全部時期';
+  all.onclick = () => { activeEra = -1; renderTabs(); render(); };
+  tabs.append(all);
+
+  eras.forEach((e, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'era-tab' + (activeEra === i ? ' active' : '');
+    b.textContent = e.name + ' · ' + e.years;
+    b.onclick = () => { activeEra = i; renderTabs(); render(); };
+    tabs.append(b);
+  });
+
+  tabs.scrollLeft = prev;
+  const on = tabs.querySelector('.active');
+  if (on) {
+    const tr = tabs.getBoundingClientRect();
+    const br = on.getBoundingClientRect();
+    tabs.scrollTo({ left: prev + (br.left - tr.left) - (tr.width - br.width) / 2, behavior: 'smooth' });
+  }
+}
+
+// 五個時代導覽卡
+function renderEraGuide() {
+  const guideGrid = document.getElementById('guideGrid');
+  guideGrid.innerHTML = '';
+  eras.forEach((e, i) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'guide';
+    btn.style.setProperty('--accent', e.color);
+    btn.innerHTML = `<small>${e.years}</small><h3>${e.name}</h3><p>${e.intro}</p><span class="guide-go">篩選此時段建築 →</span>`;
+    btn.onclick = () => {
+      activeEra = i;
+      favOnly = false;
+      updFavToggle();
+      renderTabs();
+      render();
+      document.getElementById('atlas').scrollIntoView({ behavior: 'smooth' });
+    };
+    guideGrid.append(btn);
+  });
+}
+
+// 卡片預設線稿畫面
+function cardImage(c) {
+  return `<div class="thumb" data-img="${c.id}">
+    <div class="sketch-wrap">${getArchSketchSVG(c)}<div class="sketch-caption">${c.name}</div></div>
+    <span class="era-label" style="border-left-color:${eras[c.era].color}">${eras[c.era].name}</span>
+  </div>`;
+}
+
+// 渲染卡片清單
+function render() {
+  const q = search.value.trim().toLowerCase();
+  const pl = placeFilter.value;
+  const ty = typeFilter.value;
+  clearSearchBtn.classList.toggle('show', q.length > 0);
+
+  const filtered = cases.filter(c =>
+    (activeEra < 0 || c.era === activeEra) &&
+    (!favOnly || favs.has(c.id)) &&
+    (!pl || c.place.includes(pl)) &&
+    (!ty || c.type === ty) &&
+    (!q || [c.name, c.place, c.type, c.style, c.architect, c.use, c.summary, c.tags.join(' ')].join(' ').toLowerCase().includes(q))
+  );
+
+  visible = filtered;
+  if (io) io.disconnect();
+  grid.innerHTML = '';
+  document.getElementById('resultText').textContent = `目前顯示 ${filtered.length} / ${cases.length} 個案例`;
+
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="empty">沒有找到符合條件的建築。<br>試試其他關鍵字，或清除篩選條件。<br><button type="button" class="reset" id="resetBtn">清除所有篩選</button></div>';
+    document.getElementById('resetBtn').onclick = resetFilters;
+    return;
+  }
+
+  filtered.forEach(c => {
+    const d = document.createElement('article');
+    d.className = 'tile';
+    d.innerHTML = `${cardImage(c)}
+      <div class="tile-body">
+        <div class="tile-year">${c.year}</div>
+        <h3>${c.name}</h3>
+        <div class="place">⌖ ${c.place}　｜　${c.type}</div>
+        <p class="desc">${c.summary}</p>
+        <div class="tags">${c.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+      </div>
+      <div class="tile-foot">
+        <button type="button" class="more">閱讀建築故事 →</button>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.map)}" target="_blank" rel="noopener">地圖位置 ↗</a>
+      </div>`;
+    d.querySelector('.more').onclick = () => openDetail(c);
+    d.querySelector('.tile-foot').insertBefore(favBtn(c, false), d.querySelector('.maplink'));
+    const thumbEl = d.querySelector('.thumb');
+    thumbEl.onclick = () => openDetail(c);
+    grid.append(d);
+
+    // 若已有自訂圖檔立即套用；否則交由 IntersectionObserver 延遲載入 Wikimedia 照片
+    if (customPhotos.has(c.id)) {
+      applyPhotoToContainer(c, thumbEl, false);
+    } else if (io) {
+      io.observe(thumbEl);
+    } else {
+      loadCommons(c, thumbEl, false);
+    }
+  });
+}
+
+function resetFilters() {
+  favOnly = false;
+  updFavToggle();
+  search.value = '';
+  placeFilter.value = '';
+  typeFilter.value = '';
+  activeEra = -1;
+  renderTabs();
+  render();
+}
+
+// Wikimedia Commons 圖片查詢與快取
+const imgCache = new Map();
+function getPhoto(c, large) {
+  const k = c.id + (large ? 'L' : 'S');
+  if (imgCache.has(k)) return imgCache.get(k);
+  const query = encodeURIComponent(c.query + ' Taiwan architecture');
+  const api = `https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${query}&gsrnamespace=6&gsrlimit=8&prop=imageinfo&iiprop=url%7Cextmetadata&iiurlwidth=${large ? 1200 : 680}&format=json&origin=*`;
+  const p = fetch(api)
+    .then(r => r.json())
+    .then(d => {
+      const pages = d.query && d.query.pages ? Object.values(d.query.pages) : [];
+      const hit = pages.find(x => /\.(jpe?g|png|webp)$/i.test(x.title || '') && x.imageinfo && x.imageinfo[0]);
+      return hit ? hit.imageinfo[0] : null;
+    })
+    .catch(() => {
+      imgCache.delete(k);
+      return null;
+    });
+  imgCache.set(k, p);
+  return p;
+}
+
+function renderPhotoElement(c, container, src, creditLabel, creditUrl) {
+  if (!container.isConnected) return;
+  const img = new Image();
+  img.alt = c.name + ' 建築照片';
+  img.decoding = 'async';
+  img.onload = () => {
+    if (!container.isConnected) return;
+    const badge = container.querySelector('.era-label');
+    container.innerHTML = '';
+    container.append(img);
+    if (badge) container.append(badge);
+    const cr = document.createElement('div');
+    cr.className = 'photo-credit';
+    if (creditUrl) {
+      const a = document.createElement('a');
+      a.href = creditUrl;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = creditLabel;
+      a.onclick = e => e.stopPropagation();
+      cr.append(a);
+    } else {
+      cr.textContent = creditLabel;
+    }
+    container.append(cr);
+    requestAnimationFrame(() => img.classList.add('loaded'));
+  };
+  img.onerror = () => {
+    // 若圖片載入失敗，還原為古典建築線稿 SVG
+    if (!container.isConnected) return;
+    const badge = container.querySelector('.era-label');
+    container.innerHTML = `<div class="sketch-wrap">${getArchSketchSVG(c)}<div class="sketch-caption">${c.name}</div></div>`;
+    if (badge) container.append(badge);
+  };
+  img.src = src;
+}
+
+function applyPhotoToContainer(c, container, large) {
+  const custom = customPhotos.get(c.id);
+  if (custom && custom.src) {
+    renderPhotoElement(c, container, custom.src, '自訂圖檔：' + custom.label, null);
+    return;
+  }
+  loadCommons(c, container, large);
+}
+
+function loadCommons(c, container, large) {
+  getPhoto(c, large).then(info => {
+    if (!container.isConnected || customPhotos.has(c.id)) return;
+    if (!info) return;
+    renderPhotoElement(c, container, info.thumburl || info.url, '圖片來源：Wikimedia Commons', info.descriptionurl);
+  });
+}
+
+const io = 'IntersectionObserver' in window
+  ? new IntersectionObserver(es => {
+      es.forEach(e => {
+        if (e.isIntersecting) {
+          io.unobserve(e.target);
+          const c = cases.find(x => x.id === +e.target.dataset.img);
+          if (c) applyPhotoToContainer(c, e.target, false);
+        }
+      });
+    }, { rootMargin: '250px' })
+  : null;
+
+// 詳細圖鑑 Modal
+function stepList() {
+  return currentCase && visible.some(x => x.id === currentCase.id) ? visible : cases;
+}
+
+function openDetail(c) {
+  if (!modalEl.classList.contains('open')) lastFocus = document.activeElement;
+  currentCase = c;
+  dialogBarTitle.textContent = `${c.name}｜${eras[c.era].name}`;
+  copyLinkBtn.textContent = '🔗 複製連結';
+
+  detailEl.innerHTML = `<div class="detail-hero" id="detailHero">
+      <div class="sketch-wrap">${getArchSketchSVG(c)}<div class="sketch-caption">${c.name} ・ ${c.style}</div></div>
+    </div>
+    <div class="detail-content">
+      <div class="detail-kicker">${eras[c.era].name}　｜　${eras[c.era].years}</div>
+      <h2>${c.name}</h2>
+      <div class="detail-sub">${c.year}　・　${c.place}　・　${c.type}</div>
+      <p class="detail-summary">${c.summary}</p>
+      <div class="factrow"><b>建築風格</b><span>${c.style}</span></div>
+      <div class="factrow"><b>設計／營造</b><span>${c.architect}</span></div>
+      <div class="factrow"><b>原始用途</b><span>${c.use}</span></div>
+      <div class="detail-grid" style="margin-top:20px">
+        <div class="detail-block"><h4>一、歷史脈絡</h4><p>${c.history}</p></div>
+        <div class="detail-block"><h4>二、建築特色</h4><p>${c.architecture}</p></div>
+        <div class="detail-block full"><h4>三、現場觀察指南</h4><p>${c.observe}</p></div>
+        <div class="detail-block full"><h4>四、所屬時代的建築背景</h4><p>${eras[c.era].intro}<br><br><b>時代常見特色：</b>${eras[c.era].traits}</p></div>
+      </div>
+      <div class="detail-actions">
+        <a class="action" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.map)}" target="_blank" rel="noopener">開啟地圖導航 ↗</a>
+        <a class="action secondary" href="https://nchdb.boch.gov.tw/" target="_blank" rel="noopener">查詢國家文化資產網 ↗</a>
+        <a class="action secondary" href="https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=${encodeURIComponent(c.query)}" target="_blank" rel="noopener">更多建築照片 ↗</a>
+      </div>
+    </div>`;
+
+  const act = detailEl.querySelector('.detail-actions');
+  if (act) act.append(favBtn(c, true));
+
+  const l = stepList();
+  const i = l.findIndex(x => x.id === c.id);
+  const box = document.createElement('div');
+  box.className = 'stepnav';
+  const mk = j => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    const t = l[j];
+    b.className = 'action';
+    b.textContent = t ? (j < i ? '← ' + t.name : t.name + ' →') : (j < i ? '已是第一筆' : '已是最後一筆');
+    if (!t) b.disabled = true;
+    else b.onclick = () => openDetail(t);
+    return b;
+  };
+  box.append(mk(i - 1), mk(i + 1));
+  const host = detailEl.querySelector('.detail-content');
+  host.append(box);
+  const h = document.createElement('div');
+  h.className = 'kbd-hint';
+  h.textContent = '可用鍵盤 ← → 切換上下一筆，Esc 關閉';
+  host.append(h);
+
+  addCaseSource();
+  modalEl.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  dialogEl.scrollTop = 0;
+  closeBtn.focus({ preventScroll: true });
+
+  applyPhotoToContainer(c, document.getElementById('detailHero'), true);
+
+  try {
+    history.replaceState(null, '', '#case-' + c.id);
+  } catch (e) {}
+}
+
+function closeModal() {
+  modalEl.classList.remove('open');
+  if (!imgModalEl.classList.contains('open')) document.body.style.overflow = '';
+  currentCase = null;
+  if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+  try {
+    history.replaceState(null, '', location.pathname + location.search);
+  } catch (e) {}
+}
+
+// 複製本篇連結
+copyLinkBtn.onclick = () => {
+  const url = location.href;
+  const ta = document.createElement('textarea');
+  ta.value = url;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.append(ta);
+  ta.select();
+  try {
+    document.execCommand('copy');
+    copyLinkBtn.textContent = '✓ 已複製連結';
+  } catch (e) {
+    copyLinkBtn.textContent = '複製失敗';
+  }
+  ta.remove();
+  setTimeout(() => { copyLinkBtn.textContent = '🔗 複製連結'; }, 2000);
+};
+
+// 詳細彈窗內一鍵更換該棟建築照片
+replaceCaseImgBtn.onclick = () => {
+  if (!currentCase) return;
+  quickReplaceInput.click();
+};
+quickReplaceInput.onchange = async e => {
+  const file = e.target.files && e.target.files[0];
+  e.target.value = '';
+  if (!file || !currentCase) return;
+  try {
+    const compressed = await compressImageFile(file);
+    customPhotos.set(currentCase.id, { src: compressed, label: file.name });
+    saveCustomPhotos();
+    applyPhotoToContainer(currentCase, document.getElementById('detailHero'), true);
+    render();
+  } catch (err) {}
+};
+
+// 圖檔管理彈窗邏輯
+function initImgManager() {
+  targetCaseSelect.innerHTML = '';
+  cases.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c.id;
+    opt.textContent = `#${String(c.id).padStart(2, '0')} ${c.name}（${c.place.slice(0, 3)}）`;
+    targetCaseSelect.append(opt);
+  });
+}
+
+function renderImgList() {
+  imgListEl.innerHTML = '';
+  cases.forEach(c => {
+    const item = customPhotos.get(c.id);
+    const row = document.createElement('div');
+    row.className = 'img-row';
+    row.innerHTML = `<div class="img-row-name" title="#${c.id} ${c.name}">#${c.id} ${c.name}</div>
+      <span class="img-row-tag ${item ? '' : 'default'}">${item ? item.label : '線稿／維基圖庫'}</span>
+      <div class="img-row-btns">
+        <button type="button" class="tiny-btn sel-btn">選取</button>
+        ${item ? '<button type="button" class="tiny-btn del">還原</button>' : ''}
+      </div>`;
+    row.querySelector('.sel-btn').onclick = () => {
+      targetCaseSelect.value = c.id;
+      customUrlInput.value = item && !item.src.startsWith('data:') ? item.src : '';
+      imgStatusMsg.textContent = `已選取「${c.name}」，可上方貼上網址或點選上傳照片。`;
+    };
+    const del = row.querySelector('.del');
+    if (del) {
+      del.onclick = () => {
+        customPhotos.delete(c.id);
+        saveCustomPhotos();
+        renderImgList();
+        render();
+        imgStatusMsg.textContent = `已還原「${c.name}」的預設圖檔。`;
+      };
+    }
+    imgListEl.append(row);
+  });
+}
+
+function openImgModal() {
+  imgStatusMsg.textContent = '';
+  renderImgList();
+  imgModalEl.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeImgModal() {
+  imgModalEl.classList.remove('open');
+  if (!modalEl.classList.contains('open')) document.body.style.overflow = '';
+}
+
+openImgMgrBtn.onclick = openImgModal;
+closeImgModalBtn.onclick = closeImgModal;
+imgModalEl.addEventListener('click', e => { if (e.target === imgModalEl) closeImgModal(); });
+
+applyUrlBtn.onclick = () => {
+  const id = +targetCaseSelect.value;
+  const url = customUrlInput.value.trim();
+  const c = cases.find(x => x.id === id);
+  if (!c || !url) {
+    imgStatusMsg.textContent = '請先輸入有效的圖片網址（http:// 或 https://）。';
+    return;
+  }
+  customPhotos.set(id, { src: url, label: '自訂網址' });
+  saveCustomPhotos();
+  renderImgList();
+  render();
+  imgStatusMsg.textContent = `已為「${c.name}」套用自訂圖片網址。`;
+};
+
+singleUploadInput.onchange = async e => {
+  const file = e.target.files && e.target.files[0];
+  e.target.value = '';
+  if (!file) return;
+  const id = +targetCaseSelect.value;
+  const c = cases.find(x => x.id === id);
+  if (!c) return;
+  imgStatusMsg.textContent = '正在壓縮並處理圖片…';
+  try {
+    const compressed = await compressImageFile(file);
+    customPhotos.set(id, { src: compressed, label: file.name });
+    saveCustomPhotos();
+    renderImgList();
+    render();
+    imgStatusMsg.textContent = `已成功為「${c.name}」上傳並壓縮照片（${file.name}）。`;
+  } catch (err) {
+    imgStatusMsg.textContent = '圖片處理失敗，請確認檔案格式是否為 JPG / PNG / WebP。';
+  }
+};
+
+batchUploadInput.onchange = async e => {
+  const files = [...(e.target.files || [])].filter(f => f.type && f.type.startsWith('image/'));
+  e.target.value = '';
+  if (!files.length) return;
+  imgStatusMsg.textContent = `正在批次壓縮 ${files.length} 張圖片…`;
+  let count = 0;
+  for (const file of files) {
+    const base = file.name.replace(/\.[^.]+$/, '').toLowerCase();
+    let target = cases.find(c => {
+      const shortName = c.name.toLowerCase().replace(/（.*?）/g, '');
+      return base.includes(shortName) || (shortName.includes(base) && base.length >= 2);
+    });
+    if (!target) {
+      const m = base.match(/^0?([1-9]|[12][0-9]|30)(?:[\s._-]|$)/);
+      if (m) target = cases.find(c => c.id === +m[1]);
+    }
+    if (!target) target = cases.find(c => !customPhotos.has(c.id));
+    if (target) {
+      try {
+        const compressed = await compressImageFile(file);
+        customPhotos.set(target.id, { src: compressed, label: file.name });
+        count++;
+      } catch (err) {}
+    }
+  }
+  saveCustomPhotos();
+  renderImgList();
+  render();
+  imgStatusMsg.textContent = `批次處理完成，已自動對應 ${count} 張建築照片。`;
+};
+
+clearAllImgBtn.onclick = () => {
+  customPhotos.clear();
+  saveCustomPhotos();
+  renderImgList();
+  render();
+  imgStatusMsg.textContent = '已清除全部自訂圖檔，恢復預設建築線稿與線上圖庫。';
+};
+
+// 事件監聽
+closeBtn.onclick = closeModal;
+modalEl.addEventListener('click', e => { if (e.target === modalEl) closeModal(); });
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (imgModalEl.classList.contains('open')) {
+      closeImgModal();
+      return;
+    }
+    if (modalEl.classList.contains('open')) {
+      closeModal();
+      return;
+    }
+  }
+  if (!modalEl.classList.contains('open') || !currentCase) return;
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+    const l = stepList();
+    const i = l.findIndex(x => x.id === currentCase.id);
+    const n = l[i + (e.key === 'ArrowRight' ? 1 : -1)];
+    if (n) openDetail(n);
+  }
+});
+
+// 中文輸入法防抖與清除搜尋
+let tm;
+search.addEventListener('compositionstart', () => { isComposing = true; });
+search.addEventListener('compositionend', () => {
+  isComposing = false;
+  clearTimeout(tm);
+  render();
+});
+search.addEventListener('input', () => {
+  clearSearchBtn.classList.toggle('show', search.value.length > 0);
+  if (isComposing) return;
+  clearTimeout(tm);
+  tm = setTimeout(render, 160);
+});
+clearSearchBtn.onclick = () => {
+  search.value = '';
+  clearSearchBtn.classList.remove('show');
+  render();
+  search.focus();
+};
+
+[placeFilter, typeFilter].forEach(x => x.addEventListener('change', render));
+favToggle.onclick = () => { favOnly = !favOnly; updFavToggle(); render(); };
+rndBtn.onclick = () => {
+  const l = visible.length ? visible : cases;
+  openDetail(l[Math.floor(Math.random() * l.length)]);
+};
 
 // 建築解剖室互動資料
-const partInfo={
- roof:['屋頂｜遮蔽與造型','屋頂負責遮陽、擋雨，也常是傳統建築最醒目的視覺特徵。屋面曲線、出簷深度與屋頂形式，會影響建築外觀及室內環境。','現場觀察：從側面看屋頂坡度、出簷長度，以及屋頂與牆身的比例。'],
- ridge:['屋脊｜屋面的交會線','屋脊位於兩側屋面相接的高處，負責收束屋面，也形成建築輪廓。廟宇屋脊可能有剪黏、交趾陶或其他裝飾，但形式會因地域與身分而不同。','現場觀察：看正脊、垂脊與燕尾、馬背等輪廓差異，並留意裝飾題材。'],
- tiles:['屋瓦｜排水與保護','屋瓦形成屋面的外層保護，讓雨水順著坡面排走，也減少日曬對屋架的直接影響。瓦的形狀、排列與材料會隨年代和地方工法改變。','現場觀察：看瓦片排列方向、屋面坡度、滴水位置及修補痕跡。'],
- beam:['樑｜水平傳力構件','樑通常橫向跨在柱或其他支承構件之間，承接屋架或樓板傳來的重量，再把力量傳給支承點。傳統木構樑架也常呈現工藝與比例美感。','現場觀察：從室內看樑的方向、層次、跨距，以及樑柱交會處的接合。'],
- column:['柱｜垂直支撐','柱將上方屋頂、樑或樓層的重量往下傳遞，是許多木構與現代框架建築的重要支撐構件。柱的排列也會影響室內空間與行走動線。','現場觀察：看柱距、柱身比例、柱列是否形成中軸或廊道。'],
- base:['柱腳｜柱與地面的交界','柱腳是柱身接近地面的部位，可能設有石礎或其他墊承構件，用來分散壓力並減少木柱直接接觸潮濕地面。','現場觀察：留意柱底是否墊高、石礎形狀，以及周邊是否有潮濕或修補痕跡。'],
- foundation:['基礎｜把重量傳到地盤','基礎位於建築下方，將上部結構的重量傳遞至地盤。不同地質、建築規模與結構形式會採用不同基礎方式。','現場觀察：基礎多半不易直接看見，可從地坪高差、台基、擋土與排水設施理解建築如何落地。']
+const partInfo = {
+  roof: ['屋頂｜遮蔽與造型', '屋頂負責遮陽、擋雨，也常是傳統建築最醒目的視覺特徵。屋面曲線、出簷深度與屋頂形式，會影響建築外觀及室內環境。', '現場觀察：從側面看屋頂坡度、出簷長度，以及屋頂與牆身的比例。'],
+  ridge: ['屋脊｜屋面的交會線', '屋脊位於兩側屋面相接的高處，負責收束屋面，也形成建築輪廓。廟宇屋脊可能有剪黏、交趾陶或其他裝飾，但形式會因地域與身分而不同。', '現場觀察：看正脊、垂脊與燕尾、馬背等輪廓差異，並留意裝飾題材。'],
+  tiles: ['屋瓦｜排水與保護', '屋瓦形成屋面的外層保護，讓雨水順著坡面排走，也減少日曬對屋架的直接影響。瓦的形狀、排列與材料會隨年代和地方工法改變。', '現場觀察：看瓦片排列方向、屋面坡度、滴水位置及修補痕跡。'],
+  beam: ['樑｜水平傳力構件', '樑通常橫向跨在柱或其他支承構件之間，承接屋架或樓板傳來的重量，再把力量傳給支承點。傳統木構樑架也常呈現工藝與比例美感。', '現場觀察：從室內看樑的方向、層次、跨距，以及樑柱交會處的接合。'],
+  column: ['柱｜垂直支撐', '柱將上方屋頂、樑或樓層的重量往下傳遞，是許多木構與現代框架建築的重要支撐構件。柱的排列也會影響室內空間與行走動線。', '現場觀察：看柱距、柱身比例、柱列是否形成中軸或廊道。'],
+  base: ['柱腳｜柱與地面的交界', '柱腳是柱身接近地面的部位，可能設有石礎或其他墊承構件，用來分散壓力並減少木柱直接接觸潮濕地面。', '現場觀察：留意柱底是否墊高、石礎形狀，以及周邊是否有潮濕或修補痕跡。'],
+  foundation: ['基礎｜把重量傳到地盤', '基礎位於建築下方，將上部結構的重量傳遞至地盤。不同地質、建築規模與結構形式會採用不同基礎方式。', '現場觀察：基礎多半不易直接看見，可從地坪高差、台基、擋土與排水設施理解建築如何落地。']
 };
-document.querySelectorAll('[data-part]').forEach(el=>el.addEventListener('click',()=>{const key=el.dataset.part;document.querySelectorAll('#partTabs .part-btn').forEach(b=>b.classList.toggle('active',b.dataset.part===key));document.querySelectorAll('.anatomy-visual .part').forEach(x=>x.classList.toggle('selected',x.dataset.part===key));const d=partInfo[key];if(d)document.getElementById('partDetail').innerHTML=`<h3>${d[0]}</h3><p>${d[1]}</p><div class="look">${d[2]}</div>`}));
-const structureInfo={
- wood:['木構架','傳統木構｜樑柱共同承重','以柱、樑及屋架組成骨架，荷重透過構件傳遞至柱腳與基礎。傳統廟宇常見木構架、斗栱或疊斗等構件；實際作法會因地域、年代與匠派而不同。觀察時可留意柱距、樑架層次與接合方式。'],
- brick:['磚石牆體','磚石承重｜牆體也是結構','部分傳統或早期建築以厚實磚牆、石牆承受上方重量。門窗開口會影響牆體配置，牆厚與開口比例也與建築尺度有關。並非所有磚牆都是承重牆，需依實際結構判斷。'],
- rc:['鋼筋混凝土','鋼筋混凝土｜樑、柱、樓板形成骨架','鋼筋與混凝土共同工作，常形成樑柱、樓板與剪力牆等系統。鋼筋主要承受拉力，混凝土主要承受壓力，廣泛用於戰後住宅、公共建築與高樓。實際耐震表現仍取決於設計、施工與維護。'],
- steel:['鋼構','鋼構｜以鋼構件跨越較大空間','以鋼柱、鋼樑、桁架等構件組成承重系統，具有自重相對較輕、施工組裝效率高及可形成大跨距空間等特點。常見於展覽館、廠房、車站與大型公共設施。']
-};
-document.querySelectorAll('.structure-btn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.structure-btn').forEach(x=>x.classList.toggle('active',x===b));const d=structureInfo[b.dataset.structure];document.getElementById('structureDetail').innerHTML=`<div class="structure-icon">${d[0]}</div><div><h3>${d[1]}</h3><p>${d[2]}</p></div>`}));
 
-const guideGrid=document.getElementById('guideGrid');eras.forEach((e,i)=>{const d=document.createElement('div');d.className='guide';d.style.setProperty('--accent',e.color);d.innerHTML=`<small>${e.years}</small><h3>${e.name}</h3><p>${e.intro}</p>`;guideGrid.append(d)});renderTabs();render();
-</script></body></html>
+function selectPart(key) {
+  document.querySelectorAll('#partTabs .part-btn').forEach(b => b.classList.toggle('active', b.dataset.part === key));
+  document.querySelectorAll('.anatomy-visual .part').forEach(x => x.classList.toggle('selected', x.dataset.part === key));
+  const d = partInfo[key];
+  if (d) {
+    document.getElementById('partDetail').innerHTML = `<h3>${d[0]}</h3><p>${d[1]}</p><div class="look">${d[2]}</div>`;
+  }
+}
+
+document.querySelectorAll('[data-part]').forEach(el => {
+  el.addEventListener('click', () => selectPart(el.dataset.part));
+});
+
+document.querySelectorAll('.anatomy-visual .part').forEach(el => {
+  el.setAttribute('tabindex', '0');
+  el.setAttribute('role', 'button');
+  const t = partInfo[el.dataset.part];
+  if (t) el.setAttribute('aria-label', t[0]);
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      selectPart(el.dataset.part);
+    }
+  });
+});
+
+// 四種構造比較與代表案例串聯
+const structureInfo = {
+  wood: ['木構架', '傳統木構｜樑柱共同承重', '以柱、樑及屋架組成骨架，荷重透過構件傳遞至柱腳與基礎。傳統廟宇常見木構架、斗栱或疊斗等構件；實際作法會因地域、年代與匠派而不同。觀察時可留意柱距、樑架層次與接合方式。', [1, 2, 4, 26]],
+  brick: ['磚石牆體', '磚石承重｜牆體也是結構', '部分傳統或早期建築以厚實磚牆、石牆承受上方重量。門窗開口會影響牆體配置，牆厚與開口比例也與建築尺度有關。並非所有磚牆都是承重牆，需依實際結構判斷。', [7, 11, 16]],
+  rc: ['鋼筋混凝土', '鋼筋混凝土｜樑、柱、樓板形成骨架', '鋼筋與混凝土共同工作，常形成樑柱、樓板與剪力牆等系統。鋼筋主要承受拉力，混凝土主要承受壓力，廣泛用於戰後住宅、公共建築與高樓。實際耐震表現仍取決於設計、施工與維護。', [18, 27, 28, 30]],
+  steel: ['鋼構', '鋼構｜以鋼構件跨越較大空間', '以鋼柱、鋼樑、桁架等構件組成承重系統，具有自重相對較輕、施工組裝效率高及可形成大跨距空間等特點。常見於展覽館、廠房、車站與大型公共設施。', [20]]
+};
+
+function selectStructure(key) {
+  document.querySelectorAll('.structure-btn').forEach(x => x.classList.toggle('active', x.dataset.structure === key));
+  const d = structureInfo[key];
+  if (!d) return;
+  const host = document.getElementById('structureDetail');
+  host.innerHTML = `<div class="structure-icon">${d[0]}</div>
+    <div>
+      <h3>${d[1]}</h3>
+      <p>${d[2]}</p>
+      <div class="structure-examples"><span>代表案例：</span></div>
+    </div>`;
+  const exBox = host.querySelector('.structure-examples');
+  d[3].forEach(id => {
+    const target = cases.find(c => c.id === id);
+    if (!target) return;
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'ex-chip';
+    chip.textContent = target.name;
+    chip.onclick = () => openDetail(target);
+    exBox.append(chip);
+  });
+}
+
+document.querySelectorAll('.structure-btn').forEach(b => {
+  b.addEventListener('click', () => selectStructure(b.dataset.structure));
+});
+
+// 導覽列章節高亮
+(function() {
+  const links = [...document.querySelectorAll('.nav a')];
+  const secs = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  if (!('IntersectionObserver' in window)) return;
+  const so = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  secs.forEach(x => so.observe(x));
+})();
+
+
+function escapeHtml(value){return String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+function initCompare(){const range=document.getElementById('compareRange'),layer=document.getElementById('beforeLayer');range.addEventListener('input',()=>layer.style.width=range.value+'%');const load=(input,img)=>input.addEventListener('change',()=>{const file=input.files&&input.files[0];if(!file)return;const url=URL.createObjectURL(file);img.src=url;document.getElementById('compareStatus').textContent='照片已載入；可拖曳滑桿比較。請留意照片拍攝角度與比例盡量一致。';});load(document.getElementById('beforePhoto'),document.getElementById('beforeImage'));load(document.getElementById('afterPhoto'),document.getElementById('afterImage'));}
+// 擴充模組：座標採城市地標近似位置，供文化導覽定位，不代表建築測量座標。
+const placeCoords = {
+'安平古堡':[23.0017,120.1608],'赤崁樓':[22.9971,120.2020],'金門模範街':[24.4327,118.3172],'水頭聚落':[24.4104,118.2868],'澎湖天后宮':[23.5655,119.5650],'淡水紅毛城':[25.1751,121.4328],'迪化街':[25.0597,121.5100],'大溪老街':[24.8857,121.2868],'北港朝天宮':[23.5678,120.3027],'三峽祖師廟':[24.9340,121.3690],'新莊慈祐宮':[25.0354,121.4520],'臺中火車站舊站':[24.1368,120.6850],'高雄車站舊站':[22.6395,120.3020],'臺北中山堂':[25.0440,121.5100],'高雄市立歷史博物館':[22.6278,120.2865],'嘉義舊監獄':[23.4848,120.4585],'松園別館':[23.9850,121.6120],'四四南村':[25.0310,121.5600],'寶藏巖國際藝術村':[25.0100,121.5310],'馬祖新村':[24.9537,121.2220],'中興新村':[23.9530,120.6870],'中正紀念堂':[25.0347,121.5219],'臺中國家歌劇院':[24.1638,120.6405],'衛武營':[22.6250,120.3420],'蘭陽博物館':[24.8680,121.8240],'高雄市立圖書館總館':[22.6115,120.3000],'臺北表演藝術中心':[25.0960,121.5160],'新北市立圖書館總館':[25.0120,121.4630],'桃園市立圖書館新總館':[25.0130,121.3000],'故宮南部院區':[23.4700,120.2930]
+};
+const regionOf = c => /金門|澎湖|馬祖/.test(c.place)?'離島':/花蓮|臺東/.test(c.place)?'東部':/臺南|高雄|屏東|嘉義|雲林/.test(c.place)?'南部':/臺中|彰化|南投|苗栗|新竹市|新竹縣/.test(c.place)?'中部':'北部';
+const heritageSearch = c => 'https://nchdb.boch.gov.tw/';
+function renderTimeline(){
+ const host=document.getElementById('timelineList'); if(!host)return;
+ host.innerHTML=''; eras.forEach((e,i)=>{const b=document.createElement('button');b.className='time-card';b.style.setProperty('--accent',e.color);b.innerHTML=`<small>${e.years}</small><h3>${e.name}</h3><p>${e.intro}</p><span>探索這個時期 →</span>`;b.onclick=()=>{activeEra=i;favOnly=false;document.getElementById('favToggle').setAttribute('aria-pressed','false');renderTabs();render();document.getElementById('atlas').scrollIntoView({behavior:'smooth'});};host.append(b);});
+}
+function renderRegionLinks(){const host=document.getElementById('regionLinks');if(!host)return;['北部','中部','南部','東部','離島'].forEach(r=>{const b=document.createElement('button');b.textContent=r+'案例';b.onclick=()=>{document.getElementById('mapRegion').value=r;renderMap();};host.append(b);});}
+let archMap=null, mapMarkers=[];
+function renderMap(){
+ const el=document.getElementById('architectureMap');if(!el)return;
+ const reg=document.getElementById('mapRegion').value;const selected=cases.filter(c=>!reg||regionOf(c)===reg);
+ document.getElementById('mapCount').textContent=`目前顯示 ${selected.length} 個案例｜地圖位置為導覽參考`;
+ if(!window.L){el.innerHTML='<div class="map-fallback">地圖服務暫時無法載入。請確認網路連線，或使用下方地區索引。</div>';return;}
+ if(!archMap){el.innerHTML='';archMap=L.map(el).setView([23.75,120.95],7);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap'}).addTo(archMap);}
+ mapMarkers.forEach(m=>archMap.removeLayer(m));mapMarkers=[];
+ selected.forEach(c=>{let coord=placeCoords[c.map]||placeCoords[c.name]||null;if(!coord){const latLon=cityCoords(c.place);coord=latLon;}if(!coord)return;const marker=L.marker(coord).addTo(archMap).bindPopup(`<strong>${escapeHtml(c.name)}</strong><br>${escapeHtml(c.place)}<br><button class="map-open" data-id="${c.id}">閱讀建築介紹</button>`);marker.on('popupopen',()=>{const btn=document.querySelector('.map-open[data-id="'+c.id+'"]');if(btn)btn.onclick=()=>openDetail(c);});mapMarkers.push(marker);});
+ if(mapMarkers.length){const group=L.featureGroup(mapMarkers);archMap.fitBounds(group.getBounds().pad(.12),{maxZoom:10});}setTimeout(()=>archMap.invalidateSize(),100);
+}
+function cityCoords(place){if(/臺北|新北|桃園|基隆/.test(place))return [25.03,121.45];if(/新竹/.test(place))return [24.80,120.97];if(/苗栗/.test(place))return [24.56,120.82];if(/臺中/.test(place))return [24.15,120.67];if(/彰化/.test(place))return [24.07,120.54];if(/南投/.test(place))return [23.91,120.68];if(/雲林/.test(place))return [23.71,120.43];if(/嘉義/.test(place))return [23.48,120.45];if(/臺南/.test(place))return [22.99,120.20];if(/高雄/.test(place))return [22.63,120.30];if(/屏東/.test(place))return [22.67,120.49];if(/宜蘭/.test(place))return [24.75,121.75];if(/花蓮/.test(place))return [23.98,121.60];if(/臺東/.test(place))return [22.75,121.15];if(/金門/.test(place))return [24.43,118.32];if(/澎湖/.test(place))return [23.57,119.57];if(/連江/.test(place))return [26.16,119.95];return [23.75,120.95];}
+const reuseStories=[
+ ['舊官署成為文化場館','臺南州廳轉為國立臺灣文學館、臺南地方法院轉為司法博物館。行政空間的保存再利用，讓城市歷史成為公共文化資源。','用途轉換｜官署 → 博物館'],
+ ['交通設施成為城市記憶','臺中舊火車站與高雄舊站房保存了鐵道發展的空間記憶，也提醒我們大型交通建設與歷史保存需要協調。','保存方式｜持續使用／移築保存'],
+ ['聚落保存與新生活','四四南村、寶藏巖與馬祖新村等案例，讓眷村及山坡聚落在保存後加入展覽、活動與文化使用。','生活延續｜住宅聚落 → 公共文化空間']
+];
+function renderReuse(){const h=document.getElementById('reuseGrid');if(!h)return;reuseStories.forEach(x=>{const d=document.createElement('article');d.className='story-card';d.innerHTML=`<h3>${x[0]}</h3><p>${x[1]}</p><span>${x[2]}</span>`;h.append(d);});}
+const crafts=[
+ ['剪黏與交趾陶','以陶片、彩色瓷片或陶塑組合裝飾屋脊與壁面，題材常含人物、花鳥及吉祥故事。','屋脊裝飾'],['木雕與彩繪','從門窗、神龕到樑枋，雕刻與彩繪兼具裝飾、敘事與象徵功能。','木作工藝'],['石作與石雕','石柱、柱礎、門枕及人物瑞獸雕刻，兼具承重、耐久與視覺表現。','石材工藝'],['洗石子與磨石子','以骨材與水泥形成表面質感，常見於日治後期及戰後建築立面、地坪。','近代材料工法'],['紅磚與砌築','磚的尺寸、排列與灰縫方式，影響牆體構造、開口與立面節奏。','砌築工藝'],['鋼筋混凝土','鋼筋與混凝土共同工作，形成樑、柱、樓板及剪力牆等結構系統。','現代構造'],['屋瓦與屋脊','屋瓦負責排水與遮蔽，屋脊構件兼具收邊、防水及裝飾意義。','傳統屋頂'],['玻璃與金屬帷幕','當代建築常以玻璃、鋁材與遮陽系統調節採光、視野及熱環境。','當代建材']
+];
+function renderCrafts(){const h=document.getElementById('craftGrid');if(!h)return;crafts.forEach((c,i)=>{const d=document.createElement('article');d.className='craft-card';d.innerHTML=`<div class="craft-icon">${['🏺','🪵','🪨','🧱','🧱','🏗️','🏠','🪟'][i]}</div><h3>${c[0]}</h3><p>${c[1]}</p><span class="small-note">${c[2]}</span>`;h.append(d);});const people=document.getElementById('peopleList');['森山松之助','井手薰','松ケ崎萬長','梅澤捨次郎','楊卓成','伊東豊雄','姚仁喜','Mecanoo','OMA','地方木作匠師','剪黏與交趾陶匠師','石雕與泥作匠師','文化資產修復團隊'].forEach(n=>{const x=document.createElement('span');x.textContent=n;people.append(x);});}
+const quizData=[
+ {q:'傳統孔廟常以哪一種空間秩序組織主要殿堂？',a:['中軸線與院落','完全自由曲面','環形高架道路','地下連通道'],c:0,e:'中軸線與院落常用來表現禮制秩序；仍須依個別孔廟格局理解。'},
+ {q:'建築的「保存再利用」主要指什麼？',a:['拆除後蓋全新建築','保存重要價值並轉換或延續用途','只保留外牆，其餘一律拆除','禁止任何維護'],c:1,e:'保存再利用是在尊重文化價值與安全條件下，讓建築繼續被使用。'},
+ {q:'哪一種材料系統常以樑、柱、樓板共同形成骨架？',a:['鋼筋混凝土','稻草編織','紙板','夯土單一牆體'],c:0,e:'鋼筋混凝土常形成樑柱樓板或剪力牆系統。'},
+ {q:'眷村建築最值得一起觀察的，不只是單棟住宅，還包括什麼？',a:['巷弄、公共空間與鄰里生活','只有屋頂顏色','只有門牌號碼','附近的高速公路'],c:0,e:'眷村的價值也在巷弄尺度、共享空間及居民生活記憶。'},
+ {q:'閱讀古蹟年代時，哪一項做法最恰當？',a:['把創建年當成每個構件年代','區分創建、完工、改建與修復年代','只看網路照片','不必查證來源'],c:1,e:'古蹟往往歷經多期修建，應分辨不同年代的意義並查核來源。'}
+];let quizIndex=-1,quizScore=0,quizAnswered=false;
+function showQuiz(){const q=quizData[quizIndex];document.getElementById('quizProgress').textContent=`第 ${quizIndex+1} 題／${quizData.length} 題`;document.getElementById('quizScore').textContent=`答對 ${quizScore} 題`;document.getElementById('quizQuestion').textContent=q.q;const h=document.getElementById('quizOptions');h.innerHTML='';q.a.forEach((a,i)=>{const b=document.createElement('button');b.className='quiz-option';b.textContent=a;b.onclick=()=>{if(quizAnswered)return;quizAnswered=true;if(i===q.c)quizScore++;[...h.children].forEach((x,j)=>{x.disabled=true;if(j===q.c)x.classList.add('correct');else if(j===i)x.classList.add('wrong');});document.getElementById('quizScore').textContent=`答對 ${quizScore} 題`;document.getElementById('quizFeedback').textContent=(i===q.c?'答對了！':'再記住這個觀念。')+q.e;document.getElementById('quizNext').textContent=quizIndex===quizData.length-1?'查看成績':'下一題';};h.append(b);});document.getElementById('quizFeedback').textContent='選擇一個答案。';document.getElementById('quizNext').textContent='作答後繼續';}
+document.getElementById('quizNext').onclick=()=>{if(quizIndex<0){quizIndex=0;quizScore=0;quizAnswered=false;showQuiz();return;}if(!quizAnswered)return;if(quizIndex<quizData.length-1){quizIndex++;quizAnswered=false;showQuiz();}else{document.getElementById('quizQuestion').textContent=`完成挑戰！你答對 ${quizScore}／${quizData.length} 題。`;document.getElementById('quizOptions').innerHTML='';document.getElementById('quizFeedback').textContent=quizScore===5?'建築觀察力很不錯！': '可以回到圖鑑，再探索一次相關案例。';document.getElementById('quizNext').textContent='重新挑戰';document.getElementById('quizNext').onclick=()=>{quizIndex=-1;quizScore=0;quizAnswered=false;document.getElementById('quizQuestion').textContent='準備開始';document.getElementById('quizFeedback').textContent='選擇開始挑戰。';document.getElementById('quizNext').textContent='開始挑戰';document.getElementById('quizNext').onclick=()=>{quizIndex=0;quizScore=0;quizAnswered=false;showQuiz();};};}};
+// 每個案例提供可追溯的官方查證入口；不將搜尋入口冒充個案專屬來源。
+function addCaseSource(){const content=document.querySelector('#detail .detail-content');if(!content||content.querySelector('.detail-source'))return;const box=document.createElement('div');box.className='detail-source';box.innerHTML=`<strong>延伸查證與資料使用</strong><br><a href="https://nchdb.boch.gov.tw/" target="_blank" rel="noopener">文化部文化資產局・國家文化資產網</a>　｜　<a href="https://www.nmth.gov.tw/" target="_blank" rel="noopener">國立臺灣歷史博物館</a><small>本頁為入門導覽整理；各案例年代、指定身分、建築師、修復沿革及開放資訊，請以主管機關、館舍及地方政府正式資料逐案核對。未能確認的設計者以「待考／團隊」呈現，不推定個人作者。</small>`;content.append(box);}
+
+
+// 啟動初始化
+renderTimeline();renderRegionLinks();renderReuse();renderCrafts();renderMap();initCompare();
+document.getElementById('mapRegion').addEventListener('change',renderMap);
+document.getElementById('heroCount').textContent=cases.length;document.getElementById('statCases').textContent=cases.length;
+loadCustomPhotos();
+initPlaceOptions();
+initImgManager();
+updFavToggle();
+renderEraGuide();
+selectPart('roof');
+selectStructure('wood');
+renderTabs();
+render();
+
+// 支援網址 Hash 直接開啟指定案例
+setTimeout(() => {
+  const m = location.hash.match(/^#case-(\d+)$/);
+  const c = m && cases.find(x => x.id === +m[1]);
+  if (c) openDetail(c);
+}, 0);
+</script>
+</body>
+</html>
