@@ -137,7 +137,7 @@ const T=[
 ["冬至",12,22,"蚯蚓結","天時人事日相催，冬至陽生春又來","杜甫",260]
 ];
 const $=id=>document.getElementById(id);
-const now=new Date(),Y=now.getFullYear();
+let now=new Date(),Y=now.getFullYear();
 const sunLon=j=>{const u=(j-2451545)/36525,r=Math.PI/180,L=280.46646+36000.76983*u+3.032e-4*u*u,M=(357.52911+35999.05029*u-1.537e-4*u*u)*r,C=(1.914602-.004817*u)*Math.sin(M)+(.019993-1.01e-4*u)*Math.sin(2*M)+2.89e-4*Math.sin(3*M),O=(125.04-1934.136*u)*r;return((L+C-.00569-.00478*Math.sin(O))%360+360)%360};
 const _c={};
 const st=(i,y)=>{
@@ -148,12 +148,17 @@ const st=(i,y)=>{
   const d=new Date(((lo+hi)/2-2440587.5)*864e5+8*36e5);
   return _c[k]=new Date(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate());
 };
-let cur=23,cy=Y-1;
-for(let i=0;i<24;i++)if(st(i,Y)<=now){cur=i;cy=Y;}
-const nx=(cur+1)%24,ny=cur==23?cy+1:cy;
-const elapsed=Math.floor((now-st(cur,cy))/864e5)+1;
-const total=Math.round((st(nx,ny)-st(cur,cy))/864e5);
-const left=Math.max(1,Math.ceil((st(nx,ny)-now)/864e5));
+let cur,cy,nx,ny,elapsed,total,left;
+function calc(){
+  now=new Date();Y=now.getFullYear();
+  cur=23;cy=Y-1;
+  for(let i=0;i<24;i++)if(st(i,Y)<=now){cur=i;cy=Y;}
+  nx=(cur+1)%24;ny=cur==23?cy+1:cy;
+  elapsed=Math.floor((now-st(cur,cy))/864e5)+1;
+  total=Math.round((st(nx,ny)-st(cur,cy))/864e5);
+  left=Math.max(1,Math.ceil((st(nx,ny)-now)/864e5));
+}
+calc();
 const NS="http://www.w3.org/2000/svg";
 const ring=$("ring");
 const pos=i=>{const a=((i-23)*15+90)*Math.PI/180;return[160+135*Math.cos(a),160+135*Math.sin(a)]};
@@ -176,29 +181,29 @@ for(let i=0;i<24;i++){
 // 二十四節氣詩畫：以詩詞、作者與短箋，呈現每個節氣的自然意境。
 const POEMS = [
  ["小寒連大呂，歡鵲壘新巢。","元稹〈小寒十二月節〉","寒意尚深，枝頭已傳來築巢的消息。冬天的深處，生命正悄悄準備下一個春天。","冬藏・候春"],
- ["千山鳥飛絕，萬徑人蹤滅。","柳宗元〈江雪〉","天地安靜下來，山川收起聲音。大寒不只是寒冷，也是萬物蓄藏、等待轉暖的時刻。","歲暮・靜寂"],
+ ["牆角數枝梅，凌寒獨自開。", "王安石〈梅花〉", "天寒到了極處，牆角的梅卻偏在此時綻放。大寒的深處，已有一點春訊。", "寒梅・凌寒"],
  ["律回歲晚冰霜少，春到人間草木知。","張栻〈立春偶成〉","冰霜漸退，草木先知。春天不是突然來到，而是從枝梢與泥土裡慢慢醒來。","迎春・萌發"],
  ["竹外桃花三兩枝，春江水暖鴨先知。","蘇軾〈惠崇春江晚景〉","春水漸暖，桃花初綻。江上的鴨子，比人更早感受到春天的腳步。","春水・知暖"],
- ["微雨眾卉新，一雷驚蟄始。","韋應物〈觀田家〉","一聲春雷，喚醒蟄伏的生命。細雨落下，草木抽芽，大地重新有了聲息。","春雷・甦醒"],
+ ["陽氣初驚蟄，韶光大地周。", "元稹〈詠廿四氣詩·驚蟄二月節〉", "陽氣初動，春光遍及大地。蟄伏的生命在這一刻甦醒，新的一年真正開始忙碌。", "春雷・甦醒"],
  ["仲春初四日，春色正中分。","徐鉉〈春分日〉","晝夜平分，春意正好。花開與風暖之間，是一年最從容的平衡。","平分・和煦"],
- ["清明時節雨紛紛，路上行人欲斷魂。","杜牧〈清明〉","細雨、遠路與思念交織。清明既是春日踏青，也是記得來處、緬懷故人的日子。","煙雨・追思"],
+ ["無花無酒過清明，興味蕭然似野僧。", "王禹偁〈清明〉", "沒有花，也沒有酒，清明過得清淡簡靜。這個節氣不只踏青，也留一份安靜給自己。", "清明・素淡"],
  ["穀雨春光曉，山川黛色青。","元稹〈詠廿四氣詩·穀雨三月中〉","雨潤百穀，山色轉青。春天走到尾聲，田野正迎接蓬勃的生長。","春末・潤物"],
  ["四時天氣促相催，一夜薰風帶暑來。","翁卷〈立夏〉","風裡添了暖意，樹影也漸漸濃密。夏天在不知不覺間接手了春天。","入夏・風暖"],
- ["夜鶯啼綠柳，皓月醒長空。","歐陽修〈採桑子〉","綠柳深深，夜色清朗。小滿時節，萬物將滿未滿，留一點餘地，恰是好光景。","將滿・留白"],
+ ["小荷才露尖尖角，早有蜻蜓立上頭。", "楊萬里〈小池〉", "荷葉才剛露出尖角，蜻蜓已先停上去。小滿時節，生機剛好，不必全滿，才最有餘味。", "初荷・留白"],
  ["時雨及芒種，四野皆插秧。","陸游〈時雨〉","雨水落在田間，農人忙著插秧。芒種提醒人們，時節到了，就要把握耕耘的時機。","忙種・耕耘"],
  ["晝晷已云極，宵漏自此長。","韋應物〈夏至避暑北池〉","白晝走到一年最長，從此日影漸短。盛夏的光亮裡，也藏著季節轉身的訊息。","日長・陰生"],
  ["倏忽溫風至，因循小暑來。","元稹〈小暑六月節〉","熱風輕輕吹來，蟬聲漸密。暑氣初起，生活也該放慢一些。","初暑・蟬鳴"],
  ["赤日幾時過，清風無處尋。","曾幾〈大暑〉","烈日當空，暑氣正盛。越是炎熱，越懂得一縷清風的珍貴。","盛暑・尋涼"],
  ["乳鴉啼散玉屏空，一枕新涼一扇風。","劉翰〈立秋〉","暑意未退，風裡卻先有了涼。立秋像一封短箋，提醒人們季節已悄悄改變。","新秋・微涼"],
  ["離離暑雲散，裊裊涼風起。","白居易〈早秋曲江感懷〉","暑雲漸散，涼風漸起。處暑不是一夜入秋，而是熱意慢慢退場。","暑退・風起"],
- ["蒹葭蒼蒼，白露為霜。","《詩經·秦風·蒹葭》","水岸蘆葦蒼蒼，清露凝白。秋意在晨光裡顯現，也讓思念有了清冷的形狀。","清露・秋思"],
+ ["露從今夜白，月是故鄉明。", "杜甫〈月夜憶舍弟〉", "露水在夜裡轉白，月色也格外清亮。白露的涼意裡，最容易想起遠方的人與故鄉。", "白露・思鄉"],
  ["金氣秋分，風清露冷秋期半。","謝逸〈點絳唇〉","秋分平分晝夜，天高而氣清。收穫與沉靜，在這一天相互照映。","秋半・清朗"],
  ["空庭得秋長漫漫，寒露入暮愁衣單。","王安石〈八月十九日試院夢衝卿〉","夜色漸涼，露水更重。寒露提醒人們添衣，也提醒心事不必總說出口。","深秋・添衣"],
- ["月落烏啼霜滿天，江楓漁火對愁眠。","張繼〈楓橋夜泊〉","霜夜、鐘聲與江上漁火，讓秋天有了深遠的回音。","霜夜・江楓"],
- ["凍筆新詩懶寫，寒爐美酒時溫。","李白〈立冬〉","寒意初臨，筆墨也慢了下來。圍爐取暖，是冬天最樸素的溫柔。","入冬・圍爐"],
+ ["停車坐愛楓林晚，霜葉紅於二月花。", "杜牧〈山行〉", "霜過之後，楓葉比春花更紅。霜降是秋天最後的絢爛，也是轉入冬藏前的一場盛宴。", "霜葉・楓紅"],
+ ["凍筆新詩懶寫，寒爐美酒時溫。", "相傳李白〈立冬〉", "寒意初臨，筆墨也慢了下來。圍爐取暖，是冬天最樸素的溫柔。", "入冬・圍爐"],
  ["花雪隨風不厭看，更多還肯失林巒。","戴叔倫〈小雪〉","初雪隨風而來，山林若隱若現。小雪是冬日的輕聲提醒，寒意正在加深。","初雪・山隱"],
- ["孤舟蓑笠翁，獨釣寒江雪。","柳宗元〈江雪〉","雪落江面，天地寂寥。一葉孤舟，讓冬日的靜謐有了深刻的輪廓。","大雪・清寂"],
- ["天時人事日相催，冬至陽生春又來。","杜甫〈小至〉","白晝最短之後，陽氣開始回升。冬至不是終點，而是春天重新計時的起點。","陽生・迎新"]
+ ["夜深知雪重，時聞折竹聲。", "白居易〈夜雪〉", "夜裡聽不見雪落，只聽見竹枝被壓折的聲音。大雪的靜，是要用耳朵聽出來的。", "夜雪・聽靜"],
+ ["邯鄲驛裡逢冬至，抱膝燈前影伴身。", "白居易〈邯鄲冬至夜思家〉", "冬至夜最長，旅人只有燈前的影子作伴。這是一年中最長的夜，也最容易想家。", "冬至・思家"]
 ];
 function paintPoem(i){
   const season=Math.floor(i/6), isRain=i===3, isSnow=i===22||i===23||i===0||i===1;
@@ -237,6 +242,11 @@ function paintPoem(i){
   $("poemTag").textContent=p[3]+"　·　二十四節氣・二十四種風景";
 }
 
+function houOf(i){
+  const hl=["初候","二候","三候"],hk=[T[i][3],...X[i][0].split("、")];
+  const n=i==cur?Math.min(2,Math.floor((elapsed-1)*3/total)):0;
+  return hl[n]+"　"+hk[n];
+}
 function show(i){
   const t=T[i],isNow=i==cur,r=document.documentElement.style,[h,s]=hs(i);
   paintPoem(i);
@@ -252,7 +262,7 @@ function show(i){
   fxc=`hsl(${h} ${s}% 82%)`;
   if(kind!=EL[i])setFx(EL[i]);
   musicSet(i);
-  [["nm",t[0]],["hou","初候　"+t[3]],["ln",t[4]]].forEach(([id,v])=>{const e=$(id);e.textContent=v;e.classList.remove("fade");void e.offsetWidth;e.classList.add("fade")});
+  [["nm",t[0]],["hou",(isNow?"此刻　":"")+houOf(i)],["ln",t[4]]].forEach(([id,v])=>{const e=$(id);e.textContent=v;e.classList.remove("fade");void e.offsetWidth;e.classList.add("fade")});
   $("au").textContent=t[5]?"—— "+t[5]:"";
   {const x=X[i],a=st(i,Y),e=$("dtl");
   e.innerHTML=`<p>${x[1]}</p><p class="s"><span class="k">時間</span>約 ${a.getMonth()+1} 月 ${a.getDate()} 日　·　太陽黃經 ${(285+15*i)%360}°</p><p class="s"><span class="k">三候</span>${t[3]}、${x[0]}</p><p><span class="k">習俗養生</span>${x[2]}</p>`;
@@ -296,16 +306,19 @@ const go=d=>show((sel+d+24)%24);
 $("pv").onclick=()=>go(-1);$("nt").onclick=()=>go(1);
 addEventListener("keydown",e=>{
   if(e.target.id=="vol")return;
+  if(!$("ov").hidden)return;
   if(e.key=="ArrowLeft")go(-1);else if(e.key=="ArrowRight")go(1);
   else if(e.key=="PageUp"){e.preventDefault();go(-6)}else if(e.key=="PageDown"){e.preventDefault();go(6)}
   else if(e.key.length==1&&"1234".includes(e.key))show([2,8,14,20]["1234".indexOf(e.key)]);
   else if(e.key=="Escape"||e.key=="Home")show(cur);
 });
-let x0=null;
-document.addEventListener("touchstart",e=>{x0=e.touches[0].clientX},{passive:true});
-document.addEventListener("touchend",e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)>Math.max(40,Math.min(50,innerWidth*.1)))go(dx<0?1:-1)},{passive:true});
+let x0=null,y0=0,skipSw=false;
+document.addEventListener("touchstart",e=>{skipSw=!!(e.target.closest&&e.target.closest("input,#ov"));x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
+document.addEventListener("touchend",e=>{if(x0===null)return;const t=e.changedTouches[0],dx=t.clientX-x0,dy=t.clientY-y0;x0=null;if(skipSw)return;if(Math.abs(dx)>Math.max(40,Math.min(50,innerWidth*.1))&&Math.abs(dx)>Math.abs(dy)*1.5)go(dx<0?1:-1)},{passive:true});
 const wk="日一二三四五六";
-let lu="";
+let lu="",dtTxt="",td,ft;
+function calcLu(){
+lu="";
 try{
   const p={};new Intl.DateTimeFormat("zh-TW-u-ca-chinese-nu-latn",{year:"numeric",month:"numeric",day:"numeric"}).formatToParts(now).forEach(o=>p[o.type]=o.value);
   const TG="甲乙丙丁戊己庚辛壬癸",DZ="子丑寅卯辰巳午未申酉戌亥",SX="鼠牛虎兔龍蛇馬羊猴雞狗豬";
@@ -318,7 +331,7 @@ try{
   const sx=SX[DZ.indexOf(gz[1])];
   if(gz&&mo&&d)lu=`${gz}年（${sx}年）${/閏/.test(p.month)?"閏":""}${MN[mo]}月${dn}`;
 }catch(e){}
-const dtTxt=`${Y}年${now.getMonth()+1}月${now.getDate()}日　星期${wk[now.getDay()]}`;
+}
 const FS={
 "1-1":["春節","農曆新年，開正拜年、祭祖、發紅包。"],
 "1-4":["接神日","迎接諸神下界，備牲禮、焚香迎神。"],
@@ -347,7 +360,8 @@ const FS={
 "12-24":["送神","謝灶，眾神上天庭述職。"]
 };
 const lf=new Intl.DateTimeFormat("zh-TW-u-ca-chinese-nu-latn",{month:"numeric",day:"numeric"});
-function lun(d){const p={};lf.formatToParts(d).forEach(o=>p[o.type]=o.value);const m=p.month||"";return{m:parseInt(m.replace(/\D/g,"")),d:parseInt(p.day),leap:/閏|bis/i.test(m)}}
+const CM={正:1,一:1,二:2,三:3,四:4,五:5,六:6,七:7,八:8,九:9,十:10,十一:11,十二:12,冬:11,臘:12};
+function lun(d){const p={};lf.formatToParts(d).forEach(o=>p[o.type]=o.value);const m=p.month||"";let mm=parseInt(m.replace(/\D/g,""));if(!mm)mm=CM[m.replace(/閏|月|bis/gi,"").trim()]||0;return{m:mm,d:parseInt(p.day),leap:/閏|bis/i.test(m)}}
 function lname(a){
   const N="一二三四五六七八九",MN=["","正","二","三","四","五","六","七","八","九","十","冬","臘"],d=a.d;
   const dn=d<=10?"初"+(d==10?"十":N[d-1]):d<20?"十"+N[d-11]:d==20?"二十":d<30?"廿"+N[d-21]:"三十";
@@ -358,6 +372,7 @@ function fest(d){
     const a=lun(d);if(!a.m||!a.d)return null;
     const n=lun(new Date(d.getFullYear(),d.getMonth(),d.getDate()+1));
     if(n.m==1&&n.d==1&&!n.leap)return["除夕","圍爐、守歲、祭祖，辭舊迎新。"];
+    if(!a.leap&&a.m==7&&a.d==29&&n.d==1)return FS["7-30"];
     if(!a.leap&&FS[a.m+"-"+a.d])return FS[a.m+"-"+a.d];
     const k=d.getTime(),y=d.getFullYear();
     if(st(6,y).getTime()==k)return["清明節","掃墓祭祖、踏青，台灣習慣吃潤餅。"];
@@ -365,7 +380,10 @@ function fest(d){
   }catch(e){}
   return null;
 }
-const td=new Date(now.getFullYear(),now.getMonth(),now.getDate()),ft=fest(td);
+function paintDate(){
+calcLu();
+dtTxt=`${Y}年${now.getMonth()+1}月${now.getDate()}日　星期${wk[now.getDay()]}`;
+td=new Date(now.getFullYear(),now.getMonth(),now.getDate());ft=fest(td);
 $("dt").innerHTML=dtTxt+(lu?`<small>農曆 ${lu}</small>`:"")+(ft?`<small class="fe">今日　${ft[0]}</small>`:"");
 (function(){
   const out=[];
@@ -376,6 +394,8 @@ $("dt").innerHTML=dtTxt+(lu?`<small>農曆 ${lu}</small>`:"")+(ft?`<small class=
   h+="<em>以台灣常見的習慣為主，各地廟宇的聖誕日期可能略有不同。</em>";
   if(out.length||ft)$("fes").innerHTML=h;
 })();
+}
+paintDate();
 async function mk(){
   try{await document.fonts.ready}catch(e){}
   const c=document.createElement("canvas");c.width=1080;c.height=1350;const g=c.getContext("2d");
@@ -391,7 +411,7 @@ async function mk(){
   if(sel==cur&&ft){g.fillStyle=ac;g.font=`30px ${F}`;g.fillText("今日　"+ft[0],540,252)}
   g.fillStyle=ac;g.beginPath();g.arc(540,310,38,0,7);g.fill();g.fillStyle=v("--c2");g.font=`600 40px ${F}`;g.fillText(EL[sel],540,324);
   g.fillStyle=ac;g.font=`600 230px ${F}`;g.fillText(t[0],540,610);
-  g.font=`34px ${F}`;g.fillText("初候　"+t[3]+"　·　五行屬"+EL[sel],540,720);
+  g.font=`34px ${F}`;g.fillText(houOf(sel)+"　·　五行屬"+EL[sel],540,720);
   g.fillStyle="#eef2f0";g.font=`52px ${F}`;
   let y=950;t[4].replace(/，/g,"，\n").split("\n").filter(Boolean).forEach(l=>{g.fillText(l,540,y);y+=84});
   g.fillStyle="rgba(238,242,240,.65)";g.font=`32px ${F}`;
@@ -490,9 +510,15 @@ $("mus").onclick=async()=>{
     b.textContent="♪ 音樂　關";$("vol").style.display="none";b.setAttribute("aria-pressed","false");
   }
 };
-document.addEventListener("visibilitychange",()=>{if(!AC||!on)return;document.hidden?AC.suspend():AC.resume()});
-const day0=now.toDateString();
-setInterval(()=>{if(new Date().toDateString()!=day0)location.reload()},60000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden){rollover();tick()}if(!AC||!on)return;document.hidden?AC.suspend():AC.resume()});
+let day0=now.toDateString();
+function rollover(){
+  if(new Date().toDateString()==day0)return;
+  const keep=sel==cur?null:sel;
+  calc();day0=now.toDateString();paintDate();
+  show(keep===null?cur:keep);
+}
+setInterval(rollover,60000);
 const SC="子丑寅卯辰巳午未申酉戌亥";
 function tick(){
   const d=new Date(),p=n=>String(n).padStart(2,"0");
