@@ -64,6 +64,18 @@ svg g:focus-visible .dot{stroke:#fff;stroke-width:2}
 .clock,.card,.note{position:relative;z-index:1}
 .ly{font-size:14px;line-height:1.8;color:var(--ac);margin-top:12px;letter-spacing:.06em}
 @keyframes f{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.poem-panel{width:min(92vw,380px);margin:26px 0 8px;position:relative;z-index:1;border:1px solid rgba(255,255,255,.16);border-radius:18px;overflow:hidden;background:rgba(5,12,18,.26);box-shadow:0 14px 36px rgba(0,0,0,.16)}
+.poem-head{font-size:11px;letter-spacing:.32em;color:var(--ac);text-align:center;padding:17px 12px 10px}
+.poem-art{height:174px;overflow:hidden;background:linear-gradient(180deg,#243b46,#14252c)}
+.poem-art svg{width:100%;height:100%;display:block}
+.poem-copy{padding:18px 20px 20px;text-align:center}
+.poem-verse{font-size:19px;line-height:1.95;letter-spacing:.08em;white-space:pre-line;color:#f0eadb}
+.poem-author{font-size:12px;letter-spacing:.15em;color:var(--ac);margin-top:9px}
+.poem-note{font-size:13px;line-height:1.85;color:var(--dim);margin:12px 0 0}
+.poem-tag{font-size:10px;letter-spacing:.2em;color:var(--dim);margin-top:14px}
+@media(min-width:700px){.poem-panel{width:min(92vw,430px)}.poem-art{height:205px}}
+
 </style>
 </head>
 <body>
@@ -83,6 +95,11 @@ svg g:focus-visible .dot{stroke:#fff;stroke-width:2}
   <div class="au" id="au"></div>
   <div class="ly" id="ly"></div>
   <div class="dtl fade" id="dtl"></div>
+  <section class="poem-panel" aria-label="節氣古詩與意境插畫">
+    <div class="poem-head">節氣詩畫　·　古典意境</div>
+    <div class="poem-art" id="poemArt" aria-hidden="true"></div>
+    <div class="poem-copy"><div class="poem-verse" id="poemVerse"></div><div class="poem-author" id="poemAuthor"></div><p class="poem-note" id="poemNote"></p><div class="poem-tag" id="poemTag">二十四節氣・二十四種風景</div></div>
+  </section>
   <div class="bar"><i id="pg"></i></div>
   <div class="meta" id="mt"></div>
   <button id="bk">回到今天</button><button id="sc">分享卡片</button>
@@ -155,8 +172,74 @@ for(let i=0;i<24;i++){
   const t=document.createElementNS(NS,"title");t.textContent=T[i][0];g.appendChild(t);
   ring.appendChild(g);dots.push(c);
 }
+
+// 二十四節氣詩畫：以詩詞、作者與短箋，呈現每個節氣的自然意境。
+const POEMS = [
+ ["小寒連大呂，歡鵲壘新巢。","元稹〈小寒十二月節〉","寒意尚深，枝頭已傳來築巢的消息。冬天的深處，生命正悄悄準備下一個春天。","冬藏・候春"],
+ ["千山鳥飛絕，萬徑人蹤滅。","柳宗元〈江雪〉","天地安靜下來，山川收起聲音。大寒不只是寒冷，也是萬物蓄藏、等待轉暖的時刻。","歲暮・靜寂"],
+ ["律回歲晚冰霜少，春到人間草木知。","張栻〈立春偶成〉","冰霜漸退，草木先知。春天不是突然來到，而是從枝梢與泥土裡慢慢醒來。","迎春・萌發"],
+ ["竹外桃花三兩枝，春江水暖鴨先知。","蘇軾〈惠崇春江晚景〉","春水漸暖，桃花初綻。江上的鴨子，比人更早感受到春天的腳步。","春水・知暖"],
+ ["微雨眾卉新，一雷驚蟄始。","韋應物〈觀田家〉","一聲春雷，喚醒蟄伏的生命。細雨落下，草木抽芽，大地重新有了聲息。","春雷・甦醒"],
+ ["仲春初四日，春色正中分。","徐鉉〈春分日〉","晝夜平分，春意正好。花開與風暖之間，是一年最從容的平衡。","平分・和煦"],
+ ["清明時節雨紛紛，路上行人欲斷魂。","杜牧〈清明〉","細雨、遠路與思念交織。清明既是春日踏青，也是記得來處、緬懷故人的日子。","煙雨・追思"],
+ ["穀雨春光曉，山川黛色青。","元稹〈詠廿四氣詩·穀雨三月中〉","雨潤百穀，山色轉青。春天走到尾聲，田野正迎接蓬勃的生長。","春末・潤物"],
+ ["四時天氣促相催，一夜薰風帶暑來。","翁卷〈立夏〉","風裡添了暖意，樹影也漸漸濃密。夏天在不知不覺間接手了春天。","入夏・風暖"],
+ ["夜鶯啼綠柳，皓月醒長空。","歐陽修〈採桑子〉","綠柳深深，夜色清朗。小滿時節，萬物將滿未滿，留一點餘地，恰是好光景。","將滿・留白"],
+ ["時雨及芒種，四野皆插秧。","陸游〈時雨〉","雨水落在田間，農人忙著插秧。芒種提醒人們，時節到了，就要把握耕耘的時機。","忙種・耕耘"],
+ ["晝晷已云極，宵漏自此長。","韋應物〈夏至避暑北池〉","白晝走到一年最長，從此日影漸短。盛夏的光亮裡，也藏著季節轉身的訊息。","日長・陰生"],
+ ["倏忽溫風至，因循小暑來。","元稹〈小暑六月節〉","熱風輕輕吹來，蟬聲漸密。暑氣初起，生活也該放慢一些。","初暑・蟬鳴"],
+ ["赤日幾時過，清風無處尋。","曾幾〈大暑〉","烈日當空，暑氣正盛。越是炎熱，越懂得一縷清風的珍貴。","盛暑・尋涼"],
+ ["乳鴉啼散玉屏空，一枕新涼一扇風。","劉翰〈立秋〉","暑意未退，風裡卻先有了涼。立秋像一封短箋，提醒人們季節已悄悄改變。","新秋・微涼"],
+ ["離離暑雲散，裊裊涼風起。","白居易〈早秋曲江感懷〉","暑雲漸散，涼風漸起。處暑不是一夜入秋，而是熱意慢慢退場。","暑退・風起"],
+ ["蒹葭蒼蒼，白露為霜。","《詩經·秦風·蒹葭》","水岸蘆葦蒼蒼，清露凝白。秋意在晨光裡顯現，也讓思念有了清冷的形狀。","清露・秋思"],
+ ["金氣秋分，風清露冷秋期半。","謝逸〈點絳唇〉","秋分平分晝夜，天高而氣清。收穫與沉靜，在這一天相互照映。","秋半・清朗"],
+ ["空庭得秋長漫漫，寒露入暮愁衣單。","王安石〈八月十九日試院夢衝卿〉","夜色漸涼，露水更重。寒露提醒人們添衣，也提醒心事不必總說出口。","深秋・添衣"],
+ ["月落烏啼霜滿天，江楓漁火對愁眠。","張繼〈楓橋夜泊〉","霜夜、鐘聲與江上漁火，讓秋天有了深遠的回音。","霜夜・江楓"],
+ ["凍筆新詩懶寫，寒爐美酒時溫。","李白〈立冬〉","寒意初臨，筆墨也慢了下來。圍爐取暖，是冬天最樸素的溫柔。","入冬・圍爐"],
+ ["花雪隨風不厭看，更多還肯失林巒。","戴叔倫〈小雪〉","初雪隨風而來，山林若隱若現。小雪是冬日的輕聲提醒，寒意正在加深。","初雪・山隱"],
+ ["孤舟蓑笠翁，獨釣寒江雪。","柳宗元〈江雪〉","雪落江面，天地寂寥。一葉孤舟，讓冬日的靜謐有了深刻的輪廓。","大雪・清寂"],
+ ["天時人事日相催，冬至陽生春又來。","杜甫〈小至〉","白晝最短之後，陽氣開始回升。冬至不是終點，而是春天重新計時的起點。","陽生・迎新"]
+];
+function paintPoem(i){
+  const season=Math.floor(i/6), isRain=i===3, isSnow=i===22||i===23||i===0||i===1;
+  const skies=["#9eb9b0","#9eb8c0","#c49b79","#73889a"];
+  const ground=["#526f61","#527c75","#80664e","#465969"];
+  const sky=skies[season], earth=ground[season];
+  const sun=season===3?"#d8dce0":season===2?"#e7bd83":"#f3d9a0";
+  let motifs="";
+  if(season===0){
+    motifs=`<g fill="#e8c4bd" opacity=".9"><circle cx="65" cy="74" r="5"/><circle cx="82" cy="61" r="4"/><circle cx="96" cy="82" r="5"/><circle cx="300" cy="57" r="5"/><circle cx="317" cy="72" r="4"/><circle cx="333" cy="55" r="5"/></g>`;
+  }else if(season===1){
+    motifs=`<g fill="#b7d7a0" opacity=".8"><ellipse cx="72" cy="125" rx="19" ry="7" transform="rotate(-25 72 125)"/><ellipse cx="305" cy="119" rx="22" ry="8" transform="rotate(18 305 119)"/><path d="M72 125q18-20 36-5M305 119q-18-20-35-4" fill="none" stroke="#d8e5c4" stroke-width="2"/></g>`;
+  }else if(season===2){
+    motifs=`<g fill="#d99a59" opacity=".95"><path d="M65 62q18-18 28 0q-10 18-28 0"/><path d="M300 80q18-18 28 0q-10 18-28 0"/><path d="M248 48q14-15 23 0q-9 15-23 0"/></g>`;
+  }else{
+    motifs=`<g fill="#f4f4ee" opacity=".8">${Array.from({length:18},(_,n)=>`<circle cx="${(n*47+23)%390}" cy="${(n*31+17)%115}" r="${n%3===0?2.5:1.5}"/>`).join("")}</g>`;
+  }
+  const duck=isRain?`<g transform="translate(250 125)" fill="#e9d9ad"><ellipse cx="0" cy="8" rx="18" ry="8"/><circle cx="13" cy="-2" r="7"/><path d="M19-2l10 3-10 3z" fill="#d89a55"/><path d="M-12 5q-12-12-18-2q10 2 18 7" fill="#d9c99d"/></g><g transform="translate(298 139) scale(.72)" fill="#e9d9ad"><ellipse cx="0" cy="8" rx="18" ry="8"/><circle cx="13" cy="-2" r="7"/><path d="M19-2l10 3-10 3z" fill="#d89a55"/></g>`:"";
+  const snow=isSnow?`<g fill="#fff" opacity=".8"><circle cx="110" cy="150" r="2"/><circle cx="180" cy="130" r="2"/><circle cx="340" cy="145" r="2"/><circle cx="45" cy="115" r="2"/></g>`:"";
+  $("poemArt").innerHTML=`<svg viewBox="0 0 390 174" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <defs><linearGradient id="psky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="${sky}"/><stop offset="1" stop-color="#d7c9ae"/></linearGradient><linearGradient id="pwater" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#769a99"/><stop offset="1" stop-color="#304f54"/></linearGradient></defs>
+    <rect width="390" height="174" fill="url(#psky)"/>
+    <circle cx="305" cy="43" r="22" fill="${sun}" opacity=".82"/>
+    ${motifs}
+    <path d="M0 111Q55 66 112 105T230 98T390 91V174H0Z" fill="${earth}" opacity=".75"/>
+    <path d="M0 126Q80 104 155 126T300 122T390 115V174H0Z" fill="url(#pwater)" opacity=".95"/>
+    <path d="M0 144Q65 135 130 145T260 143T390 137" fill="none" stroke="#d8d7c1" stroke-width="1.5" opacity=".45"/>
+    <path d="M0 158Q80 149 160 159T320 155T390 151" fill="none" stroke="#d8d7c1" stroke-width="1" opacity=".35"/>
+    ${duck}${snow}
+    <path d="M18 174Q42 143 60 174M330 174Q350 143 370 174" fill="none" stroke="#263f3c" stroke-width="3" opacity=".5"/>
+  </svg>`;
+  const p=POEMS[i];
+  $("poemVerse").textContent=p[0];
+  $("poemAuthor").textContent="—— "+p[1];
+  $("poemNote").textContent=p[2];
+  $("poemTag").textContent=p[3]+"　·　二十四節氣・二十四種風景";
+}
+
 function show(i){
   const t=T[i],isNow=i==cur,r=document.documentElement.style,[h,s]=hs(i);
+  paintPoem(i);
   r.setProperty("--c1",`hsl(${h} ${s*.6}% 21%)`);
   r.setProperty("--c2",`hsl(${(h+20)%360} ${s*.7}% 8%)`);
   r.setProperty("--ac",`hsl(${h} ${s}% 78%)`);
