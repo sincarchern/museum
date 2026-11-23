@@ -57,7 +57,7 @@ legend{padding:0 8px 0 0;font-weight:600;font-size:1rem}
 <section>
 <div class="theme" role="group" aria-label="螢幕背景">螢幕背景<button class="tb" data-th="light" aria-pressed="false">淺</button><button class="tb" data-th="dark" aria-pressed="false">暗</button><button class="tb" data-th="auto" aria-pressed="true">跟隨系統</button></div>
 <h1>《Show的言情短篇編輯器》</h1>
-<p class="sub">編著：Show。點選下方選項，右側即時組成一篇短篇小說。</p>
+<p class="sub">文：Show。點選下方選項，右側即時組成一篇短篇小說。</p>
 <div class="names">
 <label>女主角名字<input id="nf" value="Show" maxlength="6"></label>
 <label>男主角名字<input id="nm" value="周序" maxlength="6"></label>
@@ -189,13 +189,13 @@ function render(){
  var tags=["v","g","f","m","s","t","u","o","b","r","e"].map(function(k){return pick(k)[0]});
  var el=$("story");
  el.innerHTML="";
- var bn=document.createElement("div");bn.className="banner "+pick("v")[1];var h=document.createElement("h2");h.textContent=title;bn.appendChild(h);var by=document.createElement("div");by.className="by";by.textContent="編著：Show";bn.appendChild(by);el.appendChild(bn);
+ var bn=document.createElement("div");bn.className="banner "+pick("v")[1];var h=document.createElement("h2");h.textContent=title;bn.appendChild(h);var by=document.createElement("div");by.className="by";by.textContent="文：Show";bn.appendChild(by);el.appendChild(bn);
  var tg=document.createElement("p");tg.className="tags";
  tags.forEach(function(t){var sp=document.createElement("span");sp.className="tag";sp.textContent=t;tg.appendChild(sp)});
  el.appendChild(tg);
  paras.forEach(function(p){var e=document.createElement("p");e.textContent=p;el.appendChild(e)});
  var kw="配樂建議："+pick("u")[2];var fp=document.createElement("p");fp.className="kw";fp.textContent=kw;el.appendChild(fp);
- text=title+"\n編著：Show\n\n"+paras.join("\n\n")+"\n\n"+kw;
+ text=title+"\n文：Show\n\n"+paras.join("\n\n")+"\n\n"+kw;
 }
 function setTh(v){var r=document.documentElement;if(v=="auto")r.removeAttribute("data-theme");else r.setAttribute("data-theme",v);document.querySelectorAll("[data-th]").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.th==v?"true":"false")});try{localStorage.setItem("th",v)}catch(e){}}
 document.querySelectorAll("[data-th]").forEach(function(b){b.onclick=function(){setTh(b.dataset.th)}});
