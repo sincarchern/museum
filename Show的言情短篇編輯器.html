@@ -36,6 +36,10 @@ legend{padding:0 8px 0 0;font-weight:600;font-size:1rem}
 .tags{margin-bottom:12px;text-indent:0}
 .story .kw{text-indent:0;color:var(--mute);font-size:.88rem;border-top:1px solid var(--line);padding-top:10px;margin-top:6px}
 .msg{color:var(--mute);font-size:.85rem;min-height:1.4em;margin:6px 0 0}
+.theme{display:flex;gap:8px;align-items:center;margin-bottom:12px;font-size:.85rem;color:var(--mute)}
+.tb{font:inherit;font-size:.85rem;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px 12px;cursor:pointer}
+.tb[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:var(--acct)}
+.tb:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 .banner{height:150px;border-radius:8px;margin-bottom:16px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:14px;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.45)}
 .story .banner h2{margin:0;color:inherit}
 .banner .by{font-size:.85rem;opacity:.9;margin-top:2px}
@@ -51,6 +55,7 @@ legend{padding:0 8px 0 0;font-weight:600;font-size:1rem}
 <body>
 <main class="wrap">
 <section>
+<div class="theme" role="group" aria-label="螢幕背景">螢幕背景<button class="tb" data-th="light" aria-pressed="false">淺</button><button class="tb" data-th="dark" aria-pressed="false">暗</button><button class="tb" data-th="auto" aria-pressed="true">跟隨系統</button></div>
 <h1>《Show的言情短篇編輯器》</h1>
 <p class="sub">編著：Show。點選下方選項，右側即時組成一篇短篇小說。</p>
 <div class="names">
@@ -192,6 +197,9 @@ function render(){
  var kw="配樂建議："+pick("u")[2];var fp=document.createElement("p");fp.className="kw";fp.textContent=kw;el.appendChild(fp);
  text=title+"\n編著：Show\n\n"+paras.join("\n\n")+"\n\n"+kw;
 }
+function setTh(v){var r=document.documentElement;if(v=="auto")r.removeAttribute("data-theme");else r.setAttribute("data-theme",v);document.querySelectorAll("[data-th]").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.th==v?"true":"false")});try{localStorage.setItem("th",v)}catch(e){}}
+document.querySelectorAll("[data-th]").forEach(function(b){b.onclick=function(){setTh(b.dataset.th)}});
+var t0="auto";try{t0=localStorage.getItem("th")||"auto"}catch(e){}setTh(t0);
 var AC,master,NB,timer,nextT=0,stp=0,playing=false,lastU=-1;
 function mf(n){return 440*Math.pow(2,(n-69)/12)}
 function tone(n,t,d,type,g,lp,a){a=a||.01;var o=AC.createOscillator(),e=AC.createGain(),f=AC.createBiquadFilter();o.type=type;o.frequency.value=mf(n);f.type="lowpass";f.frequency.value=lp||3000;e.gain.setValueAtTime(.0001,t);e.gain.linearRampToValueAtTime(g,t+a);e.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(f);f.connect(e);e.connect(master);o.start(t);o.stop(t+d+.05)}
