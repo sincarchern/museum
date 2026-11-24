@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="color-scheme" content="light dark">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>紫微斗數｜傳統命盤</title>
+<title>紫微斗數｜命盤</title>
 <style>
 :root{--ink:#29251f;--muted:#766d60;--paper:#f7f2e8;--panel:#fffdf8;--line:#b9aa91;--red:#9e3d32;--gold:#a47b3e;--soft:#e2d6c4;--name:#7e302b;--btn:#7e302b;--btn2:#694e2d;--field:#fffefa;--fline:#d2c5b1;--chart:#e9dfce;--center:#f4ecdd;--focus:#fff8e9;--sub:#5f574b;--lu:#2f7d4f;--qu:#2f68a8;--ke:#a47b3e;--ji:#9e3d32;--onhua:#fff}
 *{box-sizing:border-box}
@@ -85,7 +85,7 @@ html[data-theme=dark]{color-scheme:dark;--ink:#ece3d2;--muted:#a79c86;--paper:#1
 header{position:relative}
 #theme{position:absolute;right:16px;top:16px;padding:6px 12px;font-size:13px}
 .field.wide{grid-column:span 2}
-#lbox{display:flex;gap:4px}#lbox[hidden]{display:none}#lbox input{width:5.5em}
+#lbox{display:flex;gap:4px}#lbox[hidden]{display:none}#lbox #ly{flex:1 1 7.5em;width:auto;min-width:7.5em}#lbox #lm{flex:0 0 6em;width:6em}#lbox #ld{flex:0 0 5em;width:5em}
 .msg{min-height:1.4em;margin:-6px 2px 10px;font-size:13px;color:var(--red)}
 .hua{font-style:normal;font-size:.72em;margin-left:2px;padding:0 3px;border-radius:3px;color:var(--onhua);vertical-align:super}
 .h0{background:var(--lu)}.h1{background:var(--qu)}.h2{background:var(--ke)}.h3{background:var(--ji)}
@@ -108,13 +108,39 @@ header{position:relative}
 .br{font-size:.72em;margin-left:2px;color:var(--muted)}.ed{outline:none;border-bottom:1px dotted var(--line)}
 #lines text{font-size:11px;font-weight:700;stroke:var(--panel);stroke-width:3px;paint-order:stroke}
 .credit{text-align:center;color:var(--muted);font-size:11px;line-height:1.7;padding:6px 16px 26px;letter-spacing:.08em}
+.palace-head{justify-content:flex-start}
+.palace-head .branch{position:absolute;right:6px;bottom:6px;font-size:13px}
+.palace-foot{padding-right:44px;min-height:22px}
+@media(max-width:760px){.palace-head .branch{font-size:10px;right:4px;bottom:4px}.palace-foot{padding-right:30px}}
+.hua.zi{background:none;box-shadow:inset 0 0 0 1px currentColor}.zi.h0{color:var(--lu)}.zi.h1{color:var(--qu)}.zi.h2{color:var(--ke)}.zi.h3{color:var(--ji)}
+[hidden]{display:none!important}
+.nav .seg{gap:0}.seg button{border-radius:0;padding:4px 12px;background:var(--panel);color:var(--btn2)}.seg button:first-child{border-radius:6px 0 0 6px}.seg button:last-child{border-radius:0 6px 6px 0}.seg button.on{background:var(--btn);color:#fffaf0}
+.chart.simple .trans{display:none}.chart.simple .palace-foot{visibility:hidden}
+.hua{white-space:nowrap;vertical-align:baseline;position:relative;top:-.4em;line-height:1}.tg{line-height:1}.aux{color:var(--muted)}
+@media(max-width:760px){
+ header{padding:12px 8px 6px}h1{margin-bottom:3px}.subtitle{font-size:11px}
+ .meta{line-height:1.25}.stars{line-height:1.3;min-height:0;margin:2px 0}.trans{line-height:1.25;padding-top:2px}
+ .palace-head{padding-bottom:2px;margin-bottom:3px}.chart{gap:2px}
+ .chart.simple .palace{padding:3px}.chart.simple .palace-name{font-size:10px}.chart.simple .meta{font-size:8px}.chart.simple .stars{font-size:10px}
+ .chart.simple .palace-foot{min-height:13px;padding-right:24px}
+ .chart.simple .palace-head .branch{font-size:9px;padding:0 3px;right:2px;bottom:2px}
+ .chart.simple .center{padding:4px}.chart.simple .center h2{font-size:13px;margin-bottom:4px;letter-spacing:.1em}.chart.simple .center .seal{display:none}
+ .chart.simple .center-info{font-size:8.5px;gap:2px 6px;line-height:1.25}.chart.simple .center-note:not([style]){display:none}
+}
+.trans:empty{display:none}.vcol.sha .vn{color:var(--red);font-weight:400}
+.vcol.za .vn{font-size:10px;font-weight:400;color:var(--sub)}
+.chart .stars{display:flex;flex-wrap:wrap;gap:3px;align-items:flex-start;white-space:normal}
+.vcol{display:flex;flex-direction:column;align-items:center;line-height:1.1}
+.vn{display:block;text-align:center;font-size:12px;line-height:1.15;font-weight:600}
+.vcol.aux .vn{font-weight:400;color:var(--muted)}
+.vcol .hua{position:static;margin:1px 0;font-size:8px;padding:0 2px}.vcol .br{font-size:8px;margin:1px 0}
 </style>
 </head>
 <body>
 <header>
   <button id="theme" class="secondary" type="button" aria-label="切換深淺色顯示">深色</button>
   <h1>紫微斗數命盤</h1>
-  <div class="subtitle">傳統十二宮・排盤格式</div>
+  <div class="subtitle">傳統十二宮排盤格式</div>
 </header>
 <main>
   <section class="toolbar" aria-label="命主資料">
@@ -126,6 +152,7 @@ header{position:relative}
     <div class="field"><label for="clock">出生時刻（選填）</label><input id="clock" type="time"></div>
     <div class="field"><label for="lon_">出生地東經（選填）</label><input id="lon_" type="number" step="0.01" min="70" max="140" inputmode="decimal" placeholder="例：121.3"></div>
     <div class="field"><label for="school">派別</label><select id="school"><option value="san">欽天／全集（通行表）</option><option value="quan">全書／閩派</option><option value="zhong">中州派（王亭之）</option><option value="bei">北派／占驗</option><option value="fei">飛星派（宮干飛化）</option></select></div>
+    <input type="hidden" id="mode" value="full">
     <div class="field"><label for="zi">晚子時（23點後）</label><select id="zi"><option value="next">算次日（換日）</option><option value="same">算當日</option></select></div>
     <div class="field"><label for="year">目前查看</label><select id="year"><option>本命盤</option><option>大限盤</option><option>流年盤</option></select></div>
     <div class="field"><label for="yearnum">流年年份</label><input id="yearnum" inputmode="numeric" placeholder="例：2026"></div>
@@ -133,15 +160,16 @@ header{position:relative}
     <div class="field"><label for="ming">命宮／身宮</label><input id="ming" placeholder="自動排出"></div>
     <div class="field"><label for="si">生年四化</label><input id="si" placeholder="自動排出"></div>
     <div class="field"><label for="decade">起運大限</label><input id="decade" placeholder="自動排出"></div>
-    <div class="actions"><button onclick="calc()">重新排盤</button><button class="secondary" onclick="window.print()">列印／存成 PDF</button><button class="secondary" type="button" onclick="shareLink()">複製分享連結</button><button class="secondary" type="button" onclick="saveJSON()">存成檔案</button><button class="secondary" type="button" onclick="$('loadf').click()">載入檔案</button><button class="secondary" type="button" onclick="resetSD()">還原預設釋義</button><input id="loadf" type="file" accept=".json,application/json" hidden></div>
+    <div class="actions"><button onclick="window.print()">列印／儲存 PDF</button></div>
   </section>
   <p id="msg" class="msg" role="status">請選擇出生日期與時辰，系統會自動排盤。</p>
 
   <div class="nav">
     <span>大限 <button class="secondary" id="dprev" type="button">‹</button><select id="dsel" aria-label="十年大限"></select><button class="secondary" id="dnext" type="button">›</button></span>
     <span>流年 <button class="secondary" id="yprev" type="button">‹</button><b id="ylab">—</b><button class="secondary" id="ynext" type="button">›</button></span>
-    <label><input type="checkbox" id="lon" checked style="width:auto"> 三方四正連線</label><label><input type="checkbox" id="fly" style="width:auto"> 四化飛入</label><div id="xs" style="flex-basis:100%;line-height:1.7"></div>
+    <span class="seg" id="modeseg"><button type="button" data-m="simple">簡易盤</button><button type="button" data-m="quick">快速盤</button><button type="button" data-m="full">完整盤</button></span><span class="seg" id="lseg"><button type="button" data-l="飛星">飛星</button><button type="button" data-l="三合">三合</button><button type="button" data-l="四化">四化</button></span><div id="xs" style="flex-basis:100%;line-height:1.7"></div>
   </div>
+  <div class="nav" id="flowbar"><span>流月 <select id="fm"></select></span><span>流日 <select id="fd"></select></span><span>流時 <select id="ft"></select></span></div>
   <div class="chart-wrap">
     <section class="chart" id="chart" aria-label="十二宮命盤"><svg id="lines" aria-hidden="true"></svg>
       <!-- Top row -->
@@ -169,7 +197,7 @@ header{position:relative}
             <div><span>四化：</span><b id="showSi">未填寫</b></div>
             <div><span>大限：</span><b id="showDecade">未填寫</b></div>
           </div>
-          <div class="center-note">本命盤資料區<br>可輸入命主資料，並直接點選各宮星曜文字編輯<br>中央資訊會隨上方欄位同步更新</div>
+          <div class="center-note">本命盤資料區<br>可輸入命主資料，並直接點選各宮星曜文字編輯<br>中央資訊會隨上方欄位同步更新</div><div class="center-note" style="margin-top:6px">宮干自化　<i class="hua zi h0">⟲祿</i> <i class="hua zi h1">⟲權</i> <i class="hua zi h2">⟲科</i> <i class="hua zi h3">⟲忌</i></div>
         </div>
       </section>
       <!-- Bottom row, right to left -->
@@ -186,7 +214,7 @@ header{position:relative}
   </div>
   <aside class="instructions">
     <strong>排盤說明</strong><br>
-    農曆資料涵蓋 1900–2049，年柱以農曆正月初一換年（不以立春分界）。已排：十四主星、左輔右弼、文昌文曲、天魁天鉞、祿存、擎羊、陀羅、火星、鈴星、地空、地劫、生年四化、大限、小限、長生十二神、博士十二神。已加入主星廟旺陷（通行表，各家略有出入）與十七顆雜曜；填入出生時刻與經度時，會依經度（以東經 120 度為標準）與均時差換算真太陽時並自動定時辰。尚未包含：流月、旬空截空與其餘雜曜。點選宮位可看星曜解說，並標出三方四正。派別：欽天／全集為通行四化表（欽天門與陸斌兆中州派皆採此表）；全書／閩派庚干為陽武同陰；中州派（王亭之）戊、庚、壬三干不同；北派／占驗庚干為天同科、天相忌；飛星派用通行表，並在各宮標出宮干飛化（⟲為自化）。各派在戊、庚、壬干記載有出入，沒有公認標準。大限四化取大限命宮天干、流年四化取流年天干，以「限」「年」小標籤標示。宮內文字仍可點選手動編輯，重新排盤會覆蓋。重要用途請與專業排盤軟體交叉核對。
+    農曆資料涵蓋 1900–2049，年柱以農曆正月初一換年（不以立春分界）。已排：十四主星、左輔右弼、文昌文曲、天魁天鉞、祿存、擎羊、陀羅、火星、鈴星、地空、地劫、生年四化、大限、小限、長生十二神、博士十二神。已加入主星廟旺陷（通行表，各家略有出入）與十七顆雜曜；填入出生時刻與經度時，會依經度（以東經 120 度為標準）與均時差換算真太陽時並自動定時辰。⟲ 為宮干自化（本宮天干所化之星落在本宮）。簡易盤：只顯示十八主要星（十四主星加左輔、右弼、文昌、文曲）、天干地支、大限、四化、三合與宮干自化。快速盤：主星與副星（輔星、祿煞），隱藏雜曜與長生、博士十二神。完整盤另有流月、流日、流時選單（流月命宮以斗君法起算）與飛星／三合／四化連線切換。尚未包含：流月、旬空截空與其餘雜曜。點選宮位可看星曜解說，並標出三方四正。派別：欽天／全集為通行四化表（欽天門與陸斌兆中州派皆採此表）；全書／閩派庚干為陽武同陰；中州派（王亭之）戊、庚、壬三干不同；北派／占驗庚干為天同科、天相忌；飛星派用通行表，並在各宮標出宮干飛化（⟲為自化）。各派在戊、庚、壬干記載有出入，沒有公認標準。大限四化取大限命宮天干、流年四化取流年天干，以「限」「年」小標籤標示。宮內文字仍可點選手動編輯，重新排盤會覆蓋。重要用途請與專業排盤軟體交叉核對。
   </aside>
 </main>
 <footer class="credit">小路_Joseph工作室製作<br>Claude AI協作</footer>
@@ -233,15 +261,18 @@ function chart(l,h,male,zhong){
 //--UI
 const PAL=[...document.querySelectorAll('.palace')];PAL.forEach(a=>a.dataset.b=DZ.indexOf(a.querySelector('.branch').textContent));
 const LV='祿權科忌',hm=(st,sc)=>{const m={};sihua(st,sc).forEach((n,i)=>m[n]=LV[i]);return m};
-const BD=(n,c,o)=>{const f=(m,pre,cl)=>m&&m[n]?`<i class="hua ${cl} h${LV.indexOf(m[n])}">${pre}${m[n]}</i>`:'';return f(c.H,'','')+f(o.H2,'限','lv')+f(o.H3,'年','lv')};
-function render(c,o){const S=n=>n+BD(n,c,o);
- PAL.forEach(a=>{const b=+a.dataset.b,i=w(c.M-b),p=c.P[b],s0=c.BN+10*(c.fw?w(-i):i),q=x=>a.querySelector(x),r=o.sg>0?w(b-o.sl0):w(o.sl0-b);
-  q('.palace-name').textContent=PN[i]+(b==c.S?'・身':'');
+const BD=(n,c,o)=>{const f=(m,pre,cl)=>m&&m[n]?`<i class="hua ${cl} h${LV.indexOf(m[n])}">${pre}${m[n]}</i>`:'';return f(c.H,'','')+f(o.H2,'限','lv')+f(o.H3,'年','lv')+f(o.H4,'月','lv')+f(o.H5,'日','lv')+f(o.H6,'時','lv')};
+const ZH=(n,b,c,o)=>{const k=sihua(c.st(b),o.sc).indexOf(n);return k<0?'':`<i class="hua zi h${k}">⟲${LV[k]}</i>`};
+const K18=new Set('紫微 天機 太陽 武曲 天同 廉貞 天府 太陰 貪狼 巨門 天相 天梁 七殺 破軍 左輔 右弼 文昌 文曲'.split(' '));
+function render(c,o){
+ PAL.forEach(a=>{const b=+a.dataset.b,S=n=>n+BD(n,c,o)+ZH(n,b,c,o),i=w(c.M-b),p=c.P[b],s0=c.BN+10*(c.fw?w(-i):i),q=x=>a.querySelector(x),r=o.sg>0?w(b-o.sl0):w(o.sl0-b);
+  q('.palace-name').textContent=PN[w(c.M-b)]+(b==c.S?'・身':'');
   q('.branch').textContent=TG[c.st(b)]+DZ[b];
-  q('.meta').innerHTML=`大限：${s0}–${s0+9}`+(b==o.db?'<i class="tg">大限命</i>':'')+(b==o.fb?'<i class="tg">流年命</i>':'')+(b==o.sb?'<i class="tg">小限</i>':'')+`<br>小限：${[0,1,2,3,4,5,6].map(j=>r+1+12*j).join('・')}`;
-  q('.stars').innerHTML=`主星：${p.a.map(n=>n+BR(n,b)+BD(n,c,o)).join(' ')||'—'}<br>輔星：${p.b.map(S).join(' ')||'—'}`;
-  q('.trans').innerHTML=`祿煞：${p.c.map(S).join(' ')||'—'}<br>雜：${p.d.map(S).join(' ')||'—'}`+(o.fei?`<br>飛：${sihua(c.st(b),o.sc).map((n,k)=>LV[k]+'→'+PN[w(c.M-c.loc[n])].replace('宮','')+(c.loc[n]==b?'⟲':'')).join(' ')}`:'');
-  q('.palace-foot').textContent=`長生：${CS[c.fw?w(b-c.cs):w(c.cs-b)]}　博士：${BS[c.fw?w(b-c.lc):w(c.lc-b)]}`;
+  q('.meta').innerHTML=`大限：${s0}–${s0+9}`+(b==o.db?'<i class="tg">大限命</i>':'')+(b==o.fb?'<i class="tg">流年命</i>':'')+(b==o.sb?'<i class="tg">小限</i>':'')+(b==o.mb?'<i class="tg">流月命</i>':'')+(b==o.dyb?'<i class="tg">流日命</i>':'')+(b==o.hb2?'<i class="tg">流時命</i>':'')+(o.s?'':`<br>小限：${[0,1,2,3,4,5,6].map(j=>r+1+12*j).join('・')}`);
+  q('.stars').innerHTML=(()=>{const V=(n,cl)=>`<div class="vcol ${cl}"><span class="vn">${[...n].join('<br>')}</span>${BR(n,b)}${BD(n,c,o)}${ZH(n,b,c,o)}</div>`;
+  return[...p.a.map(n=>[n,'']),...p.b.filter(n=>!o.s||K18.has(n)).map(n=>[n,'aux']),...(o.s?[]:p.c.map(n=>[n,n=='祿存'?'aux':'sha'])),...(o.s||o.q?[]:p.d.map(n=>[n,'za']))].map(([n,cl])=>V(n,cl)).join('')||'<span class="aux">—</span>'})();
+  q('.trans').innerHTML=o.fei?`飛：${sihua(c.st(b),o.sc).map((n,k)=>LV[k]+'→'+PN[w(c.M-c.loc[n])].replace('宮','')+(c.loc[n]==b?'⟲':'')).join(' ')}`:'';
+  q('.palace-foot').textContent=o.q||o.s?'':`長生：${CS[c.fw?w(b-c.cs):w(c.cs-b)]}　博士：${BS[c.fw?w(b-c.lc):w(c.lc-b)]}`;
   a.classList.toggle('flow',b==o.db||b==o.fb)})}
 const hint=m=>{$('msg').textContent=m};
 function calc(){
@@ -270,7 +301,7 @@ function calc(){
  ['bureau','ming','si','decade'].forEach(i=>$(i).dispatchEvent(new Event('input')));
  $('showBirth').textContent=`${sy}-${pad(sm)}-${pad(sd)}　農曆${lname(lo)}`;
  $('showTime').textContent=$('time').selectedOptions[0].text;
- G={c,ly:l.y,male:$('gender').value=='男'};draw();
+ G={c,ly:l.y,lm:l.m,h,male:$('gender').value=='男'};draw();
 }
 ['name','gender','bureau','ming','si','decade'].forEach(i=>{const el=$(i),o=$('show'+(i=='ming'?'Ming':i[0].toUpperCase()+i.slice(1)));
  const f=()=>o.textContent=el.value||'未填寫';el.addEventListener('input',f);el.addEventListener('change',f)});
@@ -287,7 +318,7 @@ $('cal').addEventListener('change',()=>{const lun=$('cal').value=='l';$('birth')
  if(lun&&$('birth').value){const[a,b,c]=$('birth').value.split('-').map(Number),l=s2l(a,b,c);if(l){$('ly').value=l.y;fillLm((l.l?'L':'')+l.m);$('ld').value=l.d}}
  else if(!lun&&+$('ly').value>=1900&&+$('ly').value<=2049){const m=$('lm').value,lf=m[0]=='L',D=l2s(+$('ly').value,parseInt(lf?m.slice(1):m),+$('ld').value,lf);if(!isNaN(D))$('birth').value=D.toISOString().slice(0,10)}
  calc()});
-['birth','lm','ld','time','school','zi','gender','year','yearnum','clock','lon_'].forEach(i=>{$(i).addEventListener('change',calc)});$('yearnum').addEventListener('input',calc);
+['birth','lm','ld','time','school','zi','gender','year','yearnum','clock','lon_','mode'].forEach(i=>{$(i).addEventListener('change',calc)});$('yearnum').addEventListener('input',calc);
 const root=document.documentElement;
 function setTheme(t){root.dataset.theme=t;$('theme').textContent=t=='dark'?'淺色':'深色';try{localStorage.setItem('zw-theme',t)}catch(e){}}
 let sv=null;try{sv=localStorage.getItem('zw-theme')}catch(e){}
@@ -302,25 +333,32 @@ PD='性格、天賦與一生格局|手足、親近同輩與合夥|感情、婚�
 function draw(){const{c,ly,male}=G,v=$('year').value,fy=parseInt($('yearnum').value)||new Date().getFullYear(),age=fy-ly+1,
  dk=Math.min(11,Math.max(0,Math.floor((age-c.BN)/10))),db=c.fw?w(c.M+dk):w(c.M-dk),fb=w(fy-4),sl0=[4,10,7,1][[1,2,0,3][c.yb%4]],sg=male?1:-1;
  Object.assign(G,{dk,sl0,sg});
- const sc=$('school').value,show=v!='本命盤',fl=v=='流年盤',fst=((fy-4)%10+10)%10,
- o={db:show?db:-1,fb:fl?fb:-1,dst:c.st(db),yst:fst,sb:fl&&age>=1?w(sl0+sg*(age-1)):-1,sl0,sg,sc,fei:sc=='fei',H2:show?hm(c.st(db),sc):null,H3:fl?hm(fst,sc):null};G.o=o;render(c,o);
- const tx=st=>sihua(st,sc).map((n,i)=>n+LV[i]).join(' ');
- $('xs').innerHTML=(show?`大限四化（${TG[c.st(db)]}干）${tx(c.st(db))}`:'')+(fl?`<br>流年四化（${TG[fst]}干）${tx(fst)}`:'');
+ syncUI();const sc=$('school').value,mdv=$('mode').value,show=v!='本命盤',fl=v=='流年盤',fst=((fy-4)%10+10)%10,fm=mdv=='full'&&fl?+$('fm').value:0,fdv=fm?+$('fd').value:0,ft=fdv?$('ft').value:'';
+ let mb=-1,mst=0,dyb=-1,dyst=0,hb2=-1,hst=0;
+ if(fm){mb=w(w(fb-(G.lm-1)+G.h)+fm-1);mst=((fst%5)*2+2+fm-1)%10;
+  if(fdv&&fy>=1900&&fy<2050&&fdv<=md(fy,fm)){dyb=w(mb+fdv-1);dyst=((Math.round((l2s(fy,fm,fdv,false)-Date.UTC(1949,9,1))/DAY)%60)+60)%60%10;
+   if(ft!==''){hb2=w(dyb+ +ft);hst=((dyst%5)*2+ +ft)%10}}}
+ const o={db:show?db:-1,fb:fl?fb:-1,dst:c.st(db),yst:fst,mb,mst,dyb,dyst,hb2,hst,q:mdv=='quick',s:mdv=='simple',sb:fl&&age>=1?w(sl0+sg*(age-1)):-1,sl0,sg,sc,fei:sc=='fei',
+  H2:show?hm(c.st(db),sc):null,H3:fl?hm(fst,sc):null,H4:mb>=0?hm(mst,sc):null,H5:dyb>=0?hm(dyst,sc):null,H6:hb2>=0?hm(hst,sc):null};G.o=o;render(c,o);
+ const tx=st=>sihua(st,sc).map((n,i)=>n+LV[i]).join(' '),L2=(t,st)=>`<br>${t}四化（${TG[st]}干）${tx(st)}`;
+ $('xs').innerHTML=(show?`大限四化（${TG[c.st(db)]}干）${tx(c.st(db))}`:'')+(fl?L2('流年',fst):'')+(mb>=0?L2('流月',mst):'')+(dyb>=0?L2('流日',dyst):'')+(hb2>=0?L2('流時',hst):'');
  $('dsel').innerHTML=[...Array(12).keys()].map(k=>{const b=c.fw?w(c.M+k):w(c.M-k);return `<option value="${k}">${c.BN+10*k}–${c.BN+10*k+9}歲　${DZ[b]}宮・${PN[w(c.M-b)]}</option>`}).join('');$('dsel').value=dk;
  $('ylab').textContent=`${fy} ${TG[((fy-4)%10+10)%10]}${DZ[fb]}・虛歲${age}`;
  if(foc==null)foc=c.M;lines();detail(foc)}
 function lines(){const s=$('lines');s.innerHTML='';PAL.forEach(a=>a.classList.remove('tf','foc'));if(foc==null||!G)return;
- const by={};PAL.forEach(a=>by[a.dataset.b]=a);const f=foc,t1=w(f+4),t2=w(f-4),o=w(f+6);
- [t1,t2,o].forEach(b=>by[b].classList.add('tf'));by[f].classList.add('foc');
+ const lm=lmode,by={};PAL.forEach(a=>by[a.dataset.b]=a);const f=foc,t1=w(f+4),t2=w(f-4),o=w(f+6);
+ by[f].classList.add('foc');if(lm=='三合')[t1,t2,o].forEach(b=>by[b].classList.add('tf'));
  const pt=b=>[by[b].offsetLeft+by[b].offsetWidth/2,by[b].offsetTop+by[b].offsetHeight/2],CL=['--lu','--qu','--ke','--ji'];let h='';
- if($('lon').checked)h+=[[f,o,'opp'],[f,t1,''],[f,t2,''],[t1,t2,'']].map(([a,b,k])=>{const p=pt(a),q=pt(b);return `<line class="${k}" x1="${p[0]}" y1="${p[1]}" x2="${q[0]}" y2="${q[1]}"/>`}).join('');
- if($('fly').checked&&G.o){const O=G.o,c=G.c;[[O.db,O.dst,'限'],[O.fb,O.yst,'年']].forEach(([src,st,pre])=>{if(src<0)return;sihua(st,O.sc).forEach((n,k)=>{const d=c.loc[n],p=pt(src),q=pt(d),col=`var(${CL[k]})`;
-  h+=(d==src?'':`<line x1="${p[0]}" y1="${p[1]}" x2="${q[0]}" y2="${q[1]}" style="stroke:${col};stroke-width:2.5;opacity:.9"/>`)+`<circle cx="${q[0]}" cy="${q[1]}" r="5" style="fill:${col}"/><text x="${q[0]+8+(pre=='年'?30:0)}" y="${q[1]-8+k*13}" style="fill:${col}">${pre}${LV[k]}</text>`})})}
+ if(lm=='三合')h+=[[f,o,'opp'],[f,t1,''],[f,t2,''],[t1,t2,'']].map(([a,b,k])=>{const p=pt(a),q=pt(b);return `<line class="${k}" x1="${p[0]}" y1="${p[1]}" x2="${q[0]}" y2="${q[1]}"/>`}).join('');
+ const fly=L=>L.forEach(([src,st,pre],li)=>{if(src<0)return;sihua(st,G.o.sc).forEach((n,k)=>{const d=G.c.loc[n],p=pt(src),q=pt(d),col=`var(${CL[k]})`;
+  h+=(d==src?'':`<line x1="${p[0]}" y1="${p[1]}" x2="${q[0]}" y2="${q[1]}" style="stroke:${col};stroke-width:2.5;opacity:.9"/>`)+`<circle cx="${q[0]}" cy="${q[1]}" r="5" style="fill:${col}"/><text x="${q[0]+8+li*26}" y="${q[1]-8+k*13}" style="fill:${col}">${pre}${LV[k]}</text>`})});
+ if(lm=='四化'&&G.o){const O=G.o;fly([[O.db,O.dst,'限'],[O.fb,O.yst,'年'],[O.mb,O.mst,'月'],[O.dyb,O.dyst,'日'],[O.hb2,O.hst,'時']])}
+ if(lm=='飛星')fly([[f,G.c.st(f),'']]);
  s.innerHTML=h}
-function detail(b){const c=G.c,H=c.H,i=w(c.M-b),p=c.P[b],all=q=>[...q.a,...q.b,...q.c,...q.d],o=w(b+6),r=G.sg>0?w(b-G.sl0):w(G.sl0-b),
- hu=n=>BD(n,c,G.o),
- li=n=>`<li><b>${n}</b>${hu(n)}${LVT[n]?`<small>（${FULL[LVT[n][b]]}）</small>`:''}：<span class="ed" contenteditable data-n="${n}">${SD[n]||''}</span>${[[H,'生年'],[G.o.H2,'大限'],[G.o.H3,'流年']].map(([m,t])=>m&&m[n]?`<br><small>${t}化${m[n]}：${HD[m[n]]}</small>`:'').join('')}</li>`;
- $('detail').innerHTML=`<h3>${PN[i]}・${TG[c.st(b)]}${DZ[b]}${b==c.S?'（身宮）':''}</h3><div>${PD[i]}</div>`+
+function detail(b){const c=G.c,H=c.H,i=w(c.M-b),p=c.P[b],all=q=>G.o&&G.o.s?[...q.a,...q.b.filter(n=>K18.has(n))]:[...q.a,...q.b,...q.c,...(G.o&&G.o.q?[]:q.d)],o=w(b+6),r=G.sg>0?w(b-G.sl0):w(G.sl0-b),
+ hu=n=>BD(n,c,G.o)+ZH(n,b,c,G.o),
+ li=n=>`<li><b>${n}</b>${hu(n)}${LVT[n]?`<small>（${FULL[LVT[n][b]]}）</small>`:''}：<span class="ed" contenteditable data-n="${n}">${SD[n]||''}</span>${(()=>{const k=sihua(c.st(b),G.o.sc).indexOf(n);return k<0?'':`<br><small>宮干自化${LV[k]}：此星受本宮天干所化，傳統稱「自化」，須配合飛星理論判讀。</small>`})()}${[[H,'生年'],[G.o.H2,'大限'],[G.o.H3,'流年'],[G.o.H4,'流月'],[G.o.H5,'流日'],[G.o.H6,'流時']].map(([m,t])=>m&&m[n]?`<br><small>${t}化${m[n]}：${HD[m[n]]}</small>`:'').join('')}</li>`;
+ $('detail').innerHTML=`<h3>${PN[w(c.M-b)]}・${TG[c.st(b)]}${DZ[b]}${b==c.S?'（身宮）':''}</h3><div>${PD[w(c.M-b)]}</div>`+
  (p.a.length?'':`<small>此宮無主星，傳統借對宮（${PN[w(c.M-o)]}）主星參看：${c.P[o].a.join(' ')||'無'}</small>`)+
  `<ul>${all(p).map(li).join('')||'<li>此宮無星曜</li>'}</ul>`+
  `<div><small>三方四正　${[['對宮',b+6],['三合',b+4],['三合',b-4]].map(([n,x])=>{x=w(x);return `${n}${PN[w(c.M-x)]}：${all(c.P[x]).join(' ')||'無星'}`}).join('；')}</small></div>`+
@@ -333,18 +371,22 @@ const setY=y=>{$('yearnum').value=y;setView('流年盤');calc()};
 const setD=k=>{if(!G)return;k=Math.min(11,Math.max(0,k));$('yearnum').value=G.ly+G.c.BN+10*k-1;if($('year').value=='本命盤')setView('大限盤');calc()};
 $('yprev').onclick=()=>setY(cy()-1);$('ynext').onclick=()=>setY(cy()+1);
 $('dprev').onclick=()=>G&&setD(G.dk-1);$('dnext').onclick=()=>G&&setD(G.dk+1);$('dsel').onchange=()=>setD(+$('dsel').value);
-$('lon').onchange=lines;new ResizeObserver(()=>G&&lines()).observe($('chart'));
+new ResizeObserver(()=>G&&lines()).observe($('chart'));
 
-const IDS=['name','gender','cal','birth','ly','lm','ld','time','school','zi','year','yearnum','clock','lon_'],getState=()=>Object.fromEntries(IDS.map(i=>[i,$(i).value]));
+const IDS=['name','gender','cal','birth','ly','lm','ld','time','school','zi','year','yearnum','clock','lon_','mode'],getState=()=>Object.fromEntries(IDS.map(i=>[i,$(i).value]));
 function setState(o){if(!o)return;$('cal').value=o.cal||'s';$('birth').hidden=o.cal=='l';$('lbox').hidden=o.cal!='l';if(o.ly){$('ly').value=o.ly;fillLm()}
  IDS.forEach(i=>{if(o[i]!==undefined)$(i).value=o[i]});['name','gender'].forEach(i=>$(i).dispatchEvent(new Event('input')));$('year').dispatchEvent(new Event('change'));calc()}
-function shareLink(){const u=location.href.split('#')[0]+'#'+encodeURIComponent(JSON.stringify(getState()));try{navigator.clipboard.writeText(u).then(()=>hint('已複製分享連結（需把本檔放上網路空間，連結才能在他人裝置開啟）。'),()=>prompt('複製此連結',u))}catch(e){prompt('複製此連結',u)}}
-function saveJSON(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(getState())],{type:'application/json'}));a.download=($('name').value||'紫微命盤')+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1e3)}
-$('loadf').onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{try{setState(JSON.parse(t))}catch(x){hint('檔案格式無法讀取。')}});e.target.value=''};
-$('fly').onchange=lines;
 const SD0={...SD};try{Object.assign(SD,JSON.parse(localStorage.getItem('zw-sd')||'{}'))}catch(e){}
 $('detail').addEventListener('focusout',e=>{const n=e.target.dataset&&e.target.dataset.n;if(n){SD[n]=e.target.textContent.trim();try{localStorage.setItem('zw-sd',JSON.stringify(SD))}catch(x){}}});
-function resetSD(){Object.assign(SD,SD0);try{localStorage.removeItem('zw-sd')}catch(e){}if(G)detail(foc)}
+let lmode='三合';
+function syncUI(){const m=$('mode').value;[...$('modeseg').children].forEach(b=>b.classList.toggle('on',b.dataset.m==m));$('flowbar').hidden=m!='full';[...$('lseg').children].forEach(b=>b.classList.toggle('on',b.dataset.l==lmode));$('chart').classList.toggle('simple',m=='simple');$('chart').classList.toggle('quick',m=='quick')}
+$('modeseg').onclick=e=>{const m=e.target.dataset.m;if(!m)return;$('mode').value=m;syncUI();calc();if(m=='simple'&&innerWidth<=760)setTimeout(()=>$('chart').scrollIntoView({block:'center'}),50)};
+$('lseg').onclick=e=>{const l=e.target.dataset.l;if(!l)return;lmode=lmode==l?'':l;syncUI();lines()};
+$('fm').innerHTML='<option value="0">—</option>'+[...Array(12).keys()].map(i=>`<option value="${i+1}">${MN[i]}月</option>`).join('');
+$('fd').innerHTML='<option value="0">—</option>'+[...Array(30).keys()].map(i=>`<option value="${i+1}">${dn(i+1)}</option>`).join('');
+$('ft').innerHTML='<option value="">—</option>'+[...DZ].map((z,i)=>`<option value="${i}">${z}時</option>`).join('');
+['fm','fd','ft'].forEach(i=>$(i).addEventListener('change',()=>{if($('fm').value!='0')setView('流年盤');calc()}));
+syncUI();
 if(location.hash.length>1)try{setState(JSON.parse(decodeURIComponent(location.hash.slice(1))))}catch(e){}
 </script>
 </body>
