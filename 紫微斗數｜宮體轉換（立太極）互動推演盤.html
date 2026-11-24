@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>紫微斗數｜宮體轉換（立太極）互動推演盤</title>
+<style>
+:root{--bg:#121318;--card:#1b1e26;--hover:#242834;--center:#161820;--gold:#d4af37;--gl:#f3d778;--gd:rgba(212,175,55,.28);--cin:#c94a4a;--cinb:#ff8c8c;--teal-l:#89dfd7;--ivory:#f3efe6;--muted:#a49f93;--sub:#7b776d;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--ivory);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif;line-height:1.45;padding:8px;min-height:100vh}
+.container{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
+button,select{font-family:inherit}
+button{-webkit-tap-highlight-color:transparent}
+.top-bar{background:var(--card);border:1px solid var(--gd);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px}
+.brand{display:flex;align-items:center;gap:8px}
+.brand-badge{background:linear-gradient(135deg,#c94a4a,#852424);border:1px solid var(--gold);color:var(--gl);font-weight:800;font-size:13px;padding:4px 8px;border-radius:6px;white-space:nowrap}
+.brand-title{font-size:15px;font-weight:700;color:var(--gl)}
+.brand-sub{font-size:11px;color:var(--muted)}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.select-box{display:flex;align-items:center;justify-content:space-between;gap:4px;background:#12141a;border:1px solid var(--gd);border-radius:8px;padding:6px 10px;font-size:12px;color:var(--muted)}
+.select-box select{background:transparent;border:none;color:var(--gl);font-weight:700;font-size:14px;outline:none}
+.select-box select option{background:#1b1e26;color:var(--ivory)}
+.mode-switch{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;background:#12141a;border:1px solid var(--gd);border-radius:8px;padding:2px}
+.mode-btn{border:none;background:transparent;color:var(--muted);font-size:12.5px;padding:8px 6px;border-radius:6px;cursor:pointer;font-weight:600}
+.mode-btn.active-taiji{background:var(--cin);color:#fff}
+.mode-btn.active-inspect{background:#3f9c94;color:#fff}
+.preset-row{display:flex;align-items:center;gap:6px;overflow-x:auto;padding:8px 0 2px;border-top:1px solid rgba(255,255,255,.06);scrollbar-width:none}
+.preset-row::-webkit-scrollbar{display:none}
+.preset-label{font-size:11px;color:var(--muted);white-space:nowrap;font-weight:600}
+.preset-btn{background:#12141a;border:1px solid rgba(212,175,55,.25);color:var(--ivory);font-size:13px;padding:7px 12px;border-radius:999px;cursor:pointer;white-space:nowrap;flex:none}
+.preset-btn.active{background:var(--gold);color:#121318;border-color:var(--gl);font-weight:700}
+.chart-wrapper{position:relative;width:100%}
+.ziwei-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(4,minmax(84px,auto));gap:3px;background:#0b0c10;border:1.5px solid var(--gold);border-radius:12px;padding:3px;position:relative}
+.palace-cell{background:var(--card);border:1px solid rgba(212,175,55,.22);border-radius:7px;padding:5px;display:flex;flex-direction:column;justify-content:space-between;gap:2px;cursor:pointer;position:relative;z-index:10;overflow:hidden;min-width:0}
+.palace-cell:hover{background:var(--hover);border-color:var(--gold)}
+.palace-cell.is-taiji{background:linear-gradient(155deg,#33191c,#211417);border:1.5px solid var(--cin);box-shadow:inset 0 0 12px rgba(201,74,74,.28)}
+.palace-cell.is-sanfang{background:linear-gradient(155deg,#26231a,#1b1a16);border:1.5px solid var(--gold)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(212,175,55,.85)}70%{box-shadow:0 0 0 10px rgba(212,175,55,0)}100%{box-shadow:0 0 0 0 rgba(212,175,55,0)}}
+.palace-cell.pulse-highlight{animation:pulse 1.1s ease-out 2;border-color:#ffe27a!important}
+.cell-top{display:flex;align-items:center;justify-content:space-between;gap:3px;line-height:1.1}
+.stem-branch{font-size:13px;font-weight:800;color:var(--gl);white-space:nowrap}
+.role-badge{font-size:10px;font-weight:700;padding:1px 4px;border-radius:4px;white-space:nowrap;line-height:1.25}
+.badge-taiji{background:var(--cin);color:#fff}
+.badge-sanhe{background:rgba(212,175,55,.2);color:var(--gl);border:1px solid rgba(212,175,55,.45)}
+.badge-duigong{background:rgba(63,156,148,.25);color:var(--teal-l);border:1px solid rgba(63,156,148,.5)}
+.cell-base-line,.cell-new-line{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3}
+.cell-base-line{font-size:clamp(12px,3.2vw,15px);font-weight:700}
+.has-shift .cell-base-line{color:var(--muted);font-size:clamp(11px,2.9vw,13px);font-weight:600}
+.is-taiji:not(.has-shift) .cell-base-line{color:var(--cinb)}
+.cell-new-line{font-size:clamp(11px,2.9vw,14px);font-weight:700;color:var(--gl)}
+.is-taiji .cell-new-line{color:var(--cinb)}
+.palace-cell:not(.has-shift) .cell-new-line{font-size:11px;font-weight:400;color:var(--sub)}
+.cell-bottom{display:none;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.05);padding-top:3px;font-size:10px;color:var(--sub)}
+.cell-info-btn{background:rgba(255,255,255,.07);border:none;color:var(--muted);font-size:11px;padding:3px 8px;border-radius:4px;cursor:pointer;white-space:nowrap}
+.cell-info-btn:hover{background:var(--gold);color:#121318;font-weight:700}
+.center-palace{grid-column:2/span 2;grid-row:2/span 2;background:var(--center);border:1px solid var(--gd);border-radius:8px;padding:8px;z-index:15;display:flex;flex-direction:column;justify-content:center;gap:6px;overflow:hidden;min-width:0}
+.center-title-row{display:flex;flex-direction:column;align-items:flex-start;gap:5px}
+.center-title{font-size:13.5px;font-weight:800;color:var(--gl);line-height:1.35}
+.center-desc{font-size:12px;color:var(--ivory)}
+.sihua-strip{display:grid;grid-template-columns:1fr 1fr;gap:3px 8px;background:#101217;border:1px solid rgba(212,175,55,.2);border-radius:6px;padding:5px 8px;font-size:11.5px}
+.sihua-stem{grid-column:1/-1;color:var(--gl);font-weight:700}
+.tag-lu{color:#5cd69c;font-weight:700}.tag-quan{color:#f5b942;font-weight:700}.tag-ke{color:#64b5f6;font-weight:700}.tag-ji{color:#ff7a7a;font-weight:700}
+.derived-section-title{font-size:12px;font-weight:700;color:var(--gold);margin-bottom:5px;display:flex;justify-content:space-between;gap:6px}
+.derived-grid{display:grid;grid-template-columns:1fr;gap:5px}
+.derived-card{background:#1e212b;border:1px solid rgba(212,175,55,.2);border-radius:8px;padding:8px 10px;cursor:pointer}
+.derived-card:hover{border-color:var(--gold);background:#262a37}
+.derived-card-top{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.derived-name{font-size:13px;font-weight:700;color:var(--gl)}
+.derived-loc{font-size:11px;background:rgba(212,175,55,.15);color:var(--gl);padding:1px 6px;border-radius:4px;white-space:nowrap}
+.derived-text{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.4}
+.detail-panel{background:var(--card);border:1px solid var(--gd);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:10px}
+.detail-panel:empty{display:none}
+.svg-overlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:12}
+.legend-bar{background:var(--card);border:1px solid rgba(212,175,55,.2);border-radius:10px;padding:8px 10px;display:flex;flex-direction:column;gap:6px;font-size:11px;color:var(--muted)}
+.legend-items{display:flex;flex-wrap:wrap;gap:6px 12px}
+.legend-item{display:inline-flex;align-items:center;gap:5px}
+.dot-taiji,.dot-sanfang{width:10px;height:10px;border-radius:2px}
+.dot-taiji{background:#33191c;border:1px solid var(--cin)}
+.dot-sanfang{background:#26231a;border:1px solid var(--gold)}
+.line-solid{width:16px;border-top:2px solid var(--gold)}
+.line-dashed{width:16px;border-top:2px dashed var(--cin)}
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;align-items:flex-end;justify-content:center;z-index:100}
+.modal-backdrop.open{display:flex}
+.modal-box{background:var(--card);border:1.5px solid var(--gold);border-bottom:none;border-radius:16px 16px 0 0;max-width:520px;width:100%;max-height:85vh;overflow-y:auto;padding:14px 14px calc(14px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:12px}
+.modal-header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:8px}
+.modal-title{font-size:16px;font-weight:800;color:var(--gl)}
+.modal-close{background:#272b36;border:none;color:var(--ivory);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:14px}
+.dual-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dual-card{background:#13151b;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 10px}
+.dual-card.highlight{background:#2a181b;border-color:rgba(201,74,74,.6)}
+.dual-label{font-size:11px;color:var(--muted)}
+.dual-val{font-size:15px;font-weight:800;margin-top:2px}
+.dual-card.highlight .dual-val{color:var(--cinb)}
+.modal-analysis{background:#13151b;border:1px solid var(--gd);border-radius:8px;padding:10px;font-size:13px;line-height:1.6;margin-top:8px}
+.modal-footer{display:grid;grid-template-columns:2fr 1fr;gap:8px}
+.btn-primary,.btn-secondary{border:none;padding:10px 12px;border-radius:8px;font-size:13px;cursor:pointer}
+.btn-primary{background:var(--cin);color:#fff;font-weight:700}
+.btn-secondary{background:#2a2e3a;color:var(--ivory)}
+.credit{text-align:center;font-size:11px;color:var(--sub);letter-spacing:1px;padding:6px 0 10px}
+@media (min-width:768px){
+body{padding:12px}
+.top-bar{flex-direction:column}
+.controls{display:flex;flex-wrap:wrap;align-items:center}
+.mode-switch{display:inline-flex}
+.mode-btn{padding:5px 10px}
+.ziwei-grid{grid-template-rows:repeat(4,minmax(120px,1fr));gap:4px;padding:4px}
+.palace-cell{padding:6px 8px}
+.cell-bottom{display:flex}
+.center-palace{padding:10px 12px;justify-content:space-between;gap:8px;overflow-y:auto}
+.center-title-row{flex-direction:row;align-items:center;justify-content:space-between}
+.sihua-strip{display:flex;flex-wrap:wrap}
+.derived-grid{grid-template-columns:1fr 1fr}
+.derived-card{padding:6px 8px}
+.derived-text{font-size:11px}
+.legend-bar{flex-direction:row;justify-content:space-between;align-items:center}
+.modal-backdrop{align-items:center;padding:16px}
+.modal-box{border:1.5px solid var(--gold);border-radius:12px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="top-bar">
+    <div class="brand">
+      <span class="brand-badge">立太極</span>
+      <div>
+        <div class="brand-title">紫微斗數｜宮體轉換互動推演盤</div>
+        <div class="brand-sub">定新太極為「新命宮」，依原盤十二宮順序逆時針重排</div>
+      </div>
+    </div>
+    <div class="controls">
+      <label class="select-box"><span>生年天干</span><select id="yearStemSelect"></select></label>
+      <label class="select-box"><span>本命宮在</span><select id="baseMingSelect"></select></label>
+      <div class="mode-switch" role="group" aria-label="點擊模式切換">
+        <button type="button" id="modeTaijiBtn" class="mode-btn active-taiji">點擊設為太極點</button>
+        <button type="button" id="modeInspectBtn" class="mode-btn">點擊看雙宮詳解</button>
+      </div>
+    </div>
+    <div class="preset-row" id="presetBar"><span class="preset-label">快速立太極</span></div>
+  </header>
+
+  <main class="chart-wrapper">
+    <div class="ziwei-grid" id="ziweiGrid"><svg class="svg-overlay" id="sanfangSvg"></svg></div>
+  </main>
+
+  <section class="detail-panel" id="detailPanel"></section>
+
+  <footer class="legend-bar">
+    <div class="legend-items">
+      <span class="legend-item"><span class="dot-taiji"></span>太極點（新命宮）</span>
+      <span class="legend-item"><span class="dot-sanfang"></span>新三方四正</span>
+      <span class="legend-item"><span class="line-solid"></span>三合（命財官）</span>
+      <span class="legend-item"><span class="line-dashed"></span>對宮（遷移線）</span>
+    </div>
+    <div>點選宮格可立太極或查看「本命宮職 × 轉換宮職」雙重解析</div>
+  </footer>
+  <div class="credit">小路_Joseph工作室</div>
+</div>
+
+<div class="modal-backdrop" id="detailModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">雙重宮氣交會解析</div>
+      <button type="button" class="modal-close" id="modalCloseX">✕</button>
+    </div>
+    <div id="modalBody"></div>
+    <div class="modal-footer">
+      <button type="button" class="btn-primary" id="modalSetTaijiBtn">以此宮為新太極點</button>
+      <button type="button" class="btn-secondary" id="modalCloseBtn">關閉</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const BRANCHES = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+  const STEMS = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+  const GRID_CELLS = [
+    {branch:'巳',idx:5,row:1,col:1},{branch:'午',idx:6,row:1,col:2},{branch:'未',idx:7,row:1,col:3},{branch:'申',idx:8,row:1,col:4},
+    {branch:'辰',idx:4,row:2,col:1},{branch:'酉',idx:9,row:2,col:4},
+    {branch:'卯',idx:3,row:3,col:1},{branch:'戌',idx:10,row:3,col:4},
+    {branch:'寅',idx:2,row:4,col:1},{branch:'丑',idx:1,row:4,col:2},{branch:'子',idx:0,row:4,col:3},{branch:'亥',idx:11,row:4,col:4}
+  ];
+  const PALACES = ['命宮','兄弟宮','夫妻宮','子女宮','財帛宮','疾厄宮','遷移宮','奴僕宮','官祿宮','田宅宮','福德宮','父母宮'];
+  const SI_HUA = {
+    '甲':{lu:'廉貞',quan:'破軍',ke:'武曲',ji:'太陽'},'乙':{lu:'天機',quan:'天梁',ke:'紫微',ji:'太陰'},
+    '丙':{lu:'天同',quan:'天機',ke:'文昌',ji:'廉貞'},'丁':{lu:'太陰',quan:'天同',ke:'天機',ji:'巨門'},
+    '戊':{lu:'貪狼',quan:'太陰',ke:'右弼',ji:'天機'},'己':{lu:'武曲',quan:'貪狼',ke:'天梁',ji:'文曲'},
+    '庚':{lu:'太陽',quan:'武曲',ke:'太陰',ji:'天同'},'辛':{lu:'巨門',quan:'太陽',ke:'文曲',ji:'文昌'},
+    '壬':{lu:'天梁',quan:'紫微',ke:'左輔',ji:'武曲'},'癸':{lu:'破軍',quan:'巨門',ke:'太陰',ji:'貪狼'}
+  };
+  const PRESETS = [
+    {id:'self',label:'本命中心',prefix:'本命',offset:0,desc:'以命主自身為太極中心，觀察先天格局、自我意識與三方四正氣勢。',derived:[
+      {rel:4,title:'財帛宮（本命財帛宮）',note:'自身的賺錢方式、現金流與理財價值觀。'},
+      {rel:8,title:'官祿宮（本命官祿宮）',note:'自身的事業方向、工作態度與學業表現。'},
+      {rel:6,title:'遷移宮（本命遷移宮）',note:'外出機遇、社會舞台與給人的第一印象。'},
+      {rel:10,title:'福德宮（本命福德宮）',note:'精神享受、內心狀態與深層福澤厚薄。'}]},
+    {id:'spouse',label:'配偶／伴侶',prefix:'配偶',offset:2,desc:'立太極於【本命夫妻宮】，從伴侶角度看其個性、事業財運與對待關係。',derived:[
+      {rel:2,title:'配偶的夫妻宮（本命財帛宮）',note:'伴侶眼中的你，以及兩人在關係中的真實對待與價值觀磨合。'},
+      {rel:4,title:'配偶的財帛宮（本命遷移宮）',note:'伴侶的賺錢能力、財務狀況與外出求財表現。'},
+      {rel:8,title:'配偶的官祿宮（本命福德宮）',note:'伴侶的工作狀態、事業成就與職場穩定度。'},
+      {rel:9,title:'配偶的田宅宮（本命父母宮）',note:'伴侶的原生家庭背景（婆家／岳家）與資產環境。'}]},
+    {id:'child1',label:'首胎子女',prefix:'首胎',offset:3,desc:'立太極於【本命子女宮】，觀察第一胎子女（或直屬得意門生）的發展。',derived:[
+      {rel:8,title:'首胎的官祿宮（本命田宅宮）',note:'老大的學業成績、考運以及未來的事業發展舞台。'},
+      {rel:4,title:'首胎的財帛宮（本命奴僕宮）',note:'老大未來的經濟能力、理財觀念與金錢來源。'},
+      {rel:1,title:'首胎的兄弟宮（本命財帛宮）',note:'老大的手足緣分，同時也是命主「第二胎」的太極點。'},
+      {rel:6,title:'首胎的遷移宮（本命父母宮）',note:'老大出外求學、遠行發展的長輩貴人助力。'}]},
+    {id:'child2',label:'次胎子女',prefix:'次胎',offset:4,desc:'子女宮逆推一位為【本命財帛宮】，即第二胎子女的專屬太極點。',derived:[
+      {rel:8,title:'次胎的官祿宮（本命命宮）',note:'老二的學業與事業表現，往往與命主自身狀態高度連動。'},
+      {rel:4,title:'次胎的財帛宮（本命官祿宮）',note:'老二的財運與賺錢能力，反映在命主事業氣數上。'},
+      {rel:2,title:'次胎的夫妻宮（本命遷移宮）',note:'老二未來的感情對象特質與婚姻互動模式。'},
+      {rel:10,title:'次胎的福德宮（本命夫妻宮）',note:'老二的內心世界、興趣嗜好與精神福澤。'}]},
+    {id:'career',label:'事業營運',prefix:'事業',offset:8,desc:'立太極於【本命官祿宮】，將公司或事業體視為獨立個體，診斷營收與體質。',derived:[
+      {rel:4,title:'事業的財帛宮（本命兄弟宮）',note:'公司的現金流、實際營收水位與資金周轉能力。'},
+      {rel:2,title:'事業的夫妻宮（本命父母宮）',note:'外部客戶群、簽約合作對象、政府法規與品牌口碑。'},
+      {rel:3,title:'事業的疾厄宮（本命子女宮）',note:'公司內部體質、管理漏洞、團隊磨合或產品瑕疵隱憂。'},
+      {rel:1,title:'事業的兄弟宮（本命田宅宮）',note:'內部股東合夥人、核心團隊與實體店面辦公場所。'}]},
+    {id:'father',label:'父親',prefix:'父親',offset:11,desc:'立太極於【本命父母宮】，觀察父親的性格、健康與事業經濟狀況。',derived:[
+      {rel:2,title:'父親的夫妻宮（本命兄弟宮）',note:'父親的配偶（即母親宮位所在），以及父母之間的感情對待。'},
+      {rel:4,title:'父親的財帛宮（本命子女宮）',note:'父親的經濟能力、賺錢方式與財務支配狀況。'},
+      {rel:8,title:'父親的官祿宮（本命奴僕宮）',note:'父親的職業成就、職場地位與事業運勢。'},
+      {rel:5,title:'父親的疾厄宮（本命財帛宮）',note:'父親的身體健康狀況與先天體質強弱。'}]},
+    {id:'mother',label:'母親',prefix:'母親',offset:1,desc:'依六親逆推法，父母宮之夫妻位在【本命兄弟宮】，為母親專屬太極。',derived:[
+      {rel:2,title:'母親的夫妻宮（本命子女宮）',note:'母親在婚姻中的感受以及與配偶的互動關係。'},
+      {rel:5,title:'母親的疾厄宮（本命遷移宮）',note:'母親的身體健康狀態與外出平安運勢。'},
+      {rel:8,title:'母親的官祿宮（本命田宅宮）',note:'母親操持家務或個人事業的付出與成就。'},
+      {rel:10,title:'母親的福德宮（本命父母宮）',note:'母親的精神生活、心情起伏與晚年福氣。'}]},
+    {id:'health',label:'身體健康',prefix:'疾厄',offset:5,desc:'立太極於【本命疾厄宮】，深入追蹤病灶根源、體質底蘊與康復機緣。',derived:[
+      {rel:9,title:'疾厄的田宅宮（本命兄弟宮）',note:'身體體質的根基與家族遺傳傾向。'},
+      {rel:6,title:'疾厄的遷移宮（本命父母宮）',note:'外在環境、氣候變化對身體造成的顯性症狀。'},
+      {rel:8,title:'疾厄的官祿宮（本命命宮）',note:'身體機能的運作狀態、免疫力與自我修復力。'},
+      {rel:10,title:'疾厄的福德宮（本命子女宮）',note:'生活作息、情緒壓力對健康的潛在影響。'}]}
+  ];
+  const REL_EXPLAIN = {
+    0:'【新太極點（新命宮）】此人事物的核心主體、性格特質與整體氣運發源地。',
+    1:'【新兄弟宮】此人事物的內部手足、平輩夥伴、資金周轉水位或緊密關聯體。',
+    2:'【新夫妻宮】此人事物的核心對待關係、伴侶特質、合作簽約對象或外部口碑。',
+    3:'【新子女宮】此人事物的延續產出、下一代、旗下子專案，或內部體質隱憂。',
+    4:'【新財帛宮】此人事物的經濟能力、現金流來源、價值交換與資源運用方式。',
+    5:'【新疾厄宮】此人事物的內在體質、健康狀況、結構強弱與潛在問題點。',
+    6:'【新遷移宮】此人事物的外在舞台、外出發展運、環境適應力與對外展現形象。',
+    7:'【新奴僕宮】此人事物的眾生緣、下屬團隊、客戶群體與人際競爭壓力。',
+    8:'【新官祿宮】此人事物的事業發展、學業表現、運作氣數與執行效率。',
+    9:'【新田宅宮】此人事物的根基所在、家庭環境、資產累積與最終歸宿。',
+    10:'【新福德宮】此人事物的精神層面、內心世界、深層福澤與隱性資源。',
+    11:'【新父母宮】此人事物的長輩貴人、上司庇蔭、文書規範與外在形象門面。'
+  };
+
+  const state = {yearStem:'甲',baseMingIdx:11,taijiIdx:11,presetId:'self',customPrefix:'本命',clickMode:'taiji',modalBranchIdx:null};
+  const mq = window.matchMedia('(min-width: 768px)');
+  const ccw = (from, to) => (from - to + 12) % 12;
+
+  function getPalaceStem(yearStem, branchIdx) {
+    const yin = {'甲':2,'己':2,'乙':4,'庚':4,'丙':6,'辛':6,'丁':8,'壬':8,'戊':0,'癸':0};
+    return STEMS[((yin[yearStem] ?? 0) + (branchIdx - 2 + 12) % 12) % 10];
+  }
+
+  function initUI() {
+    const ys = document.getElementById('yearStemSelect');
+    STEMS.forEach(s => { const o = document.createElement('option'); o.value = s; o.textContent = s + '年'; ys.appendChild(o); });
+    ys.addEventListener('change', e => { state.yearStem = e.target.value; render(); });
+
+    const ms = document.getElementById('baseMingSelect');
+    BRANCHES.forEach((b, i) => { const o = document.createElement('option'); o.value = i; o.textContent = b + '宮'; if (i === state.baseMingIdx) o.selected = true; ms.appendChild(o); });
+    ms.addEventListener('change', e => {
+      const prev = ccw(state.baseMingIdx, state.taijiIdx);
+      state.baseMingIdx = parseInt(e.target.value, 10);
+      state.taijiIdx = (state.baseMingIdx - prev + 12) % 12;
+      render();
+    });
+
+    const bT = document.getElementById('modeTaijiBtn'), bI = document.getElementById('modeInspectBtn');
+    bT.addEventListener('click', () => { state.clickMode = 'taiji'; bT.className = 'mode-btn active-taiji'; bI.className = 'mode-btn'; });
+    bI.addEventListener('click', () => { state.clickMode = 'inspect'; bI.className = 'mode-btn active-inspect'; bT.className = 'mode-btn'; });
+
+    const bar = document.getElementById('presetBar');
+    PRESETS.forEach(p => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'preset-btn'; b.dataset.id = p.id; b.textContent = p.label;
+      b.addEventListener('click', () => applyPreset(p.id));
+      bar.appendChild(b);
+    });
+
+    document.getElementById('modalCloseX').addEventListener('click', closeModal);
+    document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+    document.getElementById('detailModal').addEventListener('click', e => { if (e.target.id === 'detailModal') closeModal(); });
+    document.getElementById('modalSetTaijiBtn').addEventListener('click', () => {
+      if (state.modalBranchIdx !== null) { setTaijiBranch(state.modalBranchIdx); closeModal(); }
+    });
+    window.addEventListener('resize', drawLines);
+    if (mq.addEventListener) mq.addEventListener('change', render);
+  }
+
+  function applyPreset(id) {
+    const p = PRESETS.find(x => x.id === id);
+    if (!p) return;
+    state.presetId = p.id;
+    state.customPrefix = p.prefix;
+    state.taijiIdx = (state.baseMingIdx - p.offset + 12) % 12;
+    render();
+  }
+
+  function setTaijiBranch(idx) {
+    const off = ccw(state.baseMingIdx, idx);
+    const m = PRESETS.find(p => p.offset === off);
+    if (m) { applyPreset(m.id); return; }
+    state.presetId = 'custom';
+    state.taijiIdx = idx;
+    state.customPrefix = '借盤【' + PALACES[off].replace('宮', '') + '】';
+    render();
+  }
+
+  function render() {
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.toggle('active', b.dataset.id === state.presetId));
+    const grid = document.getElementById('ziweiGrid');
+    const svg = document.getElementById('sanfangSvg');
+    grid.innerHTML = '';
+    grid.appendChild(svg);
+    const shifted = state.presetId !== 'self';
+
+    GRID_CELLS.forEach(cell => {
+      const bo = ccw(state.baseMingIdx, cell.idx);
+      const to = ccw(state.taijiIdx, cell.idx);
+      const stem = getPalaceStem(state.yearStem, cell.idx);
+      const baseName = '本命' + PALACES[bo];
+      const newName = PALACES[to];
+      const isTaiji = to === 0;
+      const isSan = [4, 6, 8].includes(to);
+      let badge = '';
+      if (isTaiji) badge = '<span class="role-badge badge-taiji">太極</span>';
+      else if (to === 4) badge = '<span class="role-badge badge-sanhe">新財帛</span>';
+      else if (to === 8) badge = '<span class="role-badge badge-sanhe">新官祿</span>';
+      else if (to === 6) badge = '<span class="role-badge badge-duigong">新遷移</span>';
+      const third = shifted ? `→ ${state.customPrefix}的${newName}` : (isTaiji ? '立太極基準中心' : `逆推第 ${to + 1} 宮`);
+
+      const div = document.createElement('div');
+      div.id = `cell-branch-${cell.idx}`;
+      div.style.gridRow = cell.row;
+      div.style.gridColumn = cell.col;
+      div.className = ['palace-cell', isTaiji ? 'is-taiji' : '', isSan ? 'is-sanfang' : '', shifted ? 'has-shift' : ''].filter(Boolean).join(' ');
+      div.innerHTML = `
+        <div class="cell-top"><span class="stem-branch">${stem}${cell.branch}</span>${badge}</div>
+        <div class="cell-base-line">${baseName}</div>
+        <div class="cell-new-line">${third}</div>
+        <div class="cell-bottom"><span>${isTaiji ? '新命宮' : newName}</span><button type="button" class="cell-info-btn" data-info-idx="${cell.idx}">詳解</button></div>`;
+      div.addEventListener('click', e => {
+        if (e.target.dataset.infoIdx !== undefined) { e.stopPropagation(); openModal(cell.idx); return; }
+        if (state.clickMode === 'taiji') setTaijiBranch(cell.idx); else openModal(cell.idx);
+      });
+      grid.appendChild(div);
+    });
+
+    renderCenter(grid);
+    requestAnimationFrame(drawLines);
+  }
+
+  function renderCenter(grid) {
+    const desktop = mq.matches;
+    const center = document.createElement('div');
+    center.className = 'center-palace';
+    const panel = document.getElementById('detailPanel');
+    panel.innerHTML = '';
+
+    const baseName = '本命' + PALACES[ccw(state.baseMingIdx, state.taijiIdx)];
+    const branch = BRANCHES[state.taijiIdx];
+    const stem = getPalaceStem(state.yearStem, state.taijiIdx);
+    const sh = SI_HUA[stem];
+    const preset = PRESETS.find(p => p.id === state.presetId);
+    const descText = preset ? preset.desc : `以【${baseName}（${stem}${branch}）】為新命宮，逆排十二宮觀察其獨立氣運。`;
+    const list = preset ? preset.derived : [
+      {rel:4,title:`${state.customPrefix}的財帛宮`,note:'此人事物的現金流、資源來源與價值表現。'},
+      {rel:8,title:`${state.customPrefix}的官祿宮`,note:'此人事物的事業發展、運作狀態與氣數高低。'},
+      {rel:2,title:`${state.customPrefix}的夫妻宮`,note:'此人事物的核心對待關係與外部合作對象。'},
+      {rel:9,title:`${state.customPrefix}的田宅宮`,note:'此人事物的根基歸宿、實體環境與庫存。'}
+    ];
+
+    const cards = list.map(item => {
+      const t = (state.taijiIdx - item.rel + 12) % 12;
+      const tb = '本命' + PALACES[ccw(state.baseMingIdx, t)];
+      return `<div class="derived-card" data-jump-idx="${t}">
+        <div class="derived-card-top"><span class="derived-name">${item.title}</span><span class="derived-loc">${BRANCHES[t]}宮・${tb}</span></div>
+        <div class="derived-text">${item.note}</div></div>`;
+    }).join('');
+
+    const descHtml = `<div class="center-desc">${descText}</div>`;
+    const derivedHtml = `<div><div class="derived-section-title"><span>✦ 衍生關鍵宮位（點擊高亮定位）</span><span>逆時針排盤</span></div><div class="derived-grid">${cards}</div></div>`;
+    const headHtml = `
+      <div class="center-title-row">
+        <div class="center-title">太極點：${baseName}<br>${stem}${branch}宮</div>
+        <button type="button" class="cell-info-btn" id="centerInspectBtn">雙宮詳解 ↗</button>
+      </div>`;
+    const sihuaHtml = `
+      <div class="sihua-strip">
+        <span class="sihua-stem">【${stem}干】飛星</span>
+        <span><span class="tag-lu">祿</span> ${sh.lu}</span>
+        <span><span class="tag-quan">權</span> ${sh.quan}</span>
+        <span><span class="tag-ke">科</span> ${sh.ke}</span>
+        <span><span class="tag-ji">忌</span> ${sh.ji}</span>
+      </div>`;
+
+    if (desktop) {
+      center.innerHTML = headHtml + descHtml + sihuaHtml + derivedHtml;
+    } else {
+      center.innerHTML = headHtml + sihuaHtml;
+      panel.innerHTML = descHtml + derivedHtml;
+    }
+    grid.appendChild(center);
+
+    document.querySelectorAll('.derived-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const el = document.getElementById(`cell-branch-${card.dataset.jumpIdx}`);
+        if (!el) return;
+        if (!desktop) el.scrollIntoView({behavior: 'smooth', block: 'center'});
+        el.classList.remove('pulse-highlight');
+        void el.offsetWidth;
+        el.classList.add('pulse-highlight');
+      });
+    });
+    document.getElementById('centerInspectBtn').addEventListener('click', () => openModal(state.taijiIdx));
+  }
+
+  function drawLines() {
+    const svg = document.getElementById('sanfangSvg');
+    const grid = document.getElementById('ziweiGrid');
+    if (!svg || !grid) return;
+    const rect = grid.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    svg.setAttribute('viewBox', `0 0 ${rect.width} ${rect.height}`);
+    svg.innerHTML = '';
+    const m = state.taijiIdx;
+    const pt = idx => {
+      const el = document.getElementById(`cell-branch-${idx}`);
+      if (!el) return null;
+      const r = el.getBoundingClientRect();
+      return {x: r.left - rect.left + r.width / 2, y: r.top - rect.top + r.height / 2};
+    };
+    const p1 = pt(m), p2 = pt((m - 4 + 12) % 12), p3 = pt((m - 8 + 12) % 12), p4 = pt((m - 6 + 12) % 12);
+    if (!p1 || !p2 || !p3 || !p4) return;
+    const NS = 'http://www.w3.org/2000/svg';
+    const poly = document.createElementNS(NS, 'polygon');
+    poly.setAttribute('points', `${p1.x},${p1.y} ${p2.x},${p2.y} ${p3.x},${p3.y}`);
+    poly.setAttribute('fill', 'rgba(212,175,55,.04)');
+    poly.setAttribute('stroke', 'rgba(212,175,55,.45)');
+    poly.setAttribute('stroke-width', '1.6');
+    svg.appendChild(poly);
+    const line = document.createElementNS(NS, 'line');
+    line.setAttribute('x1', p1.x); line.setAttribute('y1', p1.y);
+    line.setAttribute('x2', p4.x); line.setAttribute('y2', p4.y);
+    line.setAttribute('stroke', 'rgba(201,74,74,.55)');
+    line.setAttribute('stroke-width', '1.6');
+    line.setAttribute('stroke-dasharray', '5,4');
+    svg.appendChild(line);
+  }
+
+  function openModal(idx) {
+    state.modalBranchIdx = idx;
+    const stem = getPalaceStem(state.yearStem, idx);
+    const sh = SI_HUA[stem];
+    const bo = ccw(state.baseMingIdx, idx);
+    const to = ccw(state.taijiIdx, idx);
+    const baseName = '本命' + PALACES[bo];
+    const newName = state.presetId === 'self' ? '本命' + PALACES[to] : `${state.customPrefix}的${PALACES[to]}`;
+    document.getElementById('modalTitle').textContent = `【${stem}${BRANCHES[idx]}宮】雙重宮氣交會解析`;
+    document.getElementById('modalBody').innerHTML = `
+      <div class="dual-cards">
+        <div class="dual-card"><div class="dual-label">第一層：原盤宮職（體）</div><div class="dual-val">${baseName}</div></div>
+        <div class="dual-card highlight"><div class="dual-label">第二層：立太極宮職（用）</div><div class="dual-val">${newName}</div></div>
+      </div>
+      <div class="modal-analysis">
+        <div><strong>✦ 宮位角色定義：</strong>${REL_EXPLAIN[to]}</div>
+        <div style="margin-top:6px;color:#cfc9bc"><strong>✦ 疊宮實戰斷訣：</strong>此宮同時承載「${baseName}」與「${newName}」的雙重資訊。若此宮星曜吉美或得祿，代表你在<strong>${PALACES[bo]}</strong>的表現能直接助旺<strong>${newName}</strong>；若逢化忌沖破，則兩者容易產生連動牽制。</div>
+        <div style="margin-top:8px;padding-top:6px;border-top:1px solid rgba(255,255,255,.08);font-size:12px">
+          <strong>【${stem}干】飛出四化：</strong>
+          <span class="tag-lu">祿</span>${sh.lu} &nbsp;<span class="tag-quan">權</span>${sh.quan} &nbsp;<span class="tag-ke">科</span>${sh.ke} &nbsp;<span class="tag-ji">忌</span>${sh.ji}
+        </div>
+      </div>`;
+    document.getElementById('detailModal').classList.add('open');
+  }
+  function closeModal() { document.getElementById('detailModal').classList.remove('open'); }
+
+  initUI();
+  render();
+})();
+</script>
+</body>
+</html>
