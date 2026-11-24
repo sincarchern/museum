@@ -102,6 +102,12 @@ header{position:relative}
 .detail h3{margin:0 0 4px;color:var(--name);letter-spacing:.08em}.detail ul{padding-left:1.2em;margin:6px 0}.detail small{color:var(--muted);font-size:12px}
 @media print{.nav,.detail,#lines{display:none}}
 .hua.lv{background:none;box-shadow:inset 0 0 0 1px currentColor}.lv.h0{color:var(--lu)}.lv.h1{color:var(--qu)}.lv.h2{color:var(--ke)}.lv.h3{color:var(--ji)}
+.chart{aspect-ratio:auto!important;grid-template-rows:repeat(4,auto)!important}
+.palace{overflow:visible}
+#lines line{stroke-width:1.5;opacity:.5}
+.br{font-size:.72em;margin-left:2px;color:var(--muted)}.ed{outline:none;border-bottom:1px dotted var(--line)}
+#lines text{font-size:11px;font-weight:700;stroke:var(--panel);stroke-width:3px;paint-order:stroke}
+.credit{text-align:center;color:var(--muted);font-size:11px;line-height:1.7;padding:6px 16px 26px;letter-spacing:.08em}
 </style>
 </head>
 <body>
@@ -117,6 +123,8 @@ header{position:relative}
     <div class="field"><label for="cal">曆法</label><select id="cal"><option value="s">國曆</option><option value="l">農曆</option></select></div>
     <div class="field wide"><label for="birth">出生日期</label><input id="birth" type="date" min="1900-01-31" max="2049-12-31"><div id="lbox" hidden><input id="ly" type="number" min="1900" max="2049" value="1990" aria-label="農曆年"><select id="lm" aria-label="農曆月"></select><select id="ld" aria-label="農曆日"></select></div></div>
     <div class="field"><label for="time">出生時辰</label><select id="time"></select></div>
+    <div class="field"><label for="clock">出生時刻（選填）</label><input id="clock" type="time"></div>
+    <div class="field"><label for="lon_">出生地東經（選填）</label><input id="lon_" type="number" step="0.01" min="70" max="140" inputmode="decimal" placeholder="例：121.3"></div>
     <div class="field"><label for="school">派別</label><select id="school"><option value="san">欽天／全集（通行表）</option><option value="quan">全書／閩派</option><option value="zhong">中州派（王亭之）</option><option value="bei">北派／占驗</option><option value="fei">飛星派（宮干飛化）</option></select></div>
     <div class="field"><label for="zi">晚子時（23點後）</label><select id="zi"><option value="next">算次日（換日）</option><option value="same">算當日</option></select></div>
     <div class="field"><label for="year">目前查看</label><select id="year"><option>本命盤</option><option>大限盤</option><option>流年盤</option></select></div>
@@ -125,14 +133,14 @@ header{position:relative}
     <div class="field"><label for="ming">命宮／身宮</label><input id="ming" placeholder="自動排出"></div>
     <div class="field"><label for="si">生年四化</label><input id="si" placeholder="自動排出"></div>
     <div class="field"><label for="decade">起運大限</label><input id="decade" placeholder="自動排出"></div>
-    <div class="actions"><button onclick="calc()">重新排盤</button><button class="secondary" onclick="window.print()">列印／存成 PDF</button></div>
+    <div class="actions"><button onclick="calc()">重新排盤</button><button class="secondary" onclick="window.print()">列印／存成 PDF</button><button class="secondary" type="button" onclick="shareLink()">複製分享連結</button><button class="secondary" type="button" onclick="saveJSON()">存成檔案</button><button class="secondary" type="button" onclick="$('loadf').click()">載入檔案</button><button class="secondary" type="button" onclick="resetSD()">還原預設釋義</button><input id="loadf" type="file" accept=".json,application/json" hidden></div>
   </section>
   <p id="msg" class="msg" role="status">請選擇出生日期與時辰，系統會自動排盤。</p>
 
   <div class="nav">
     <span>大限 <button class="secondary" id="dprev" type="button">‹</button><select id="dsel" aria-label="十年大限"></select><button class="secondary" id="dnext" type="button">›</button></span>
     <span>流年 <button class="secondary" id="yprev" type="button">‹</button><b id="ylab">—</b><button class="secondary" id="ynext" type="button">›</button></span>
-    <label><input type="checkbox" id="lon" checked style="width:auto"> 三方四正連線</label><div id="xs" style="flex-basis:100%;line-height:1.7"></div>
+    <label><input type="checkbox" id="lon" checked style="width:auto"> 三方四正連線</label><label><input type="checkbox" id="fly" style="width:auto"> 四化飛入</label><div id="xs" style="flex-basis:100%;line-height:1.7"></div>
   </div>
   <div class="chart-wrap">
     <section class="chart" id="chart" aria-label="十二宮方形命盤"><svg id="lines" aria-hidden="true"></svg>
@@ -178,9 +186,10 @@ header{position:relative}
   </div>
   <aside class="instructions">
     <strong>排盤說明</strong><br>
-    農曆資料涵蓋 1900–2049，年柱以農曆正月初一換年（不以立春分界）。已排：十四主星、左輔右弼、文昌文曲、天魁天鉞、祿存、擎羊、陀羅、火星、鈴星、地空、地劫、生年四化、大限、小限、長生十二神、博士十二神。尚未包含：廟旺陷、流月、流年四化與其餘雜曜。點選宮位可看星曜解說，並標出三方四正。派別：欽天／全集為通行四化表（欽天門與陸斌兆中州派皆採此表）；全書／閩派庚干為陽武同陰；中州派（王亭之）戊、庚、壬三干不同；北派／占驗庚干為天同科、天相忌；飛星派用通行表，並在各宮標出宮干飛化（⟲為自化）。各派在戊、庚、壬干記載有出入，沒有公認標準。大限四化取大限命宮天干、流年四化取流年天干，以「限」「年」小標籤標示。宮內文字仍可點選手動編輯，重新排盤會覆蓋。重要用途請與專業排盤軟體交叉核對。
+    農曆資料涵蓋 1900–2049，年柱以農曆正月初一換年（不以立春分界）。已排：十四主星、左輔右弼、文昌文曲、天魁天鉞、祿存、擎羊、陀羅、火星、鈴星、地空、地劫、生年四化、大限、小限、長生十二神、博士十二神。已加入主星廟旺陷（通行表，各家略有出入）與十七顆雜曜；填入出生時刻與經度時，會依經度（以東經 120 度為標準）與均時差換算真太陽時並自動定時辰。尚未包含：流月、旬空截空與其餘雜曜。點選宮位可看星曜解說，並標出三方四正。派別：欽天／全集為通行四化表（欽天門與陸斌兆中州派皆採此表）；全書／閩派庚干為陽武同陰；中州派（王亭之）戊、庚、壬三干不同；北派／占驗庚干為天同科、天相忌；飛星派用通行表，並在各宮標出宮干飛化（⟲為自化）。各派在戊、庚、壬干記載有出入，沒有公認標準。大限四化取大限命宮天干、流年四化取流年天干，以「限」「年」小標籤標示。宮內文字仍可點選手動編輯，重新排盤會覆蓋。重要用途請與專業排盤軟體交叉核對。
   </aside>
 </main>
+<footer class="credit">小路_Joseph工作室製作<br>Claude AI協作</footer>
 <script>
 const $=i=>document.getElementById(i),TG='甲乙丙丁戊己庚辛壬癸',DZ='子丑寅卯辰巳午未申酉戌亥',N='一二三四五六七八九十',MN='正二三四五六七八九十冬臘';
 const L='04bd8 04ae0 0a570 054d5 0d260 0d950 16554 056a0 09ad0 055d2 04ae0 0a5b6 0a4d0 0d250 1d255 0b540 0d6a0 0ada2 095b0 14977 04970 0a4b0 0b4b5 06a50 06d40 1ab54 02b60 09570 052f2 04970 06566 0d4a0 0ea50 06e95 05ad0 02b60 186e3 092e0 1c8d7 0c950 0d4a0 1d8a6 0b550 056a0 1a5b4 025d0 092d0 0d2b2 0a950 0b557 06ca0 0b550 15355 04da0 0a5b0 14573 052b0 0a9a8 0e950 06aa0 0aea6 0ab50 04b60 0aae4 0a570 05260 0f263 0d950 05b57 056a0 096d0 04dd5 04ad0 0a4d0 0d4d4 0d250 0d558 0b540 0b6a0 195a6 095b0 049b0 0a974 0a4b0 0b27a 06a50 06d40 0af46 0ab60 09570 04af5 04970 064b0 074a3 0ea50 06b58 05ac0 0ab60 096d5 092e0 0c960 0d954 0d4a0 0da50 07552 056a0 0abb7 025d0 092d0 0cab5 0a950 0b4a0 0baa4 0ad50 055d9 04ba0 0a5b0 15176 052b0 0a930 07954 06aa0 0ad50 05b52 04b60 0a6e6 0a4e0 0d260 0ea65 0d530 05aa0 076a3 096d0 04afb 04ad0 0a4d0 1d0b6 0d250 0d520 0dd45 0b5a0 056d0 055b2 049b0 0a577 0a4b0 0aa50 1b255 06d20 0ada0'.split(' ').map(s=>parseInt(s,16));
@@ -195,22 +204,30 @@ const lname=l=>TG[(l.y-4)%10]+DZ[(l.y-4)%12]+'年'+(l.l?'閏':'')+MN[l.m-1]+'月
 const SH='廉貞 破軍 武曲 太陽|天機 天梁 紫微 太陰|天同 天機 文昌 廉貞|太陰 天同 天機 巨門|貪狼 太陰 右弼 天機|武曲 貪狼 天梁 文曲|太陽 武曲 太陰 天同|巨門 太陽 文曲 文昌|天梁 紫微 左輔 武曲|破軍 巨門 太陰 貪狼'.split('|').map(s=>s.split(' '));
 const PT={quan:{6:['太陽','武曲','天同','太陰']},zhong:{4:['貪狼','太陰','太陽','天機'],6:['太陽','武曲','天府','天同'],8:['天梁','紫微','天府','武曲']},bei:{6:['太陽','武曲','天同','天相']}};
 const sihua=(ys,sc)=>(PT[sc]&&PT[sc][ys])||SH[ys];
+const LVT=Object.fromEntries('紫微 平廟旺旺得旺廟廟旺旺得旺|天機 廟陷得旺利平廟陷得旺利平|太陽 陷不旺廟旺旺旺得得平不陷|武曲 旺廟得利廟平旺廟得利廟平|天同 旺不利平平廟陷不旺平平廟|廉貞 平利廟平利陷平利廟平利陷|天府 廟廟廟得廟得旺廟得旺廟得|太陰 廟廟旺陷陷陷不不利旺旺廟|貪狼 旺廟平利廟陷旺廟平利廟陷|巨門 旺不廟廟陷旺旺不廟廟陷旺|天相 廟廟廟陷得得廟得廟陷得得|天梁 廟旺廟廟廟陷廟旺陷得廟陷|七殺 旺廟廟旺廟平旺廟廟旺廟平|破軍 廟旺得陷旺平廟旺得陷旺平'.split('|').map(x=>x.split(' ')));
+const FULL={廟:'廟',旺:'旺',得:'得地',利:'利',平:'平',不:'不得地',陷:'陷'};
+const BR=(n,b)=>LVT[n]?`<small class="br">${LVT[n][b]}</small>`:'';
 const PN='命宮 兄弟宮 夫妻宮 子女宮 財帛宮 疾厄宮 遷移宮 交友宮 官祿宮 田宅宮 福德宮 父母宮'.split(' '),CS='長生 沐浴 冠帶 臨官 帝旺 衰 病 死 墓 絕 胎 養'.split(' '),BS='博士 力士 青龍 小耗 將軍 奏書 飛廉 喜神 病符 大耗 伏兵 官府'.split(' ');
 function chart(l,h,male,zhong){
  const ys=(l.y-4)%10,yb=(l.y-4)%12,M=w(2+l.m-1-h),S=w(2+l.m-1+h),st=b=>((ys%5)*2+2+w(b-2))%10;
  const bv=[1,1,2,2,3,3,4,4,5,5][st(M)]+[1,1,2,2,3,3,1,1,2,2,3,3][M],k=bv>5?bv-5:bv;
  const BN=[0,3,4,2,6,5][k],BT=['','木三局','金四局','水二局','火六局','土五局'][k];
  const q=Math.ceil(l.d/BN),x=BN*q-l.d,z=w(2+q+(x%2?-x:x)-1);
- const P=Array.from({length:12},()=>({a:[],b:[],c:[]})),put=(i,n,t)=>P[w(i)][t].push(n);
+ const P=Array.from({length:12},()=>({a:[],b:[],c:[],d:[]})),put=(i,n,t)=>P[w(i)][t].push(n);
  [['紫微',0],['天機',-1],['太陽',-3],['武曲',-4],['天同',-5],['廉貞',-8]].forEach(([n,o])=>put(z+o,n,'a'));
  const f=4-z;['天府','太陰','貪狼','巨門','天相','天梁','七殺'].forEach((n,i)=>put(f+i,n,'a'));put(f+10,'破軍','a');
  put(3+l.m,'左輔','b');put(11-l.m,'右弼','b');put(10-h,'文昌','b');put(4+h,'文曲','b');
  const KY=[[1,7],[0,8],[11,9],[11,9],[1,7],[0,8],[1,7],[6,2],[5,3],[5,3]][ys];put(KY[0],'天魁','b');put(KY[1],'天鉞','b');
  const lc=[2,3,5,6,5,6,8,9,11,0][ys];put(lc,'祿存','c');put(lc+1,'擎羊','c');put(lc-1,'陀羅','c');
  const FG=[[1,3],[2,10],[3,10],[9,10]][[1,2,0,3][yb%4]];put(FG[0]+h,'火星','c');put(FG[1]+h,'鈴星','c');put(11+h,'地劫','c');put(11-h,'地空','c');
+ const g=[1,2,0,3][yb%4],gs=Math.floor(w(yb-2)/3);
+ put([8,2,11,5][g],'天馬','d');put(3-yb,'紅鸞','d');put(9-yb,'天喜','d');put(8+l.m,'天刑','d');put(l.m,'天姚','d');
+ put(6-yb,'天哭','d');put(6+yb,'天虛','d');put(4+yb,'龍池','d');put(10-yb,'鳳閣','d');
+ put([10,4,1,7][g],'華蓋','d');put([3,9,6,0][g],'咸池','d');put([5,8,11,2][gs],'孤辰','d');put([1,4,7,10][gs],'寡宿','d');
+ put(2+l.m+l.d,'三台','d');put(12-l.m-l.d,'八座','d');put(8-h+l.d,'恩光','d');put(2+h+l.d,'天貴','d');
  const sh=sihua(ys,zhong);
  const H={};sh.forEach((n,i)=>H[n]='祿權科忌'[i]);
- const loc={};P.forEach((q,b)=>[...q.a,...q.b,...q.c].forEach(n=>loc[n]=b));
+ const loc={};P.forEach((q,b)=>[...q.a,...q.b,...q.c,...q.d].forEach(n=>loc[n]=b));
  return{ys,yb,M,S,st,BN,BT,P,H,sh,lc,loc,fw:(ys%2==0)==male,cs:{2:8,5:8,3:11,4:5,6:2}[BN],z};
 }
 //--UI
@@ -222,26 +239,36 @@ function render(c,o){const S=n=>n+BD(n,c,o);
   q('.palace-name').textContent=PN[i]+(b==c.S?'・身':'');
   q('.branch').textContent=TG[c.st(b)]+DZ[b];
   q('.meta').innerHTML=`大限：${s0}–${s0+9}`+(b==o.db?'<i class="tg">大限命</i>':'')+(b==o.fb?'<i class="tg">流年命</i>':'')+(b==o.sb?'<i class="tg">小限</i>':'')+`<br>小限：${[0,1,2,3,4,5,6].map(j=>r+1+12*j).join('・')}`;
-  q('.stars').innerHTML=`主星：${p.a.map(S).join(' ')||'—'}<br>輔星：${p.b.map(S).join(' ')||'—'}`;
-  q('.trans').innerHTML=`祿煞：${p.c.map(S).join(' ')||'—'}`+(o.fei?`<br>飛：${sihua(c.st(b),o.sc).map((n,k)=>LV[k]+'→'+PN[w(c.M-c.loc[n])].replace('宮','')+(c.loc[n]==b?'⟲':'')).join(' ')}`:'');
+  q('.stars').innerHTML=`主星：${p.a.map(n=>n+BR(n,b)+BD(n,c,o)).join(' ')||'—'}<br>輔星：${p.b.map(S).join(' ')||'—'}`;
+  q('.trans').innerHTML=`祿煞：${p.c.map(S).join(' ')||'—'}<br>雜：${p.d.map(S).join(' ')||'—'}`+(o.fei?`<br>飛：${sihua(c.st(b),o.sc).map((n,k)=>LV[k]+'→'+PN[w(c.M-c.loc[n])].replace('宮','')+(c.loc[n]==b?'⟲':'')).join(' ')}`:'');
   q('.palace-foot').textContent=`長生：${CS[c.fw?w(b-c.cs):w(c.cs-b)]}　博士：${BS[c.fw?w(b-c.lc):w(c.lc-b)]}`;
   a.classList.toggle('flow',b==o.db||b==o.fb)})}
 const hint=m=>{$('msg').textContent=m};
 function calc(){
- hint('');const t=$('time').value;let sy,sm,sd;
- if(t==='')return hint('請選擇出生時辰。');
+ hint('');let note='',sy,sm,sd;const tm=$('clock').value,lon=parseFloat($('lon_').value);
+ if(tm===''&&$('time').value==='')return hint('請選擇出生時辰，或填入出生時刻。');
  if($('cal').value=='s'){const v=$('birth').value;if(!v)return hint('請選擇國曆出生日期。');[sy,sm,sd]=v.split('-').map(Number)}
  else{const y=+$('ly').value,m=$('lm').value,lf=m[0]=='L',mm=parseInt(lf?m.slice(1):m),d=+$('ld').value;
   if(!(y>=1900&&y<=2049))return hint('農曆年請輸入 1900–2049。');
   if(d>(lf?lpd(y):md(y,mm)))return hint('該農曆月沒有這一天，請重新選擇日。');
   const D=l2s(y,mm,d,lf);[sy,sm,sd]=[D.getUTCFullYear(),D.getUTCMonth()+1,D.getUTCDate()]}
  const lo=s2l(sy,sm,sd);if(!lo)return hint('日期超出支援範圍（國曆 1900-01-31 至 2049-12-31）。');
- const hi=+t,h=hi==12?0:hi;let l=lo;
- if(hi==12&&$('zi').value=='next'){const D=new Date(Date.UTC(sy,sm-1,sd+1));l=s2l(D.getUTCFullYear(),D.getUTCMonth()+1,D.getUTCDate());if(!l)return hint('日期超出支援範圍。');hint('晚子時已換日，以 '+lname(l)+' 排盤。')}
+ const sh1=(a,b,c,k)=>{const D=new Date(Date.UTC(a,b-1,c+k));return[D.getUTCFullYear(),D.getUTCMonth()+1,D.getUTCDate()]};
+ let hi=+$('time').value,T=[sy,sm,sd];
+ if(tm!==''){const[H,Mi]=tm.split(':').map(Number),N=Math.round((Date.UTC(sy,sm-1,sd)-Date.UTC(sy,0,0))/DAY),B=2*Math.PI*(N-81)/365;
+  let t=H*60+Mi+(isNaN(lon)?0:(lon-120)*4+9.87*Math.sin(2*B)-7.53*Math.cos(B)-1.5*Math.sin(B)),dd=0;
+  if(t<0){t+=1440;dd=-1}else if(t>=1440){t-=1440;dd=1}
+  if(dd)T=sh1(sy,sm,sd,dd);
+  hi=t>=1380?12:t<60?0:Math.floor((t+60)/120);$('time').value=hi;
+  if(!isNaN(lon))note=`真太陽時 ${pad(Math.floor(t/60))}:${pad(Math.floor(t%60))}${dd>0?'（次日）':dd<0?'（前一日）':''}，`}
+ if(hi==12&&$('zi').value=='next'){T=sh1(...T,1);note+='晚子時換日，'}
+ const l=s2l(...T);if(!l)return hint('日期超出支援範圍。');
+ const h=hi==12?0:hi;
+ hint(note+(l.y!=lo.y||l.m!=lo.m||l.d!=lo.d||l.l!=lo.l?`以${lname(l)}排盤。`:note?'時辰已依此校正。':''));
  const c=chart(l,h,$('gender').value=='男',$('school').value);
  $('bureau').value=c.BT;$('ming').value=`命宮${DZ[c.M]}／身宮${DZ[c.S]}`;$('si').value=c.sh.map((n,i)=>n+'祿權科忌'[i]).join(' ');$('decade').value=`${c.BN}–${c.BN+9}歲（${c.fw?'順':'逆'}行）`;
  ['bureau','ming','si','decade'].forEach(i=>$(i).dispatchEvent(new Event('input')));
- $('showBirth').textContent=`${sy}-${String(sm).padStart(2,'0')}-${String(sd).padStart(2,'0')}　農曆${lname(lo)}`;
+ $('showBirth').textContent=`${sy}-${pad(sm)}-${pad(sd)}　農曆${lname(lo)}`;
  $('showTime').textContent=$('time').selectedOptions[0].text;
  G={c,ly:l.y,male:$('gender').value=='男'};draw();
 }
@@ -260,7 +287,7 @@ $('cal').addEventListener('change',()=>{const lun=$('cal').value=='l';$('birth')
  if(lun&&$('birth').value){const[a,b,c]=$('birth').value.split('-').map(Number),l=s2l(a,b,c);if(l){$('ly').value=l.y;fillLm((l.l?'L':'')+l.m);$('ld').value=l.d}}
  else if(!lun&&+$('ly').value>=1900&&+$('ly').value<=2049){const m=$('lm').value,lf=m[0]=='L',D=l2s(+$('ly').value,parseInt(lf?m.slice(1):m),+$('ld').value,lf);if(!isNaN(D))$('birth').value=D.toISOString().slice(0,10)}
  calc()});
-['birth','lm','ld','time','school','zi','gender','year','yearnum'].forEach(i=>{$(i).addEventListener('change',calc)});$('yearnum').addEventListener('input',calc);
+['birth','lm','ld','time','school','zi','gender','year','yearnum','clock','lon_'].forEach(i=>{$(i).addEventListener('change',calc)});$('yearnum').addEventListener('input',calc);
 const root=document.documentElement;
 function setTheme(t){root.dataset.theme=t;$('theme').textContent=t=='dark'?'淺色':'深色';try{localStorage.setItem('zw-theme',t)}catch(e){}}
 let sv=null;try{sv=localStorage.getItem('zw-theme')}catch(e){}
@@ -269,33 +296,36 @@ $('theme').onclick=()=>setTheme(root.dataset.theme=='dark'?'light':'dark');
 let prevT;addEventListener('beforeprint',()=>{prevT=root.dataset.theme;root.dataset.theme='light'});addEventListener('afterprint',()=>setTheme(prevT));
 
 let G=null,foc=null;
-const SD=Object.fromEntries(('紫微=帝星，尊貴主導、重威望與統籌，易自尊固執。|天機=智星，善謀、反應快、愛思考，易多慮善變。|太陽=主貴與付出，熱情外放、重名聲，宜動不宜靜。|武曲=財星，剛毅果決、重實務與理財，個性偏孤直。|天同=福星，隨和知足、重享受，惰性與依賴為弊。|廉貞=次桃花，情感強烈、企圖心重，善惡兩面。|天府=財庫，穩重保守、善守成，有包容力。|太陰=田宅主，細膩溫柔、重內在與積蓄，亦敏感內斂。|貪狼=桃花星，多才多藝、慾望與交際力強，重機會與享樂。|巨門=暗星，口才與分析力強，主是非口舌與多疑。|天相=印星，輔佐重禮、公正協調，易受環境影響。|天梁=蔭星，庇蔭照顧人、老成持重，好管事。|七殺=將星，衝勁獨立、肅殺果斷，起伏變動大。|破軍=耗星，破舊立新、行動力強，主變革與消耗。|左輔=助力星，主平輩與貴人相助。|右弼=助力星，主柔性協助與貴人。|文昌=文書、考試、條理與學術。|文曲=才藝、口才與藝術感。|天魁=貴人星，主機緣與長輩提攜。|天鉞=貴人星，主暗中助力與機緣。|祿存=財祿穩定、守成，亦主保守孤獨。|擎羊=剛烈、競爭與衝突，主刑傷變動。|陀羅=拖延糾纏、固執，主事緩多阻。|火星=急躁爆發，速成速敗。|鈴星=悶燒隱忍，突發的緊張。|地空=空想超脫，易落空而不務實。|地劫=劫耗，得失起伏、破耗。').split('|').map(x=>x.split('='))),
+const SD=Object.fromEntries(('紫微=帝星，尊貴主導、重威望與統籌，易自尊固執。|天機=智星，善謀、反應快、愛思考，易多慮善變。|太陽=主貴與付出，熱情外放、重名聲，宜動不宜靜。|武曲=財星，剛毅果決、重實務與理財，個性偏孤直。|天同=福星，隨和知足、重享受，惰性與依賴為弊。|廉貞=次桃花，情感強烈、企圖心重，善惡兩面。|天府=財庫，穩重保守、善守成，有包容力。|太陰=田宅主，細膩溫柔、重內在與積蓄，亦敏感內斂。|貪狼=桃花星，多才多藝、慾望與交際力強，重機會與享樂。|巨門=暗星，口才與分析力強，主是非口舌與多疑。|天相=印星，輔佐重禮、公正協調，易受環境影響。|天梁=蔭星，庇蔭照顧人、老成持重，好管事。|七殺=將星，衝勁獨立、肅殺果斷，起伏變動大。|破軍=耗星，破舊立新、行動力強，主變革與消耗。|左輔=助力星，主平輩與貴人相助。|右弼=助力星，主柔性協助與貴人。|文昌=文書、考試、條理與學術。|文曲=才藝、口才與藝術感。|天魁=貴人星，主機緣與長輩提攜。|天鉞=貴人星，主暗中助力與機緣。|祿存=財祿穩定、守成，亦主保守孤獨。|擎羊=剛烈、競爭與衝突，主刑傷變動。|陀羅=拖延糾纏、固執，主事緩多阻。|火星=急躁爆發，速成速敗。|鈴星=悶燒隱忍，突發的緊張。|地空=空想超脫，易落空而不務實。|地劫=劫耗，得失起伏、破耗。|天馬=動星，主奔波、遷動與機會，與祿同宮為祿馬交馳。|紅鸞=婚戀喜慶之星，主桃花緣分。|天喜=喜慶之星，與紅鸞對照，主婚育喜事。|天刑=刑星，主紀律、孤剋與是非，亦主嚴謹。|天姚=桃花星，主風情、人緣與魅力。|天哭=哀傷星，主憂思感傷。|天虛=虛耗之星，主落空、虛驚與情緒起伏。|龍池=才藝、文雅之星。|鳳閣=才藝、清雅之星，與龍池相對。|華蓋=孤高、藝術與宗教傾向，才華而孤傲。|咸池=桃花星，主情慾與人緣，亦主是非。|孤辰=孤獨星，主少緣、獨處。|寡宿=孤寡星，與孤辰同看，主情感疏離。|三台=助力星，主地位與提攜。|八座=助力星，主權位與威儀。|恩光=恩惠光彩，主受人賞識與提攜。|天貴=貴氣，主名譽與受人尊重。').split('|').map(x=>x.split('='))),
 HD={祿:'增益、機緣與資源，順遂有成',權:'掌控、主導與行動力，主動爭取',科:'名聲、貴人與化解，平穩有序',忌:'執著、阻礙與牽絆，需留意壓力與得失'},
 PD='性格、天賦與一生格局|手足、親近同輩與合夥|感情、婚姻與配偶特質|子女、晚輩、創作與桃花|賺錢方式與理財|體質、身心狀態與壓力|外出、外在機運與環境|朋友、同事、部屬與人脈|事業、學業與工作態度|不動產、家庭環境與資產|精神享受、興趣與內心狀態|父母長輩、上司、文書與貴人'.split('|');
 function draw(){const{c,ly,male}=G,v=$('year').value,fy=parseInt($('yearnum').value)||new Date().getFullYear(),age=fy-ly+1,
  dk=Math.min(11,Math.max(0,Math.floor((age-c.BN)/10))),db=c.fw?w(c.M+dk):w(c.M-dk),fb=w(fy-4),sl0=[4,10,7,1][[1,2,0,3][c.yb%4]],sg=male?1:-1;
  Object.assign(G,{dk,sl0,sg});
  const sc=$('school').value,show=v!='本命盤',fl=v=='流年盤',fst=((fy-4)%10+10)%10,
- o={db:show?db:-1,fb:fl?fb:-1,sb:fl&&age>=1?w(sl0+sg*(age-1)):-1,sl0,sg,sc,fei:sc=='fei',H2:show?hm(c.st(db),sc):null,H3:fl?hm(fst,sc):null};G.o=o;render(c,o);
+ o={db:show?db:-1,fb:fl?fb:-1,dst:c.st(db),yst:fst,sb:fl&&age>=1?w(sl0+sg*(age-1)):-1,sl0,sg,sc,fei:sc=='fei',H2:show?hm(c.st(db),sc):null,H3:fl?hm(fst,sc):null};G.o=o;render(c,o);
  const tx=st=>sihua(st,sc).map((n,i)=>n+LV[i]).join(' ');
  $('xs').innerHTML=(show?`大限四化（${TG[c.st(db)]}干）${tx(c.st(db))}`:'')+(fl?`<br>流年四化（${TG[fst]}干）${tx(fst)}`:'');
  $('dsel').innerHTML=[...Array(12).keys()].map(k=>{const b=c.fw?w(c.M+k):w(c.M-k);return `<option value="${k}">${c.BN+10*k}–${c.BN+10*k+9}歲　${DZ[b]}宮・${PN[w(c.M-b)]}</option>`}).join('');$('dsel').value=dk;
  $('ylab').textContent=`${fy} ${TG[((fy-4)%10+10)%10]}${DZ[fb]}・虛歲${age}`;
  if(foc==null)foc=c.M;lines();detail(foc)}
-function lines(){const s=$('lines');s.innerHTML='';PAL.forEach(a=>a.classList.remove('tf','foc'));if(foc==null)return;
+function lines(){const s=$('lines');s.innerHTML='';PAL.forEach(a=>a.classList.remove('tf','foc'));if(foc==null||!G)return;
  const by={};PAL.forEach(a=>by[a.dataset.b]=a);const f=foc,t1=w(f+4),t2=w(f-4),o=w(f+6);
- [t1,t2,o].forEach(b=>by[b].classList.add('tf'));by[f].classList.add('foc');if(!$('lon').checked)return;
- const pt=b=>[by[b].offsetLeft+by[b].offsetWidth/2,by[b].offsetTop+by[b].offsetHeight/2];
- s.innerHTML=[[f,o,'opp'],[f,t1,''],[f,t2,''],[t1,t2,'']].map(([a,b,k])=>{const p=pt(a),q=pt(b);return `<line class="${k}" x1="${p[0]}" y1="${p[1]}" x2="${q[0]}" y2="${q[1]}"/>`}).join('')}
-function detail(b){const c=G.c,H=c.H,i=w(c.M-b),p=c.P[b],all=q=>[...q.a,...q.b,...q.c],o=w(b+6),r=G.sg>0?w(b-G.sl0):w(G.sl0-b),
+ [t1,t2,o].forEach(b=>by[b].classList.add('tf'));by[f].classList.add('foc');
+ const pt=b=>[by[b].offsetLeft+by[b].offsetWidth/2,by[b].offsetTop+by[b].offsetHeight/2],CL=['--lu','--qu','--ke','--ji'];let h='';
+ if($('lon').checked)h+=[[f,o,'opp'],[f,t1,''],[f,t2,''],[t1,t2,'']].map(([a,b,k])=>{const p=pt(a),q=pt(b);return `<line class="${k}" x1="${p[0]}" y1="${p[1]}" x2="${q[0]}" y2="${q[1]}"/>`}).join('');
+ if($('fly').checked&&G.o){const O=G.o,c=G.c;[[O.db,O.dst,'限'],[O.fb,O.yst,'年']].forEach(([src,st,pre])=>{if(src<0)return;sihua(st,O.sc).forEach((n,k)=>{const d=c.loc[n],p=pt(src),q=pt(d),col=`var(${CL[k]})`;
+  h+=(d==src?'':`<line x1="${p[0]}" y1="${p[1]}" x2="${q[0]}" y2="${q[1]}" style="stroke:${col};stroke-width:2.5;opacity:.9"/>`)+`<circle cx="${q[0]}" cy="${q[1]}" r="5" style="fill:${col}"/><text x="${q[0]+8+(pre=='年'?30:0)}" y="${q[1]-8+k*13}" style="fill:${col}">${pre}${LV[k]}</text>`})})}
+ s.innerHTML=h}
+function detail(b){const c=G.c,H=c.H,i=w(c.M-b),p=c.P[b],all=q=>[...q.a,...q.b,...q.c,...q.d],o=w(b+6),r=G.sg>0?w(b-G.sl0):w(G.sl0-b),
  hu=n=>BD(n,c,G.o),
- li=n=>`<li><b>${n}</b>${hu(n)}：${SD[n]||''}${[[H,'生年'],[G.o.H2,'大限'],[G.o.H3,'流年']].map(([m,t])=>m&&m[n]?`<br><small>${t}化${m[n]}：${HD[m[n]]}</small>`:'').join('')}</li>`;
+ li=n=>`<li><b>${n}</b>${hu(n)}${LVT[n]?`<small>（${FULL[LVT[n][b]]}）</small>`:''}：<span class="ed" contenteditable data-n="${n}">${SD[n]||''}</span>${[[H,'生年'],[G.o.H2,'大限'],[G.o.H3,'流年']].map(([m,t])=>m&&m[n]?`<br><small>${t}化${m[n]}：${HD[m[n]]}</small>`:'').join('')}</li>`;
  $('detail').innerHTML=`<h3>${PN[i]}・${TG[c.st(b)]}${DZ[b]}${b==c.S?'（身宮）':''}</h3><div>${PD[i]}</div>`+
  (p.a.length?'':`<small>此宮無主星，傳統借對宮（${PN[w(c.M-o)]}）主星參看：${c.P[o].a.join(' ')||'無'}</small>`)+
  `<ul>${all(p).map(li).join('')||'<li>此宮無星曜</li>'}</ul>`+
  `<div><small>三方四正　${[['對宮',b+6],['三合',b+4],['三合',b-4]].map(([n,x])=>{x=w(x);return `${n}${PN[w(c.M-x)]}：${all(c.P[x]).join(' ')||'無星'}`}).join('；')}</small></div>`+
  `<div><small>小限行經此宮：${[0,1,2,3,4,5,6].map(j=>r+1+12*j).join('・')}歲</small></div>`+
- `<div><small>以上為傳統釋義概要，供學習參考；實際判讀須綜合整體星曜組合與四化。</small></div>`}
+ `<div><small>以上為傳統釋義概要，供學習參考；實際判讀須綜合整體星曜組合與四化。釋義文字可直接點選修改，會存在這台裝置。</small></div>`}
 PAL.forEach(a=>a.addEventListener('click',()=>{if(!G)return;foc=+a.dataset.b;lines();detail(foc);$('detail').scrollIntoView({block:'nearest',behavior:'smooth'})}));
 const setView=v=>{if($('year').value!=v){$('year').value=v;$('year').dispatchEvent(new Event('change'))}};
 const cy=()=>parseInt($('yearnum').value)||new Date().getFullYear();
@@ -304,6 +334,18 @@ const setD=k=>{if(!G)return;k=Math.min(11,Math.max(0,k));$('yearnum').value=G.ly
 $('yprev').onclick=()=>setY(cy()-1);$('ynext').onclick=()=>setY(cy()+1);
 $('dprev').onclick=()=>G&&setD(G.dk-1);$('dnext').onclick=()=>G&&setD(G.dk+1);$('dsel').onchange=()=>setD(+$('dsel').value);
 $('lon').onchange=lines;new ResizeObserver(()=>G&&lines()).observe($('chart'));
+
+const IDS=['name','gender','cal','birth','ly','lm','ld','time','school','zi','year','yearnum','clock','lon_'],getState=()=>Object.fromEntries(IDS.map(i=>[i,$(i).value]));
+function setState(o){if(!o)return;$('cal').value=o.cal||'s';$('birth').hidden=o.cal=='l';$('lbox').hidden=o.cal!='l';if(o.ly){$('ly').value=o.ly;fillLm()}
+ IDS.forEach(i=>{if(o[i]!==undefined)$(i).value=o[i]});['name','gender'].forEach(i=>$(i).dispatchEvent(new Event('input')));$('year').dispatchEvent(new Event('change'));calc()}
+function shareLink(){const u=location.href.split('#')[0]+'#'+encodeURIComponent(JSON.stringify(getState()));try{navigator.clipboard.writeText(u).then(()=>hint('已複製分享連結（需把本檔放上網路空間，連結才能在他人裝置開啟）。'),()=>prompt('複製此連結',u))}catch(e){prompt('複製此連結',u)}}
+function saveJSON(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(getState())],{type:'application/json'}));a.download=($('name').value||'紫微命盤')+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1e3)}
+$('loadf').onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{try{setState(JSON.parse(t))}catch(x){hint('檔案格式無法讀取。')}});e.target.value=''};
+$('fly').onchange=lines;
+const SD0={...SD};try{Object.assign(SD,JSON.parse(localStorage.getItem('zw-sd')||'{}'))}catch(e){}
+$('detail').addEventListener('focusout',e=>{const n=e.target.dataset&&e.target.dataset.n;if(n){SD[n]=e.target.textContent.trim();try{localStorage.setItem('zw-sd',JSON.stringify(SD))}catch(x){}}});
+function resetSD(){Object.assign(SD,SD0);try{localStorage.removeItem('zw-sd')}catch(e){}if(G)detail(foc)}
+if(location.hash.length>1)try{setState(JSON.parse(decodeURIComponent(location.hash.slice(1))))}catch(e){}
 </script>
 </body>
 </html>
